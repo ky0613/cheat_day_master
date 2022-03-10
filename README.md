@@ -1,4 +1,4 @@
-# cheet_day_master(仮)
+# cheat_day_master(仮)
 # チートデイマスター
 ### サービス概要
 ダイエット中のチートデイの時に
@@ -47,3 +47,6 @@ README 作成： 3/8 〆切
 メイン機能実装： 4/13 〆切
 β版をRUNTEQ内リリース（MVP）： 4/18 〆切
 本番リリース： 4/30 〆切
+
+### 画面遷移図
+https://www.figma.com/file/inSsQE78Xi9HSZgu9045Bk/CheatDayMaster?node-id=0%3A1
