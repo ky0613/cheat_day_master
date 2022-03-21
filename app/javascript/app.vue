@@ -1,8 +1,12 @@
 <template>
   <div id="app">
-    <TheHeader></TheHeader>
-    <router-view></router-view>
-    <TheFooter></TheFooter>
+    <body class="flex flex-col min-h-screen">
+      <TheHeader />
+      <main class="flex-grow">
+        <router-view />
+      </main>
+      <TheFooter />
+    </body>
   </div>
 </template>
 
