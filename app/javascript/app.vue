@@ -2,7 +2,7 @@
   <div id="app">
     <body class="flex flex-col min-h-screen">
       <TheHeader />
-      <main class="flex-grow">
+      <main class="flex-grow h-0">
         <router-view />
       </main>
       <TheFooter />
