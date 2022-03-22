@@ -31,12 +31,12 @@ export default new Router({
       component: MealHome,
     },
     {
-      path: "/result-meal-out",
+      path: "/meal-out/result",
       name: "MealOutResult",
       component: MealOutResult,
     },
     {
-      path: "/result-meal-home",
+      path: "/meal-home/result",
       name: "MealHomeResult",
       component: MealHomeResult,
     },
