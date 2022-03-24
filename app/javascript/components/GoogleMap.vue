@@ -1,64 +1,62 @@
 <template>
-  <div class="form-group">
-    <div>
-      <div class="wrap">
-        <div class="modalBox" id="startPoint">
-          <div class="modalInner">現在地点に設定しました</div>
-        </div>
-        <div class="modalBox" id="destination">
-          <div class="modalInner">行きたいお店に設定しました</div>
-        </div>
+  <div>
+    <div class="wrap">
+      <div class="modalBox" id="startPoint">
+        <div class="modalInner">現在地点に設定しました</div>
       </div>
-      <div class="map_wrapper">
-        <div id="map" class="map"></div>
-        <input
-          id="pac-input"
-          class="controls ignore-enterkey"
-          type="text"
-          placeholder="検索"
-        />
+      <div class="modalBox" id="destination">
+        <div class="modalInner">行きたいお店に設定しました</div>
       </div>
-      <form class="w-full max-w-sm">
-        <div class="md:flex md:items-center mb-6">
-          <div class="md:w-1/3">
-            <label
-              class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-              for="inline-full-name"
-            >
-              現在地
-            </label>
-          </div>
-          <div class="md:w-2/3">
-            <input
-              type="text"
-              id="data-start-point-name"
-              readonly="readonly"
-              class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-            />
-            <input type="hidden" id="data-start-point-location" />
-            <input type="hidden" id="data-start-point-address" />
-          </div>
-          <div class="md:w-1/3">
-            <label
-              class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
-              for="inline-full-name"
-            >
-              行きたいお店
-            </label>
-          </div>
-          <div class="md:w-2/3">
-            <input
-              type="text"
-              id="data-destination-name"
-              readonly="readonly"
-              class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
-            />
-            <input type="hidden" id="data-destination-location" />
-            <input type="hidden" id="data-destination-address" />
-          </div>
-        </div>
-      </form>
     </div>
+    <div class="map_wrapper">
+      <div id="map" class="map"></div>
+      <input
+        id="pac-input"
+        class="controls ignore-enterkey"
+        type="text"
+        placeholder="検索"
+      />
+    </div>
+    <form class="w-full max-w mt-3">
+      <div class="md:flex md:items-center mb-6">
+        <div class="md:w-1/3">
+          <label
+            class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+          >
+            現在地
+          </label>
+        </div>
+        <div class="md:w-1/2">
+          <input
+            type="text"
+            id="data-start-point-name"
+            readonly="readonly"
+            class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight"
+          />
+          <input type="hidden" id="data-start-point-location" />
+          <input type="hidden" id="data-start-point-address" />
+        </div>
+      </div>
+      <div class="md:flex md:items-center mb-6">
+        <div class="md:w-1/3">
+          <label
+            class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+          >
+            行きたいお店
+          </label>
+        </div>
+        <div class="md:w-1/2">
+          <input
+            type="text"
+            id="data-destination-name"
+            readonly="readonly"
+            class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight"
+          />
+          <input type="hidden" id="data-destination-location" />
+          <input type="hidden" id="data-destination-address" />
+        </div>
+      </div>
+    </form>
   </div>
 </template>
 
@@ -79,7 +77,7 @@ export default {
       const google = window.google;
       map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: 35.6581, lng: 139.7017 },
-        zoom: 16,
+        zoom: 15,
         mapTypeControl: false,
         streetViewControl: false,
         fullscreenControl: false,
