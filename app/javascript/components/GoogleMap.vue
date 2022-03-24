@@ -1,12 +1,64 @@
 <template>
-  <div class="map_wrapper">
-    <div id="map" class="map"></div>
-    <input
-      id="pac-input"
-      class="%i[controls ignore-enterkey]"
-      type="text"
-      placeholder="検索"
-    />
+  <div class="form-group">
+    <div>
+      <div class="wrap">
+        <div class="modalBox" id="startPoint">
+          <div class="modalInner">現在地点に設定しました</div>
+        </div>
+        <div class="modalBox" id="destination">
+          <div class="modalInner">行きたいお店に設定しました</div>
+        </div>
+      </div>
+      <div class="map_wrapper">
+        <div id="map" class="map"></div>
+        <input
+          id="pac-input"
+          class="controls ignore-enterkey"
+          type="text"
+          placeholder="検索"
+        />
+      </div>
+      <form class="w-full max-w-sm">
+        <div class="md:flex md:items-center mb-6">
+          <div class="md:w-1/3">
+            <label
+              class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              for="inline-full-name"
+            >
+              現在地
+            </label>
+          </div>
+          <div class="md:w-2/3">
+            <input
+              type="text"
+              id="data-start-point-name"
+              readonly="readonly"
+              class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+            />
+            <input type="hidden" id="data-start-point-location" />
+            <input type="hidden" id="data-start-point-address" />
+          </div>
+          <div class="md:w-1/3">
+            <label
+              class="block text-gray-500 font-bold md:text-right mb-1 md:mb-0 pr-4"
+              for="inline-full-name"
+            >
+              行きたいお店
+            </label>
+          </div>
+          <div class="md:w-2/3">
+            <input
+              type="text"
+              id="data-destination-name"
+              readonly="readonly"
+              class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight focus:outline-none focus:bg-white focus:border-purple-500"
+            />
+            <input type="hidden" id="data-destination-location" />
+            <input type="hidden" id="data-destination-address" />
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
@@ -204,17 +256,17 @@ export default {
       });
       // 検索結果のマーカークリックで発火
       function attachInfoWindow(marker, places, contentString) {
-        let infowindow = new google.maps.InfoWindow({
+        let infoWindow = new google.maps.InfoWindow({
           content: contentString,
         });
         marker.addListener("click", () => {
           if (currentInfoWindow) {
             currentInfoWindow.close();
           }
-          infowindow.open(marker.get("map"), marker);
-          currentInfoWindow = infowindow;
+          infoWindow.open(marker.get("map"), marker);
+          currentInfoWindow = infoWindow;
           // HTMLのformに値を送信
-          infowindow.addListener("domready", () => {
+          infoWindow.addListener("domready", () => {
             document
               .getElementById("addStartPoint")
               .addEventListener("click", () => {
@@ -282,5 +334,30 @@ export default {
   font-family: Roboto;
   font-size: 13px;
   font-weight: 300;
+}
+
+.modalBox {
+  position: fixed;
+  width: 85%;
+  max-width: 420px;
+  height: 0;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  overflow: hidden;
+  opacity: 1;
+  display: none;
+  border-radius: 3px;
+  z-index: 1000;
+}
+
+.modalInner {
+  padding: 10px;
+  text-align: center;
+  box-sizing: border-box;
+  background: rgba(0, 0, 0, 0.7);
+  color: #fff;
 }
 </style>

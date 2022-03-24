@@ -1,6 +1,5 @@
 <template>
   <div>
-    <p>MealOut</p>
     <GoogleMap />
     <router-link
       :to="{ name: 'MealOutResult' }"
