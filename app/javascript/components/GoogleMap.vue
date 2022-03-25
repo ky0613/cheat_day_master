@@ -31,6 +31,7 @@
             type="text"
             id="data-start-point-name"
             readonly="readonly"
+            placeholder="マップから選択してください"
             class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight"
           />
           <input type="hidden" id="data-start-point-location" />
@@ -50,6 +51,7 @@
             type="text"
             id="data-destination-name"
             readonly="readonly"
+            placeholder="マップから選択してください"
             class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight"
           />
           <input type="hidden" id="data-destination-location" />
@@ -124,6 +126,12 @@ export default {
               lng: position.coords.longitude,
             };
             map.setCenter(pos);
+            document.getElementById("data-start-point-name").value =
+              "現在地情報を取得しました";
+            document.getElementById(
+              "data-start-point-location"
+            ).value = `(${pos.lat}, ${pos.lng})`;
+            document.getElementById("data-start-point-address").value = null;
           });
         } else {
           return false;
@@ -169,7 +177,7 @@ export default {
             `<div id="ababab">` +
             `<p>${marker.title}</p>` +
             `<p>${marker.address}</p>` +
-            `<input type="button" value="現在地に設定" id="addStartPoint"  href="#startPoint">` +
+            `<input type="button" value="現在地に設定" id="addStartPoint"  href="#startPoint" class="border-solid bg-gray-400">` +
             `<input type="button" value="行きたいお店に設定" id="addDestination" href="#destination">` +
             `</div>`;
           markers.push(new google.maps.Marker({ marker }));
@@ -202,8 +210,8 @@ export default {
                   `<div id="ababab">` +
                   `<p>${placeOnMap.name}</p>` +
                   `<p>${placeOnMap.formatted_address}</p>` +
-                  `<input type="button" value="出発地点に設定" id="addStartPoint" href="#startPoint">` +
-                  `<input type="button" value="待ち合わせ場所に設定" id="addDestination" href="#destination">` +
+                  `<input type="button" value="現在地に設定" id="addStartPoint" href="#startPoint" class="rounded solid bg-blue-100 px-1 m-2">` +
+                  `<input type="button" value="行きたいお店に設定" id="addDestination" href="#destination" class="rounded solid bg-blue-100 px-1">` +
                   `</div>`;
                 let infowindow = new google.maps.InfoWindow({
                   content: contentOnMap,
