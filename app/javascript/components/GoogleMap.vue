@@ -66,6 +66,12 @@
 import { Loader } from "@googlemaps/js-api-loader";
 
 export default {
+  data() {
+    return {
+      currentPosition = null,
+      destinationPosition = null
+    }
+  },
   mounted() {
     const loader = new Loader({
       apiKey: "AIzaSyBe69s9_xYPZtwWPCUykqCP2qpimoGwfwg",
