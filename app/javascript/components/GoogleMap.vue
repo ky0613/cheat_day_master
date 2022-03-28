@@ -1,13 +1,13 @@
 <template>
   <div>
-    <div class="wrap">
-      <div class="modalBox" id="startPoint">
+    <transition>
+      <div class="modalBox" id="startPoint" v-if="isStartModalShown">
         <div class="modalInner">現在地点に設定しました</div>
       </div>
-      <div class="modalBox" id="destination">
+      <div class="modalBox" id="destination" v-if="isDestinationModalShown">
         <div class="modalInner">行きたいお店に設定しました</div>
       </div>
-    </div>
+    </transition>
     <div class="map_wrapper">
       <div id="map" class="map"></div>
       <input
@@ -69,8 +69,10 @@ export default {
   data() {
     return {
       apiKey: process.env.API_KEY,
-      // currentPosition: null,
-      // destinationPosition: null,
+      currentPosition: null,
+      destinationPosition: null,
+      isStartModalShown: false,
+      isDestinationModalShown: false,
     };
   },
   mounted() {
@@ -184,8 +186,8 @@ export default {
             `<div id="ababab">` +
             `<p>${marker.title}</p>` +
             `<p>${marker.address}</p>` +
-            `<input type="button" value="現在地に設定" id="addStartPoint"  href="#startPoint" class="border-solid bg-gray-400">` +
-            `<input type="button" value="行きたいお店に設定" id="addDestination" href="#destination">` +
+            `<input type="button" value="現在地に設定" id="addStartPoint"  href="#startPoint" class="rounded solid bg-blue-100 px-1 m-2">` +
+            `<input type="button" value="行きたいお店に設定" id="addDestination" href="#destination" class="rounded solid bg-blue-100 px-1">` +
             `</div>`;
           markers.push(new google.maps.Marker({ marker }));
           attachInfoWindow(marker, places, contentString, i);
@@ -217,8 +219,8 @@ export default {
                   `<div id="ababab">` +
                   `<p>${placeOnMap.name}</p>` +
                   `<p>${placeOnMap.formatted_address}</p>` +
-                  `<input type="button" value="現在地に設定" id="addStartPoint" href="#startPoint" class="rounded solid bg-blue-100 px-1 m-2">` +
-                  `<input type="button" value="行きたいお店に設定" id="addDestination" href="#destination" class="rounded solid bg-blue-100 px-1">` +
+                  `<input type="button" value="現在地に設定" id="addStartPoint" href="#startPoint" class="rounded solid bg-blue-100 px-1 m-2" onclick="isOpenSetStartModal()">` +
+                  `<input type="button" value="行きたいお店に設定" id="addDestination" href="#destination" class="rounded solid bg-blue-100 px-1" onclick="isSetDestinationModal()">` +
                   `</div>`;
                 let infowindow = new google.maps.InfoWindow({
                   content: contentOnMap,
@@ -305,6 +307,24 @@ export default {
       }
     });
   },
+  created() {
+    window.isOpenSetStartModal = this.isOpenSetStartModal;
+    window.isSetDestinationModal = this.isSetDestinationModal;
+  },
+  methods: {
+    isOpenSetStartModal() {
+      this.isStartModalShown = true;
+      setTimeout(() => {
+        this.isStartModalShown = false;
+      }, 1);
+    },
+    isSetDestinationModal() {
+      this.isDestinationModalShown = true;
+      setTimeout(() => {
+        this.isDestinationModalShown = false;
+      }, 1);
+    },
+  },
 };
 </script>
 
@@ -359,9 +379,7 @@ export default {
   left: 0;
   right: 0;
   margin: auto;
-  overflow: hidden;
   opacity: 1;
-  display: none;
   border-radius: 3px;
   z-index: 1000;
 }
@@ -372,5 +390,17 @@ export default {
   box-sizing: border-box;
   background: rgba(0, 0, 0, 0.7);
   color: #fff;
+}
+
+.v-leave-active {
+  transition: opacity 2s;
+}
+
+.v-leave {
+  opacity: 1;
+}
+
+.v-leave-to {
+  opacity: 0;
 }
 </style>
