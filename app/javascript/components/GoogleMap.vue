@@ -112,7 +112,7 @@ export default {
         fullscreenControl: false,
       });
 
-      ////////////////// 現在地ボタン作成 //////////////////
+      ////////////////// 現在地取得ボタン作成 //////////////////
       const locationButton = document.createElement("button");
       locationButton.textContent = "現在地を取得";
       // 現在地ボタンのCSS
@@ -159,6 +159,7 @@ export default {
               "data-start-point-location"
             ).value = `(${pos.lat}, ${pos.lng})`;
             document.getElementById("data-start-point-address").value = null;
+            this.isOpenSetStartModal();
           });
         } else {
           return false;
@@ -204,8 +205,8 @@ export default {
             `<div id="ababab">` +
             `<p>${marker.title}</p>` +
             `<p>${marker.address}</p>` +
-            `<input type="button" value="現在地に設定" id="addStartPoint"  href="#startPoint" class="rounded solid bg-blue-100 px-1 m-2">` +
-            `<input type="button" value="行きたいお店に設定" id="addDestination" href="#destination" class="rounded solid bg-blue-100 px-1">` +
+            `<input type="button" value="現在地に設定" id="addStartPoint" href="#startPoint" class="rounded solid bg-blue-100 px-1 m-2" onclick="isOpenSetStartModal()">` +
+            `<input type="button" value="行きたいお店に設定" id="addDestination" href="#destination" class="rounded solid bg-blue-100 px-1" onclick="isSetDestinationModal()">` +
             `</div>`;
           markers.push(new google.maps.Marker({ marker }));
           attachInfoWindow(marker, places, contentString, i);
@@ -218,6 +219,7 @@ export default {
         }
         map.fitBounds(bounds);
       });
+      ////////////////////////////////////////////////////
 
       // Infowindowを１つのみ開くために設定
       let currentInfoWindow = null;
@@ -330,23 +332,26 @@ export default {
     window.isSetDestinationModal = this.isSetDestinationModal;
   },
   updated() {
-    this.isSetPositionData(
-      this.$refs.startLocation.value.slice(1, -1).split(", "),
-      this.$refs.destinationLocation.value.slice(1, -1).split(", ")
-    );
+    let start = this.$refs.startLocation.value.slice(1, -1).split(", ");
+    let destination = this.$refs.destinationLocation.value
+      .slice(1, -1)
+      .split(", ");
+    if (start !== "" && destination !== "") {
+      this.isSetPositionData(start, destination);
+    }
   },
   methods: {
     isOpenSetStartModal() {
       this.isStartModalShown = true;
       setTimeout(() => {
         this.isStartModalShown = false;
-      }, 1);
+      }, 100);
     },
     isSetDestinationModal() {
       this.isDestinationModalShown = true;
       setTimeout(() => {
         this.isDestinationModalShown = false;
-      }, 1);
+      }, 100);
     },
     isSetPositionData(start, destination) {
       this.startLatLng = start.map(Number);

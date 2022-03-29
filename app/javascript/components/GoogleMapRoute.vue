@@ -12,6 +12,7 @@ export default {
     return {
       startLatLng: this.$store.state.startLatLng,
       destinationLatLng: this.$store.state.destinationLatLng,
+      aroundRestaruntData: [],
     };
   },
   mounted() {
@@ -28,13 +29,41 @@ export default {
     loader.load().then(() => {
       const google = window.google;
       map = new google.maps.Map(document.getElementById("map"), {
-        center: { lat: 35.6581, lng: 139.7017 },
+        center: {
+          lat: this.startLatLng[0],
+          lng: this.startLatLng[1],
+        },
         zoom: 15,
         mayTypeId: google.maps.MapTypeId.ROADMAP,
         mapTypeControl: false,
         streetViewControl: false,
         fullscreenControl: false,
       });
+
+      let radiusSerchRequest = {
+        location: new google.maps.LatLng(
+          this.destinationLatLng[0],
+          this.destinationLatLng[1]
+        ),
+        radius: 2000,
+        types: ["restaurant"],
+      };
+
+      let service = new google.maps.places.PlacesService(map);
+      service.search(radiusSerchRequest, Result_Places);
+
+      function Result_Places(results, status) {
+        // Placesが検索に成功したかをチェック
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+          let places = [];
+          for (let i = 0; i < results.length; i++) {
+            if (results[i].opening_hours.open_now && places.length <= 4) {
+              places.push(results[i]);
+            }
+          }
+          console.log(places);
+        }
+      }
 
       let rendererOptions = {
         map: map,
