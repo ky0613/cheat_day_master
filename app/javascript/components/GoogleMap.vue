@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="h-1/2">
     <transition>
       <div class="modalBox" id="startPoint" v-if="isStartModalShown">
         <div class="modalInner">現在地点に設定しました</div>
@@ -34,7 +34,11 @@
             placeholder="マップから選択してください"
             class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight"
           />
-          <input type="hidden" id="data-start-point-location" />
+          <input
+            type="hidden"
+            id="data-start-point-location"
+            ref="startLocation"
+          />
           <input type="hidden" id="data-start-point-address" />
         </div>
       </div>
@@ -54,8 +58,22 @@
             placeholder="マップから選択してください"
             class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight"
           />
-          <input type="hidden" id="data-destination-location" />
+          <input
+            type="hidden"
+            id="data-destination-location"
+            ref="destinationLocation"
+          />
           <input type="hidden" id="data-destination-address" />
+        </div>
+      </div>
+      <div class="container mx-auto">
+        <div class="flex justify-center">
+          <router-link
+            :to="{ name: 'MealOutResult' }"
+            class="rounded-full bg-blue-400 p-2 mb-3 text-center"
+          >
+            ルートを検索する</router-link
+          >
         </div>
       </div>
     </form>
@@ -69,8 +87,8 @@ export default {
   data() {
     return {
       apiKey: process.env.API_KEY,
-      currentPosition: null,
-      destinationPosition: null,
+      startLatLng: {},
+      destinationLatLng: {},
       isStartModalShown: false,
       isDestinationModalShown: false,
     };
@@ -311,6 +329,12 @@ export default {
     window.isOpenSetStartModal = this.isOpenSetStartModal;
     window.isSetDestinationModal = this.isSetDestinationModal;
   },
+  updated() {
+    this.isSetPositionData(
+      this.$refs.startLocation.value.slice(1, -1).split(", "),
+      this.$refs.destinationLocation.value.slice(1, -1).split(", ")
+    );
+  },
   methods: {
     isOpenSetStartModal() {
       this.isStartModalShown = true;
@@ -323,6 +347,12 @@ export default {
       setTimeout(() => {
         this.isDestinationModalShown = false;
       }, 1);
+    },
+    isSetPositionData(start, destination) {
+      this.startLatLng = start.map(Number);
+      this.destinationLatLng = destination.map(Number);
+      this.$store.commit("setStartPosition", this.startLatLng);
+      this.$store.commit("setDestinationPosition", this.destinationLatLng);
     },
   },
 };
