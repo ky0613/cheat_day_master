@@ -1,6 +1,9 @@
 <template>
-  <div class="map_wrapper">
-    <div id="map"></div>
+  <div>
+    <div class="map_wrapper">
+      <div id="map"></div>
+    </div>
+    <h3>このルートを歩いたら{{ burnedCalories }}kcal消費します。</h3>
   </div>
 </template>
 
@@ -12,8 +15,7 @@ export default {
     return {
       startLatLng: this.$store.state.startLatLng,
       destinationLatLng: this.$store.state.destinationLatLng,
-      aroundRestaruntData: [],
-      wayPoints: [],
+      wayPoints: this.$store.state.wayPoints,
     };
   },
   mounted() {
@@ -52,13 +54,6 @@ export default {
 
       directionsRenderer.setMap(map);
 
-      let waypts = [
-        {
-          location: { lat: 35.6614468, lng: 139.6980632 },
-          stopover: true,
-        },
-      ];
-
       let request = {
         origin: new google.maps.LatLng({
           lat: this.startLatLng[0],
@@ -68,18 +63,38 @@ export default {
           lat: this.destinationLatLng[0],
           lng: this.destinationLatLng[1],
         }), // 待ち合わせ場所
-        waypoints: this.$store.state.wayPoints,
+        waypoints: this.wayPoints,
         optimizeWaypoints: true,
         travelMode: google.maps.DirectionsTravelMode.WALKING, // 移動手段
       };
 
-      directionsService.route(request, function (response, status) {
-        if (status === google.maps.DirectionsStatus.OK) {
-          directionsRenderer.setMap(map);
+      directionsService
+        .route(request, function (response, status) {
+          if (status === google.maps.DirectionsStatus.OK) {
+            directionsRenderer.setMap(map);
+            directionsRenderer.setDirections(response);
+          }
+        })
+        .then((response) => {
           directionsRenderer.setDirections(response);
-        }
-      });
+          let route = response.routes[0];
+          let sum = 0;
+          for (let i = 0; i < route.legs.length; i++) {
+            sum += route.legs[i].duration.value;
+          }
+          getDurationTime(sum);
+        });
     });
+
+    let store = this.$store;
+    function getDurationTime(sum) {
+      store.commit("setBurnedCalories", sum);
+    }
+  },
+  computed: {
+    burnedCalories() {
+      return this.$store.getters.getBurnedCalories;
+    },
   },
 };
 </script>
