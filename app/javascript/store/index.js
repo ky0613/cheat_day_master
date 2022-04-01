@@ -8,6 +8,12 @@ export default new Vuex.Store({
     startLatLng: [],
     destinationLatLng: [],
     wayPoints: [],
+    sumBurnedCalories: null,
+  },
+  getters: {
+    getBurnedCalories: (state) => {
+      return state.sumBurnedCalories;
+    },
   },
   mutations: {
     setStartPosition(state, position) {
@@ -28,6 +34,10 @@ export default new Vuex.Store({
         };
         state.wayPoints.push(conversionWayPoint);
       }
+    },
+    setBurnedCalories(state, durationTime) {
+      let calories = Math.trunc(1.05 * 3.5 * (durationTime / 3600) * 60);
+      state.sumBurnedCalories = calories;
     },
   },
 });
