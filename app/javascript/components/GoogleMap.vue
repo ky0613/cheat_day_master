@@ -1,13 +1,13 @@
 <template>
-  <div>
-    <div class="wrap">
-      <div class="modalBox" id="startPoint">
+  <div class="h-1/2">
+    <transition>
+      <div class="modalBox" id="startPoint" v-if="isStartModalShown">
         <div class="modalInner">現在地点に設定しました</div>
       </div>
-      <div class="modalBox" id="destination">
+      <div class="modalBox" id="destination" v-if="isDestinationModalShown">
         <div class="modalInner">行きたいお店に設定しました</div>
       </div>
-    </div>
+    </transition>
     <div class="map_wrapper">
       <div id="map" class="map"></div>
       <input
@@ -34,7 +34,11 @@
             placeholder="マップから選択してください"
             class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight"
           />
-          <input type="hidden" id="data-start-point-location" />
+          <input
+            type="hidden"
+            id="data-start-point-location"
+            ref="startLocation"
+          />
           <input type="hidden" id="data-start-point-address" />
         </div>
       </div>
@@ -54,8 +58,22 @@
             placeholder="マップから選択してください"
             class="bg-gray-200 appearance-none border-2 border-gray-200 rounded w-full py-2 px-4 text-gray-700 leading-tight"
           />
-          <input type="hidden" id="data-destination-location" />
+          <input
+            type="hidden"
+            id="data-destination-location"
+            ref="destinationLocation"
+          />
           <input type="hidden" id="data-destination-address" />
+        </div>
+      </div>
+      <div class="container mx-auto">
+        <div class="flex justify-center">
+          <router-link
+            :to="{ name: 'MealOutResult' }"
+            class="rounded-full bg-blue-400 p-2 mb-3 text-center"
+          >
+            ルートを検索する</router-link
+          >
         </div>
       </div>
     </form>
@@ -66,9 +84,18 @@
 import { Loader } from "@googlemaps/js-api-loader";
 
 export default {
+  data() {
+    return {
+      apiKey: process.env.API_KEY,
+      startLatLng: {},
+      destinationLatLng: {},
+      isStartModalShown: false,
+      isDestinationModalShown: false,
+    };
+  },
   mounted() {
     const loader = new Loader({
-      apiKey: "AIzaSyBe69s9_xYPZtwWPCUykqCP2qpimoGwfwg",
+      apiKey: this.apiKey,
       version: "weekly",
       libraries: ["places"],
     });
@@ -85,7 +112,7 @@ export default {
         fullscreenControl: false,
       });
 
-      ////////////////// 現在地ボタン作成 //////////////////
+      ////////////////// 現在地取得ボタン作成 //////////////////
       const locationButton = document.createElement("button");
       locationButton.textContent = "現在地を取得";
       // 現在地ボタンのCSS
@@ -132,6 +159,7 @@ export default {
               "data-start-point-location"
             ).value = `(${pos.lat}, ${pos.lng})`;
             document.getElementById("data-start-point-address").value = null;
+            this.isOpenSetStartModal();
           });
         } else {
           return false;
@@ -177,8 +205,8 @@ export default {
             `<div id="ababab">` +
             `<p>${marker.title}</p>` +
             `<p>${marker.address}</p>` +
-            `<input type="button" value="現在地に設定" id="addStartPoint"  href="#startPoint" class="border-solid bg-gray-400">` +
-            `<input type="button" value="行きたいお店に設定" id="addDestination" href="#destination">` +
+            `<input type="button" value="現在地に設定" id="addStartPoint" href="#startPoint" class="rounded solid bg-blue-100 px-1 m-2" onclick="isOpenSetStartModal()">` +
+            `<input type="button" value="行きたいお店に設定" id="addDestination" href="#destination" class="rounded solid bg-blue-100 px-1" onclick="isSetDestinationModal()">` +
             `</div>`;
           markers.push(new google.maps.Marker({ marker }));
           attachInfoWindow(marker, places, contentString, i);
@@ -191,6 +219,7 @@ export default {
         }
         map.fitBounds(bounds);
       });
+      ////////////////////////////////////////////////////
 
       // Infowindowを１つのみ開くために設定
       let currentInfoWindow = null;
@@ -210,8 +239,8 @@ export default {
                   `<div id="ababab">` +
                   `<p>${placeOnMap.name}</p>` +
                   `<p>${placeOnMap.formatted_address}</p>` +
-                  `<input type="button" value="現在地に設定" id="addStartPoint" href="#startPoint" class="rounded solid bg-blue-100 px-1 m-2">` +
-                  `<input type="button" value="行きたいお店に設定" id="addDestination" href="#destination" class="rounded solid bg-blue-100 px-1">` +
+                  `<input type="button" value="現在地に設定" id="addStartPoint" href="#startPoint" class="rounded solid bg-blue-100 px-1 m-2" onclick="isOpenSetStartModal()">` +
+                  `<input type="button" value="行きたいお店に設定" id="addDestination" href="#destination" class="rounded solid bg-blue-100 px-1" onclick="isSetDestinationModal()">` +
                   `</div>`;
                 let infowindow = new google.maps.InfoWindow({
                   content: contentOnMap,
@@ -247,6 +276,31 @@ export default {
                       document.getElementById(
                         "data-destination-address"
                       ).value = placeOnMap.formatted_address;
+
+                      let radiusSearchRequest = {
+                        location: placeOnMap.geometry.location,
+                        radius: 2000,
+                        type: "restaurant",
+                      };
+
+                      service.nearbySearch(
+                        radiusSearchRequest,
+                        function (results, status) {
+                          let resultLocations = [];
+                          if (
+                            status == google.maps.places.PlacesServiceStatus.OK
+                          ) {
+                            for (let i = 0; i < 4; i++) {
+                              resultLocations.push(
+                                JSON.parse(
+                                  JSON.stringify(results[i].geometry.location)
+                                )
+                              );
+                            }
+                          }
+                          setWayPoints(resultLocations);
+                        }
+                      );
                     });
                 });
               }
@@ -254,6 +308,7 @@ export default {
           );
         }
       });
+
       // マップ上クリックでinfowindow閉じる
       google.maps.event.addListener(map, "click", function () {
         if (currentInfoWindow) {
@@ -297,6 +352,53 @@ export default {
         });
       }
     });
+
+    let resultWayPoints = [];
+    let store = this.$store;
+    function setWayPoints(places) {
+      console.log("places", places);
+      for (let i = 0; i < places.length; i++) {
+        resultWayPoints.push(places[i]);
+      }
+      store.commit("setWaypointsPositions", resultWayPoints);
+    }
+  },
+  created() {
+    window.isOpenSetStartModal = this.isOpenSetStartModal;
+    window.isSetDestinationModal = this.isSetDestinationModal;
+  },
+  updated() {
+    let start = this.$refs.startLocation.value
+      .slice(1, -1)
+      .split(", ")
+      .map(Number);
+    let destination = this.$refs.destinationLocation.value
+      .slice(1, -1)
+      .split(", ")
+      .map(Number);
+    if (start !== "" && destination !== "") {
+      this.isSetPositionData(start, destination);
+    }
+  },
+  methods: {
+    isOpenSetStartModal() {
+      this.isStartModalShown = true;
+      setTimeout(() => {
+        this.isStartModalShown = false;
+      }, 100);
+    },
+    isSetDestinationModal() {
+      this.isDestinationModalShown = true;
+      setTimeout(() => {
+        this.isDestinationModalShown = false;
+      }, 100);
+    },
+    isSetPositionData(start, destination) {
+      this.startLatLng = start;
+      this.destinationLatLng = destination;
+      this.$store.commit("setStartPosition", this.startLatLng);
+      this.$store.commit("setDestinationPosition", this.destinationLatLng);
+    },
   },
 };
 </script>
@@ -352,9 +454,7 @@ export default {
   left: 0;
   right: 0;
   margin: auto;
-  overflow: hidden;
   opacity: 1;
-  display: none;
   border-radius: 3px;
   z-index: 1000;
 }
@@ -365,5 +465,17 @@ export default {
   box-sizing: border-box;
   background: rgba(0, 0, 0, 0.7);
   color: #fff;
+}
+
+.v-leave-active {
+  transition: opacity 2s;
+}
+
+.v-leave {
+  opacity: 1;
+}
+
+.v-leave-to {
+  opacity: 0;
 }
 </style>
