@@ -13,6 +13,7 @@ export default {
       startLatLng: this.$store.state.startLatLng,
       destinationLatLng: this.$store.state.destinationLatLng,
       aroundRestaruntData: [],
+      wayPoints: [],
     };
   },
   mounted() {
@@ -23,8 +24,6 @@ export default {
     });
 
     let map;
-    console.log(this.startLatLng);
-    console.log(this.destinationLatLng);
 
     loader.load().then(() => {
       const google = window.google;
@@ -40,31 +39,6 @@ export default {
         fullscreenControl: false,
       });
 
-      let radiusSerchRequest = {
-        location: new google.maps.LatLng(
-          this.destinationLatLng[0],
-          this.destinationLatLng[1]
-        ),
-        radius: 2000,
-        types: ["restaurant"],
-      };
-
-      let service = new google.maps.places.PlacesService(map);
-      service.search(radiusSerchRequest, Result_Places);
-
-      function Result_Places(results, status) {
-        // Placesが検索に成功したかをチェック
-        if (status == google.maps.places.PlacesServiceStatus.OK) {
-          let places = [];
-          for (let i = 0; i < results.length; i++) {
-            if (results[i].opening_hours.open_now && places.length <= 4) {
-              places.push(results[i]);
-            }
-          }
-          console.log(places);
-        }
-      }
-
       let rendererOptions = {
         map: map,
         draggable: true,
@@ -78,6 +52,13 @@ export default {
 
       directionsRenderer.setMap(map);
 
+      let waypts = [
+        {
+          location: { lat: 35.6614468, lng: 139.6980632 },
+          stopover: true,
+        },
+      ];
+
       let request = {
         origin: new google.maps.LatLng({
           lat: this.startLatLng[0],
@@ -87,11 +68,12 @@ export default {
           lat: this.destinationLatLng[0],
           lng: this.destinationLatLng[1],
         }), // 待ち合わせ場所
+        waypoints: this.$store.state.wayPoints,
+        optimizeWaypoints: true,
         travelMode: google.maps.DirectionsTravelMode.WALKING, // 移動手段
       };
 
       directionsService.route(request, function (response, status) {
-        console.log(response);
         if (status === google.maps.DirectionsStatus.OK) {
           directionsRenderer.setMap(map);
           directionsRenderer.setDirections(response);

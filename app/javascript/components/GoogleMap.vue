@@ -276,6 +276,31 @@ export default {
                       document.getElementById(
                         "data-destination-address"
                       ).value = placeOnMap.formatted_address;
+
+                      let radiusSearchRequest = {
+                        location: placeOnMap.geometry.location,
+                        radius: 2000,
+                        type: "restaurant",
+                      };
+
+                      service.nearbySearch(
+                        radiusSearchRequest,
+                        function (results, status) {
+                          let resultLocations = [];
+                          if (
+                            status == google.maps.places.PlacesServiceStatus.OK
+                          ) {
+                            for (let i = 0; i < 4; i++) {
+                              resultLocations.push(
+                                JSON.parse(
+                                  JSON.stringify(results[i].geometry.location)
+                                )
+                              );
+                            }
+                          }
+                          setWayPoints(resultLocations);
+                        }
+                      );
                     });
                 });
               }
@@ -283,6 +308,7 @@ export default {
           );
         }
       });
+
       // マップ上クリックでinfowindow閉じる
       google.maps.event.addListener(map, "click", function () {
         if (currentInfoWindow) {
@@ -326,16 +352,30 @@ export default {
         });
       }
     });
+
+    let resultWayPoints = [];
+    let store = this.$store;
+    function setWayPoints(places) {
+      console.log("places", places);
+      for (let i = 0; i < places.length; i++) {
+        resultWayPoints.push(places[i]);
+      }
+      store.commit("setWaypointsPositions", resultWayPoints);
+    }
   },
   created() {
     window.isOpenSetStartModal = this.isOpenSetStartModal;
     window.isSetDestinationModal = this.isSetDestinationModal;
   },
   updated() {
-    let start = this.$refs.startLocation.value.slice(1, -1).split(", ");
+    let start = this.$refs.startLocation.value
+      .slice(1, -1)
+      .split(", ")
+      .map(Number);
     let destination = this.$refs.destinationLocation.value
       .slice(1, -1)
-      .split(", ");
+      .split(", ")
+      .map(Number);
     if (start !== "" && destination !== "") {
       this.isSetPositionData(start, destination);
     }
@@ -354,8 +394,8 @@ export default {
       }, 100);
     },
     isSetPositionData(start, destination) {
-      this.startLatLng = start.map(Number);
-      this.destinationLatLng = destination.map(Number);
+      this.startLatLng = start;
+      this.destinationLatLng = destination;
       this.$store.commit("setStartPosition", this.startLatLng);
       this.$store.commit("setDestinationPosition", this.destinationLatLng);
     },
