@@ -2,8 +2,10 @@
   <div id="app">
     <body class="flex flex-col min-h-screen">
       <TheHeader />
-      <main class="flex-grow h-0">
-        <router-view />
+      <main class="flex flex-1">
+        <div class="m-auto max-w-6xl w-full">
+          <router-view />
+        </div>
       </main>
       <TheFooter />
     </body>

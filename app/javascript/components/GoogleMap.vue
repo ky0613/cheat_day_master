@@ -1,5 +1,7 @@
 <template>
-  <div class="h-1/2">
+  <div
+    class="overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 mt-6 w-full"
+  >
     <transition>
       <div class="modalBox" id="startPoint" v-if="isStartModalShown">
         <div class="modalInner">現在地点に設定しました</div>
