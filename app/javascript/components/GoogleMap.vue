@@ -394,8 +394,8 @@ export default {
       }, 100);
     },
     isSetPositionData(start, destination) {
-      this.startLatLng = start;
-      this.destinationLatLng = destination;
+      this.startLatLng = { lat: start[0], lng: start[1] };
+      this.destinationLatLng = { lat: destination[0], lng: destination[1] };
       this.$store.commit("setStartPosition", this.startLatLng);
       this.$store.commit("setDestinationPosition", this.destinationLatLng);
     },
