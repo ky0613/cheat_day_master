@@ -1,6 +1,6 @@
 <template>
   <div
-    class="overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 my-6 w-full"
+    class="overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 my-4 w-full"
   >
     <div>
       <h3>このルートを歩いたら{{ burnedCalories }}kcal消費します。</h3>
