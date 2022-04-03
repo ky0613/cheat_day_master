@@ -248,27 +248,31 @@ export default {
                 }
                 infowindow.open(map);
                 currentInfoWindow = infowindow;
+                let place = JSON.parse(JSON.stringify(placeOnMap));
                 // HTMLのformに値を送信
                 infowindow.addListener("domready", () => {
                   document
                     .getElementById("addStartPoint")
                     .addEventListener("click", () => {
-                      that.startPositionData = JSON.parse(
-                        JSON.stringify(placeOnMap)
-                      );
+                      that.startPositionData.name = place.name;
+                      that.startPositionData.latLng = place.geometry.location;
+                      console.log(that.startPositionData);
                     });
                   document
                     .getElementById("addDestination")
                     .addEventListener("click", () => {
-                      that.destinationPositionData = JSON.parse(
-                        JSON.stringify(placeOnMap)
-                      );
+                      that.destinationPositionData.name = place.name;
+                      that.destinationPositionData.latLng =
+                        place.geometry.location;
+                      console.log(that.destinationPositionData);
                       that.destinationNearBySearch(
                         service,
                         google,
-                        placeOnMap.geometry.location,
+                        place.geometry.location,
                         that
                       );
+
+                      console.log(that.wayPoints);
                     });
                 });
               }
@@ -284,7 +288,7 @@ export default {
         }
       });
       // 検索結果のマーカークリックで発火
-      function attachInfoWindow(marker, places, contentString) {
+      function attachInfoWindow(marker, contentString) {
         let infoWindow = new google.maps.InfoWindow({
           content: contentString,
         });
@@ -294,9 +298,9 @@ export default {
           }
           infoWindow.open(marker.get("map"), marker);
           currentInfoWindow = infoWindow;
+          let locationMarker = JSON.parse(JSON.stringify(marker.position));
           // HTMLのformに値を送信
           infoWindow.addListener("domready", () => {
-            let locationMarker = JSON.parse(JSON.stringify(marker.position));
             document
               .getElementById("addStartPoint")
               .addEventListener("click", () => {
@@ -350,8 +354,14 @@ export default {
           for (let i = 0; i < results.length; i++) {
             that.wayPoints.push(JSON.parse(JSON.stringify(results[i])));
           }
+          that.$store.commit("setWaypointsPositions", that.wayPoints);
         }
       });
+      that.$store.commit("setStartPosition", that.startPositionData);
+      that.$store.commit(
+        "setDestinationPosition",
+        that.destinationPositionData
+      );
     },
   },
 };
