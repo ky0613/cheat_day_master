@@ -18,6 +18,8 @@ export default new Vuex.Store({
       state.destinationLatLng = position;
     },
     setWaypointsPositions(state, positions) {
+      state.wayPoints = [];
+      state.routeWayPoints = [];
       positions.sort((a, b) => (a.rating - b.rating) * -1);
       let conversionWayPoint = {};
       for (let i = 0; i < 4; i++) {

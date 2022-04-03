@@ -256,7 +256,6 @@ export default {
                     .addEventListener("click", () => {
                       that.startPositionData.name = place.name;
                       that.startPositionData.latLng = place.geometry.location;
-                      console.log(that.startPositionData);
                     });
                   document
                     .getElementById("addDestination")
@@ -264,15 +263,12 @@ export default {
                       that.destinationPositionData.name = place.name;
                       that.destinationPositionData.latLng =
                         place.geometry.location;
-                      console.log(that.destinationPositionData);
                       that.destinationNearBySearch(
                         service,
                         google,
                         place.geometry.location,
                         that
                       );
-
-                      console.log(that.wayPoints);
                     });
                 });
               }
@@ -352,6 +348,9 @@ export default {
         that.wayPoints = [];
         if (status == google.maps.places.PlacesServiceStatus.OK) {
           for (let i = 0; i < results.length; i++) {
+            if (results[i].photos && results[i].photos.length >= 1) {
+              results[i].storePhoto = results[i].photos[0].getUrl();
+            }
             that.wayPoints.push(JSON.parse(JSON.stringify(results[i])));
           }
           that.$store.commit("setWaypointsPositions", that.wayPoints);
