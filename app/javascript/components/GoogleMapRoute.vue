@@ -1,24 +1,62 @@
 <template>
-  <div>
-    <div class="map_wrapper">
-      <div id="map"></div>
+  <div
+    class="overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 my-4 w-full"
+  >
+    <div>
+      <h3>このルートを歩いたら{{ burnedCalories }}kcal消費します。</h3>
     </div>
-    <h3>このルートを歩いたら{{ burnedCalories }}kcal消費します。</h3>
+    <div class="map_wrapper object-cover w-full h-64">
+      <div id="map" class="map"></div>
+    </div>
+    <StoreDataCard />
   </div>
 </template>
 
 <script>
 import { Loader } from "@googlemaps/js-api-loader";
+import StoreDataCard from "./StoreDataCard.vue";
 
 export default {
+  components: {
+    StoreDataCard,
+  },
   data() {
     return {
       startLatLng: this.$store.state.startLatLng,
       destinationLatLng: this.$store.state.destinationLatLng,
-      wayPoints: this.$store.state.wayPoints,
+      routeWayPoints: this.$store.state.routeWayPoints,
+      waypoints: this.$store.state.wayPoints,
+      durationTime: null,
+      // レイアウト整形のため仮で指定
+      // startLatLng: {
+      //   lat: 35.6534925,
+      //   lng: 139.6927441,
+      // },
+      // destinationLatLng: {
+      //   lat: 35.6587729,
+      //   lng: 139.7156104,
+      // },
+      // wayPoints: [
+      //   {
+      //     location: {
+      //       lat: 35.6612139,
+      //       lng: 139.7162296,
+      //     },
+      //     stopover: true,
+      //   },
+      //   {
+      //     location: {
+      //       lat: 35.66143479999999,
+      //       lng: 139.7238296,
+      //     },
+      //     stopover: true,
+      //   },
+      // ],
     };
   },
   mounted() {
+    const that = this;
+
     const loader = new Loader({
       apiKey: process.env.API_KEY,
       version: "weekly",
@@ -30,10 +68,7 @@ export default {
     loader.load().then(() => {
       const google = window.google;
       map = new google.maps.Map(document.getElementById("map"), {
-        center: {
-          lat: this.startLatLng[0],
-          lng: this.startLatLng[1],
-        },
+        center: this.startLatLng.latLng,
         zoom: 15,
         mayTypeId: google.maps.MapTypeId.ROADMAP,
         mapTypeControl: false,
@@ -44,7 +79,6 @@ export default {
       let rendererOptions = {
         map: map,
         draggable: true,
-        preserveViewport: true,
       };
 
       let directionsService = new google.maps.DirectionsService();
@@ -55,15 +89,9 @@ export default {
       directionsRenderer.setMap(map);
 
       let request = {
-        origin: new google.maps.LatLng({
-          lat: this.startLatLng[0],
-          lng: this.startLatLng[1],
-        }), // 出発地点
-        destination: new google.maps.LatLng({
-          lat: this.destinationLatLng[0],
-          lng: this.destinationLatLng[1],
-        }), // 待ち合わせ場所
-        waypoints: this.wayPoints,
+        origin: new google.maps.LatLng(this.startLatLng.latLng), // 出発地点
+        destination: new google.maps.LatLng(this.destinationLatLng.latLng), // 待ち合わせ場所
+        waypoints: this.routeWayPoints,
         optimizeWaypoints: true,
         travelMode: google.maps.DirectionsTravelMode.WALKING, // 移動手段
       };
@@ -82,18 +110,13 @@ export default {
           for (let i = 0; i < route.legs.length; i++) {
             sum += route.legs[i].duration.value;
           }
-          getDurationTime(sum);
+          that.durationTime = sum;
         });
     });
-
-    let store = this.$store;
-    function getDurationTime(sum) {
-      store.commit("setBurnedCalories", sum);
-    }
   },
   computed: {
     burnedCalories() {
-      return this.$store.getters.getBurnedCalories;
+      return Math.trunc(1.05 * 3.5 * (this.durationTime / 3600) * 60);
     },
   },
 };
