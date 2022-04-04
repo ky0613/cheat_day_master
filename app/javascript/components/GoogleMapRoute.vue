@@ -8,24 +8,28 @@
     <div class="map_wrapper object-cover w-full h-64">
       <div id="map" class="map"></div>
     </div>
-    <StoreDataCard />
+    <StoreDataCard :stores="wayPoints" />
+    <RakutenDataCard :items="allItems" />
   </div>
 </template>
 
 <script>
 import { Loader } from "@googlemaps/js-api-loader";
 import StoreDataCard from "./StoreDataCard.vue";
+import RakutenDataCard from "./RakutenDataCard.vue";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
     StoreDataCard,
+    RakutenDataCard,
   },
   data() {
     return {
       startLatLng: this.$store.state.startLatLng,
       destinationLatLng: this.$store.state.destinationLatLng,
       routeWayPoints: this.$store.state.routeWayPoints,
-      waypoints: this.$store.state.wayPoints,
+      wayPoints: this.$store.state.wayPoints,
       durationTime: null,
       // レイアウト整形のため仮で指定
       // startLatLng: {
@@ -115,9 +119,16 @@ export default {
     });
   },
   computed: {
+    ...mapGetters(["allItems"]),
     burnedCalories() {
       return Math.trunc(1.05 * 3.5 * (this.durationTime / 3600) * 60);
     },
+  },
+  created() {
+    this.fetchItems();
+  },
+  methods: {
+    ...mapActions(["fetchItems"]),
   },
 };
 </script>

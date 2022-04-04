@@ -1,6 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
+import items from "./modules/rakutenItems";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -31,5 +33,8 @@ export default new Vuex.Store({
         state.routeWayPoints.push(conversionWayPoint);
       }
     },
+  },
+  modules: {
+    items,
   },
 });
