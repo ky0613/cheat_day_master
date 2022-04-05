@@ -1,7 +1,8 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
-import items from "./modules/rakutenItems";
+import rakutenItems from "./modules/rakutenItems";
+import hotPepperGourmandStores from "./modules/hotPepperGourmand";
 
 Vue.use(Vuex);
 
@@ -35,6 +36,7 @@ export default new Vuex.Store({
     },
   },
   modules: {
-    items,
+    rakutenItems,
+    hotPepperGourmandStores,
   },
 });
