@@ -1,5 +1,7 @@
 import axios from "axios";
 
+let apiKeyHotPeppaer = process.env.HOT_PEPPER_API_KEY;
+
 const state = {
   items: [],
 };
