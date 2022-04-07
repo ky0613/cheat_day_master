@@ -9,7 +9,7 @@ const testConfig = {
     lng: "135.52",
     range: "5",
     order: "4",
-    format: "json",
+    format: "jsonp",
   },
 };
 
