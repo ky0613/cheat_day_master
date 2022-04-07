@@ -1,8 +1,10 @@
 module.exports = {
-  devServer: {
-    proxy: {
-      "/api": {
-        target: "http://webservice.recruit.co.jp",
+  configureWebpack: {
+    devServer: {
+      proxy: {
+        "/api": {
+          target: "http://webservice.recruit.co.jp",
+        },
       },
     },
   },
