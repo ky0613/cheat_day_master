@@ -2,7 +2,7 @@
   <div class="p-6 flex justify-between">
     <div
       class="mx-2 overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
-      v-for="store of storeDatas"
+      v-for="store of stores"
       :key="store.place_id"
     >
       <img
@@ -27,10 +27,10 @@
 
 <script>
 export default {
-  data() {
-    return {
-      storeDatas: this.$store.state.wayPoints,
-    };
+  props: {
+    stores: {
+      type: Array,
+    },
   },
 };
 </script>

@@ -3,29 +3,39 @@
     class="overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 my-4 w-full"
   >
     <div>
-      <h3>このルートを歩いたら{{ burnedCalories }}kcal消費します。</h3>
+      <h1>1店舗では物足りないと思うので勝手に経由地を追加しておきました。</h1>
+      <h3>
+        余談ですが，このルートを歩いたら{{ burnedCalories }}kcal消費します。
+      </h3>
     </div>
     <div class="map_wrapper object-cover w-full h-64">
       <div id="map" class="map"></div>
     </div>
-    <StoreDataCard />
+    <StoreDataCard :stores="wayPoints" />
+    <RakutenDataCard :items="allItems" />
+    <!-- <HotPepperGourmandStores :stores="allStores" /> -->
   </div>
 </template>
 
 <script>
 import { Loader } from "@googlemaps/js-api-loader";
 import StoreDataCard from "./StoreDataCard.vue";
+import RakutenDataCard from "./RakutenDataCard.vue";
+import HotPepperGourmandStores from "./HotPepperGourmandStores.vue";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
     StoreDataCard,
+    RakutenDataCard,
+    HotPepperGourmandStores,
   },
   data() {
     return {
       startLatLng: this.$store.state.startLatLng,
       destinationLatLng: this.$store.state.destinationLatLng,
       routeWayPoints: this.$store.state.routeWayPoints,
-      waypoints: this.$store.state.wayPoints,
+      wayPoints: this.$store.state.wayPoints,
       durationTime: null,
       // レイアウト整形のため仮で指定
       // startLatLng: {
@@ -58,7 +68,7 @@ export default {
     const that = this;
 
     const loader = new Loader({
-      apiKey: process.env.API_KEY,
+      // apiKey: process.env.API_KEY,
       version: "weekly",
       libraries: ["places"],
     });
@@ -115,9 +125,17 @@ export default {
     });
   },
   computed: {
+    ...mapGetters(["allItems", "allStores"]),
     burnedCalories() {
       return Math.trunc(1.05 * 3.5 * (this.durationTime / 3600) * 60);
     },
+  },
+  created() {
+    this.fetchItems();
+    this.fetchStores();
+  },
+  methods: {
+    ...mapActions(["fetchItems", "fetchStores"]),
   },
 };
 </script>
