@@ -5,11 +5,4 @@ module.exports = {
       loader: "vue-loader",
     },
   ],
-  devServer: {
-    proxy: {
-      "/api/": {
-        target: "http://webservice.recruit.co.jp",
-      },
-    },
-  },
 };
