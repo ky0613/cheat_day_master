@@ -1,7 +1,6 @@
 import axios from "axios";
 
-const HOTPEPPER_API_ENDPOINT =
-  "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/";
+const HOTPEPPER_API_ENDPOINT = "/api/hotpepper/gourmet/v1/";
 
 const testConfig = {
   params: {
