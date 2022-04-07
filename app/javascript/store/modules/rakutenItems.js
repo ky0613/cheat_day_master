@@ -1,6 +1,14 @@
 import axios from "axios";
 
-let apiKeyHotPeppaer = process.env.HOT_PEPPER_API_KEY;
+const KEY = process.env.RAKUTEN_API_KEY;
+
+const config = {
+  params: {
+    format: "json",
+    genreId: "100227",
+    applicationId: "1093853470195032291",
+  },
+};
 
 const state = {
   items: [],
@@ -13,7 +21,8 @@ const getters = {
 const actions = {
   async fetchItems({ commit }) {
     const response = await axios.get(
-      "https://app.rakuten.co.jp/services/api/IchibaItem/Ranking/20170628?format=json&genreId=100227&applicationId=1093853470195032291"
+      "https://app.rakuten.co.jp/services/api/IchibaItem/Ranking/20170628",
+      config
     );
     commit("setItems", response.data);
   },

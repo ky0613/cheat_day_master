@@ -71,12 +71,6 @@ development:
       "Access-Control-Allow-Origin": "*"
     watch_options:
       ignored: "**/node_modules/**"
-    proxy:
-      "/api":
-        target: "http://webservice.recruit.co.jp"
-        pathRewrite: { "/api": "" }
-        changeOrigin: true
-        secure: false
 
 test:
   <<: *default
