@@ -8,10 +8,14 @@ Vue.use(Vuex);
 
 export default new Vuex.Store({
   state: {
-    startLatLng: [],
-    destinationLatLng: [],
+    startLatLng: {},
+    destinationLatLng: {},
     routeWayPoints: [],
     wayPoints: [],
+  },
+  getters: {
+    startPositionData: (state) => state.startLatLng,
+    destinationPositionData: (state) => state.destinationLatLng,
   },
   mutations: {
     setStartPosition(state, position) {
@@ -26,6 +30,7 @@ export default new Vuex.Store({
       positions.sort((a, b) => (a.rating - b.rating) * -1);
       let conversionWayPoint = {};
       for (let i = 0; i < 4; i++) {
+        // console.log(positions[i]);
         state.wayPoints.push(positions[i]);
         conversionWayPoint = {
           location: positions[i].geometry.location,
