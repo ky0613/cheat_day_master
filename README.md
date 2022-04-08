@@ -67,6 +67,7 @@ https://drive.google.com/file/d/1PRnnQv8_cSyaJ0Yy8K6q89Ojf3PUZao4/view?usp=shari
   - ruby 3.1.1
 - コマンド（自分のPCでローカルにcloneして確認しました。）
 ```
+$ git clone https://github.com/ky0613/cheat_day_master.git
 $ rbenv install 3.1.1
 $ rbenv local 3.1.1
 $ bundle install
