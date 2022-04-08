@@ -61,3 +61,13 @@ https://www.figma.com/file/inSsQE78Xi9HSZgu9045Bk/CheatDayMaster?node-id=0%3A1
 ### ER 図
 
 https://drive.google.com/file/d/1PRnnQv8_cSyaJ0Yy8K6q89Ojf3PUZao4/view?usp=sharing
+
+###　環境構築手順
+バージョン　ruby 3.1.1
+コマンド（自分のPCでローカルにcloneして確認しました。）
+```
+$ rbenv install 3.1.1
+$ rbenv local 3.1.1
+$ bundle install
+$ yarn
+```
