@@ -28,7 +28,7 @@
           readonly="readonly"
           placeholder="マップから選択してください"
           class="bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight min-w"
-          :value="startPositionName"
+          :value="this.$store.state.startLatLng.name"
         />
       </div>
       <div class="flex items-center mb-6 mx-auto justify-center">
@@ -39,7 +39,7 @@
           readonly="readonly"
           placeholder="マップから選択してください"
           class="bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight min-w"
-          :value="destinationPositionName"
+          :value="this.$store.state.destinationLatLng.name"
         />
       </div>
       <div class="container mx-auto">
@@ -63,35 +63,13 @@ export default {
   data() {
     return {
       apiKey: process.env.API_KEY,
-      startPositionData: {
-        name: "",
-        latLng: {
-          lat: null,
-          lng: null,
-        },
-      },
-      destinationPositionData: {
-        name: "",
-        latLng: {
-          lat: null,
-          lng: null,
-        },
-      },
       isStartModalShown: false,
       isDestinationModalShown: false,
       wayPoints: [],
     };
   },
-  computed: {
-    startPositionName() {
-      return this.startPositionData.name;
-    },
-    destinationPositionName() {
-      return this.destinationPositionData.name;
-    },
-  },
   mounted() {
-    const that = this;
+    const self = this;
     function infoWindowContent(name, address) {
       let content =
         `<div>` +
@@ -164,9 +142,11 @@ export default {
               lng: position.coords.longitude,
             };
             map.setCenter(pos);
-            that.startPositionData.name = "現在地情報を取得しました";
-            that.startPositionData.latLng = pos;
-            that.isOpenSetStartModal();
+            self.$store.commit("setStartPosition", {
+              name: "現在地情報を取得しました",
+              latLng: pos,
+            });
+            self.isOpenSetStartModal();
           });
         } else {
           return false;
@@ -254,20 +234,43 @@ export default {
                   document
                     .getElementById("addStartPoint")
                     .addEventListener("click", () => {
-                      that.startPositionData.name = place.name;
-                      that.startPositionData.latLng = place.geometry.location;
+                      self.$store.commit("setStartPosition", {
+                        name: place.name,
+                        latLng: place.geometry.location,
+                      });
                     });
                   document
                     .getElementById("addDestination")
                     .addEventListener("click", () => {
-                      that.destinationPositionData.name = place.name;
-                      that.destinationPositionData.latLng =
-                        place.geometry.location;
-                      that.destinationNearBySearch(
-                        service,
-                        google,
-                        place.geometry.location,
-                        that
+                      self.$store.commit("setDestinationPosition", {
+                        name: place.name,
+                        latLng: place.geometry.location,
+                      });
+
+                      let radiusSearchRequest = {
+                        location: place.geometry.location,
+                        radius: 2000,
+                        type: "restaurant",
+                      };
+
+                      service.nearbySearch(
+                        radiusSearchRequest,
+                        function (results, status) {
+                          if (
+                            status == google.maps.places.PlacesServiceStatus.OK
+                          ) {
+                            results.map((result) => {
+                              const { photos } = result;
+                              if (photos && photos.length > 0)
+                                result.storePhoto = result.photos[0].getUrl();
+                              JSON.parse(JSON.stringify(result));
+                            });
+                            self.$store.commit(
+                              "setWaypointsPositions",
+                              results
+                            );
+                          }
+                        }
                       );
                     });
                 });
@@ -279,40 +282,55 @@ export default {
 
       // マップ上クリックでinfowindow閉じる
       google.maps.event.addListener(map, "click", function () {
-        if (currentInfoWindow) {
-          currentInfoWindow.close();
-        }
+        if (currentInfoWindow) currentInfoWindow.close();
       });
       // 検索結果のマーカークリックで発火
-      function attachInfoWindow(marker, contentString) {
+      function attachInfoWindow(marker, places, contentString) {
         let infoWindow = new google.maps.InfoWindow({
           content: contentString,
         });
         marker.addListener("click", () => {
-          if (currentInfoWindow) {
-            currentInfoWindow.close();
-          }
+          if (currentInfoWindow) currentInfoWindow.close();
           infoWindow.open(marker.get("map"), marker);
           currentInfoWindow = infoWindow;
-          let locationMarker = JSON.parse(JSON.stringify(marker.position));
+          const locationMarker = JSON.parse(JSON.stringify(marker.position));
           // HTMLのformに値を送信
           infoWindow.addListener("domready", () => {
             document
               .getElementById("addStartPoint")
               .addEventListener("click", () => {
-                that.startPositionData.name = marker.title;
-                that.startPositionData.latLng = locationMarker;
+                self.$store.commit("setStartPosition", {
+                  name: marker.title,
+                  latLng: locationMarker,
+                });
               });
             document
               .getElementById("addDestination")
               .addEventListener("click", () => {
-                that.destinationPositionData.name = marker.title;
-                that.destinationPositionData.latLng = locationMarker;
-                that.destinationNearBySearch(
-                  service,
-                  google,
-                  locationMarker,
-                  that
+                self.$store.commit("setDestinationPosition", {
+                  name: marker.title,
+                  latLng: locationMarker,
+                });
+
+                let radiusSearchRequest = {
+                  location: locationMarker,
+                  radius: 2000,
+                  type: "restaurant",
+                };
+
+                service.nearbySearch(
+                  radiusSearchRequest,
+                  function (results, status) {
+                    if (status == google.maps.places.PlacesServiceStatus.OK) {
+                      results.map((result) => {
+                        const { photos } = result;
+                        if (photos && photos.length > 0)
+                          result.storePhoto = result.photos[0].getUrl();
+                        JSON.parse(JSON.stringify(result));
+                      });
+                      self.$store.commit("setWaypointsPositions", results);
+                    }
+                  }
                 );
               });
           });
@@ -336,31 +354,6 @@ export default {
       setTimeout(() => {
         this.isDestinationModalShown = false;
       }, 100);
-    },
-    destinationNearBySearch(service, google, place, that) {
-      let radiusSearchRequest = {
-        location: place,
-        radius: 2000,
-        type: "restaurant",
-      };
-
-      service.nearbySearch(radiusSearchRequest, function (results, status) {
-        that.wayPoints = [];
-        if (status == google.maps.places.PlacesServiceStatus.OK) {
-          for (let i = 0; i < results.length; i++) {
-            if (results[i].photos && results[i].photos.length >= 1) {
-              results[i].storePhoto = results[i].photos[0].getUrl();
-            }
-            that.wayPoints.push(JSON.parse(JSON.stringify(results[i])));
-          }
-          that.$store.commit("setWaypointsPositions", that.wayPoints);
-        }
-      });
-      that.$store.commit("setStartPosition", that.startPositionData);
-      that.$store.commit(
-        "setDestinationPosition",
-        that.destinationPositionData
-      );
     },
   },
 };

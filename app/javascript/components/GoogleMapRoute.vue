@@ -11,7 +11,7 @@
     <div class="map_wrapper object-cover w-full h-64">
       <div id="map" class="map"></div>
     </div>
-    <StoreDataCard :stores="wayPoints" />
+    <StoreDataCard :stores="this.$store.state.wayPoints" />
     <RakutenDataCard :items="allItems" />
     <!-- <HotPepperGourmandStores :stores="allStores" /> -->
   </div>
@@ -32,43 +32,14 @@ export default {
   },
   data() {
     return {
-      startLatLng: this.$store.state.startLatLng,
-      destinationLatLng: this.$store.state.destinationLatLng,
-      routeWayPoints: this.$store.state.routeWayPoints,
-      wayPoints: this.$store.state.wayPoints,
       durationTime: null,
-      // レイアウト整形のため仮で指定
-      // startLatLng: {
-      //   lat: 35.6534925,
-      //   lng: 139.6927441,
-      // },
-      // destinationLatLng: {
-      //   lat: 35.6587729,
-      //   lng: 139.7156104,
-      // },
-      // wayPoints: [
-      //   {
-      //     location: {
-      //       lat: 35.6612139,
-      //       lng: 139.7162296,
-      //     },
-      //     stopover: true,
-      //   },
-      //   {
-      //     location: {
-      //       lat: 35.66143479999999,
-      //       lng: 139.7238296,
-      //     },
-      //     stopover: true,
-      //   },
-      // ],
     };
   },
   mounted() {
-    const that = this;
+    const self = this;
 
     const loader = new Loader({
-      // apiKey: process.env.API_KEY,
+      apiKey: process.env.API_KEY,
       version: "weekly",
       libraries: ["places"],
     });
@@ -78,7 +49,7 @@ export default {
     loader.load().then(() => {
       const google = window.google;
       map = new google.maps.Map(document.getElementById("map"), {
-        center: this.startLatLng.latLng,
+        center: this.$store.state.startLatLng.latLng,
         zoom: 15,
         mayTypeId: google.maps.MapTypeId.ROADMAP,
         mapTypeControl: false,
@@ -87,7 +58,7 @@ export default {
       });
 
       let rendererOptions = {
-        map: map,
+        map,
         draggable: true,
       };
 
@@ -98,11 +69,13 @@ export default {
 
       directionsRenderer.setMap(map);
 
+      const { latLng: startLatLng } = this.$store.state.startLatLng;
+      const { latLng: destinationLatLng } = this.$store.state.destinationLatLng;
+
       let request = {
-        origin: new google.maps.LatLng(this.startLatLng.latLng), // 出発地点
-        destination: new google.maps.LatLng(this.destinationLatLng.latLng), // 待ち合わせ場所
-        waypoints: this.routeWayPoints,
-        optimizeWaypoints: true,
+        origin: new google.maps.LatLng(startLatLng), // 出発地点
+        destination: new google.maps.LatLng(destinationLatLng), // 待ち合わせ場所
+        waypoints: this.$store.state.routeWayPoints,
         travelMode: google.maps.DirectionsTravelMode.WALKING, // 移動手段
       };
 
@@ -120,7 +93,7 @@ export default {
           for (let i = 0; i < route.legs.length; i++) {
             sum += route.legs[i].duration.value;
           }
-          that.durationTime = sum;
+          self.durationTime = sum;
         });
     });
   },
