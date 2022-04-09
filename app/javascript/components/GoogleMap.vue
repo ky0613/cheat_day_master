@@ -251,6 +251,15 @@ export default {
                         location: place.geometry.location,
                         radius: 2000,
                         type: "restaurant",
+                        fields: [
+                          "name",
+                          "formatted_address",
+                          "utc_offset_minutes",
+                          "geometry",
+                          "photos",
+                          "types",
+                          "rating",
+                        ],
                       };
 
                       service.nearbySearch(
@@ -316,6 +325,15 @@ export default {
                   location: locationMarker,
                   radius: 2000,
                   type: "restaurant",
+                  fields: [
+                    "name",
+                    "formatted_address",
+                    "utc_offset_minutes",
+                    "geometry",
+                    "photos",
+                    "types",
+                    "rating",
+                  ],
                 };
 
                 service.nearbySearch(
