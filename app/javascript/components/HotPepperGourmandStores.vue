@@ -2,31 +2,52 @@
   <div class="p-6 flex justify-between">
     <div
       class="mx-2 overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
-      v-for="item of items"
-      :key="item.itemCode"
+      v-for="store of stores"
+      :key="store.id"
     >
-      <div class="bg-blue-300 w-full">
-        <a
-          class="py-2 text-gray-700 dark:text-gray-400 text-sm hover:text-white hover:underline"
-          :href="item.itemUrl"
+      <a class="bg-blue-300 w-full" :href="store.urls.pc">
+        <img
+          class="object-cover object-center w-full h-56"
+          :src="store.photo.pc.l"
+          alt="avatar"
+        />
+      </a>
+      <div class="p-1">
+        <div
+          class="flex flex-col items-center mt-4 text-gray-700 dark:text-gray-200"
         >
-          {{ item.itemName }}
-        </a>
-      </div>
-      <div class="px-6 py-4">
-        <img class="mx-auto" :src="item.mediumImageUrls[0].imageUrl" />
-        <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
-          <p class="px-2 text-sm">価格: {{ item.itemPrice }} 円</p>
-        </div>
-        <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
-          <p class="px-2 text-sm">評価: {{ item.reviewAverage }}</p>
+          <a
+            class="px-2 text-l font-semibold text-center"
+            :href="store.urls.pc"
+            >{{ store.name }}</a
+          >
         </div>
         <div
-          class="flex flex-col items-left mt-4 text-gray-700 dark:text-gray-200"
+          class="flex flex-col items-center mt-4 text-gray-700 dark:text-gray-200"
         >
-          <p class="px-2 text-sm">店名:</p>
-          <p class="px-2 text-sm">{{ item.shopName }}</p>
+          <p class="px-2 text-sm">営業時間</p>
+          <p class="px-2 text-sm">{{ store.open }}</p>
         </div>
+        <div
+          class="flex flex-col items-center mt-4 text-gray-700 dark:text-gray-200"
+        >
+          <p class="px-2 text-sm">住所</p>
+          <p class="px-2 text-sm">{{ store.address }}</p>
+        </div>
+      </div>
+      <div class="flex-1 h-auto">
+        <a
+          href="http://webservice.recruit.co.jp/"
+          class="flex flex-col p-2 items-end relative"
+          ><img
+            src="http://webservice.recruit.co.jp/banner/hotpepper-s.gif"
+            alt="ホットペッパー Webサービス"
+            width="135"
+            height="17"
+            border="0"
+            title="ホットペッパー Webサービス"
+            class="mt-auto"
+        /></a>
       </div>
     </div>
   </div>
@@ -35,18 +56,10 @@
 <script>
 export default {
   props: {
-    items: {
+    stores: {
       type: Array,
       required: true,
     },
   },
 };
 </script>
-
-<style scoped>
-img {
-  max-width: 100%;
-  height: auto;
-  image-rendering: -webkit-optimize-contrast;
-}
-</style>

@@ -14,9 +14,8 @@
         <p
           class="text-xl font-semibold text-gray-800 dark:text-white text-center"
         >
-          店舗情報
+          {{ store.name }}
         </p>
-        <p class="py-2 text-gray-700 dark:text-gray-400">{{ store.name }}</p>
         <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
           <p class="px-2 text-sm">{{ store.vicinity }}</p>
         </div>

@@ -42,11 +42,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-img {
-  max-width: 100%;
-  height: auto;
-  image-rendering: -webkit-optimize-contrast;
-}
-</style>

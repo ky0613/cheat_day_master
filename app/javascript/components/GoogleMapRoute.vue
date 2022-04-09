@@ -13,7 +13,7 @@
     </div>
     <StoreDataCard :stores="this.$store.state.wayPoints" />
     <RakutenDataCard :items="allItems" />
-    <!-- <HotPepperGourmandStores :stores="allStores" /> -->
+    <HotPepperGourmandStores :stores="allStores" />
   </div>
 </template>
 
@@ -39,7 +39,7 @@ export default {
     const self = this;
 
     const loader = new Loader({
-      apiKey: process.env.API_KEY,
+      // apiKey: process.env.API_KEY,
       version: "weekly",
       libraries: ["places"],
     });

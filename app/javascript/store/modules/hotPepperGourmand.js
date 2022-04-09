@@ -4,7 +4,7 @@ import axiosJsonpAdapter from "axios-jsonp";
 const HOTPEPPER_API_ENDPOINT =
   "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/";
 
-const testConfig = {
+const config = {
   params: {
     key: "104afec0a929daa3",
     lat: "34.67",
@@ -26,16 +26,16 @@ const getters = {
 
 const actions = {
   async fetchStores({ commit }) {
-    const response = await axios.get(HOTPEPPER_API_ENDPOINT, testConfig);
-    console.log(response);
-    commit("setStores", response.data.result.shop);
+    const response = await axios.get(HOTPEPPER_API_ENDPOINT, config);
+    commit("setStores", response.data.results.shop);
   },
 };
 
 const mutations = {
   setStores: (state, stores) => {
-    console.log(stores);
-    console.log(state.stores);
+    for (let i = 0; i < 4; i++) {
+      state.stores.push(stores[i]);
+    }
   },
 };
 
