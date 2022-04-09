@@ -39,7 +39,7 @@ export default {
     const self = this;
 
     const loader = new Loader({
-      // apiKey: process.env.API_KEY,
+      apiKey: process.env.API_KEY,
       version: "weekly",
       libraries: ["places"],
     });
@@ -105,7 +105,7 @@ export default {
   },
   created() {
     this.fetchItems();
-    this.fetchStores();
+    this.fetchStores(this.$store.state.destinationLatLng.latLng);
   },
   methods: {
     ...mapActions(["fetchItems", "fetchStores"]),
