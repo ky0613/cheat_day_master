@@ -254,7 +254,6 @@ export default {
                         fields: [
                           "name",
                           "formatted_address",
-                          "utc_offset_minutes",
                           "geometry",
                           "photos",
                           "types",
@@ -328,7 +327,6 @@ export default {
                   fields: [
                     "name",
                     "formatted_address",
-                    "utc_offset_minutes",
                     "geometry",
                     "photos",
                     "types",
