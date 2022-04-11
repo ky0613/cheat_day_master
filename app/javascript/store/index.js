@@ -6,12 +6,21 @@ import hotPepperGourmandStores from "./modules/hotPepperGourmand";
 
 Vue.use(Vuex);
 
+const shuffle = ([...array]) => {
+  for (let i = array.length - 1; i >= 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [array[i], array[j]] = [array[j], array[i]];
+  }
+  return array;
+};
+
 export default new Vuex.Store({
   state: {
     startLatLng: {},
     destinationLatLng: {},
     routeWayPoints: [],
     wayPoints: [],
+    recommendStores: [],
   },
   getters: {
     startPositionData: (state) => state.startLatLng,
@@ -25,18 +34,18 @@ export default new Vuex.Store({
       state.destinationLatLng = position;
     },
     setWaypointsPositions(state, positions) {
-      state.wayPoints = [];
-      state.routeWayPoints = [];
-      positions.sort((a, b) => (a.rating - b.rating) * -1);
+      const shuffleWaypoints = shuffle(positions).splice(0, 4);
       let conversionWayPoint = {};
-      for (let i = 0; i < 4; i++) {
-        state.wayPoints.push(positions[i]);
+      shuffleWaypoints.forEach((waypoint) => {
+        state.wayPoints.push(waypoint);
         conversionWayPoint = {
-          location: positions[i].geometry.location,
+          location: waypoint.geometry.location,
           stopover: true,
         };
         state.routeWayPoints.push(conversionWayPoint);
-      }
+      });
+      positions.sort((a, b) => (a.rating < b.rating ? 1 : -1));
+      state.recommendStores = positions.splice(0, 4);
     },
   },
   modules: {

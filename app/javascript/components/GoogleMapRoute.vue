@@ -12,8 +12,9 @@
       <div id="map" class="map"></div>
     </div>
     <StoreDataCard :stores="this.$store.state.wayPoints" />
-    <RakutenDataCard :items="allItems" />
+    <StoreDataCard :stores="this.$store.state.recommendStores" />
     <HotPepperGourmandStores :stores="allStores" />
+    <RakutenDataCard :items="allItems" />
   </div>
 </template>
 
