@@ -249,7 +249,7 @@ export default {
 
                       let radiusSearchRequest = {
                         location: place.geometry.location,
-                        radius: 2000,
+                        radius: 3000,
                         type: "restaurant",
                         fields: [
                           "name",
@@ -322,7 +322,7 @@ export default {
 
                 let radiusSearchRequest = {
                   location: locationMarker,
-                  radius: 2000,
+                  radius: 3000,
                   type: "restaurant",
                   fields: [
                     "name",

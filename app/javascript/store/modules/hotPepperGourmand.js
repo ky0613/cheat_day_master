@@ -28,7 +28,7 @@ const actions = {
         key: process.env.HOT_PEPPER_API_KEY,
         lat: String(lat),
         lng: String(lng),
-        range: "4",
+        range: "5",
         order: "4",
         format: "jsonp",
       },
@@ -41,10 +41,8 @@ const actions = {
 
 const mutations = {
   setStores: (state, stores) => {
-    let shuffleStores = shuffle(stores);
-    for (let i = 0; i < 4; i++) {
-      state.stores.push(shuffleStores[i]);
-    }
+    let shuffleStores = shuffle(stores).splice(0, 4);
+    shuffleStores.forEach((store) => state.stores.push(store));
   },
 };
 
