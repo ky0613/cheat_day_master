@@ -20,6 +20,7 @@ export default new Vuex.Store({
     destinationLatLng: {},
     routeWayPoints: [],
     wayPoints: [],
+    recommendStores: [],
   },
   getters: {
     startPositionData: (state) => state.startLatLng,
@@ -33,16 +34,18 @@ export default new Vuex.Store({
       state.destinationLatLng = position;
     },
     setWaypointsPositions(state, positions) {
-      const shuffleWaypoints = shuffle(positions);
+      const shuffleWaypoints = shuffle(positions).splice(0, 4);
       let conversionWayPoint = {};
-      for (let i = 0; i < 4; i++) {
-        state.wayPoints.push(shuffleWaypoints[i]);
+      shuffleWaypoints.forEach((waypoint) => {
+        state.wayPoints.push(waypoint);
         conversionWayPoint = {
-          location: shuffleWaypoints[i].geometry.location,
+          location: waypoint.geometry.location,
           stopover: true,
         };
         state.routeWayPoints.push(conversionWayPoint);
-      }
+      });
+      positions.sort((a, b) => (a.rating < b.rating ? 1 : -1));
+      state.recommendStores = positions.splice(0, 4);
     },
   },
   modules: {
