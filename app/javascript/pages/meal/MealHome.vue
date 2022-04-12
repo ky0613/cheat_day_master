@@ -1,16 +1,16 @@
 <template>
   <div>
-    <p>MealHome</p>
-    <router-link
-      :to="{ name: 'MealHomeResult' }"
-      class="rounded-full bg-blue-400 p-2"
-      >食べ物を検索する</router-link
-    >
+    <GoogleMap />
   </div>
 </template>
 
 <script>
+import GoogleMap from "../../components/mealhome/GoogleMap.vue";
+
 export default {
   name: "MealHomeResult",
+  components: {
+    GoogleMap,
+  },
 };
 </script>

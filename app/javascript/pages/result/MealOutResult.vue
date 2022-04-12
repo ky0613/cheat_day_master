@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import GoogleMapRoute from "../../components/GoogleMapRoute.vue";
+import GoogleMapRoute from "../../components/mealout/GoogleMapRoute.vue";
 
 export default {
   name: "MealOutResult",
