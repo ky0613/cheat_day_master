@@ -4,7 +4,7 @@
   >
     <transition>
       <div class="modalBox" id="startPoint" v-if="isStartModalShown">
-        <div class="modalInner">現在地点に設定しました</div>
+        <div class="modalInner">現在地点を設定しました</div>
       </div>
     </transition>
     <div class="map_wrapper">
@@ -31,7 +31,7 @@
       <div class="container mx-auto">
         <div class="flex justify-center">
           <router-link
-            :to="{ name: 'MealOutResult' }"
+            :to="{ name: 'MealHomeResult' }"
             class="rounded-full bg-blue-400 p-2 mb-3 text-center"
           >
             周辺を検索する</router-link
@@ -129,6 +129,28 @@ export default {
               name: "現在地情報を取得しました",
               latLng: pos,
             });
+
+            let radiusSearchRequest = {
+              location: pos,
+              radius: 3000,
+              types: ["meal_delivery", "meal_takeaway"],
+              fields: ["name", "formatted_address", "geometry", "photos"],
+            };
+
+            service.nearbySearch(
+              radiusSearchRequest,
+              function (results, status) {
+                if (status == google.maps.places.PlacesServiceStatus.OK) {
+                  results.map((result) => {
+                    const { photos } = result;
+                    if (photos && photos.length > 0)
+                      result.storePhoto = result.photos[0].getUrl();
+                    JSON.parse(JSON.stringify(result));
+                  });
+                  self.$store.commit("setWaypointsPositions", results);
+                }
+              }
+            );
             self.isOpenSetStartModal();
           });
         } else {
