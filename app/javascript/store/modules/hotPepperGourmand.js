@@ -1,6 +1,5 @@
 import axios from "axios";
 import axiosJsonpAdapter from "axios-jsonp";
-import store from "..";
 
 const HOTPEPPER_API_ENDPOINT =
   "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/";
