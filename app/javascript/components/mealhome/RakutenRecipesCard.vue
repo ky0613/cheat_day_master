@@ -5,6 +5,11 @@
       v-for="recipe of recipes"
       :key="recipe.recipeId"
     >
+      <img
+        class="object-cover object-center w-full h-56"
+        :src="recipe.foodImageUrl"
+        alt="avatar"
+      />
       <div class="bg-blue-300 w-full">
         <a
           class="py-2 text-gray-700 dark:text-gray-400 text-sm hover:text-white hover:underline"
@@ -14,7 +19,6 @@
         </a>
       </div>
       <div class="px-6 py-4">
-        <img class="mx-auto" :src="recipe.foodImageUrl" />
         <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
           <p class="px-2 text-sm">{{ recipe.recipeDescription }}</p>
         </div>

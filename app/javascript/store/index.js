@@ -35,9 +35,12 @@ export default new Vuex.Store({
       state.destinationLatLng = position;
     },
     setWaypointsPositions(state, positions) {
-      const shuffleWaypoints = shuffle(positions).splice(0, 4);
+      const notHotelPositions = positions.filter((position) => {
+        return position.name.match(/ホテル/) == null;
+      });
+      const shuffleWaypoints = shuffle(notHotelPositions);
       let conversionWayPoint = {};
-      shuffleWaypoints.forEach((waypoint) => {
+      shuffleWaypoints.splice(0, 4).forEach((waypoint) => {
         state.wayPoints.push(waypoint);
         conversionWayPoint = {
           location: waypoint.geometry.location,
@@ -45,8 +48,9 @@ export default new Vuex.Store({
         };
         state.routeWayPoints.push(conversionWayPoint);
       });
-      positions.sort((a, b) => (a.rating < b.rating ? 1 : -1));
-      state.recommendStores = positions.splice(0, 4);
+      state.recommendStores = shuffleWaypoints
+        .sort((a, b) => (a.rating < b.rating ? 1 : -1))
+        .splice(0, 4);
     },
   },
   modules: {
