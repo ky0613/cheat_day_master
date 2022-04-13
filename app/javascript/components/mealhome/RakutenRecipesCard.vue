@@ -1,0 +1,41 @@
+<template>
+  <div class="p-6 flex justify-between">
+    <div
+      class="mx-2 overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
+      v-for="recipe of recipes"
+      :key="recipe.recipeId"
+    >
+      <div class="bg-blue-300 w-full">
+        <a
+          class="py-2 text-gray-700 dark:text-gray-400 text-sm hover:text-white hover:underline"
+          :href="recipe.recipeUrl"
+        >
+          {{ recipe.recipeTitle }}
+        </a>
+      </div>
+      <div class="px-6 py-4">
+        <img class="mx-auto" :src="recipe.foodImageUrl" />
+        <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
+          <p class="px-2 text-sm">{{ recipe.recipeDescription }}</p>
+        </div>
+        <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
+          <p class="px-2 text-sm">費用: {{ recipe.recipeCost }} 円</p>
+        </div>
+        <div class="flex items-left mt-4 text-gray-700 dark:text-gray-200">
+          <p class="px-2 text-sm">調理時間: {{ recipe.recipeIndication }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
+<script>
+export default {
+  props: {
+    recipes: {
+      type: Array,
+      required: true,
+    },
+  },
+};
+</script>
