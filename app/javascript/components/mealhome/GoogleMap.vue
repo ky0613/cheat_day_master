@@ -247,13 +247,9 @@ export default {
                       let radiusSearchRequest = {
                         location: place.geometry.location,
                         radius: 3000,
-                        types: ["meal_delivery", "meal_takeaway"],
-                        fields: [
-                          "name",
-                          "formatted_address",
-                          "geometry",
-                          "photos",
-                        ],
+                        types: ["meal_delivery"],
+                        openNow: true,
+                        maxPriceLevel: 2,
                       };
 
                       service.nearbySearch(
@@ -310,8 +306,9 @@ export default {
                 let radiusSearchRequest = {
                   location: locationMarker,
                   radius: 3000,
-                  types: ["meal_delivery", "meal_takeaway"],
-                  fields: ["name", "formatted_address", "geometry", "photos"],
+                  type: ["meal_delivery"],
+                  openNow: true,
+                  maxPriceLevel: 2,
                 };
 
                 service.nearbySearch(
