@@ -7,6 +7,7 @@ const config = {
   params: {
     format: "json",
     applicationId: "1093853470195032291",
+    categoryId: "30",
   },
 };
 
