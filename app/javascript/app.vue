@@ -24,4 +24,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style>
+main {
+  background-image: url("../../public/logo.png");
+}
+</style>

@@ -1,5 +1,5 @@
 <template>
-  <div class="flex justify-center flex-col">
+  <div class="flex justify-center flex-col" id="background">
     <div class="text-center">
       <div class="mb-10">
         <h3 class="mb-3">外食でチートデイを楽しみたい方はこちら</h3>
