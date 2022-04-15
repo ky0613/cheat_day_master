@@ -3,7 +3,7 @@
     <body class="flex flex-col min-h-screen">
       <TheHeader />
       <main class="flex flex-1">
-        <div class="m-auto max-w-6xl w-full">
+        <div class="m-auto max-w-4xl w-full">
           <router-view />
         </div>
       </main>
@@ -24,8 +24,8 @@ export default {
 };
 </script>
 
-<style>
-main {
-  background-image: url("../../public/logo.png");
+<style scoped>
+#app {
+  background: rgba(251, 226, 81, 0.6);
 }
 </style>
