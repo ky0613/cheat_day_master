@@ -26,6 +26,6 @@ export default {
 
 <style scoped>
 #app {
-  background: rgba(251, 226, 81, 0.6);
+  background: rgba(230, 213, 184, 0.6);
 }
 </style>
