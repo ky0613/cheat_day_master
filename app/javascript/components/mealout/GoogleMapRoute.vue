@@ -21,7 +21,7 @@
 <script>
 import { Loader } from "@googlemaps/js-api-loader";
 import StoreDataCard from "./StoreDataCard.vue";
-import RakutenDataCard from "./RakutenDataCard.vue";
+import RakutenDataCard from "../mealhome/RakutenDataCard.vue";
 import HotPepperGourmandStores from "./HotPepperGourmandStores.vue";
 import { mapGetters, mapActions } from "vuex";
 
@@ -107,9 +107,10 @@ export default {
   created() {
     this.fetchItems();
     this.fetchStores(this.$store.state.destinationLatLng.latLng);
+    this.fetchYelpStores();
   },
   methods: {
-    ...mapActions(["fetchItems", "fetchStores"]),
+    ...mapActions(["fetchItems", "fetchStores", "fetchYelpStores"]),
   },
 };
 </script>

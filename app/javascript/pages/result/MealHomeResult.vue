@@ -12,7 +12,7 @@
 <script>
 import { mapGetters, mapActions } from "vuex";
 import StoreDataCard from "../../components/mealhome/StoreDataCard.vue";
-import RakutenDataCard from "../../components/mealout/RakutenDataCard.vue";
+import RakutenDataCard from "../../components/mealhome/RakutenDataCard.vue";
 import RakutenRecipesCard from "../../components/mealhome/RakutenRecipesCard.vue";
 
 export default {
