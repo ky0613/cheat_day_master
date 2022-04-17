@@ -1,17 +1,15 @@
 <template>
   <header>
-    <div class="flex justify-between bg-green-200 p-4">
+    <div class="flex justify-between p-4" id="header">
       <router-link :to="{ name: 'TopIndex' }"
-        ><h1>チートデイマスター（仮）</h1></router-link
-      >
-      <nav>
-        <ul class="flex gap-4">
-          <li>ログイン</li>
-          <li>新規機能</li>
-        </ul>
-      </nav>
+        ><img src="logo-removebg-preview.png" alt="logo"
+      /></router-link>
     </div>
   </header>
 </template>
 
-<script></script>
+<style scoped>
+#header {
+  background: rgb(6, 17, 60, 0.4);
+}
+</style>

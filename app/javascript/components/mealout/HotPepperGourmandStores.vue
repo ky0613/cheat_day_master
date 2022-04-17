@@ -38,7 +38,7 @@
       <div class="flex-1 h-auto">
         <a
           href="http://webservice.recruit.co.jp/"
-          class="flex flex-col p-2 items-end relative"
+          class="p-2 items-end relative"
           ><img
             src="http://webservice.recruit.co.jp/banner/hotpepper-s.gif"
             alt="ホットペッパー Webサービス"
@@ -46,7 +46,6 @@
             height="17"
             border="0"
             title="ホットペッパー Webサービス"
-            class="mt-auto"
         /></a>
       </div>
     </div>

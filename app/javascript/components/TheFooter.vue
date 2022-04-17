@@ -1,13 +1,15 @@
 <template>
   <footer>
-    <div class="text-center p-4 bg-green-200 mx-auto">
+    <div class="text-center p-4 mx-auto">
       <ul class="flex justify-center gap-4">
-        <router-link :to="{ name: 'Terms' }"><li>利用規約</li></router-link>
+        <router-link :to="{ name: 'Terms' }"
+          ><li class="text-xs">利用規約</li></router-link
+        >
         <router-link :to="{ name: 'Policy' }"
-          ><li>プライバシーポリシー</li></router-link
+          ><li class="text-xs">プライバシーポリシー</li></router-link
         >
         <router-link :to="{ name: 'Contact' }"
-          ><li>お問い合わせ</li></router-link
+          ><li class="text-xs">お問い合わせ</li></router-link
         >
       </ul>
       <small>Copyright &copy; 2022. チートデイマスター</small>

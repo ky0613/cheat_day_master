@@ -3,7 +3,7 @@
     <body class="flex flex-col min-h-screen">
       <TheHeader />
       <main class="flex flex-1">
-        <div class="m-auto max-w-6xl w-full">
+        <div class="m-auto max-w-4xl w-full">
           <router-view />
         </div>
       </main>
@@ -24,4 +24,8 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+#app {
+  background: rgba(230, 213, 184, 0.6);
+}
+</style>
