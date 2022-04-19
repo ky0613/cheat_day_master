@@ -1,7 +1,5 @@
 import axios from "../../plugins/axios";
 
-
-
 const state = {
   items: [],
 };
@@ -13,7 +11,6 @@ const getters = {
 const actions = {
   async fetchItems({ commit }) {
     const response = await axios.get("/rakuten_items");
-    console.log(response.data)
     commit("setItems", response.data);
   },
 };
