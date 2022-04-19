@@ -8,11 +8,14 @@ class YelpApiClient
 
   def get_stores(lat, lng)
     params = URI.encode_www_form({
-      latitude: "35.6581",
-      longitude: "139.7017",
+      # レイアウト変更用 レイアウト変更後削除
+      # latitude: "35.6581",
+      # longitude: "139.7017",
       radius: "3000",
-      # lat: lat,
-      # lng: lng,
+      latitude: lat,
+      longitude: lng,
+      sort_by: "rating",
+      price: "3",
     })
     uri = URI.parse("#{YELP_HOST}#{params}")
     http = Net::HTTP.new(uri.host, uri.port)

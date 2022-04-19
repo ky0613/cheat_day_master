@@ -1,38 +1,29 @@
-import axios from "axios";
-
-const YELP_API_ENDPOINT =
-  "https://api.yelp.com/v3/businesses/search";
+import axios from "../../plugins/axios";
 
 const state = {
   stores: [],
 };
 
 const getters = {
-  allStores: (state) => state.stores,
+  allYelpStores: (state) => state.stores,
 };
 
 const actions = {
-  async fetchYelpStores({ commit }) {
-    const response = await axios
-      .get(YELP_API_ENDPOINT, {
-        headers: {
-          Authorization: `Bearer ${process.env.YELP_API_KEY}`,
-        },
-        params: {
-          latitude: 35.6581,
-          longitude: 139.7017,
-          radius: "3000",
-        },
-      })
-
-    console.log(response)
+  async fetchYelpStores({ commit }, { lat, lng }) {
+    const config = {
+      params: {
+        lat: String(lat),
+        lng: String(lng),
+      }
+    }
+    const response = await axios.get("yelp_stores", config)
+    commit("setYelpStores", response.data.businesses)
   },
 };
 
 const mutations = {
-  setStores: (state, stores) => {
-    let shuffleStores = shuffle(stores).splice(0, 4);
-    shuffleStores.forEach((store) => state.stores.push(store));
+  setYelpStores: (state, stores) => {
+    state.stores = stores.splice(0, 4)
   },
 };
 

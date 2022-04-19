@@ -25,7 +25,6 @@ const actions = {
       },
     };
     const response = await axios.get("hot_pepper_stores", config);
-    console.log(response.data)
     commit("setStores", response.data.results.shop);
   },
 };
