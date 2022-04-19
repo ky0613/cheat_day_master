@@ -16,10 +16,7 @@ class RakutenApiClient
       applicationId: @token,
     })
     uri = URI.parse("#{ITEMS_GET_URI}#{params}")
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    request = Net::HTTP::Get.new(uri.request_uri)
-    response = http.request(request)
+    response = http_client(uri)
     JSON.parse(response.body)
   end
 
@@ -30,10 +27,7 @@ class RakutenApiClient
       categoryId: "30",
     })
     uri = URI.parse("#{RECIPES_GET_URI}#{params}")
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    request = Net::HTTP::Get.new(uri.request_uri)
-    response = http.request(request)
+    response = http_client(uri)
     JSON.parse(response.body)
   end
 
@@ -50,4 +44,14 @@ class RakutenApiClient
       client.get_recipes
     end
   end
+
+  private
+
+  def http_client(uri)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = true
+    request = Net::HTTP::Get.new(uri.request_uri)
+    response = http.request(request)
+  end
+
 end
