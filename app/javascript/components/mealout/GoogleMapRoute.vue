@@ -14,22 +14,22 @@
     <StoreDataCard :stores="this.$store.state.wayPoints" />
     <StoreDataCard :stores="this.$store.state.recommendStores" />
     <HotPepperGourmandStores :stores="allStores" />
-    <RakutenDataCard :items="allItems" />
+    <YelpStoreData :stores="allYelpStores"/>
   </div>
 </template>
 
 <script>
 import { Loader } from "@googlemaps/js-api-loader";
 import StoreDataCard from "./StoreDataCard.vue";
-import RakutenDataCard from "../mealhome/RakutenDataCard.vue";
 import HotPepperGourmandStores from "./HotPepperGourmandStores.vue";
+import YelpStoreData from "./YelpStoreDataCard.vue"
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
     StoreDataCard,
-    RakutenDataCard,
     HotPepperGourmandStores,
+    YelpStoreData
   },
   data() {
     return {
@@ -99,7 +99,7 @@ export default {
     });
   },
   computed: {
-    ...mapGetters(["allItems", "allStores"]),
+    ...mapGetters(["allItems", "allStores", "allYelpStores"]),
     burnedCalories() {
       return Math.trunc(1.05 * 3.5 * (this.durationTime / 3600) * 60);
     },
@@ -107,7 +107,7 @@ export default {
   created() {
     this.fetchItems();
     this.fetchStores(this.$store.state.destinationLatLng.latLng);
-    this.fetchYelpStores();
+    this.fetchYelpStores(this.$store.state.destinationLatLng.latLng);
   },
   methods: {
     ...mapActions(["fetchItems", "fetchStores", "fetchYelpStores"]),
