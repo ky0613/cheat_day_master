@@ -14,6 +14,7 @@
         <a
           class="py-2 text-gray-700 dark:text-gray-400 text-sm hover:text-white hover:underline"
           :href="recipe.recipeUrl"
+          target="_blank"
         >
           {{ recipe.recipeTitle }}
         </a>
