@@ -14,7 +14,7 @@
     <StoreDataCard :stores="this.$store.state.wayPoints" />
     <StoreDataCard :stores="this.$store.state.recommendStores" />
     <HotPepperGourmandStores :stores="allStores" />
-    <YelpStoreData :stores="allYelpStores"/>
+    <YelpStoreData :stores="allYelpStores" />
   </div>
 </template>
 
@@ -22,14 +22,14 @@
 import { Loader } from "@googlemaps/js-api-loader";
 import StoreDataCard from "./StoreDataCard.vue";
 import HotPepperGourmandStores from "./HotPepperGourmandStores.vue";
-import YelpStoreData from "./YelpStoreDataCard.vue"
+import YelpStoreData from "./YelpStoreDataCard.vue";
 import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
     StoreDataCard,
     HotPepperGourmandStores,
-    YelpStoreData
+    YelpStoreData,
   },
   data() {
     return {
@@ -70,13 +70,15 @@ export default {
 
       directionsRenderer.setMap(map);
 
-      const { latLng: startLatLng } = this.$store.state.startLatLng;
-      const { latLng: destinationLatLng } = this.$store.state.destinationLatLng;
+      // const { latLng: startLatLng } = this.$store.state.startLatLng;
+      // const { latLng: destinationLatLng } = this.$store.state.destinationLatLng;
+      const startLatLng = { lat: 35.6581, lng: 139.7017 };
+      const destinationLatLng = { lat: 35.6460739, lng: 139.7113368 };
 
       let request = {
         origin: new google.maps.LatLng(startLatLng), // 出発地点
         destination: new google.maps.LatLng(destinationLatLng), // 待ち合わせ場所
-        waypoints: this.$store.state.routeWayPoints,
+        waypoints: this.$store.state.routeWayPoints, // 経由地点
         travelMode: google.maps.DirectionsTravelMode.WALKING, // 移動手段
       };
 
@@ -106,8 +108,10 @@ export default {
   },
   created() {
     this.fetchItems();
-    this.fetchStores(this.$store.state.destinationLatLng.latLng);
-    this.fetchYelpStores(this.$store.state.destinationLatLng.latLng);
+    // this.fetchStores(this.$store.state.destinationLatLng.latLng);
+    // this.fetchYelpStores(this.$store.state.destinationLatLng.latLng);
+    this.fetchStores({ lat: 35.6581, lng: 139.7017 });
+    this.fetchYelpStores({ lat: 35.6460739, lng: 139.7113368 });
   },
   methods: {
     ...mapActions(["fetchItems", "fetchStores", "fetchYelpStores"]),

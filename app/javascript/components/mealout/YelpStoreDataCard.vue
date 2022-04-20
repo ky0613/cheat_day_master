@@ -1,9 +1,9 @@
 <template>
   <div>
-    <Carousel autoplayHoverPause="true" autoplay="true" loop="true" perPage="3">
-      <Slide v-for="store of stores" :key="store.id">
+    <Carousel :perPage="3">
+      <Slide v-for="store of stores" :key="store.id" class="px-2">
         <div
-          class="mx-2 overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
+          class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
         >
           <a :href="store.url" target="_blank">
             <img
