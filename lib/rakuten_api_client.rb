@@ -31,6 +31,17 @@ class RakutenApiClient
     JSON.parse(response.body)
   end
 
+  def get_sweets
+    params = URI.encode_www_form({
+      format: "json",
+      genreId: "551167",
+      applicationId: @token,
+    })
+    uri = URI.parse("#{ITEMS_GET_URI}#{params}")
+    response = http_client(uri)
+    JSON.parse(response.body)
+  end
+
   class << self
     def client
       RakutenApiClient.new
@@ -42,6 +53,10 @@ class RakutenApiClient
 
     def get_recipes
       client.get_recipes
+    end
+
+    def get_sweets
+      client.get_sweets
     end
   end
 

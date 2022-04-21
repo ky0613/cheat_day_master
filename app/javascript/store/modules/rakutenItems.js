@@ -11,16 +11,14 @@ const getters = {
 const actions = {
   async fetchItems({ commit }) {
     const response = await axios.get("/rakuten_items");
-    commit("setItems", response.data);
+    commit("setItems", response.data.Items);
   },
 };
 
 const mutations = {
   setItems: (state, items) => {
     state.items = [];
-    for (let i = 0; i < 4; i++) {
-      state.items.push(items.Items[i].Item);
-    }
+    items.forEach((item) => state.items.push(item.Item));
   },
 };
 
