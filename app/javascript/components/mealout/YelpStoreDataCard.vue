@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Carousel :perPage="3">
+    <Carousel :perPage="3" :paginationPadding="4">
       <Slide v-for="store of stores" :key="store.id" class="px-2 mb-3">
         <div
           class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
