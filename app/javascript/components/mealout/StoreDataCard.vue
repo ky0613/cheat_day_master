@@ -10,7 +10,7 @@
         :src="store.storePhoto"
         alt="avatar"
       />
-      <div class="px-6 py-4">
+      <div class="p-2">
         <p
           class="text-xl font-semibold text-gray-800 dark:text-white text-center"
         >
