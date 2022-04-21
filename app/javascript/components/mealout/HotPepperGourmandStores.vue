@@ -1,59 +1,61 @@
 <template>
-  <div class="p-6 flex justify-between">
-    <div
-      class="mx-2 overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
-      v-for="store of stores"
-      :key="store.id"
-    >
-      <a class="bg-blue-300 w-full" :href="store.urls.pc">
-        <img
-          class="object-cover object-center w-full h-56"
-          :src="store.photo.pc.l"
-          alt="avatar"
-        />
-      </a>
-      <div class="p-1">
+  <div>
+    <Carousel :perPage="3">
+      <Slide v-for="store of stores" :key="store.id" class="px-2 mb-3">
         <div
-          class="flex flex-col items-center mt-4 text-gray-700 dark:text-gray-200"
+          class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full flex flex-col"
         >
+          <a class="bg-blue-300 w-full" :href="store.urls.pc" target="_blank">
+            <img
+              class="object-cover object-center w-full h-56"
+              :src="store.photo.pc.l"
+              alt="avatar"
+            />
+          </a>
+          <div class="p-1">
+            <div
+              class="flex items-center mt-4 text-gray-700 dark:text-gray-200 h-10"
+            >
+              <img src="../../../../public/shop.svg" class="w-5 h-5" />
+              <p class="px-2 text-l font-semibold text-center">
+                {{ store.name }}
+              </p>
+            </div>
+            <div
+              class="flex items-center mt-4 text-gray-700 dark:text-gray-200 h-6"
+            >
+              <img src="../../../../public/place.svg" class="w-5 h-5" />
+              <p class="px-2 text-sm">{{ store.address }}</p>
+            </div>
+          </div>
           <a
-            class="px-2 text-l font-semibold text-center"
-            :href="store.urls.pc"
-            >{{ store.name }}</a
-          >
+            href="http://webservice.recruit.co.jp/"
+            class="h-10 p-3 flex justify-center"
+            target="_blank"
+            ><p class="text-sm items-center pr-2">Produced by</p>
+            <img
+              src="http://webservice.recruit.co.jp/banner/hotpepper-s.gif"
+              alt="ホットペッパー Webサービス"
+              width="135"
+              height="17"
+              border="0"
+              title="ホットペッパー Webサービス"
+              class="items-ceter"
+          /></a>
         </div>
-        <div
-          class="flex flex-col items-center mt-4 text-gray-700 dark:text-gray-200"
-        >
-          <p class="px-2 text-sm">営業時間</p>
-          <p class="px-2 text-sm">{{ store.open }}</p>
-        </div>
-        <div
-          class="flex flex-col items-center mt-4 text-gray-700 dark:text-gray-200"
-        >
-          <p class="px-2 text-sm">住所</p>
-          <p class="px-2 text-sm">{{ store.address }}</p>
-        </div>
-      </div>
-      <div class="flex-1 h-auto">
-        <a
-          href="http://webservice.recruit.co.jp/"
-          class="p-2 items-end relative"
-          ><img
-            src="http://webservice.recruit.co.jp/banner/hotpepper-s.gif"
-            alt="ホットペッパー Webサービス"
-            width="135"
-            height="17"
-            border="0"
-            title="ホットペッパー Webサービス"
-        /></a>
-      </div>
-    </div>
+      </Slide>
+    </Carousel>
   </div>
 </template>
 
 <script>
+import { Carousel, Slide } from "vue-carousel";
+
 export default {
+  components: {
+    Carousel,
+    Slide,
+  },
   props: {
     stores: {
       type: Array,

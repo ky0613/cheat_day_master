@@ -1,7 +1,7 @@
 <template>
   <div>
     <Carousel :perPage="3">
-      <Slide v-for="store of stores" :key="store.id" class="px-2">
+      <Slide v-for="store of stores" :key="store.id" class="px-2 mb-3">
         <div
           class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
         >
@@ -12,17 +12,29 @@
               alt="avatar"
             />
           </a>
-          <div class="px-6 py-4">
-            <p
-              class="text-xl font-semibold text-gray-800 dark:text-white text-center"
-            >
-              {{ store.alias }}
-            </p>
+          <div class="p-2">
             <div
-              class="flex flex-col items-center mt-4 text-gray-700 dark:text-gray-200"
+              class="flex items-center mt-4 text-gray-700 dark:text-gray-200 h-10"
             >
-              <p class="px-2 text-sm">レビュー: {{ store.rating }}</p>
-              <p class="px-2 text-sm">レビュー総数: {{ store.rating }}</p>
+              <img src="../../../../public/shop.svg" class="w-5 h-5" />
+              <p class="px-2 text-l font-semibold text-center">
+                {{ store.alias }}
+              </p>
+            </div>
+            <div
+              class="flex items-center mt-4 text-gray-700 dark:text-gray-200"
+            >
+              <StarRating
+                :increment="0.1"
+                :round-start-rating="false"
+                :read-only="true"
+                :rating="store.rating"
+                :star-size="30"
+                class="items-center text-base"
+              ></StarRating>
+              <p class="px-2 text-base items-center">
+                ({{ store.review_count }})
+              </p>
             </div>
           </div>
         </div>
@@ -33,11 +45,13 @@
 
 <script>
 import { Carousel, Slide } from "vue-carousel";
+import StarRating from "vue-star-rating";
 
 export default {
   components: {
     Carousel,
     Slide,
+    StarRating,
   },
   props: {
     stores: {
