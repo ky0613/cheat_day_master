@@ -14,17 +14,15 @@ const actions = {
       params: {
         lat: String(lat),
         lng: String(lng),
-      }
-    }
-    const response = await axios.get("yelp_stores", config)
-    commit("setYelpStores", response.data.businesses)
+      },
+    };
+    const response = await axios.get("yelp_stores", config);
+    commit("setYelpStores", response.data.businesses);
   },
 };
 
 const mutations = {
-  setYelpStores: (state, stores) => {
-    state.stores = stores.splice(0, 4)
-  },
+  setYelpStores: (state, stores) => (state.stores = stores),
 };
 
 export default {

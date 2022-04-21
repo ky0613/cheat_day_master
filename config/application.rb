@@ -17,6 +17,7 @@ module CheatDayMaster
       g.template_engine false
       g.assets false
       g.helper false
+      g.skip_routes true
       g.test_framework :rspec,
                         view_specs: false,
                         helper_specs: false

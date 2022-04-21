@@ -14,19 +14,19 @@
         <a
           class="py-2 text-gray-700 dark:text-gray-400 text-sm hover:text-white hover:underline"
           :href="recipe.recipeUrl"
+          target="_blank"
         >
           {{ recipe.recipeTitle }}
         </a>
       </div>
-      <div class="px-6 py-4">
+      <div class="p-2 flex flex-col">
         <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
-          <p class="px-2 text-sm">{{ recipe.recipeDescription }}</p>
-        </div>
-        <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
-          <p class="px-2 text-sm">費用: {{ recipe.recipeCost }} 円</p>
+          <img src="../../../../public/money.svg" class="w-5 h-5" />
+          <p class="px-2 text-sm">{{ recipe.recipeCost }}</p>
         </div>
         <div class="flex items-left mt-4 text-gray-700 dark:text-gray-200">
-          <p class="px-2 text-sm">調理時間: {{ recipe.recipeIndication }}</p>
+          <img src="../../../../public/time.svg" class="w-5 h-5" />
+          <p class="px-2 text-sm">{{ recipe.recipeIndication }}</p>
         </div>
       </div>
     </div>

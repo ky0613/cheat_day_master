@@ -30,10 +30,7 @@ const actions = {
 };
 
 const mutations = {
-  setStores: (state, stores) => {
-    let shuffleStores = shuffle(stores).splice(0, 4);
-    shuffleStores.forEach((store) => state.stores.push(store));
-  },
+  setStores: (state, stores) => (state.stores = shuffle(stores)),
 };
 
 export default {

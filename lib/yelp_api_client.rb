@@ -15,7 +15,8 @@ class YelpApiClient
       latitude: lat,
       longitude: lng,
       sort_by: "rating",
-      price: "3",
+      price: "2",
+      limit: "30"
     })
     uri = URI.parse("#{YELP_HOST}#{params}")
     http = Net::HTTP.new(uri.host, uri.port)

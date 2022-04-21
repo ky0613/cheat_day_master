@@ -2,25 +2,33 @@ import axios from "../../plugins/axios";
 
 const state = {
   items: [],
+  sweets: [],
 };
 
 const getters = {
   allItems: (state) => state.items,
+  allSweets: (state) => state.sweets,
 };
 
 const actions = {
   async fetchItems({ commit }) {
     const response = await axios.get("/rakuten_items");
-    commit("setItems", response.data);
+    commit("setItems", response.data.Items);
+  },
+  async fetchSweets({ commit }) {
+    const response = await axios.get("/rakuten_sweets");
+    commit("setSweets", response.data.Items);
   },
 };
 
 const mutations = {
   setItems: (state, items) => {
     state.items = [];
-    for (let i = 0; i < 4; i++) {
-      state.items.push(items.Items[i].Item);
-    }
+    items.forEach((item) => state.items.push(item.Item));
+  },
+  setSweets: (state, sweets) => {
+    state.sweets = [];
+    sweets.forEach((sweet) => state.sweets.push(sweet.Item));
   },
 };
 

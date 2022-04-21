@@ -3,6 +3,7 @@ Rails.application.routes.draw do
   namespace :api do
     resources :rakuten_items, only: %i(index)
     resources :rakuten_recipes, only: %i(index)
+    resources :rakuten_sweets, only: %i(index)
     resources :hot_pepper_stores, only: %i(index)
     resources :yelp_stores, only: %i(index)
   end

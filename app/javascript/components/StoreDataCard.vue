@@ -1,25 +1,29 @@
 <template>
   <div>
-    <Carousel :perPage="3" :paginationPadding="4">
-      <Slide v-for="store of stores" :key="store.id" class="px-2 mb-3">
+    <Carousel :perPage="this.perPage" :paginationPadding="4">
+      <Slide v-for="store of stores" :key="store.place_id" class="px-2 mb-3">
         <div
-          class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
+          class="mx-2 overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
         >
-          <a :href="store.url" target="_blank">
-            <img
-              class="object-cover object-center w-full h-56"
-              :src="store.image_url"
-              alt="avatar"
-            />
-          </a>
+          <img
+            class="object-cover object-center w-full h-56"
+            :src="store.storePhoto"
+            alt="avatar"
+          />
           <div class="p-2">
             <div
               class="flex items-center mt-4 text-gray-700 dark:text-gray-200 h-10"
             >
-              <img src="../../../../public/shop.svg" class="w-5 h-5" />
+              <img src="../../../public/shop.svg" class="w-5 h-5" />
               <p class="px-2 text-l font-semibold text-center">
-                {{ store.alias }}
+                {{ store.name }}
               </p>
+            </div>
+            <div
+              class="flex items-center mt-4 text-gray-700 dark:text-gray-200 h-6"
+            >
+              <img src="../../../public/place.svg" class="w-5 h-5" />
+              <p class="px-2 text-sm">{{ store.vicinity }}</p>
             </div>
             <div
               class="flex items-center mt-4 text-gray-700 dark:text-gray-200"
@@ -33,7 +37,7 @@
                 class="items-center text-base"
               ></StarRating>
               <p class="px-2 text-base items-center">
-                ({{ store.review_count }})
+                ({{ store.user_ratings_total }})
               </p>
             </div>
           </div>
@@ -54,6 +58,10 @@ export default {
     StarRating,
   },
   props: {
+    perPage: {
+      type: Number,
+      required: true,
+    },
     stores: {
       type: Array,
     },
