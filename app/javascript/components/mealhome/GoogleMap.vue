@@ -44,6 +44,7 @@
 
 <script>
 import { Loader } from "@googlemaps/js-api-loader";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   data() {

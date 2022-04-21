@@ -5,6 +5,7 @@ import rakutenItems from "./modules/rakutenItems";
 import rakutenRecipes from "./modules/rakutenRecipes";
 import hotPepperGourmandStores from "./modules/hotPepperGourmand";
 import yelpStores from "./modules/yelpStores";
+import googleMealOutStores from "./modules/googleMealOutStores";
 
 Vue.use(Vuex);
 
@@ -59,5 +60,6 @@ export default new Vuex.Store({
     rakutenRecipes,
     hotPepperGourmandStores,
     yelpStores,
+    googleMealOutStores,
   },
 });
