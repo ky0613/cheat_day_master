@@ -2,7 +2,7 @@
   <div
     class="overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 my-4 w-full"
   >
-    <StoreDataCard :stores="this.$store.state.recommendStores" />
+    <StoreDataCard :stores="this.$store.state.recommendStores" :perPage="3" />
     <RakutenDataCard :items="allItems" />
     <RakutenDataCard :items="allSweets" />
     <RakutenRecipesCard :recipes="allRecipes" />
@@ -11,7 +11,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
-import StoreDataCard from "../../components/mealhome/StoreDataCard.vue";
+import StoreDataCard from "../../components/StoreDataCard.vue";
 import RakutenDataCard from "../../components/mealhome/RakutenDataCard.vue";
 import RakutenRecipesCard from "../../components/mealhome/RakutenRecipesCard.vue";
 
