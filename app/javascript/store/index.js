@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import createPersistedState from "vuex-persistedstate";
 
 import rakutenItems from "./modules/rakutenItems";
 import rakutenRecipes from "./modules/rakutenRecipes";
@@ -19,4 +20,9 @@ export default new Vuex.Store({
     googleMealOutStores,
     googleMealHomeStores,
   },
+  plugins: [
+    createPersistedState({
+      key: "cheatDayMaster",
+    }),
+  ],
 });
