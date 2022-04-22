@@ -12,6 +12,11 @@ import googleMealHomeStores from "./modules/googleMealHomeStores";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
+  mutations: {
+    resetAllState: (state) => {
+      console.log(state);
+    },
+  },
   modules: {
     rakutenItems,
     rakutenRecipes,
@@ -23,6 +28,7 @@ export default new Vuex.Store({
   plugins: [
     createPersistedState({
       key: "cheatDayMaster",
+      paths: ["googleMealOutStores", "googleMealHomeStores"],
     }),
   ],
 });

@@ -54,7 +54,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["currentPositionData", "deliveryStoresData"]),
+    ...mapGetters("googleMealHomeStores", [
+      "currentPositionData",
+      "deliveryStoresData",
+    ]),
   },
   mounted() {
     const self = this;
@@ -251,7 +254,6 @@ export default {
                         location: place.geometry.location,
                         radius: 3000,
                         types: ["meal_delivery"],
-                        openNow: true,
                         maxPriceLevel: 2,
                       };
 
@@ -307,7 +309,6 @@ export default {
                   location: locationMarker,
                   radius: 3000,
                   type: ["meal_delivery"],
-                  openNow: true,
                   maxPriceLevel: 2,
                 };
 
@@ -335,10 +336,7 @@ export default {
     window.isOpenSetStartModal = this.isOpenSetStartModal;
   },
   methods: {
-    ...mapActions([
-      "setStartPosition",
-      "setDestinationPosition",
-      "setWaypointPositions",
+    ...mapActions("googleMealHomeStores", [
       "setCurrentPosition",
       "setDeliveryStores",
     ]),

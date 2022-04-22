@@ -30,6 +30,10 @@ const mutations = {
     state.sweets = [];
     sweets.forEach((sweet) => state.sweets.push(sweet.Item));
   },
+  resetState: (state) => {
+    state.items = [];
+    state.sweets = [];
+  },
 };
 
 export default {

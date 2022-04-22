@@ -70,7 +70,10 @@ export default {
     };
   },
   computed: {
-    ...mapGetters(["startPositionData", "destinationPositionData"]),
+    ...mapGetters("googleMealOutStores", [
+      "startPositionData",
+      "destinationPositionData",
+    ]),
   },
   mounted() {
     const self = this;
@@ -346,7 +349,7 @@ export default {
     window.isSetDestinationModal = this.isSetDestinationModal;
   },
   methods: {
-    ...mapActions([
+    ...mapActions("googleMealOutStores", [
       "setStartPosition",
       "setDestinationPosition",
       "setWayPointPositions",

@@ -23,12 +23,8 @@ export default {
     RakutenRecipesCard,
   },
   computed: {
-    ...mapGetters([
-      "allItems",
-      "allRecipes",
-      "allSweets",
-      "deliveryStoresData",
-    ]),
+    ...mapGetters(["allItems", "allRecipes", "allSweets"]),
+    ...mapGetters("googleMealHomeStores", ["deliveryStoresData"]),
   },
   created() {
     this.fetchItems();

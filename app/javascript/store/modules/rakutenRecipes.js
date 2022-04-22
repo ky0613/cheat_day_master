@@ -17,6 +17,9 @@ const actions = {
 
 const mutations = {
   setRecipes: (state, recipes) => (state.recipes = recipes),
+  resetState: (state) => {
+    state.recipes = [];
+  },
 };
 
 export default {
