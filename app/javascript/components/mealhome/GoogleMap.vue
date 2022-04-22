@@ -53,6 +53,9 @@ export default {
       isStartModalShown: false,
     };
   },
+  computed: {
+    ...mapGetters[("startPositionData", "destinationPositionData")],
+  },
   mounted() {
     const self = this;
     function infoWindowContent(name, address) {
@@ -336,6 +339,9 @@ export default {
     window.isOpenSetStartModal = this.isOpenSetStartModal;
   },
   methods: {
+    ...mapActions[
+      ("setStartPosition", "setDestinationPosition", "setWaypointsPositions")
+    ],
     isOpenSetStartModal() {
       this.isStartModalShown = true;
       setTimeout(() => {

@@ -17,6 +17,9 @@ const state = {
 const getters = {
   startPositionData: (state) => state.startLatLng,
   destinationPositionData: (state) => state.destinationLatLng,
+  routeWayPointsData: (state) => state.routeWayPoints,
+  wayPointsData: (state) => state.wayPoints,
+  recommendStoresData: (state) => state.recommendStores,
 };
 
 const actions = {
@@ -26,22 +29,22 @@ const actions = {
   setDestinationPosition({ commit }, position) {
     commit("setDestinationLatLng", position);
   },
-  setWaypointsPositions({ commit }, positions) {
+  setWayPointPositions({ commit }, positions) {
     const notHotelPositions = positions.filter((position) => {
       return position.name.match(/ホテル/) == null;
     });
-    const shuffleWaypoints = shuffle(notHotelPositions.splice(0, 6));
-    commit("setWaypoints", shuffleWaypoints);
-    let convertWayPoint = {};
-    let routePoints = [];
-    shuffleWaypoints.forEach((waypoint) => {
+    const shuffleWayPoints = shuffle(notHotelPositions.splice(0, 6));
+    commit("setWayPoints", shuffleWayPoints);
+    let points = [];
+    shuffleWayPoints.map((waypoint) => {
+      let convertWayPoint = {};
       convertWayPoint = {
         location: waypoint.geometry.location,
         stopover: true,
       };
-      routePoints.push(convertWayPoint);
+      points.push(convertWayPoint);
     });
-    commit("setRouteWayPoints", routePoints);
+    commit("setRouteWayPoints", points);
     commit(
       "setRecommendStores",
       notHotelPositions.sort((a, b) => (a.rating < b.rating ? 1 : -1))
@@ -53,7 +56,7 @@ const mutations = {
   setStartLatLng: (state, position) => (state.startLatLng = position),
   setDestinationLatLng: (state, position) =>
     (state.destinationLatLng = position),
-  setWaypoints: (state, positions) => (state.wayPoints = positions),
+  setWayPoints: (state, positions) => (state.wayPoints = positions),
   setRouteWayPoints: (state, positions) => (state.routeWayPoints = positions),
   setRecommendStores: (state, positions) => (state.recommendStores = positions),
 };
