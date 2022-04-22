@@ -2,7 +2,7 @@
   <div
     class="overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 my-4 w-full"
   >
-    <StoreDataCard :stores="this.$store.state.recommendStores" :perPage="3" />
+    <StoreDataCard :stores="deliveryStoresData" :perPage="3" />
     <RakutenDataCard :items="allItems" />
     <RakutenDataCard :items="allSweets" />
     <RakutenRecipesCard :recipes="allRecipes" />
@@ -23,7 +23,12 @@ export default {
     RakutenRecipesCard,
   },
   computed: {
-    ...mapGetters(["allItems", "allRecipes", "allSweets"]),
+    ...mapGetters([
+      "allItems",
+      "allRecipes",
+      "allSweets",
+      "deliveryStoresData",
+    ]),
   },
   created() {
     this.fetchItems();
