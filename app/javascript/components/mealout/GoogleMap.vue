@@ -28,7 +28,7 @@
           readonly="readonly"
           placeholder="マップから選択してください"
           class="bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight min-w"
-          :value="this.$store.state.startLatLng.name"
+          :value="startPositionData.name"
         />
       </div>
       <div class="flex items-center mb-6 mx-auto justify-center">
@@ -39,7 +39,7 @@
           readonly="readonly"
           placeholder="マップから選択してください"
           class="bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight min-w"
-          :value="this.$store.state.destinationLatLng.name"
+          :value="destinationPositionData.name"
         />
       </div>
       <div class="container mx-auto">
@@ -58,6 +58,7 @@
 
 <script>
 import { Loader } from "@googlemaps/js-api-loader";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   data() {
@@ -67,6 +68,9 @@ export default {
       isDestinationModalShown: false,
       wayPoints: [],
     };
+  },
+  computed: {
+    ...mapGetters(["startPositionData", "destinationPositionData"]),
   },
   mounted() {
     const self = this;
@@ -142,7 +146,7 @@ export default {
               lng: position.coords.longitude,
             };
             map.setCenter(pos);
-            self.$store.commit("setStartPosition", {
+            self.setStartPosition({
               name: "現在地情報を取得しました",
               latLng: pos,
             });
@@ -234,7 +238,7 @@ export default {
                   document
                     .getElementById("addStartPoint")
                     .addEventListener("click", () => {
-                      self.$store.commit("setStartPosition", {
+                      self.setStartPosition({
                         name: place.name,
                         latLng: place.geometry.location,
                       });
@@ -242,7 +246,7 @@ export default {
                   document
                     .getElementById("addDestination")
                     .addEventListener("click", () => {
-                      self.$store.commit("setDestinationPosition", {
+                      self.setDestinationPosition({
                         name: place.name,
                         latLng: place.geometry.location,
                       });
@@ -251,7 +255,6 @@ export default {
                         location: place.geometry.location,
                         radius: 3000,
                         type: ["food"],
-                        openNow: true,
                         maxPriceLevel: 2,
                       };
 
@@ -267,10 +270,7 @@ export default {
                                 result.storePhoto = result.photos[0].getUrl();
                               JSON.parse(JSON.stringify(result));
                             });
-                            self.$store.commit(
-                              "setWaypointsPositions",
-                              results
-                            );
+                            self.setWayPointPositions(results);
                           }
                         }
                       );
@@ -301,7 +301,7 @@ export default {
             document
               .getElementById("addStartPoint")
               .addEventListener("click", () => {
-                self.$store.commit("setStartPosition", {
+                self.setStartPosition({
                   name: marker.title,
                   latLng: locationMarker,
                 });
@@ -309,7 +309,7 @@ export default {
             document
               .getElementById("addDestination")
               .addEventListener("click", () => {
-                self.$store.commit("setDestinationPosition", {
+                self.setDestinationPosition({
                   name: marker.title,
                   latLng: locationMarker,
                 });
@@ -318,7 +318,6 @@ export default {
                   location: locationMarker,
                   radius: 3000,
                   type: ["food"],
-                  openNow: true,
                   maxPriceLevel: 2,
                 };
 
@@ -332,7 +331,7 @@ export default {
                           result.storePhoto = result.photos[0].getUrl();
                         JSON.parse(JSON.stringify(result));
                       });
-                      self.$store.commit("setWaypointsPositions", results);
+                      self.setWayPointPositions(results);
                     }
                   }
                 );
@@ -347,6 +346,11 @@ export default {
     window.isSetDestinationModal = this.isSetDestinationModal;
   },
   methods: {
+    ...mapActions([
+      "setStartPosition",
+      "setDestinationPosition",
+      "setWayPointPositions",
+    ]),
     isOpenSetStartModal() {
       this.isStartModalShown = true;
       setTimeout(() => {

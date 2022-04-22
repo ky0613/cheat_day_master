@@ -11,8 +11,8 @@
     <div class="map_wrapper object-cover w-full h-64">
       <div id="map" class="map"></div>
     </div>
-    <StoreDataCard :stores="this.$store.state.wayPoints" :perPage="3" />
-    <StoreDataCard :stores="this.$store.state.recommendStores" :perPage="3" />
+    <StoreDataCard :stores="wayPointsData" :perPage="3" />
+    <StoreDataCard :stores="recommendStoresData" :perPage="3" />
     <HotPepperGourmandStores :stores="allStores" />
     <YelpStoreData :stores="allYelpStores" />
   </div>
@@ -36,6 +36,21 @@ export default {
       durationTime: null,
     };
   },
+  computed: {
+    ...mapGetters([
+      "allItems",
+      "allStores",
+      "allYelpStores",
+      "startPositionData",
+      "destinationPositionData",
+      "routeWayPointsData",
+      "wayPointsData",
+      "recommendStoresData",
+    ]),
+    burnedCalories() {
+      return Math.trunc(1.05 * 3.5 * (this.durationTime / 3600) * 60);
+    },
+  },
   mounted() {
     const self = this;
 
@@ -50,7 +65,6 @@ export default {
     loader.load().then(() => {
       const google = window.google;
       map = new google.maps.Map(document.getElementById("map"), {
-        center: this.$store.state.startLatLng.latLng,
         zoom: 15,
         mayTypeId: google.maps.MapTypeId.ROADMAP,
         mapTypeControl: false,
@@ -70,15 +84,15 @@ export default {
 
       directionsRenderer.setMap(map);
 
-      const { latLng: startLatLng } = this.$store.state.startLatLng;
-      const { latLng: destinationLatLng } = this.$store.state.destinationLatLng;
+      const startLatLng = self.startPositionData.latLng;
+      const destinationLatLng = self.destinationPositionData.latLng;
       // const startLatLng = { lat: 35.6581, lng: 139.7017 };
       // const destinationLatLng = { lat: 35.6460739, lng: 139.7113368 };
 
       let request = {
         origin: new google.maps.LatLng(startLatLng), // 出発地点
         destination: new google.maps.LatLng(destinationLatLng), // 待ち合わせ場所
-        waypoints: this.$store.state.routeWayPoints, // 経由地点
+        waypoints: self.routeWayPointsData, // 経由地点
         travelMode: google.maps.DirectionsTravelMode.WALKING, // 移動手段
       };
 
@@ -100,21 +114,14 @@ export default {
         });
     });
   },
-  computed: {
-    ...mapGetters(["allItems", "allStores", "allYelpStores"]),
-    burnedCalories() {
-      return Math.trunc(1.05 * 3.5 * (this.durationTime / 3600) * 60);
-    },
-  },
   created() {
-    this.fetchItems();
-    this.fetchStores(this.$store.state.destinationLatLng.latLng);
-    this.fetchYelpStores(this.$store.state.destinationLatLng.latLng);
+    this.fetchStores(this.destinationPositionData.latLng);
+    this.fetchYelpStores(this.destinationPositionData.latLng);
     // this.fetchStores({ lat: 35.6581, lng: 139.7017 });
     // this.fetchYelpStores({ lat: 35.6460739, lng: 139.7113368 });
   },
   methods: {
-    ...mapActions(["fetchItems", "fetchStores", "fetchYelpStores"]),
+    ...mapActions(["fetchStores", "fetchYelpStores"]),
   },
 };
 </script>

@@ -25,7 +25,7 @@
           readonly="readonly"
           placeholder="マップから選択してください"
           class="bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight min-w"
-          :value="this.$store.state.startLatLng.name"
+          :value="currentPositionData.name"
         />
       </div>
       <div class="container mx-auto">
@@ -44,6 +44,7 @@
 
 <script>
 import { Loader } from "@googlemaps/js-api-loader";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   data() {
@@ -51,6 +52,9 @@ export default {
       apiKey: process.env.API_KEY,
       isStartModalShown: false,
     };
+  },
+  computed: {
+    ...mapGetters(["currentPositionData", "deliveryStoresData"]),
   },
   mounted() {
     const self = this;
@@ -125,7 +129,7 @@ export default {
               lng: position.coords.longitude,
             };
             map.setCenter(pos);
-            self.$store.commit("setStartPosition", {
+            self.setCurrentPosition({
               name: "現在地情報を取得しました",
               latLng: pos,
             });
@@ -133,8 +137,7 @@ export default {
             let radiusSearchRequest = {
               location: pos,
               radius: 3000,
-              types: ["meal_delivery", "meal_takeaway"],
-              fields: ["name", "formatted_address", "geometry", "photos"],
+              types: ["meal_delivery"],
             };
 
             service.nearbySearch(
@@ -147,7 +150,7 @@ export default {
                       result.storePhoto = result.photos[0].getUrl();
                     JSON.parse(JSON.stringify(result));
                   });
-                  self.$store.commit("setWaypointsPositions", results);
+                  self.setDeliveryStores(results);
                 }
               }
             );
@@ -239,7 +242,7 @@ export default {
                   document
                     .getElementById("addStartPoint")
                     .addEventListener("click", () => {
-                      self.$store.commit("setStartPosition", {
+                      self.setCurrentPosition({
                         name: place.name,
                         latLng: place.geometry.location,
                       });
@@ -264,10 +267,7 @@ export default {
                                 result.storePhoto = result.photos[0].getUrl();
                               JSON.parse(JSON.stringify(result));
                             });
-                            self.$store.commit(
-                              "setWaypointsPositions",
-                              results
-                            );
+                            self.setDeliveryStores(results);
                           }
                         }
                       );
@@ -298,7 +298,7 @@ export default {
             document
               .getElementById("addStartPoint")
               .addEventListener("click", () => {
-                self.$store.commit("setStartPosition", {
+                self.setCurrentPosition({
                   name: marker.title,
                   latLng: locationMarker,
                 });
@@ -321,7 +321,7 @@ export default {
                           result.storePhoto = result.photos[0].getUrl();
                         JSON.parse(JSON.stringify(result));
                       });
-                      self.$store.commit("setWaypointsPositions", results);
+                      self.setDeliveryStores(results);
                     }
                   }
                 );
@@ -335,6 +335,13 @@ export default {
     window.isOpenSetStartModal = this.isOpenSetStartModal;
   },
   methods: {
+    ...mapActions([
+      "setStartPosition",
+      "setDestinationPosition",
+      "setWaypointPositions",
+      "setCurrentPosition",
+      "setDeliveryStores",
+    ]),
     isOpenSetStartModal() {
       this.isStartModalShown = true;
       setTimeout(() => {
