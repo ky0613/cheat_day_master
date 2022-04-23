@@ -2,7 +2,7 @@
   <header>
     <div class="p-4" id="header">
       <router-link :to="{ name: 'TopIndex' }" @click.native="resetState()"
-        ><img src="logo-removebg-preview.png" alt="logo"
+        ><img src="../../../public/logo-removebg-preview.png" alt="logo"
       /></router-link>
     </div>
   </header>
