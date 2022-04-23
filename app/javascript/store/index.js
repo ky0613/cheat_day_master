@@ -8,15 +8,11 @@ import hotPepperGourmandStores from "./modules/hotPepperGourmand";
 import yelpStores from "./modules/yelpStores";
 import googleMealOutStores from "./modules/googleMealOutStores";
 import googleMealHomeStores from "./modules/googleMealHomeStores";
+import digressions from "./modules/digressions";
 
 Vue.use(Vuex);
 
 export default new Vuex.Store({
-  mutations: {
-    resetAllState: (state) => {
-      console.log(state);
-    },
-  },
   modules: {
     rakutenItems,
     rakutenRecipes,
@@ -24,6 +20,7 @@ export default new Vuex.Store({
     yelpStores,
     googleMealOutStores,
     googleMealHomeStores,
+    digressions,
   },
   plugins: [
     createPersistedState({

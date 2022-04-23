@@ -1,8 +1,11 @@
 <template>
   <header>
-    <div class="p-4" id="header">
-      <router-link :to="{ name: 'TopIndex' }" @click.native="resetState()"
-        ><img src="../../../public/logo.png" alt="logo" class="h-12"
+    <div class="pl-4 py-2" id="header">
+      <router-link
+        :to="{ name: 'TopIndex' }"
+        @click.native="resetState()"
+        class="inline-block"
+        ><img src="../../../public/logo.png" alt="logo" class="max-w-xs h-auto"
       /></router-link>
     </div>
   </header>
