@@ -1,8 +1,11 @@
 <template>
   <header>
-    <div class="p-4" id="header">
-      <router-link :to="{ name: 'TopIndex' }" @click.native="resetState()"
-        ><img src="../../../public/logo-removebg-preview.png" alt="logo"
+    <div class="pl-4 py-2" id="header">
+      <router-link
+        :to="{ name: 'TopIndex' }"
+        @click.native="resetState()"
+        class="inline-block"
+        ><img src="../../../public/logo.png" alt="logo" class="max-w-xs h-auto"
       /></router-link>
     </div>
   </header>
@@ -22,6 +25,6 @@ export default {
 
 <style scoped>
 #header {
-  background: rgb(6, 17, 60, 0.4);
+  background: rgb(6, 17, 60, 0.7);
 }
 </style>

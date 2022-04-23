@@ -18,6 +18,9 @@
         経由地に追加されなければ食べない可能性があったのでこちらのお店で摂取したカロリーは0kcalです。
       </p>
       <p>安心してお立ち寄りください。</p>
+      <p v-if="allDigressions">
+        余談ですが，{{ allDigressions[0].description }}
+      </p>
     </div>
     <StoreDataCard :stores="wayPointsData" :perPage="3" />
     <div class="p-3 mt-2">
@@ -26,6 +29,9 @@
         評価によって店舗情報を並び替えたタイミングでカロリーが抜け落ちてしまったので，<br />こちらのお店で摂取したカロリーは0kcalです。
       </p>
       <p>安心して食事をお楽しみください。</p>
+      <p v-if="allDigressions">
+        余談ですが，{{ allDigressions[1].description }}
+      </p>
     </div>
     <StoreDataCard :stores="recommendStoresData" :perPage="3" />
     <div class="p-3 mt-2">
@@ -33,10 +39,10 @@
       <p>
         ホットもペッパーも辛そうなので，こちらのお店で摂取したカロリーは0kcalです。
       </p>
-      <p>
-        余談ですが，アルコールは揮発性があるのでお酒を飲むとカロリーも揮発して0kcalになります。
-      </p>
       <p>安心して食事をお楽しみください。</p>
+      <p v-if="allDigressions">
+        余談ですが，{{ allDigressions[2].description }}
+      </p>
     </div>
     <HotPepperGourmandStores :stores="allStores" />
     <div class="p-3 mt-2">
@@ -44,10 +50,10 @@
       <p>
         海外のサイトから取得したので「calorie」はありますが「カロリー」はないと思われます。<br />こちらのお店で摂取したカロリーは0kcalです。
       </p>
-      <p>
-        余談ですが世界の人口は約80億人で，取得したカロリーを80億で割るとほぼ0kcalです。よかったですね！
-      </p>
       <p>安心して食事をお楽しみください。</p>
+      <p v-if="allDigressions">
+        余談ですが，{{ allDigressions[3].description }}
+      </p>
     </div>
     <YelpStoreData :stores="allYelpStores" />
   </div>
@@ -79,7 +85,7 @@ export default {
       "wayPointsData",
       "recommendStoresData",
     ]),
-    ...mapGetters(["allItems", "allStores", "allYelpStores"]),
+    ...mapGetters(["allItems", "allStores", "allYelpStores", "allDigressions"]),
     burnedCalories() {
       return Math.trunc(1.05 * 3.5 * (this.durationTime / 3600) * 60);
     },
@@ -150,11 +156,12 @@ export default {
   created() {
     this.fetchStores(this.destinationPositionData.latLng);
     this.fetchYelpStores(this.destinationPositionData.latLng);
+    this.fetchDigressions();
     // this.fetchStores({ lat: 35.6581, lng: 139.7017 });
     // this.fetchYelpStores({ lat: 35.6460739, lng: 139.7113368 });
   },
   methods: {
-    ...mapActions(["fetchStores", "fetchYelpStores"]),
+    ...mapActions(["fetchStores", "fetchYelpStores", "fetchDigressions"]),
   },
 };
 </script>
