@@ -1,7 +1,7 @@
 <template>
   <div>
     <Carousel :perPage="3" :paginationPadding="4">
-      <Slide v-for="store of stores" :key="store.id" class="px-2 mb-3">
+      <Slide v-for="store of stores" :key="store.id" class="px-2 my-3">
         <div
           class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full flex flex-col"
         >
@@ -32,7 +32,7 @@
             href="http://webservice.recruit.co.jp/"
             class="h-10 p-3 flex justify-center"
             target="_blank"
-            ><p class="text-sm items-center pr-2">Produced by</p>
+            ><p class="text-xs items-center pr-2">Produced by</p>
             <img
               src="http://webservice.recruit.co.jp/banner/hotpepper-s.gif"
               alt="ホットペッパー Webサービス"
