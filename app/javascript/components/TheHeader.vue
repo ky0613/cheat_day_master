@@ -2,7 +2,7 @@
   <header>
     <div class="p-4" id="header">
       <router-link :to="{ name: 'TopIndex' }" @click.native="resetState()"
-        ><img src="../../../public/logo-removebg-preview.png" alt="logo"
+        ><img src="../../../public/logo.png" alt="logo" class="h-12"
       /></router-link>
     </div>
   </header>
@@ -22,6 +22,6 @@ export default {
 
 <style scoped>
 #header {
-  background: rgb(6, 17, 60, 0.4);
+  background: rgb(6, 17, 60, 0.7);
 }
 </style>
