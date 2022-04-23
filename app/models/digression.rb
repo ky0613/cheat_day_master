@@ -1,0 +1,2 @@
+class Digression < ApplicationRecord
+end
