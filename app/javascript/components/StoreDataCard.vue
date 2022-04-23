@@ -1,9 +1,9 @@
 <template>
   <div>
     <Carousel :perPage="this.perPage" :paginationPadding="4">
-      <Slide v-for="store of stores" :key="store.place_id" class="px-2 mb-3">
+      <Slide v-for="store of stores" :key="store.place_id" class="px-2 my-3">
         <div
-          class="mx-2 overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
+          class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
         >
           <img
             class="object-cover object-center w-full h-56"
