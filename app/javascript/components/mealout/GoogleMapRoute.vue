@@ -2,18 +2,53 @@
   <div
     class="overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 my-4 w-full"
   >
-    <div>
-      <h1>1店舗では物足りないと思うので勝手に経由地を追加しておきました。</h1>
-      <h3>
+    <div class="p-3">
+      <p class="text-4xl font-bold">ルート検索結果</p>
+      <p>1店舗では物足りないと思うので勝手に経由地を追加しておきました。</p>
+      <p>
         余談ですが，このルートを歩いたら{{ burnedCalories }}kcal消費します。
-      </h3>
+      </p>
     </div>
     <div class="map_wrapper object-cover w-full h-64">
       <div id="map" class="map"></div>
     </div>
+    <div class="p-3 mt-5">
+      <p class="text-4xl font-bold">経由地の店舗情報</p>
+      <p>
+        経由地に追加されなければ食べない可能性があったのでこちらのお店で摂取したカロリーは0kcalです。
+      </p>
+      <p>安心してお立ち寄りください。</p>
+    </div>
     <StoreDataCard :stores="wayPointsData" :perPage="3" />
+    <div class="p-3 mt-2">
+      <p class="text-4xl font-bold">経由地以外の店舗情報</p>
+      <p>
+        評価によって店舗情報を並び替えたタイミングでカロリーが抜け落ちてしまったので，<br />こちらのお店で摂取したカロリーは0kcalです。
+      </p>
+      <p>安心して食事をお楽しみください。</p>
+    </div>
     <StoreDataCard :stores="recommendStoresData" :perPage="3" />
+    <div class="p-3 mt-2">
+      <p class="text-4xl font-bold">ホットペッパーグルメから取得した店舗情報</p>
+      <p>
+        ホットもペッパーも辛そうなので，こちらのお店で摂取したカロリーは0kcalです。
+      </p>
+      <p>
+        余談ですが，アルコールは揮発性があるのでお酒を飲むとカロリーも揮発して0kcalになります。
+      </p>
+      <p>安心して食事をお楽しみください。</p>
+    </div>
     <HotPepperGourmandStores :stores="allStores" />
+    <div class="p-3 mt-2">
+      <p class="text-4xl font-bold">Yelpから取得した店舗情報</p>
+      <p>
+        海外のサイトから取得したので「calorie」はありますが「カロリー」はないと思われます。<br />こちらのお店で摂取したカロリーは0kcalです。
+      </p>
+      <p>
+        余談ですが世界の人口は約80億人で，取得したカロリーを80億で割るとほぼ0kcalです。よかったですね！
+      </p>
+      <p>安心して食事をお楽しみください。</p>
+    </div>
     <YelpStoreData :stores="allYelpStores" />
   </div>
 </template>
