@@ -37,16 +37,14 @@ export default {
     };
   },
   computed: {
-    ...mapGetters([
-      "allItems",
-      "allStores",
-      "allYelpStores",
+    ...mapGetters("googleMealOutStores", [
       "startPositionData",
       "destinationPositionData",
       "routeWayPointsData",
       "wayPointsData",
       "recommendStoresData",
     ]),
+    ...mapGetters(["allItems", "allStores", "allYelpStores"]),
     burnedCalories() {
       return Math.trunc(1.05 * 3.5 * (this.durationTime / 3600) * 60);
     },
