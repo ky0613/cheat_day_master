@@ -8,7 +8,7 @@ import hotPepperGourmandStores from "./modules/hotPepperGourmand";
 import yelpStores from "./modules/yelpStores";
 import googleMealOutStores from "./modules/googleMealOutStores";
 import googleMealHomeStores from "./modules/googleMealHomeStores";
-import digressions from "./modules/digressions";
+import digressions from "./modules/descriptions";
 
 Vue.use(Vuex);
 

@@ -44,12 +44,15 @@
       </div>
       <div class="container mx-auto">
         <div class="flex justify-center">
-          <router-link
-            :to="{ name: 'MealOutResult' }"
-            class="rounded-full bg-blue-400 p-2 mb-3 text-center"
-          >
-            ルートを検索する</router-link
-          >
+          <span @click.capture="clicked" class="p-2 mb-3">
+            <router-link
+              :to="{ name: 'MealOutResult' }"
+              class="rounded-full bg-blue-400 text-center p-2 mb-3"
+              :disabled="isButtonDisabled"
+            >
+              ルートを検索する</router-link
+            >
+          </span>
         </div>
       </div>
     </form>
@@ -74,6 +77,12 @@ export default {
       "startPositionData",
       "destinationPositionData",
     ]),
+    isButtonDisabled() {
+      return (
+        Object.keys(this.startPositionData).length === 0 &&
+        Object.keys(this.destinationPositionData).length === 0
+      );
+    },
   },
   mounted() {
     const self = this;
@@ -365,6 +374,9 @@ export default {
       setTimeout(() => {
         this.isDestinationModalShown = false;
       }, 100);
+    },
+    clicked(e) {
+      if (this.isButtonDisabled) e.preventDefault();
     },
   },
 };
