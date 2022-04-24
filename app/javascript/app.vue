@@ -26,6 +26,11 @@ export default {
 
 <style scoped>
 #app {
-  background: rgba(230, 213, 184, 0.6);
+  background: linear-gradient(
+    130deg,
+    rgba(250, 112, 112, 0.8),
+    rgba(175, 254, 64, 0.611)
+  );
+  background-size: cover;
 }
 </style>
