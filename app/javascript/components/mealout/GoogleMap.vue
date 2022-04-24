@@ -42,13 +42,17 @@
           :value="destinationPositionData.name"
         />
       </div>
-      <div class="container mx-auto">
+      <div class="container mx-auto text-center">
+        <span
+          class="text-base text-red-500 justify-center"
+          v-if="isValidation && validateSwitch"
+          >現在地または目的地に地点が登録されていません。</span
+        >
         <div class="flex justify-center">
           <span @click.capture="clicked" class="p-2 mb-3">
             <router-link
               :to="{ name: 'MealOutResult' }"
               class="rounded-full bg-blue-400 text-center p-2 mb-3"
-              :disabled="isButtonDisabled"
             >
               ルートを検索する</router-link
             >
@@ -70,6 +74,7 @@ export default {
       isStartModalShown: false,
       isDestinationModalShown: false,
       wayPoints: [],
+      validateSwitch: false,
     };
   },
   computed: {
@@ -77,9 +82,9 @@ export default {
       "startPositionData",
       "destinationPositionData",
     ]),
-    isButtonDisabled() {
+    isValidation() {
       return (
-        Object.keys(this.startPositionData).length === 0 &&
+        Object.keys(this.startPositionData).length === 0 ||
         Object.keys(this.destinationPositionData).length === 0
       );
     },
@@ -376,7 +381,10 @@ export default {
       }, 100);
     },
     clicked(e) {
-      if (this.isButtonDisabled) e.preventDefault();
+      this.validateSwitch = true;
+      if (this.isValidation) {
+        e.preventDefault();
+      }
     },
   },
 };
