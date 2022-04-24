@@ -28,7 +28,12 @@
           :value="currentPositionData.name"
         />
       </div>
-      <div class="container mx-auto">
+      <div class="container mx-auto text-center">
+        <span
+          class="text-base text-red-500 justify-center"
+          v-if="isValidation && validateSwitch"
+          >現在地に地点が登録されていません。</span
+        >
         <div class="flex justify-center">
           <span @click.capture="clicked" class="p-2 mb-3">
             <router-link
@@ -53,6 +58,7 @@ export default {
     return {
       apiKey: process.env.API_KEY,
       isStartModalShown: false,
+      validateSwitch: false,
     };
   },
   computed: {
@@ -60,6 +66,9 @@ export default {
       "currentPositionData",
       "deliveryStoresData",
     ]),
+    isValidation() {
+      return Object.keys(this.currentPositionData).length === 0;
+    },
   },
   mounted() {
     const self = this;
@@ -349,8 +358,10 @@ export default {
       }, 100);
     },
     clicked(e) {
-      if (Object.keys(this.currentPositionData).length === 0)
+      this.validateSwitch = true;
+      if (this.isValidation) {
         e.preventDefault();
+      }
     },
   },
 };
