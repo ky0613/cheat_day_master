@@ -13,6 +13,7 @@
     "axios": "^0.26.1",
     "dotenv": "^16.0.0",
     "postcss": "7",
+    "vee-validate": "3",
     "vue": "^2.6.14",
     "vue-carousel": "^0.18.0",
     "vue-flickity": "^1.2.1",

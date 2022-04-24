@@ -1,6 +1,7 @@
 <template>
   <div
     class="overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 my-4 w-full"
+    v-cloak
   >
     <div class="p-3">
       <p class="text-4xl font-bold">ルート検索結果</p>
@@ -18,9 +19,7 @@
         経由地に追加されなければ食べない可能性があったのでこちらのお店で摂取したカロリーは0kcalです。
       </p>
       <p>安心してお立ち寄りください。</p>
-      <p v-if="allDigressions">
-        余談ですが，{{ allDigressions[0].description }}
-      </p>
+      <p v-if="this.allDescriptions">余談ですが，{{ allDescriptions[0] }}</p>
     </div>
     <StoreDataCard :stores="wayPointsData" :perPage="3" />
     <div class="p-3 mt-2">
@@ -29,9 +28,7 @@
         評価によって店舗情報を並び替えたタイミングでカロリーが抜け落ちてしまったので，<br />こちらのお店で摂取したカロリーは0kcalです。
       </p>
       <p>安心して食事をお楽しみください。</p>
-      <p v-if="allDigressions">
-        余談ですが，{{ allDigressions[1].description }}
-      </p>
+      <p v-if="this.allDescriptions">余談ですが，{{ allDescriptions[1] }}</p>
     </div>
     <StoreDataCard :stores="recommendStoresData" :perPage="3" />
     <div class="p-3 mt-2">
@@ -40,9 +37,7 @@
         ホットもペッパーも辛そうなので，こちらのお店で摂取したカロリーは0kcalです。
       </p>
       <p>安心して食事をお楽しみください。</p>
-      <p v-if="allDigressions">
-        余談ですが，{{ allDigressions[2].description }}
-      </p>
+      <p v-if="this.allDescriptions">余談ですが，{{ allDescriptions[2] }}</p>
     </div>
     <HotPepperGourmandStores :stores="allStores" />
     <div class="p-3 mt-2">
@@ -51,9 +46,7 @@
         海外のサイトから取得したので「calorie」はありますが「カロリー」はないと思われます。<br />こちらのお店で摂取したカロリーは0kcalです。
       </p>
       <p>安心して食事をお楽しみください。</p>
-      <p v-if="allDigressions">
-        余談ですが，{{ allDigressions[3].description }}
-      </p>
+      <p v-if="this.allDescriptions">余談ですが，{{ allDescriptions[3] }}</p>
     </div>
     <YelpStoreData :stores="allYelpStores" />
   </div>
@@ -85,7 +78,12 @@ export default {
       "wayPointsData",
       "recommendStoresData",
     ]),
-    ...mapGetters(["allItems", "allStores", "allYelpStores", "allDigressions"]),
+    ...mapGetters([
+      "allItems",
+      "allStores",
+      "allYelpStores",
+      "allDescriptions",
+    ]),
     burnedCalories() {
       return Math.trunc(1.05 * 3.5 * (this.durationTime / 3600) * 60);
     },
@@ -125,8 +123,6 @@ export default {
 
       const startLatLng = self.startPositionData.latLng;
       const destinationLatLng = self.destinationPositionData.latLng;
-      // const startLatLng = { lat: 35.6581, lng: 139.7017 };
-      // const destinationLatLng = { lat: 35.6460739, lng: 139.7113368 };
 
       let request = {
         origin: new google.maps.LatLng(startLatLng), // 出発地点
@@ -156,12 +152,10 @@ export default {
   created() {
     this.fetchStores(this.destinationPositionData.latLng);
     this.fetchYelpStores(this.destinationPositionData.latLng);
-    this.fetchDigressions();
-    // this.fetchStores({ lat: 35.6581, lng: 139.7017 });
-    // this.fetchYelpStores({ lat: 35.6460739, lng: 139.7113368 });
+    this.fetchDescriptions();
   },
   methods: {
-    ...mapActions(["fetchStores", "fetchYelpStores", "fetchDigressions"]),
+    ...mapActions(["fetchStores", "fetchYelpStores", "fetchDescriptions"]),
   },
 };
 </script>
