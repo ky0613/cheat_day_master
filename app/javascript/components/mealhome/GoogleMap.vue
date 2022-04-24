@@ -30,12 +30,14 @@
       </div>
       <div class="container mx-auto">
         <div class="flex justify-center">
-          <router-link
-            :to="{ name: 'MealHomeResult' }"
-            class="rounded-full bg-blue-400 p-2 mb-3 text-center"
-          >
-            周辺を検索する</router-link
-          >
+          <span @click.capture="clicked" class="p-2 mb-3">
+            <router-link
+              :to="{ name: 'MealHomeResult' }"
+              class="rounded-full bg-blue-400 p-2 mb-3 text-center"
+            >
+              周辺を検索する</router-link
+            >
+          </span>
         </div>
       </div>
     </form>
@@ -345,6 +347,10 @@ export default {
       setTimeout(() => {
         this.isStartModalShown = false;
       }, 100);
+    },
+    clicked(e) {
+      if (Object.keys(this.currentPositionData).length === 0)
+        e.preventDefault();
     },
   },
 };
