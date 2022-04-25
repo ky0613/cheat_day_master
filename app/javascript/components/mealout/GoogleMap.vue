@@ -8,14 +8,18 @@
         id="startPoint"
         v-if="isStartModalShown"
       >
-        <div class="p-3 text-center box-border bg-black opacity-70 text-white">現在地点に設定しました</div>
+        <div class="p-3 text-center box-border bg-black opacity-70 text-white">
+          現在地点に設定しました
+        </div>
       </div>
       <div
         class="fixed w-4/5 max-w-md m-auto opacity-100 rounded-sm z-1000 h-0 top-0 bottom-0 left-0 right-0"
         id="destination"
         v-if="isDestinationModalShown"
       >
-        <div class="p-3 text-center box-border bg-black opacity-70 text-white">行きたいお店に設定しました</div>
+        <div class="p-3 text-center box-border bg-black opacity-70 text-white">
+          行きたいお店に設定しました
+        </div>
       </div>
     </transition>
     <div class="relative w-full pt-56.25">
@@ -26,6 +30,12 @@
         type="text"
         placeholder="検索"
       />
+      <button
+        id="locationButton"
+        class="bg-orange-500 rounded-md text-white overflow-hidden h-8 cursor-pointer mt-2 mr-2 hover:bg-orange-300 px-3 py-1 text-lg"
+      >
+        現在地を取得
+      </button>
     </div>
     <form class="w-full mt-3">
       <div class="flex items-center mb-6 mx-auto justify-center">
@@ -100,7 +110,7 @@ export default {
   mounted() {
     const self = this;
     function infoWindowContent(name, address) {
-      let content =
+      const content =
         `<div>` +
         `<p>${name}</p>` +
         `<p>${address}</p>` +
@@ -131,35 +141,7 @@ export default {
       let service = new google.maps.places.PlacesService(map);
 
       ////////////////// 現在地取得ボタン作成 //////////////////
-      const locationButton = document.createElement("button");
-      locationButton.textContent = "現在地を取得";
-      // 現在地ボタンのCSS
-      Object.assign(locationButton.style, {
-        appearance: "button",
-        backgroundColor: "dimgray",
-        border: "1px solid black",
-        borderRadius: "2px",
-        boxShadow: "0 1px 4px -1px rgb(0 0 0 / 30%)",
-        margin: "10px",
-        padding: "3px 11px 3px 13px",
-        font: "400 15px Roboto, Arial, sans-serif",
-        color: "white",
-        overflow: "hidden",
-        height: "30px",
-        cursor: "pointer",
-      });
-      locationButton.addEventListener("mouseover", () => {
-        Object.assign(locationButton.style, {
-          backgroundColor: "white",
-          color: "black",
-        });
-      });
-      locationButton.addEventListener("mouseleave", () => {
-        Object.assign(locationButton.style, {
-          backgroundColor: "dimgray",
-          color: "white",
-        });
-      });
+      const locationButton = document.getElementById("locationButton");
       map.controls[google.maps.ControlPosition.TOP_RIGHT].push(locationButton);
 
       // 現在地取得ボタンのクリックイベント
