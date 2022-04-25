@@ -26,7 +26,7 @@
       <div id="map" class="absolute w-full h-full top-0 left-0"></div>
       <input
         id="pac-input"
-        class="controls ignore-enterkey bg-white text-base font-light mt-2 ml-2 w-60 h-8 truncate focus:border-blue-500"
+        class="controls ignore-enterkey bg-white text-base font-light mt-2 ml-2 w-60 h-8 truncate focus:border-blue-500 text-center"
         type="text"
         placeholder="検索"
       />
@@ -45,7 +45,7 @@
           id="data-start-point-name"
           readonly="readonly"
           placeholder="マップから選択してください"
-          class="bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight min-w-250"
+          class="bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight min-w-250 text-center"
           :value="startPositionData.name"
         />
       </div>
@@ -56,7 +56,7 @@
           id="data-destination-name"
           readonly="readonly"
           placeholder="マップから選択してください"
-          class="bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight min-w-250"
+          class="bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight min-w-250 text-center"
           :value="destinationPositionData.name"
         />
       </div>

@@ -19,7 +19,7 @@
       <div id="map" class="absolute w-full h-full top-0 left-0"></div>
       <input
         id="pac-input"
-        class="controls ignore-enterkey bg-white text-base font-light mt-2 ml-2 w-60 h-8 truncate focus:border-blue-500"
+        class="controls ignore-enterkey bg-white text-base font-light mt-2 ml-2 w-60 h-8 truncate focus:border-blue-500 text-center"
         type="text"
         placeholder="検索"
       />
