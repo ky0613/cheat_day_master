@@ -5,7 +5,9 @@
   >
     <div class="p-3">
       <p class="text-4xl font-bold">ルート検索結果</p>
-      <p>1店舗では物足りないと思うので勝手に経由地を追加しておきました。</p>
+      <p>
+        1店舗では物足りないと思うので勝手に経由地を追加しておきました。(S:現在地、D:目的地、数字:経由順)
+      </p>
       <p>
         余談ですが，このルートを歩いたら{{ burnedCalories }}kcal消費します。
       </p>
@@ -112,12 +114,41 @@ export default {
       let rendererOptions = {
         map,
         draggable: true,
+        suppressMarkers: true,
       };
 
       let directionsService = new google.maps.DirectionsService();
       let directionsRenderer = new google.maps.DirectionsRenderer(
         rendererOptions
       );
+
+      new google.maps.Marker({
+        map,
+        title: self.startPositionData.name,
+        position: self.startPositionData.latLng,
+        label: "S",
+        animation: google.maps.Animation.DROP,
+      });
+
+      new google.maps.Marker({
+        map,
+        title: self.destinationPositionData.name,
+        position: self.destinationPositionData.latLng,
+        label: "D",
+        animation: google.maps.Animation.DROP,
+      });
+
+      let index = 0;
+      self.wayPointsData.forEach((waypoint) => {
+        index++;
+        new google.maps.Marker({
+          map,
+          title: waypoint.name,
+          position: waypoint.geometry.location,
+          label: `${index}`,
+          animation: google.maps.Animation.DROP,
+        });
+      });
 
       directionsRenderer.setMap(map);
 

@@ -3,15 +3,23 @@
     class="overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 w-full my-4"
   >
     <transition>
-      <div class="modalBox" id="startPoint" v-if="isStartModalShown">
-        <div class="modalInner">現在地点を設定しました</div>
+      <div
+        class="fixed w-4/5 max-w-md m-auto opacity-100 rounded-sm z-1000 h-0 top-0 bottom-0 left-0 right-0"
+        id="startPoint"
+        v-if="isStartModalShown"
+      >
+        <div
+          class="modalInner p-3 text-center box-border bg-black opacity-70 text-white"
+        >
+          現在地点を設定しました
+        </div>
       </div>
     </transition>
-    <div class="map_wrapper">
-      <div id="map" class="map"></div>
+    <div class="relative w-full pt-56.25">
+      <div id="map" class="absolute w-full h-full top-0 left-0"></div>
       <input
         id="pac-input"
-        class="controls ignore-enterkey"
+        class="controls ignore-enterkey bg-white text-base font-light mt-2 ml-2 w-60 h-8 truncate focus:border-blue-500 text-center"
         type="text"
         placeholder="検索"
       />
@@ -24,9 +32,15 @@
           id="data-start-point-name"
           readonly="readonly"
           placeholder="マップから選択してください"
-          class="bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight min-w"
+          class="bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight min-w-250"
           :value="currentPositionData.name"
         />
+        <button
+          id="locationButton"
+          class="bg-orange-500 rounded-md text-white overflow-hidden h-8 cursor-pointer mt-2 mr-2 hover:bg-orange-300 px-3 py-1 text-lg"
+        >
+          現在地を取得
+        </button>
       </div>
       <div class="container mx-auto text-center">
         <span
@@ -103,35 +117,7 @@ export default {
       let service = new google.maps.places.PlacesService(map);
 
       ////////////////// 現在地取得ボタン作成 //////////////////
-      const locationButton = document.createElement("button");
-      locationButton.textContent = "現在地を取得";
-      // 現在地ボタンのCSS
-      Object.assign(locationButton.style, {
-        appearance: "button",
-        backgroundColor: "dimgray",
-        border: "1px solid black",
-        borderRadius: "2px",
-        boxShadow: "0 1px 4px -1px rgb(0 0 0 / 30%)",
-        margin: "10px",
-        padding: "3px 11px 3px 13px",
-        font: "400 15px Roboto, Arial, sans-serif",
-        color: "white",
-        overflow: "hidden",
-        height: "30px",
-        cursor: "pointer",
-      });
-      locationButton.addEventListener("mouseover", () => {
-        Object.assign(locationButton.style, {
-          backgroundColor: "white",
-          color: "black",
-        });
-      });
-      locationButton.addEventListener("mouseleave", () => {
-        Object.assign(locationButton.style, {
-          backgroundColor: "dimgray",
-          color: "white",
-        });
-      });
+      const locationButton = document.getElementById("locationButton");
       map.controls[google.maps.ControlPosition.TOP_RIGHT].push(locationButton);
 
       // 現在地取得ボタンのクリックイベント
@@ -368,73 +354,6 @@ export default {
 </script>
 
 <style scoped>
-.map_wrapper {
-  position: relative;
-  width: 100%;
-  padding-top: 56.25%;
-}
-
-#map {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-}
-
-#pac-input {
-  background-color: #fff;
-  font-size: 15px;
-  font-weight: 300;
-  margin: 10px 0 0 10px;
-  padding: 3px 8px 3px 13px;
-  text-overflow: ellipsis;
-  width: 230px;
-  height: 30px;
-}
-
-#pac-input:focus {
-  border-color: #4d90fe;
-}
-
-.pac-controls {
-  display: inline-block;
-  padding: 5px 11px;
-}
-
-.pac-controls label {
-  font-family: Roboto;
-  font-size: 13px;
-  font-weight: 300;
-}
-
-.min-w {
-  min-width: 250px;
-}
-
-.modalBox {
-  position: fixed;
-  width: 85%;
-  max-width: 420px;
-  height: 0;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  margin: auto;
-  opacity: 1;
-  border-radius: 3px;
-  z-index: 1000;
-}
-
-.modalInner {
-  padding: 10px;
-  text-align: center;
-  box-sizing: border-box;
-  background: rgba(0, 0, 0, 0.7);
-  color: #fff;
-}
-
 .v-leave-active {
   transition: opacity 2s;
 }
