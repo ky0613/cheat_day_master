@@ -133,27 +133,7 @@ export default {
               name: "現在地情報を取得しました",
               latLng: pos,
             });
-
-            let radiusSearchRequest = {
-              location: pos,
-              radius: 3000,
-              types: ["meal_delivery"],
-            };
-
-            service.nearbySearch(
-              radiusSearchRequest,
-              function (results, status) {
-                if (status == google.maps.places.PlacesServiceStatus.OK) {
-                  results.map((result) => {
-                    const { photos } = result;
-                    if (photos && photos.length > 0)
-                      result.storePhoto = result.photos[0].getUrl();
-                    JSON.parse(JSON.stringify(result));
-                  });
-                  self.setDeliveryStores(results);
-                }
-              }
-            );
+            storeSearch(pos);
             self.isOpenSetStartModal();
           });
         } else {
@@ -246,30 +226,7 @@ export default {
                         name: place.name,
                         latLng: place.geometry.location,
                       });
-
-                      let radiusSearchRequest = {
-                        location: place.geometry.location,
-                        radius: 3000,
-                        types: ["meal_delivery"],
-                        maxPriceLevel: 2,
-                      };
-
-                      service.nearbySearch(
-                        radiusSearchRequest,
-                        function (results, status) {
-                          if (
-                            status == google.maps.places.PlacesServiceStatus.OK
-                          ) {
-                            results.map((result) => {
-                              const { photos } = result;
-                              if (photos && photos.length > 0)
-                                result.storePhoto = result.photos[0].getUrl();
-                              JSON.parse(JSON.stringify(result));
-                            });
-                            self.setDeliveryStores(results);
-                          }
-                        }
-                      );
+                      storeSearch(place.geometry.location);
                     });
                 });
               }
@@ -301,30 +258,30 @@ export default {
                   name: marker.title,
                   latLng: locationMarker,
                 });
-
-                let radiusSearchRequest = {
-                  location: locationMarker,
-                  radius: 3000,
-                  type: ["meal_delivery"],
-                  maxPriceLevel: 2,
-                };
-
-                service.nearbySearch(
-                  radiusSearchRequest,
-                  function (results, status) {
-                    if (status == google.maps.places.PlacesServiceStatus.OK) {
-                      results.map((result) => {
-                        const { photos } = result;
-                        if (photos && photos.length > 0)
-                          result.storePhoto = result.photos[0].getUrl();
-                        JSON.parse(JSON.stringify(result));
-                      });
-                      self.setDeliveryStores(results);
-                    }
-                  }
-                );
+                storeSearch(locationMarker);
               });
           });
+        });
+      }
+
+      function storeSearch(location) {
+        let radiusSearchRequest = {
+          location: location,
+          radius: 3000,
+          type: ["meal_delivery"],
+          maxPriceLevel: 2,
+        };
+
+        service.nearbySearch(radiusSearchRequest, function (results, status) {
+          if (status == google.maps.places.PlacesServiceStatus.OK) {
+            results.map((result) => {
+              const { photos } = result;
+              if (photos && photos.length > 0)
+                result.storePhoto = result.photos[0].getUrl();
+              JSON.parse(JSON.stringify(result));
+            });
+            self.setDeliveryStores(results);
+          }
         });
       }
     });

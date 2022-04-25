@@ -12,8 +12,8 @@
         余談ですが，このルートを歩いたら{{ burnedCalories }}kcal消費します。
       </p>
     </div>
-    <div class="map_wrapper object-cover w-full h-64">
-      <div id="map" class="map"></div>
+    <div class="relative w-full pt-56.25">
+      <div id="map" class="absolute w-full h-full top-0 left-0"></div>
     </div>
     <div class="p-3 mt-5">
       <p class="text-4xl font-bold">経由地の店舗情報</p>
@@ -122,33 +122,32 @@ export default {
         rendererOptions
       );
 
-      new google.maps.Marker({
-        map,
-        title: self.startPositionData.name,
-        position: self.startPositionData.latLng,
-        label: "S",
-        animation: google.maps.Animation.DROP,
-      });
-
-      new google.maps.Marker({
-        map,
-        title: self.destinationPositionData.name,
-        position: self.destinationPositionData.latLng,
-        label: "D",
-        animation: google.maps.Animation.DROP,
-      });
+      setMarker(
+        self.startPositionData.name,
+        self.startPositionData.latLng,
+        "S"
+      );
+      setMarker(
+        self.destinationPositionData.name,
+        self.destinationPositionData.latLng,
+        "D"
+      );
 
       let index = 0;
       self.wayPointsData.forEach((waypoint) => {
         index++;
+        setMarker(waypoint.name, waypoint.geometry.location, String(index));
+      });
+
+      function setMarker(title, location, label) {
         new google.maps.Marker({
           map,
-          title: waypoint.name,
-          position: waypoint.geometry.location,
-          label: `${index}`,
+          title: title,
+          position: location,
+          label: label,
           animation: google.maps.Animation.DROP,
         });
-      });
+      }
 
       directionsRenderer.setMap(map);
 
@@ -190,19 +189,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.map_wrapper {
-  position: relative;
-  width: 100%;
-  padding-top: 56.25%;
-}
-
-#map {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-}
-</style>

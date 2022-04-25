@@ -258,29 +258,7 @@ export default {
                         latLng: place.geometry.location,
                       });
 
-                      let radiusSearchRequest = {
-                        location: place.geometry.location,
-                        radius: 3000,
-                        type: ["food"],
-                        maxPriceLevel: 2,
-                      };
-
-                      service.nearbySearch(
-                        radiusSearchRequest,
-                        function (results, status) {
-                          if (
-                            status == google.maps.places.PlacesServiceStatus.OK
-                          ) {
-                            results.map((result) => {
-                              const { photos } = result;
-                              if (photos && photos.length > 0)
-                                result.storePhoto = result.photos[0].getUrl();
-                              JSON.parse(JSON.stringify(result));
-                            });
-                            self.setWayPointPositions(results);
-                          }
-                        }
-                      );
+                      storeSearch(place.geometry.location);
                     });
                 });
               }
@@ -321,29 +299,29 @@ export default {
                   latLng: locationMarker,
                 });
 
-                let radiusSearchRequest = {
-                  location: locationMarker,
-                  radius: 3000,
-                  type: ["food"],
-                  maxPriceLevel: 2,
-                };
-
-                service.nearbySearch(
-                  radiusSearchRequest,
-                  function (results, status) {
-                    if (status == google.maps.places.PlacesServiceStatus.OK) {
-                      results.map((result) => {
-                        const { photos } = result;
-                        if (photos && photos.length > 0)
-                          result.storePhoto = result.photos[0].getUrl();
-                        JSON.parse(JSON.stringify(result));
-                      });
-                      self.setWayPointPositions(results);
-                    }
-                  }
-                );
+                storeSearch(locationMarker);
               });
           });
+        });
+      }
+
+      function storeSearch(location) {
+        let radiusSearchRequest = {
+          location: location,
+          radius: 3000,
+          type: ["food"],
+          maxPriceLevel: 2,
+        };
+        service.nearbySearch(radiusSearchRequest, function (results, status) {
+          if (status == google.maps.places.PlacesServiceStatus.OK) {
+            results.map((result) => {
+              const { photos } = result;
+              if (photos && photos.length > 0)
+                result.storePhoto = result.photos[0].getUrl();
+              JSON.parse(JSON.stringify(result));
+            });
+            self.setWayPointPositions(results);
+          }
         });
       }
     });
