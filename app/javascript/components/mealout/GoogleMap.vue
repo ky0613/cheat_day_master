@@ -66,15 +66,23 @@
           v-if="isValidation && validateSwitch"
           >現在地または目的地に地点が登録されていません。</span
         >
-        <div class="flex justify-center">
-          <span @click.capture="clicked" class="p-2 mb-3">
+        <div class="flex flex-col justify-center mb-6 mt-6">
+          <span @click.capture="clicked">
             <router-link
               :to="{ name: 'MealOutResult' }"
-              class="rounded-full bg-blue-400 text-center p-2 mb-3"
+              class="rounded-full bg-orange-300 text-center p-2 mb-3"
             >
               ルートを検索する</router-link
             >
           </span>
+          <div class="mt-6">
+            <router-link
+              :to="{ name: 'TopIndex' }"
+              @click.native="resetState()"
+              class="rounded-full bg-orange-300 text-center p-2"
+              >ホームに戻る</router-link
+            >
+          </div>
         </div>
       </div>
     </form>
@@ -353,6 +361,11 @@ export default {
       if (this.isValidation) {
         e.preventDefault();
       }
+    },
+    resetState() {
+      this.$store.commit("googleMealOutStores/resetState");
+      this.$store.commit("googleMealHomeStores/resetState");
+      localStorage.removeItem("cheatDayMaster");
     },
   },
 };

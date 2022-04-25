@@ -19,7 +19,7 @@
       <div id="map" class="absolute w-full h-full top-0 left-0"></div>
       <input
         id="pac-input"
-        class="controls ignore-enterkey bg-white text-base font-light mt-2 ml-2 w-60 h-8 truncate focus:border-blue-500 text-center"
+        class="controls ignore-enterkey bg-white text-base font-light mt-2 ml-2 w-60 h-8 truncate border-blue-500 text-center"
         type="text"
         placeholder="検索"
       />
@@ -48,15 +48,23 @@
           v-if="isValidation && validateSwitch"
           >現在地に地点が登録されていません。</span
         >
-        <div class="flex justify-center">
-          <span @click.capture="clicked" class="p-2 mb-3">
+        <div class="flex flex-col justify-center mb-6 mt-6">
+          <span @click.capture="clicked">
             <router-link
               :to="{ name: 'MealHomeResult' }"
-              class="rounded-full bg-blue-400 p-2 mb-3 text-center"
+              class="rounded-full bg-orange-300 p-2 mb-3 text-center"
             >
               周辺を検索する</router-link
             >
           </span>
+          <div class="mt-6">
+            <router-link
+              :to="{ name: 'TopIndex' }"
+              @click.native="resetState()"
+              class="rounded-full bg-orange-300 text-center p-2"
+              >ホームに戻る</router-link
+            >
+          </div>
         </div>
       </div>
     </form>
@@ -87,7 +95,7 @@ export default {
   mounted() {
     const self = this;
     function infoWindowContent(name, address) {
-      let content =
+      const content =
         `<div>` +
         `<p>${name}</p>` +
         `<p>${address}</p>` +
@@ -305,6 +313,11 @@ export default {
       if (this.isValidation) {
         e.preventDefault();
       }
+    },
+    resetState() {
+      this.$store.commit("googleMealOutStores/resetState");
+      this.$store.commit("googleMealHomeStores/resetState");
+      localStorage.removeItem("cheatDayMaster");
     },
   },
 };
