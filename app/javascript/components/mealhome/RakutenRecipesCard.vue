@@ -10,14 +10,15 @@
         :src="recipe.foodImageUrl"
         alt="avatar"
       />
-      <div class="bg-blue-300 w-full">
+      <div class="w-full">
         <a
-          class="py-2 text-gray-700 dark:text-gray-400 text-sm hover:text-white hover:underline"
+          class="py-2 text-gray-700 dark:text-gray-400 text-sm hover:text-blue-400 hover:underline"
           :href="recipe.recipeUrl"
           target="_blank"
         >
           {{ recipe.recipeTitle }}
         </a>
+        <hr />
       </div>
       <div class="p-2 flex flex-col">
         <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
