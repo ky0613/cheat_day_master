@@ -19,10 +19,16 @@
       <div id="map" class="absolute w-full h-full top-0 left-0"></div>
       <input
         id="pac-input"
-        class="controls ignore-enterkey bg-white text-base font-light mt-2 ml-2 w-60 h-8 truncate border-blue-500 text-center"
+        class="controls ignore-enterkey bg-white text-base font-light mt-2 ml-2 w-60 h-8 truncate focus:border-blue-500 text-center"
         type="text"
         placeholder="検索"
       />
+      <button
+        id="locationButton"
+        class="bg-orange-500 rounded-md text-white overflow-hidden h-8 cursor-pointer mt-2 mr-2 hover:bg-orange-300 px-3 py-1 text-lg"
+      >
+        現在地を取得
+      </button>
     </div>
     <form class="w-full mt-3">
       <div class="flex items-center mb-6 mx-auto justify-center">
@@ -35,12 +41,6 @@
           class="bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight min-w-250"
           :value="currentPositionData.name"
         />
-        <button
-          id="locationButton"
-          class="bg-orange-500 rounded-md text-white overflow-hidden h-8 cursor-pointer mt-2 mr-2 hover:bg-orange-300 px-3 py-1 text-lg"
-        >
-          現在地を取得
-        </button>
       </div>
       <div class="container mx-auto text-center">
         <span
@@ -48,16 +48,16 @@
           v-if="isValidation && validateSwitch"
           >現在地に地点が登録されていません。</span
         >
-        <div class="flex flex-col justify-center mb-6 mt-6">
-          <span @click.capture="clicked">
+        <div class="flex flex-col mb-6 mt-6">
+          <div @click.capture="clicked" class="w-fit mx-auto">
             <router-link
               :to="{ name: 'MealHomeResult' }"
-              class="rounded-full bg-orange-300 p-2 mb-3 text-center"
+              class="rounded-full bg-orange-300 p-2 mb-3 text-center max-w-lg"
             >
               周辺を検索する</router-link
             >
-          </span>
-          <div class="mt-6">
+          </div>
+          <div class="mt-6 w-fit mx-auto">
             <router-link
               :to="{ name: 'TopIndex' }"
               @click.native="resetState()"

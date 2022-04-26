@@ -66,15 +66,15 @@
           v-if="isValidation && validateSwitch"
           >現在地または目的地に地点が登録されていません。</span
         >
-        <div class="flex flex-col justify-center mb-6 mt-6">
-          <span @click.capture="clicked">
+        <div class="flex flex-col mb-6 mt-6">
+          <div @click.capture="clicked" class="w-fit mx-auto">
             <router-link
               :to="{ name: 'MealOutResult' }"
               class="rounded-full bg-orange-300 text-center p-2 mb-3"
             >
               ルートを検索する</router-link
             >
-          </span>
+          </div>
           <div class="mt-6">
             <router-link
               :to="{ name: 'TopIndex' }"
@@ -265,7 +265,6 @@ export default {
                         name: place.name,
                         latLng: place.geometry.location,
                       });
-
                       storeSearch(place.geometry.location);
                     });
                 });
@@ -306,7 +305,6 @@ export default {
                   name: marker.title,
                   latLng: locationMarker,
                 });
-
                 storeSearch(locationMarker);
               });
           });
