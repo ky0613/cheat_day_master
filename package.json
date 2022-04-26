@@ -2,6 +2,7 @@
   "name": "cheat-day-master",
   "private": true,
   "dependencies": {
+    "@fullhuman/postcss-purgecss": "3",
     "@googlemaps/js-api-loader": "^1.13.9",
     "@rails/actioncable": "^6.0.0",
     "@rails/activestorage": "^6.0.0",
