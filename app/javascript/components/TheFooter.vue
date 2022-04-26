@@ -8,8 +8,8 @@
         <router-link :to="{ name: 'Policy' }"
           ><li class="text-xs">プライバシーポリシー</li></router-link
         >
-        <router-link :to="{ name: 'Contact' }"
-          ><li class="text-xs">お問い合わせ</li></router-link
+        <a href="https://twitter.com/engineer_newbie" target="_blank"
+          ><li class="text-xs">開発者Twitter(お問い合わせ)</li></a
         >
       </ul>
       <small>Copyright &copy; 2022. チートデイマスター</small>
