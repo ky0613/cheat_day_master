@@ -5,21 +5,22 @@
         <div
           class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
         >
-          <div class="bg-blue-300 w-full">
+          <div class="w-full">
             <a
-              class="text-sm text-gray-700 dark:text-gray-400 line-clamp-3 hover:text-white hover:underline"
+              class="text-sm text-gray-700 dark:text-gray-400 line-clamp-3 hover:text-blue-400 hover:underline"
               :href="item.itemUrl"
               target="_blank"
             >
               {{ item.itemName }}
             </a>
+            <hr />
           </div>
           <div class="p-2 flex">
             <img class="mx-1" :src="item.mediumImageUrls[0].imageUrl" />
             <div
               class="flex flex-col mt-4 text-gray-700 dark:text-gray-200 justify-right"
             >
-              <div class="flex">
+              <div class="flex mb-3">
                 <img src="../../../../public/money.svg" class="w-5 h-5" />
                 <p class="px-2 text-base font-semibold">
                   {{ item.itemPrice }}円

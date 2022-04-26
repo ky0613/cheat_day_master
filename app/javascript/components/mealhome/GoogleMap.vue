@@ -23,6 +23,12 @@
         type="text"
         placeholder="検索"
       />
+      <button
+        id="locationButton"
+        class="bg-orange-500 rounded-md text-white overflow-hidden h-8 cursor-pointer mt-2 mr-2 hover:bg-orange-300 px-3 py-1 text-lg"
+      >
+        現在地を取得
+      </button>
     </div>
     <form class="w-full mt-3">
       <div class="flex items-center mb-6 mx-auto justify-center">
@@ -35,12 +41,6 @@
           class="bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight min-w-250"
           :value="currentPositionData.name"
         />
-        <button
-          id="locationButton"
-          class="bg-orange-500 rounded-md text-white overflow-hidden h-8 cursor-pointer mt-2 mr-2 hover:bg-orange-300 px-3 py-1 text-lg"
-        >
-          現在地を取得
-        </button>
       </div>
       <div class="container mx-auto text-center">
         <span
@@ -48,15 +48,23 @@
           v-if="isValidation && validateSwitch"
           >現在地に地点が登録されていません。</span
         >
-        <div class="flex justify-center">
-          <span @click.capture="clicked" class="p-2 mb-3">
+        <div class="flex flex-col mb-6 mt-6">
+          <div @click.capture="clicked" class="w-fit mx-auto">
             <router-link
               :to="{ name: 'MealHomeResult' }"
-              class="rounded-full bg-blue-400 p-2 mb-3 text-center"
+              class="rounded-full bg-orange-300 p-2 mb-3 text-center max-w-lg"
             >
               周辺を検索する</router-link
             >
-          </span>
+          </div>
+          <div class="mt-6 w-fit mx-auto">
+            <router-link
+              :to="{ name: 'TopIndex' }"
+              @click.native="resetState()"
+              class="rounded-full bg-orange-300 text-center p-2"
+              >ホームに戻る</router-link
+            >
+          </div>
         </div>
       </div>
     </form>
@@ -87,7 +95,7 @@ export default {
   mounted() {
     const self = this;
     function infoWindowContent(name, address) {
-      let content =
+      const content =
         `<div>` +
         `<p>${name}</p>` +
         `<p>${address}</p>` +
@@ -305,6 +313,11 @@ export default {
       if (this.isValidation) {
         e.preventDefault();
       }
+    },
+    resetState() {
+      this.$store.commit("googleMealOutStores/resetState");
+      this.$store.commit("googleMealHomeStores/resetState");
+      localStorage.removeItem("cheatDayMaster");
     },
   },
 };
