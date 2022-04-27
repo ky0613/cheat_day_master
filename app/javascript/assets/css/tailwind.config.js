@@ -1,5 +1,11 @@
 module.exports = {
-  purge: ["./javascript/assets/style/*.{vue,js,ts,jsx,tsx}"],
+  content: [
+    "./app/views/**/*.erb",
+    "./app/javascript/app.vue",
+    "./app/javascript/packs.vue",
+    "./app/javascript/**/*.vue",
+    "./app/javascript/*.vue",
+  ],
   darkMode: false, // or 'media' or 'class'
   theme: {
     extend: {
@@ -24,14 +30,14 @@ module.exports = {
         "3/4": "75%",
       },
       minWidth: {
-        "250": "250px"
+        250: "250px",
       },
       zIndex: {
-        "1000": 1000,
+        1000: 1000,
       },
       padding: {
-        "56.25": "56.25%"
-      }
+        56.25: "56.25%",
+      },
     },
   },
   variants: {
