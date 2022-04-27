@@ -1,5 +1,6 @@
 import Vue from "vue";
 import Router from "vue-router";
+import store from "../store";
 
 import TopIndex from "../pages/top/index.vue";
 import MealOut from "../pages/meal/MealOut.vue";
@@ -13,9 +14,14 @@ import RegisterIndex from "../pages/register/index.vue";
 
 Vue.use(Router);
 
-export default new Router({
+const router = new Router({
   mode: "history",
   routes: [
+    {
+      path: "/",
+      name: "TopIndex",
+      component: TopIndex,
+    },
     {
       path: "/login",
       name: "LoginIndex",
@@ -25,11 +31,6 @@ export default new Router({
       path: "/register",
       name: "RegisterIndex",
       component: RegisterIndex,
-    },
-    {
-      path: "/",
-      name: "TopIndex",
-      component: TopIndex,
     },
     {
       path: "/meal-out",
@@ -64,12 +65,14 @@ export default new Router({
   ],
 });
 
-// Router.beforeEach((to, from, next) => {
-//   store.dispatch("users/fetchAuthUser").then((authUser) => {
-//     if (to.matched.some((record) => record.meta.requiredAuth) && !authUser) {
-//       next({ name: "LoginIndex" });
-//     } else {
-//       next();
-//     }
-//   });
-// });
+router.beforeEach((to, from, next) => {
+  store.dispatch("fetchAuthUser").then((authUser) => {
+    if (to.matched.some((record) => record.meta.requiredAuth) && !authUser) {
+      next({ name: "LoginIndex" });
+    } else {
+      next();
+    }
+  });
+});
+
+export default router;

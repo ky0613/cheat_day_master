@@ -9,7 +9,7 @@ const getters = {
 };
 
 const actions = {
-  async loginUser({ commit }) {
+  async loginUser({ commit }, user) {
     const sessionsResponse = await axios.post("sessions", user);
     localStorage.auth_token = sessionsResponse.data.token;
     axios.defaults.headers.common[
@@ -48,4 +48,11 @@ const mutations = {
   setUser: (state, user) => {
     state.authUser = user;
   },
+};
+
+export default {
+  state,
+  getters,
+  actions,
+  mutations,
 };
