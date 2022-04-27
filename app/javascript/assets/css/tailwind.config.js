@@ -1,8 +1,10 @@
 module.exports = {
-  purge: [
-    "./javascript/*.{vue,js,ts,jsx,tsx}",
-    "./javascript/**/*.{vue,js,ts,jsx,tsx}",
-    "./javascript/**/**/*.{vue,js,ts,jsx,tsx}",
+  content: [
+    "./app/views/**/*.erb",
+    "./app/javascript/app.vue",
+    "./app/javascript/packs.vue",
+    "./app/javascript/**/*.vue",
+    "./app/javascript/*.vue",
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
