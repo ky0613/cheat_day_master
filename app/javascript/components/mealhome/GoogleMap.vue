@@ -19,7 +19,7 @@
       <div id="map" class="absolute w-full h-full top-0 left-0"></div>
       <input
         id="pac-input"
-        class="controls ignore-enterkey bg-white text-base font-light mt-2 ml-2 w-60 h-8 truncate focus:border-blue-500 text-center"
+        class="text-base font-light mt-2 ml-2 w-60 h-8 truncate focus:border-blue-500 text-center rounded border-2 border-black"
         type="text"
         placeholder="検索"
       />
@@ -136,6 +136,11 @@ export default {
               lat: position.coords.latitude,
               lng: position.coords.longitude,
             };
+            new google.maps.Marker({
+              map,
+              position: pos, // 緯度軽度
+              animation: google.maps.Animation.BOUNCE,
+            });
             map.setCenter(pos);
             self.setCurrentPosition({
               name: "現在地情報を取得しました",
