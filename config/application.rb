@@ -14,6 +14,7 @@ module CheatDayMaster
     config.api_only = true
 
     config.paths.add 'lib', eager_load: true
+    config.middleware.use ActionDispatch::Flash
 
     config.generators do |g|
       g.template_engine false

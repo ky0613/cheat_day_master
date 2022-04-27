@@ -5,7 +5,6 @@ class Api::SessionsController < ApplicationController
 
     if user
       token = user.create_tokens
-
       render json: {token: token}
     else
       head :unauthorized
