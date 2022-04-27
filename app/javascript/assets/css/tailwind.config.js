@@ -1,10 +1,10 @@
 module.exports = {
   purge: [
     "./javascript/assets/style/*.{vue,js,ts,jsx,tsx}",
-    "./javascript/**/*.{vue,js,ts,jsx,tsx}",
-    "./javascript/**/**/*.{vue,js,ts,jsx,tsx}",
-    "../../../views/home/index.html.erb",
-    "../../../views/layouts/application.html.erb",
+    "../../pages/**/*.{vue,js,ts,jsx,tsx}",
+    "../../component/**/*.{vue,js,ts,jsx,tsx}",
+    "../../component/*.{vue,js,ts,jsx,tsx}",
+    "./javascript/app.vue",
   ],
   darkMode: false, // or 'media' or 'class'
   theme: {
