@@ -9,6 +9,7 @@ import yelpStores from "./modules/yelpStores";
 import googleMealOutStores from "./modules/googleMealOutStores";
 import googleMealHomeStores from "./modules/googleMealHomeStores";
 import digressions from "./modules/descriptions";
+import users from "./modules/users";
 
 Vue.use(Vuex);
 
@@ -21,6 +22,7 @@ export default new Vuex.Store({
     googleMealOutStores,
     googleMealHomeStores,
     digressions,
+    users,
   },
   plugins: [
     createPersistedState({
