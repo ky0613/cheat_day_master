@@ -8,12 +8,24 @@ import MealOutResult from "../pages/result/MealOutResult.vue";
 import MealHomeResult from "../pages/result/MealHomeResult.vue";
 import Terms from "../pages/static/Terms.vue";
 import Policy from "../pages/static/Policy.vue";
+import LoginIndex from "../pages/login/index.vue";
+import RegisterIndex from "../pages/register/index.vue";
 
 Vue.use(Router);
 
 export default new Router({
   mode: "history",
   routes: [
+    {
+      path: "/login",
+      name: "LoginIndex",
+      component: LoginIndex,
+    },
+    {
+      path: "/register",
+      name: "RegisterIndex",
+      component: RegisterIndex,
+    },
     {
       path: "/",
       name: "TopIndex",
@@ -51,3 +63,13 @@ export default new Router({
     },
   ],
 });
+
+// Router.beforeEach((to, from, next) => {
+//   store.dispatch("users/fetchAuthUser").then((authUser) => {
+//     if (to.matched.some((record) => record.meta.requiredAuth) && !authUser) {
+//       next({ name: "LoginIndex" });
+//     } else {
+//       next();
+//     }
+//   });
+// });
