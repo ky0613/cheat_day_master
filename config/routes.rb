@@ -7,6 +7,12 @@ Rails.application.routes.draw do
     resources :hot_pepper_stores, only: %i(index)
     resources :yelp_stores, only: %i(index)
     resources :digressions, only: %i(index)
+    resources :sessions
+    resources :users do
+      collection do
+        get 'me'
+      end
+    end
   end
   get '*path', to: 'home#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
