@@ -24,13 +24,15 @@
         </nav>
       </template>
       <template v-else>
-        <router-link
-          :to="{ name: 'TopIndex' }"
-          class="text-white text-lg"
-          @click.native="handleLogout"
-        >
-          ログアウト
-        </router-link>
+        <nav class="pr-4 py-2">
+          <router-link
+            :to="{ name: 'TopIndex' }"
+            class="text-white text-lg"
+            @click.native="handleLogout"
+          >
+            ログアウト
+          </router-link>
+        </nav>
       </template>
     </div>
   </header>
@@ -48,7 +50,7 @@ export default {
     async handleLogout() {
       try {
         await this.logoutUser();
-        this.$route.push({ name: 'TopIndex' });
+        this.$route.push({ name: "TopIndex" });
       } catch (error) {
         console.log(error);
       }
