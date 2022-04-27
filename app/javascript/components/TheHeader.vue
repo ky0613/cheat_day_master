@@ -7,24 +7,52 @@
         class="inline-block"
         ><img src="../../../public/logo.png" alt="logo" class="max-w-xs h-auto"
       /></router-link>
-      <nav class="pr-4 py-2">
+      <template v-if="!authUser">
+        <nav class="pr-4 py-2">
+          <router-link
+            :to="{ name: 'LoginIndex' }"
+            class="text-white mr-2 text-lg"
+          >
+            ログイン
+          </router-link>
+          <router-link
+            :to="{ name: 'RegisterIndex' }"
+            class="text-white text-lg"
+          >
+            新規登録
+          </router-link>
+        </nav>
+      </template>
+      <template v-else>
         <router-link
-          :to="{ name: 'LoginIndex' }"
-          class="text-white mr-2 text-lg"
+          :to="{ name: 'TopIndex' }"
+          class="text-white text-lg"
+          @click.native="handleLogout"
         >
-          ログイン
+          ログアウト
         </router-link>
-        <router-link :to="{ name: 'RegisterIndex' }" class="text-white text-lg">
-          新規登録
-        </router-link>
-      </nav>
+      </template>
     </div>
   </header>
 </template>
 
 <script>
+import { mapGetters, mapActions } from "vuex";
+
 export default {
+  computed: {
+    ...mapGetters(["authUser"]),
+  },
   methods: {
+    ...mapActions(["logoutUser"]),
+    async handleLogout() {
+      try {
+        await this.logoutUser();
+        this.$route.push({ name: 'TopIndex' });
+      } catch (error) {
+        console.log(error);
+      }
+    },
     resetState() {
       this.$store.commit("googleMealOutStores/resetState");
       this.$store.commit("googleMealHomeStores/resetState");

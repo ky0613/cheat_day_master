@@ -6,7 +6,7 @@
       >
         ログイン
       </h2>
-      <form class="max-w-lg border rounded-lg mx-auto bg-white">
+      <div class="max-w-lg border rounded-lg mx-auto bg-white">
         <div class="flex flex-col gap-4 p-4 md:p-8">
           <div>
             <label
@@ -17,6 +17,10 @@
             <input
               name="email"
               class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
+              placeholder="test@example.com"
+              autocomplete="email"
+              type="email"
+              v-model="user.email"
             />
           </div>
           <div>
@@ -28,10 +32,16 @@
             <input
               name="password"
               class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
+              type="password"
+              placeholder="password"
+              autocomplete="new-password"
+              v-model="user.password"
             />
           </div>
           <button
+            type="submit"
             class="block bg-gray-800 hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
+            @click="login"
           >
             ログインする
           </button>
@@ -46,13 +56,34 @@
             </p>
           </div>
         </div>
-      </form>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "LoginIndex",
+  data() {
+    return {
+      user: {
+        email: "",
+        password: "",
+      },
+    };
+  },
+  methods: {
+    ...mapActions(["loginUser", "fetchUser"]),
+    async login() {
+      try {
+        await this.loginUser(this.user);
+        this.$router.push({ name: "TopIndex" });
+      } catch (error) {
+        console.log(error);
+      }
+    },
+  },
 };
 </script>
