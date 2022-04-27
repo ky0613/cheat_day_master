@@ -8,7 +8,6 @@ import MealOutResult from "../pages/result/MealOutResult.vue";
 import MealHomeResult from "../pages/result/MealHomeResult.vue";
 import Terms from "../pages/static/Terms.vue";
 import Policy from "../pages/static/Policy.vue";
-import Contact from "../pages/static/Contact.vue";
 
 Vue.use(Router);
 
@@ -49,11 +48,6 @@ export default new Router({
       path: "/policy",
       name: "Policy",
       component: Policy,
-    },
-    {
-      path: "/contact",
-      name: "Contact",
-      component: Contact,
     },
   ],
 });
