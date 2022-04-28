@@ -9,8 +9,10 @@ const getters = {
 };
 
 const actions = {
-  async fetchRecipes({ commit }) {
-    const response = await axios.get("/rakuten_recipes");
+  async fetchRecipes({ commit }, recipeCategory) {
+    const response = await axios.get("/rakuten_recipes", {
+      params: { category_id: String(recipeCategory) },
+    });
     commit("setRecipes", response.data.result);
   },
 };

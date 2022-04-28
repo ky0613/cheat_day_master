@@ -7,6 +7,9 @@ Rails.application.routes.draw do
     resources :hot_pepper_stores, only: %i(index)
     resources :yelp_stores, only: %i(index)
     resources :digressions, only: %i(index)
+    resources :genres, only: %i(index)
+    resources :categories, only: %i(index)
+
     resources :sessions
     resources :users do
       collection do

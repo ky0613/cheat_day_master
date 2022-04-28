@@ -11,12 +11,17 @@ const getters = {
 };
 
 const actions = {
-  async fetchItems({ commit }) {
-    const response = await axios.get("/rakuten_items");
+  async fetchItems({ commit }, foodGenre) {
+    const response = await axios.get("rakuten_items", {
+      params: { food_genre_id: String(foodGenre) },
+    });
+    console.log(String(foodGenre));
     commit("setItems", response.data.Items);
   },
-  async fetchSweets({ commit }) {
-    const response = await axios.get("/rakuten_sweets");
+  async fetchSweets({ commit }, sweetGenre) {
+    const response = await axios.get("rakuten_sweets", {
+      params: { sweet_genre_id: String(sweetGenre) },
+    });
     commit("setSweets", response.data.Items);
   },
 };

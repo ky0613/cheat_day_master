@@ -59,9 +59,9 @@ export default {
     ...mapGetters("googleMealHomeStores", ["deliveryStoresData"]),
   },
   created() {
-    this.fetchItems();
-    this.fetchRecipes();
-    this.fetchSweets();
+    this.fetchItems(this.$route.params.foodGenre);
+    this.fetchSweets(this.$route.params.sweetGenre);
+    this.fetchRecipes(this.$route.params.recipeCategory);
     this.fetchDescriptions();
   },
   methods: {

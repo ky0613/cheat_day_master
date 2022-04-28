@@ -10,6 +10,8 @@ import googleMealOutStores from "./modules/googleMealOutStores";
 import googleMealHomeStores from "./modules/googleMealHomeStores";
 import digressions from "./modules/descriptions";
 import users from "./modules/users";
+import categories from "./modules/categories";
+import genres from "./modules/genres";
 
 Vue.use(Vuex);
 
@@ -23,6 +25,8 @@ export default new Vuex.Store({
     googleMealHomeStores,
     digressions,
     users,
+    categories,
+    genres,
   },
   plugins: [
     createPersistedState({

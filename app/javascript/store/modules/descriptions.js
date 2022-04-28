@@ -10,7 +10,7 @@ const getters = {
 
 const actions = {
   fetchDescriptions: async ({ commit }) => {
-    const response = await axios.get("/digressions");
+    const response = await axios.get("digressions");
     let descriptions = [];
     response.data.forEach((item) => {
       descriptions.push(item.description);
