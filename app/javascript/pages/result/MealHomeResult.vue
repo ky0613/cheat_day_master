@@ -45,6 +45,14 @@
       <p v-if="allDescriptions">余談ですが，{{ allDescriptions[3] }}</p>
     </div>
     <RakutenRecipesCard :recipes="allRecipes" />
+    <div class="my-6 w-full text-center">
+      <router-link
+        :to="{ name: 'TopIndex' }"
+        @click.native="resetState()"
+        class="rounded-full bg-orange-300 text-center py-2 px-9"
+        >ホームに戻る</router-link
+      >
+    </div>
   </div>
 </template>
 
@@ -78,6 +86,11 @@ export default {
       "fetchSweets",
       "fetchDescriptions",
     ]),
+    resetState() {
+      this.$store.commit("googleMealOutStores/resetState");
+      this.$store.commit("googleMealHomeStores/resetState");
+      localStorage.removeItem("cheatDayMaster");
+    },
   },
 };
 </script>

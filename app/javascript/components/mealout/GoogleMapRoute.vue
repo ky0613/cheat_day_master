@@ -71,6 +71,14 @@
     <p class="text-6xl font-bold text-center my-24" v-else>
       ごめんなさい，<br />お店が見つかりません。
     </p>
+    <div class="my-6 w-full text-center">
+      <router-link
+        :to="{ name: 'TopIndex' }"
+        @click.native="resetState()"
+        class="rounded-full bg-orange-300 text-center py-2 px-9"
+        >ホームに戻る</router-link
+      >
+    </div>
   </div>
 </template>
 
@@ -206,6 +214,11 @@ export default {
   },
   methods: {
     ...mapActions(["fetchStores", "fetchYelpStores", "fetchDescriptions"]),
+    resetState() {
+      this.$store.commit("googleMealOutStores/resetState");
+      this.$store.commit("googleMealHomeStores/resetState");
+      localStorage.removeItem("cheatDayMaster");
+    },
   },
 };
 </script>
