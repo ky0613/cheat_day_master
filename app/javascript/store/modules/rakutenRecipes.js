@@ -19,7 +19,7 @@ const actions = {
 
 const mutations = {
   setRecipes: (state, recipes) => (state.recipes = recipes),
-  resetState: (state) => {
+  resetRecipesState: (state) => {
     state.recipes = [];
   },
 };

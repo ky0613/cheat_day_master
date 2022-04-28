@@ -31,7 +31,12 @@ export default new Vuex.Store({
   plugins: [
     createPersistedState({
       key: "cheatDayMaster",
-      paths: ["googleMealOutStores", "googleMealHomeStores"],
+      paths: [
+        "googleMealOutStores",
+        "googleMealHomeStores",
+        "rakutenItems",
+        "rakutenRecipes",
+      ],
     }),
   ],
 });

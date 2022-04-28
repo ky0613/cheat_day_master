@@ -35,7 +35,7 @@ const mutations = {
     state.sweets = [];
     sweets.forEach((sweet) => state.sweets.push(sweet.Item));
   },
-  resetState: (state) => {
+  resetRakutenState: (state) => {
     state.items = [];
     state.sweets = [];
   },
