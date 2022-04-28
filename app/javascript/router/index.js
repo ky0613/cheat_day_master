@@ -51,6 +51,7 @@ const router = new Router({
       path: "/meal-home/result",
       name: "MealHomeResult",
       component: MealHomeResult,
+      props: true,
     },
     {
       path: "/terms",
