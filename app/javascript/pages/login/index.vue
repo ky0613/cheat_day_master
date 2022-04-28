@@ -79,7 +79,7 @@ import { mapActions } from "vuex";
 import { extend, ValidationProvider, ValidationObserver } from "vee-validate";
 import { required, email } from "vee-validate/dist/rules";
 
-required.message = "必須項目です";
+required.message = "必須項目です。入力してください。";
 email.message = "メールの形式ではありません";
 
 extend("required", required);
