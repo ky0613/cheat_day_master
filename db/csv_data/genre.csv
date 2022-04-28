@@ -1,4 +1,4 @@
-id,genre_id,genre_name,type
+id,genre_id,genre_name,genre_type
 1,110472,米・雑穀,food
 2,100236,魚介類・水産加工品,food
 3,100228,精肉・肉加工品,food
