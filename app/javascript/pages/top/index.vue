@@ -7,11 +7,17 @@
     </div>
     <div class="flex">
       <div class="flex flex-col justify-center">
+        <div>
+          <p class="text-2xl font-extrabold text-black mb-20">
+            仕事に勉強に疲れているそこのあなた。<br />
+            1日ぐらい，食べ物のことだけを考えませんか？
+          </p>
+        </div>
         <div class="flex items-center mb-10">
           <img src="Best_place.svg" class="max-w-1/2 h-auto mb-10 mr-10" />
           <router-link
             :to="{ name: 'MealOut' }"
-            class="rounded-lg bg-orange-500 p-2 text-center hover:bg-orange-300 text-white text-xl"
+            class="rounded-lg bg-orange-500 p-2 text-center hover:bg-orange-300 text-white text-xl font-bold"
             id="sans"
             >外食でチートデイ</router-link
           >
@@ -20,7 +26,7 @@
           <img src="at_home.svg" class="max-w-1/2 h-auto mb-10 mr-10" />
           <router-link
             :to="{ name: 'MealHome' }"
-            class="rounded-lg bg-orange-500 p-2 text-center hover:bg-orange-300 text-white text-xl"
+            class="rounded-lg bg-orange-500 p-2 text-center hover:bg-orange-300 text-white text-xl font-bold"
             id="sans"
             >自宅でチートデイ</router-link
           >
@@ -43,5 +49,15 @@ export default {
 .permanent {
   font-family: "Permanent Marker", cursive;
   font-size: 80px;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Yomogi&display=swap");
+
+p {
+  font-family: "Yomogi", cursive;
+}
+
+#sans {
+  font-family: "Yomogi", cursive;
 }
 </style>

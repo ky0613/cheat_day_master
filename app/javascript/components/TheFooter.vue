@@ -16,3 +16,12 @@
     </div>
   </footer>
 </template>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Yomogi&display=swap");
+
+li,
+small {
+  font-family: "Yomogi", cursive;
+}
+</style>

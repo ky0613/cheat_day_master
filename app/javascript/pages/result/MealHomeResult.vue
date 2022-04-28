@@ -10,7 +10,14 @@
       <p>安心して食事を楽しんでください。</p>
       <p v-if="allDescriptions">余談ですが，{{ allDescriptions[0] }}</p>
     </div>
-    <StoreDataCard :stores="deliveryStoresData" :perPage="3" />
+    <StoreDataCard
+      v-if="deliveryStoresData.length !== 0"
+      :stores="deliveryStoresData"
+      :perPage="3"
+    />
+    <p class="text-6xl font-bold text-center my-24" v-else>
+      ごめんなさい，<br />お店が見つかりません
+    </p>
     <div class="p-3 mt-2">
       <p class="text-4xl font-bold">楽天市場ランキングの食品情報</p>
       <p>
@@ -76,9 +83,9 @@ export default {
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css?family=M+PLUS+1p");
+@import url("https://fonts.googleapis.com/css2?family=Yomogi&display=swap");
 
 p {
-  font-family: "M PLUS 1p";
+  font-family: "Yomogi", cursive;
 }
 </style>
