@@ -109,7 +109,6 @@ export default {
       "recommendStoresData",
     ]),
     ...mapGetters([
-      "allItems",
       "allStores",
       "allYelpStores",
       "allDescriptions",

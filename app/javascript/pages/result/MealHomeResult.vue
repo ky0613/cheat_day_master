@@ -74,21 +74,15 @@ export default {
     ...mapGetters("googleMealHomeStores", ["deliveryStoresData"]),
   },
   created() {
-    this.fetchItems(this.$route.params.foodGenre);
-    this.fetchSweets(this.$route.params.sweetGenre);
-    this.fetchRecipes(this.$route.params.recipeCategory);
     this.fetchDescriptions();
   },
   methods: {
-    ...mapActions([
-      "fetchItems",
-      "fetchRecipes",
-      "fetchSweets",
-      "fetchDescriptions",
-    ]),
+    ...mapActions(["fetchDescriptions"]),
     resetState() {
       this.$store.commit("googleMealOutStores/resetState");
       this.$store.commit("googleMealHomeStores/resetState");
+      this.$store.commit("resetRakutenState");
+      this.$store.commit("resetRecipesState");
       localStorage.removeItem("cheatDayMaster");
     },
   },

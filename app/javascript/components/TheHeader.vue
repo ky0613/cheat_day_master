@@ -61,6 +61,8 @@ export default {
     resetState() {
       this.$store.commit("googleMealOutStores/resetState");
       this.$store.commit("googleMealHomeStores/resetState");
+      this.$store.commit("resetRakutenState");
+      this.$store.commit("resetRecipesState");
       localStorage.removeItem("cheatDayMaster");
     },
   },
