@@ -6,13 +6,12 @@ class RakutenApiClient
 
   def initialize
     @token = Rails.application.credentials.rakuten[:token]
-    @genre_id = Rails.application.credentials.rakuten[:genre_id]
   end
 
-  def get_items
+  def get_items(genre)
     params = URI.encode_www_form({
       format: "json",
-      genreId: @genre_id,
+      genreId: genre,
       applicationId: @token,
     })
     uri = URI.parse("#{ITEMS_GET_URI}#{params}")
@@ -20,21 +19,21 @@ class RakutenApiClient
     JSON.parse(response.body)
   end
 
-  def get_recipes
+  def get_recipes(category)
     params = URI.encode_www_form({
       format: "json",
+      categoryId: category,
       applicationId: @token,
-      categoryId: "30",
     })
     uri = URI.parse("#{RECIPES_GET_URI}#{params}")
     response = http_client(uri)
     JSON.parse(response.body)
   end
 
-  def get_sweets
+  def get_sweets(genre)
     params = URI.encode_www_form({
       format: "json",
-      genreId: "551167",
+      genreId: genre,
       applicationId: @token,
     })
     uri = URI.parse("#{ITEMS_GET_URI}#{params}")
@@ -47,16 +46,16 @@ class RakutenApiClient
       RakutenApiClient.new
     end
 
-    def get_items
-      client.get_items
+    def get_items(genre)
+      client.get_items(genre)
     end
 
-    def get_recipes
-      client.get_recipes
+    def get_recipes(category)
+      client.get_recipes(category)
     end
 
-    def get_sweets
-      client.get_sweets
+    def get_sweets(genre)
+      client.get_sweets(genre)
     end
   end
 
