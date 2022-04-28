@@ -142,7 +142,7 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
-      // apiKey: process.env.API_KEY,
+      apiKey: process.env.API_KEY,
       isStartModalShown: false,
       validateSwitch: false,
       foodGenre: 100227,
