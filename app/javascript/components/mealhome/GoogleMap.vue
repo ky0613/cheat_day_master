@@ -48,10 +48,74 @@
           v-if="isValidation && validateSwitch"
           >現在地に地点が登録されていません。</span
         >
+        <template v-if="authUser" class="inline-block relative w-64">
+          <ul>
+            <li class="flex my-2 items-center justify-center">
+              <label for="genre" class="mr-3 text-gray-500 font-bold w-40"
+                >食品ジャンル</label
+              >
+              <select
+                name="genre"
+                v-model="foodGenre"
+                class="block w-80 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+              >
+                <option
+                  v-for="Genre in foodGenres"
+                  :key="Genre.id"
+                  :value="Genre.genre_id"
+                  class="text-center"
+                >
+                  {{ Genre.genre_name }}
+                </option>
+              </select>
+            </li>
+            <li class="flex my-2 items-center justify-center">
+              <label for="genre" class="mr-3 text-gray-500 font-bold w-40"
+                >スイーツジャンル</label
+              >
+              <select
+                name="genre"
+                v-model="sweetGenre"
+                class="block w-80 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+              >
+                <option
+                  v-for="Genre in sweetGenres"
+                  :key="Genre.id"
+                  :value="Genre.genre_id"
+                  class="text-center"
+                >
+                  {{ Genre.genre_name }}
+                </option>
+              </select>
+            </li>
+            <li class="flex my-2 items-center justify-center">
+              <label for="genre" class="mr-3 text-gray-500 font-bold w-40"
+                >レシピカテゴリー</label
+              >
+              <select
+                name="genre"
+                v-model="recipeCategory"
+                class="block w-80 border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+              >
+                <option
+                  v-for="category in categories"
+                  :key="category.id"
+                  :value="category.category_id"
+                  class="text-center"
+                >
+                  {{ category.category_name }}
+                </option>
+              </select>
+            </li>
+          </ul>
+        </template>
         <div class="flex flex-col mb-6 mt-6">
           <div @click.capture="clicked" class="w-fit mx-auto">
             <router-link
-              :to="{ name: 'MealHomeResult' }"
+              :to="{
+                name: 'MealHomeResult',
+                params: { foodGenre, sweetGenre, recipeCategory },
+              }"
               class="rounded-full bg-orange-300 p-2 mb-3 text-center max-w-lg"
             >
               周辺を検索する</router-link
@@ -78,9 +142,12 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
-      apiKey: process.env.API_KEY,
+      // apiKey: process.env.API_KEY,
       isStartModalShown: false,
       validateSwitch: false,
+      foodGenre: 100227,
+      sweetGenre: 551167,
+      recipeCategory: 30,
     };
   },
   computed: {
@@ -88,6 +155,7 @@ export default {
       "currentPositionData",
       "deliveryStoresData",
     ]),
+    ...mapGetters(["categories", "foodGenres", "sweetGenres", "authUser"]),
     isValidation() {
       return Object.keys(this.currentPositionData).length === 0;
     },
@@ -301,12 +369,15 @@ export default {
   },
   created() {
     window.isOpenSetStartModal = this.isOpenSetStartModal;
+    this.fetchGenres();
+    this.fetchCategories();
   },
   methods: {
     ...mapActions("googleMealHomeStores", [
       "setCurrentPosition",
       "setDeliveryStores",
     ]),
+    ...mapActions(["fetchGenres", "fetchCategories"]),
     isOpenSetStartModal() {
       this.isStartModalShown = true;
       setTimeout(() => {
