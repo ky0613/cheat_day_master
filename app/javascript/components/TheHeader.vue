@@ -12,12 +12,14 @@
           <router-link
             :to="{ name: 'LoginIndex' }"
             class="text-white mr-2 text-lg"
+            id="nav-font"
           >
             ログイン
           </router-link>
           <router-link
             :to="{ name: 'RegisterIndex' }"
             class="text-white text-lg"
+            id="nav-font"
           >
             新規登録
           </router-link>
@@ -28,6 +30,7 @@
           <router-link
             :to="{ name: 'TopIndex' }"
             class="text-white text-lg"
+            id="nav-font"
             @click.native="handleLogout"
           >
             ログアウト
@@ -58,6 +61,8 @@ export default {
     resetState() {
       this.$store.commit("googleMealOutStores/resetState");
       this.$store.commit("googleMealHomeStores/resetState");
+      this.$store.commit("resetRakutenState");
+      this.$store.commit("resetRecipesState");
       localStorage.removeItem("cheatDayMaster");
     },
   },
@@ -67,5 +72,11 @@ export default {
 <style scoped>
 #header {
   background: rgb(6, 17, 60, 0.7);
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Yomogi&display=swap");
+
+#nav-font {
+  font-family: "Yomogi", cursive;
 }
 </style>

@@ -10,13 +10,20 @@
       <p>安心して食事を楽しんでください。</p>
       <p v-if="allDescriptions">余談ですが，{{ allDescriptions[0] }}</p>
     </div>
-    <StoreDataCard :stores="deliveryStoresData" :perPage="3" />
+    <StoreDataCard
+      v-if="deliveryStoresData.length !== 0"
+      :stores="deliveryStoresData"
+      :perPage="3"
+    />
+    <p class="text-6xl font-bold text-center my-24" v-else>
+      ごめんなさい，<br />お店が見つかりません。
+    </p>
     <div class="p-3 mt-2">
       <p class="text-4xl font-bold">楽天市場ランキングの食品情報</p>
       <p>
         ランキングが高いとみんなに支持されているということなのでカロリーが分散します。<br />そのため，こちらの食品から摂取したカロリーは0kcalです。
       </p>
-      <p>安心してお取り寄せください</p>
+      <p>安心してお取り寄せください。</p>
       <p v-if="allDescriptions">余談ですが，{{ allDescriptions[1] }}</p>
     </div>
     <RakutenDataCard :items="allItems" />
@@ -25,7 +32,7 @@
       <p>
         ん〜，何故かはよく分かりませんが甘いので，こちらのスイーツから摂取したカロリーは0kcalです。
       </p>
-      <p>安心してお取り寄せください</p>
+      <p>安心してお取り寄せください。</p>
       <p v-if="allDescriptions">余談ですが，{{ allDescriptions[2] }}</p>
     </div>
     <RakutenDataCard :items="allSweets" />
@@ -38,6 +45,14 @@
       <p v-if="allDescriptions">余談ですが，{{ allDescriptions[3] }}</p>
     </div>
     <RakutenRecipesCard :recipes="allRecipes" />
+    <div class="my-6 w-full text-center">
+      <router-link
+        :to="{ name: 'TopIndex' }"
+        @click.native="resetState()"
+        class="rounded-full bg-orange-300 text-center py-2 px-9"
+        >ホームに戻る</router-link
+      >
+    </div>
   </div>
 </template>
 
@@ -59,26 +74,25 @@ export default {
     ...mapGetters("googleMealHomeStores", ["deliveryStoresData"]),
   },
   created() {
-    this.fetchItems(this.$route.params.foodGenre);
-    this.fetchSweets(this.$route.params.sweetGenre);
-    this.fetchRecipes(this.$route.params.recipeCategory);
     this.fetchDescriptions();
   },
   methods: {
-    ...mapActions([
-      "fetchItems",
-      "fetchRecipes",
-      "fetchSweets",
-      "fetchDescriptions",
-    ]),
+    ...mapActions(["fetchDescriptions"]),
+    resetState() {
+      this.$store.commit("googleMealOutStores/resetState");
+      this.$store.commit("googleMealHomeStores/resetState");
+      this.$store.commit("resetRakutenState");
+      this.$store.commit("resetRecipesState");
+      localStorage.removeItem("cheatDayMaster");
+    },
   },
 };
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css?family=M+PLUS+1p");
+@import url("https://fonts.googleapis.com/css2?family=Yomogi&display=swap");
 
 p {
-  font-family: "M PLUS 1p";
+  font-family: "Yomogi", cursive;
 }
 </style>

@@ -9,7 +9,7 @@
       <div class="max-w-lg border rounded-lg mx-auto bg-white">
         <ValidationObserver v-slot="ObserverProps">
           <div class="flex flex-col gap-4 p-4 md:p-8">
-            <ValidationProvider rules="required|email">
+            <ValidationProvider rules="required|email" mode="lazy">
               <div slot-scope="ProviderProps">
                 <label
                   for="email"
@@ -29,7 +29,7 @@
                 }}</span>
               </div>
             </ValidationProvider>
-            <ValidationProvider rules="required">
+            <ValidationProvider rules="required" mode="lazy">
               <div slot-scope="ProviderProps">
                 <label
                   for="password"
@@ -79,7 +79,7 @@ import { mapActions } from "vuex";
 import { extend, ValidationProvider, ValidationObserver } from "vee-validate";
 import { required, email } from "vee-validate/dist/rules";
 
-required.message = "必須項目です";
+required.message = "必須項目です。入力してください。";
 email.message = "メールの形式ではありません";
 
 extend("required", required);

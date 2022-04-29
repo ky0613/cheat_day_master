@@ -23,7 +23,14 @@
       <p>安心してお立ち寄りください。</p>
       <p v-if="this.allDescriptions">余談ですが，{{ allDescriptions[0] }}</p>
     </div>
-    <StoreDataCard :stores="wayPointsData" :perPage="3" />
+    <StoreDataCard
+      v-if="wayPointsData.length !== 0"
+      :stores="wayPointsData"
+      :perPage="3"
+    />
+    <p class="text-6xl font-bold text-center my-24" v-else>
+      ごめんなさい，<br />お店が見つかりません。
+    </p>
     <div class="p-3 mt-2">
       <p class="text-4xl font-bold">経由地以外の店舗情報</p>
       <p>
@@ -32,25 +39,46 @@
       <p>安心して食事をお楽しみください。</p>
       <p v-if="this.allDescriptions">余談ですが，{{ allDescriptions[1] }}</p>
     </div>
-    <StoreDataCard :stores="recommendStoresData" :perPage="3" />
+    <StoreDataCard
+      v-if="recommendStoresData.length !== 0"
+      :stores="recommendStoresData"
+      :perPage="3"
+    />
+    <p class="text-6xl font-bold text-center my-24" v-else>
+      ごめんなさい，<br />お店が見つかりません。
+    </p>
     <div class="p-3 mt-2">
-      <p class="text-4xl font-bold">ホットペッパーグルメから取得した店舗情報</p>
+      <p class="text-4xl font-bold">ホットペッパーグルメの店舗情報</p>
       <p>
         ホットもペッパーも辛そうなので，こちらのお店で摂取したカロリーは0kcalです。
       </p>
       <p>安心して食事をお楽しみください。</p>
       <p v-if="this.allDescriptions">余談ですが，{{ allDescriptions[2] }}</p>
     </div>
-    <HotPepperGourmandStores :stores="allStores" />
+    <HotPepperGourmandStores
+      v-if="allStores.length !== 0"
+      :stores="allStores"
+    />
     <div class="p-3 mt-2">
-      <p class="text-4xl font-bold">Yelpから取得した店舗情報</p>
+      <p class="text-4xl font-bold">Yelpの店舗情報</p>
       <p>
         海外のサイトから取得したので「calorie」はありますが「カロリー」はないと思われます。<br />こちらのお店で摂取したカロリーは0kcalです。
       </p>
       <p>安心して食事をお楽しみください。</p>
       <p v-if="this.allDescriptions">余談ですが，{{ allDescriptions[3] }}</p>
     </div>
-    <YelpStoreData :stores="allYelpStores" />
+    <YelpStoreData v-if="allYelpStores.length !== 0" :stores="allYelpStores" />
+    <p class="text-6xl font-bold text-center my-24" v-else>
+      ごめんなさい，<br />お店が見つかりません。
+    </p>
+    <div class="my-6 w-full text-center">
+      <router-link
+        :to="{ name: 'TopIndex' }"
+        @click.native="resetState()"
+        class="rounded-full bg-orange-300 text-center py-2 px-9"
+        >ホームに戻る</router-link
+      >
+    </div>
   </div>
 </template>
 
@@ -81,7 +109,6 @@ export default {
       "recommendStoresData",
     ]),
     ...mapGetters([
-      "allItems",
       "allStores",
       "allYelpStores",
       "allDescriptions",
@@ -186,14 +213,19 @@ export default {
   },
   methods: {
     ...mapActions(["fetchStores", "fetchYelpStores", "fetchDescriptions"]),
+    resetState() {
+      this.$store.commit("googleMealOutStores/resetState");
+      this.$store.commit("googleMealHomeStores/resetState");
+      localStorage.removeItem("cheatDayMaster");
+    },
   },
 };
 </script>
 
 <style scoped>
-@import url("https://fonts.googleapis.com/css?family=M+PLUS+1p");
+@import url("https://fonts.googleapis.com/css2?family=Yomogi&display=swap");
 
 p {
-  font-family: "M PLUS 1p";
+  font-family: "Yomogi", cursive;
 }
 </style>

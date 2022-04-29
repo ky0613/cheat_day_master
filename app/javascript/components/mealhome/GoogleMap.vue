@@ -112,11 +112,9 @@
         <div class="flex flex-col mb-6 mt-6">
           <div @click.capture="clicked" class="w-fit mx-auto">
             <router-link
-              :to="{
-                name: 'MealHomeResult',
-                params: { foodGenre, sweetGenre, recipeCategory },
-              }"
+              :to="{ name: 'MealHomeResult' }"
               class="rounded-full bg-orange-300 p-2 mb-3 text-center max-w-lg"
+              @click.native="setRakuten()"
             >
               周辺を検索する</router-link
             >
@@ -142,7 +140,7 @@ import { mapGetters, mapActions } from "vuex";
 export default {
   data() {
     return {
-      // apiKey: process.env.API_KEY,
+      apiKey: process.env.API_KEY,
       isStartModalShown: false,
       validateSwitch: false,
       foodGenre: 100227,
@@ -377,7 +375,13 @@ export default {
       "setCurrentPosition",
       "setDeliveryStores",
     ]),
-    ...mapActions(["fetchGenres", "fetchCategories"]),
+    ...mapActions([
+      "fetchGenres",
+      "fetchCategories",
+      "fetchItems",
+      "fetchRecipes",
+      "fetchSweets",
+    ]),
     isOpenSetStartModal() {
       this.isStartModalShown = true;
       setTimeout(() => {
@@ -394,6 +398,11 @@ export default {
       this.$store.commit("googleMealOutStores/resetState");
       this.$store.commit("googleMealHomeStores/resetState");
       localStorage.removeItem("cheatDayMaster");
+    },
+    setRakuten() {
+      this.fetchItems(this.foodGenre);
+      this.fetchSweets(this.sweetGenre);
+      this.fetchRecipes(this.recipeCategory);
     },
   },
 };
