@@ -45,13 +45,12 @@ export default {
 
 <style scoped>
 @import url("https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Yomogi&display=swap");
 
 .permanent {
   font-family: "Permanent Marker", cursive;
   font-size: 80px;
 }
-
-@import url("https://fonts.googleapis.com/css2?family=Yomogi&display=swap");
 
 p {
   font-family: "Yomogi", cursive;
