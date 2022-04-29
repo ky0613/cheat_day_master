@@ -1,7 +1,11 @@
 <template>
   <div>
     <Carousel :perPage="this.perPage" :paginationPadding="4">
-      <Slide v-for="store of stores" :key="store.place_id" class="px-2 my-3">
+      <Slide
+        v-for="(store, index) of stores"
+        :key="store.place_id"
+        class="px-2 my-3"
+      >
         <div
           class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
         >
@@ -16,6 +20,9 @@
             />
           </a>
           <div class="p-2">
+            <div v-if="wayPoint" class="text-l font-semibold text-center">
+              経由地 {{ index + 1 }}店舗目
+            </div>
             <div
               class="flex items-center mt-4 text-gray-700 dark:text-gray-200 h-10"
             >
@@ -69,6 +76,10 @@ export default {
     },
     stores: {
       type: Array,
+    },
+    wayPoint: {
+      type: Boolean,
+      default: false,
     },
   },
 };
