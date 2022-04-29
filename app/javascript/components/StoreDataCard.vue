@@ -5,11 +5,16 @@
         <div
           class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
         >
-          <img
-            class="object-cover object-center w-full h-56"
-            :src="store.storePhoto"
-            alt="avatar"
-          />
+          <a
+            :href="`https://maps.google.co.jp/maps?q=place_id:${store.place_id}`"
+            target="_blank"
+          >
+            <img
+              class="object-cover object-center w-full h-56"
+              :src="store.storePhoto"
+              alt="avatar"
+            />
+          </a>
           <div class="p-2">
             <div
               class="flex items-center mt-4 text-gray-700 dark:text-gray-200 h-10"
