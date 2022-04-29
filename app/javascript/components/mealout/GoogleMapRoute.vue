@@ -24,6 +24,7 @@
       <p v-if="this.allDescriptions">余談ですが，{{ allDescriptions[0] }}</p>
     </div>
     <StoreDataCard
+      :wayPoint="true"
       v-if="wayPointsData.length !== 0"
       :stores="wayPointsData"
       :perPage="3"
@@ -108,11 +109,7 @@ export default {
       "wayPointsData",
       "recommendStoresData",
     ]),
-    ...mapGetters([
-      "allStores",
-      "allYelpStores",
-      "allDescriptions",
-    ]),
+    ...mapGetters(["allStores", "allYelpStores", "allDescriptions"]),
     burnedCalories() {
       return Math.trunc(1.05 * 3.5 * (this.durationTime / 3600) * 60);
     },
