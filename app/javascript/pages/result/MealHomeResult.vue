@@ -16,14 +16,14 @@
       :perPage="3"
     />
     <p class="text-6xl font-bold text-center my-24" v-else>
-      ごめんなさい，<br />お店が見つかりません
+      ごめんなさい，<br />お店が見つかりません。
     </p>
     <div class="p-3 mt-2">
       <p class="text-4xl font-bold">楽天市場ランキングの食品情報</p>
       <p>
         ランキングが高いとみんなに支持されているということなのでカロリーが分散します。<br />そのため，こちらの食品から摂取したカロリーは0kcalです。
       </p>
-      <p>安心してお取り寄せください</p>
+      <p>安心してお取り寄せください。</p>
       <p v-if="allDescriptions">余談ですが，{{ allDescriptions[1] }}</p>
     </div>
     <RakutenDataCard :items="allItems" />
@@ -32,7 +32,7 @@
       <p>
         ん〜，何故かはよく分かりませんが甘いので，こちらのスイーツから摂取したカロリーは0kcalです。
       </p>
-      <p>安心してお取り寄せください</p>
+      <p>安心してお取り寄せください。</p>
       <p v-if="allDescriptions">余談ですが，{{ allDescriptions[2] }}</p>
     </div>
     <RakutenDataCard :items="allSweets" />

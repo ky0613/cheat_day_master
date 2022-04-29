@@ -15,7 +15,6 @@ const actions = {
     const response = await axios.get("rakuten_items", {
       params: { food_genre_id: String(foodGenre) },
     });
-    console.log(String(foodGenre));
     commit("setItems", response.data.Items);
   },
   async fetchSweets({ commit }, sweetGenre) {
