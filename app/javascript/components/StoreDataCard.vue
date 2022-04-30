@@ -21,7 +21,7 @@
           </a>
           <div class="p-2">
             <div v-if="wayPoint" class="text-l font-semibold text-center">
-              経由地 {{ index + 1 }}店舗目
+              {{ index + 1 }}店舗目
             </div>
             <div
               class="flex items-center mt-4 text-gray-700 dark:text-gray-200 h-10"
