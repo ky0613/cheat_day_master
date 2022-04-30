@@ -22,7 +22,9 @@ const actions = {
 };
 
 const mutations = {
-  setYelpStores: (state, stores) => Object.assign(state.stores, stores),
+  setYelpStores: (state, stores) => {
+    state.stores = stores;
+  },
 };
 
 export default {
