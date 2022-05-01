@@ -1,6 +1,8 @@
 <template>
   <div>
-    <div v-show="isLoading">Loading...</div>
+    <div v-show="isLoading">
+      <LoadingPackmanPage />
+    </div>
     <div
       v-show="!isLoading"
       class="overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 w-full my-4"
@@ -141,8 +143,12 @@
 <script>
 import { Loader } from "@googlemaps/js-api-loader";
 import { mapGetters, mapActions } from "vuex";
+import LoadingPackmanPage from "../LoadingPacmanPage.vue";
 
 export default {
+  components: {
+    LoadingPackmanPage,
+  },
   data() {
     return {
       apiKey: process.env.API_KEY,

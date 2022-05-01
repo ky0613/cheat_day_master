@@ -1,5 +1,5 @@
 <template>
-  <div id="app" v-cloak>
+  <div id="app">
     <body class="flex flex-col min-h-screen">
       <TheHeader />
       <main class="flex flex-1">

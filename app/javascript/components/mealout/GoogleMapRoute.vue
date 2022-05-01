@@ -1,7 +1,6 @@
 <template>
   <div
     class="overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 my-4 w-full"
-    v-cloak
   >
     <div class="p-3">
       <p class="text-4xl font-bold">ルート検索結果</p>
@@ -101,10 +100,10 @@
 
 <script>
 import { Loader } from "@googlemaps/js-api-loader";
+import { mapGetters, mapActions } from "vuex";
 import StoreDataCard from "../StoreDataCard.vue";
 import HotPepperGourmandStores from "./HotPepperGourmandStores.vue";
 import YelpStoreData from "./YelpStoreDataCard.vue";
-import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
