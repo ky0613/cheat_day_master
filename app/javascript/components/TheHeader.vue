@@ -70,11 +70,11 @@ export default {
 </script>
 
 <style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Yomogi&display=swap");
+
 #header {
   background: rgb(6, 17, 60, 0.7);
 }
-
-@import url("https://fonts.googleapis.com/css2?family=Yomogi&display=swap");
 
 #nav-font {
   font-family: "Yomogi", cursive;

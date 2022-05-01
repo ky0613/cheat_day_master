@@ -1,143 +1,154 @@
 <template>
-  <div
-    class="overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 w-full my-4"
-  >
-    <transition>
-      <div
-        class="fixed w-4/5 max-w-md m-auto opacity-100 rounded-sm z-1000 h-0 top-0 bottom-0 left-0 right-0"
-        id="startPoint"
-        v-if="isStartModalShown"
-      >
-        <div
-          class="modalInner p-3 text-center box-border bg-black opacity-70 text-white"
-        >
-          現在地点を設定しました
-        </div>
-      </div>
-    </transition>
-    <div class="relative w-full pt-56.25">
-      <div id="map" class="absolute w-full h-full top-0 left-0"></div>
-      <input
-        id="pac-input"
-        class="text-base font-light mt-2 ml-2 w-60 h-8 truncate focus:border-blue-500 text-center rounded border-2 border-black"
-        type="text"
-        placeholder="検索"
-      />
-      <button
-        id="locationButton"
-        class="bg-orange-500 rounded-md text-white overflow-hidden h-8 cursor-pointer mt-2 mr-2 hover:bg-orange-300 px-3 py-1 text-lg"
-      >
-        現在地を取得
-      </button>
+  <div>
+    <div v-show="isLoading">
+      <LoadingPackmanPage />
     </div>
-    <form class="w-full mt-3">
-      <div class="flex items-center mb-6 mx-auto justify-center">
-        <label class="text-gray-500 font-bold pr-4"> 現在地 </label>
-        <input
-          type="text"
-          id="data-start-point-name"
-          readonly="readonly"
-          placeholder="マップから選択してください"
-          class="bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight min-w-250"
-          :value="currentPositionData.name"
-        />
-      </div>
-      <div class="container mx-auto text-center">
-        <span
-          class="text-base text-red-500 justify-center"
-          v-if="isValidation && validateSwitch"
-          >現在地に地点が登録されていません。</span
+    <div
+      v-show="!isLoading"
+      class="overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 w-full my-4"
+    >
+      <transition>
+        <div
+          class="fixed w-4/5 max-w-md m-auto opacity-100 rounded-sm z-1000 h-0 top-0 bottom-0 left-0 right-0"
+          id="startPoint"
+          v-if="isStartModalShown"
         >
-        <template v-if="authUser" class="inline-block relative w-64">
-          <ul>
-            <li class="flex my-2 items-center justify-center">
-              <label for="genre" class="mr-3 text-gray-500 font-bold w-40"
-                >食品ジャンル</label
-              >
-              <select
-                name="genre"
-                v-model="foodGenre"
-                class="block w-80 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-              >
-                <option
-                  v-for="Genre in foodGenres"
-                  :key="Genre.id"
-                  :value="Genre.genre_id"
-                  class="text-center"
-                >
-                  {{ Genre.genre_name }}
-                </option>
-              </select>
-            </li>
-            <li class="flex my-2 items-center justify-center">
-              <label for="genre" class="mr-3 text-gray-500 font-bold w-40"
-                >スイーツジャンル</label
-              >
-              <select
-                name="genre"
-                v-model="sweetGenre"
-                class="block w-80 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-              >
-                <option
-                  v-for="Genre in sweetGenres"
-                  :key="Genre.id"
-                  :value="Genre.genre_id"
-                  class="text-center"
-                >
-                  {{ Genre.genre_name }}
-                </option>
-              </select>
-            </li>
-            <li class="flex my-2 items-center justify-center">
-              <label for="genre" class="mr-3 text-gray-500 font-bold w-40"
-                >レシピカテゴリー</label
-              >
-              <select
-                name="genre"
-                v-model="recipeCategory"
-                class="block w-80 border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-              >
-                <option
-                  v-for="category in categories"
-                  :key="category.id"
-                  :value="category.category_id"
-                  class="text-center"
-                >
-                  {{ category.category_name }}
-                </option>
-              </select>
-            </li>
-          </ul>
-        </template>
-        <div class="flex flex-col mb-6 mt-6">
-          <div @click.capture="clicked" class="w-fit mx-auto">
-            <router-link
-              :to="{ name: 'MealHomeResult' }"
-              class="rounded-full bg-orange-300 p-2 mb-3 text-center max-w-lg"
-              @click.native="setRakuten()"
-            >
-              周辺を検索する</router-link
-            >
-          </div>
-          <div class="mt-6 w-fit mx-auto">
-            <router-link
-              :to="{ name: 'TopIndex' }"
-              @click.native="resetState()"
-              class="rounded-full bg-orange-300 text-center p-2"
-              >ホームに戻る</router-link
-            >
+          <div
+            class="modalInner p-3 text-center box-border bg-black opacity-70 text-white"
+          >
+            現在地点を設定しました
           </div>
         </div>
+      </transition>
+      <div class="relative w-full pt-56.25">
+        <div id="map" class="absolute w-full h-full top-0 left-0"></div>
+        <input
+          id="pac-input"
+          class="text-base font-light mt-2 ml-2 w-60 h-8 truncate focus:border-blue-500 text-center rounded border-2 border-black"
+          type="text"
+          placeholder="検索"
+        />
+        <button
+          id="locationButton"
+          class="bg-orange-500 rounded-md text-white overflow-hidden h-8 cursor-pointer mt-2 mr-2 hover:bg-orange-300 px-3 py-1 text-lg"
+        >
+          現在地を取得
+        </button>
       </div>
-    </form>
+      <form class="w-full mt-3">
+        <div class="flex items-center mb-6 mx-auto justify-center">
+          <label class="text-gray-500 font-bold pr-4"> 現在地 </label>
+          <input
+            type="text"
+            id="data-start-point-name"
+            readonly="readonly"
+            placeholder="マップから選択してください"
+            class="bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight min-w-250"
+            :value="currentPositionData.name"
+          />
+        </div>
+        <div class="container mx-auto text-center">
+          <span
+            class="text-base text-red-500 justify-center"
+            v-if="isValidation && validateSwitch"
+            >現在地に地点が登録されていません。</span
+          >
+          <template v-if="authUser" class="inline-block relative w-64">
+            <ul>
+              <li class="flex my-2 items-center justify-center">
+                <label for="genre" class="mr-3 text-gray-500 font-bold w-40"
+                  >食品ジャンル</label
+                >
+                <select
+                  name="genre"
+                  v-model="foodGenre"
+                  class="block w-80 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                >
+                  <option
+                    v-for="Genre in foodGenres"
+                    :key="Genre.id"
+                    :value="Genre.genre_id"
+                    class="text-center"
+                  >
+                    {{ Genre.genre_name }}
+                  </option>
+                </select>
+              </li>
+              <li class="flex my-2 items-center justify-center">
+                <label for="genre" class="mr-3 text-gray-500 font-bold w-40"
+                  >スイーツジャンル</label
+                >
+                <select
+                  name="genre"
+                  v-model="sweetGenre"
+                  class="block w-80 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                >
+                  <option
+                    v-for="Genre in sweetGenres"
+                    :key="Genre.id"
+                    :value="Genre.genre_id"
+                    class="text-center"
+                  >
+                    {{ Genre.genre_name }}
+                  </option>
+                </select>
+              </li>
+              <li class="flex my-2 items-center justify-center">
+                <label for="genre" class="mr-3 text-gray-500 font-bold w-40"
+                  >レシピカテゴリー</label
+                >
+                <select
+                  name="genre"
+                  v-model="recipeCategory"
+                  class="block w-80 border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+                >
+                  <option
+                    v-for="category in categories"
+                    :key="category.id"
+                    :value="category.category_id"
+                    class="text-center"
+                  >
+                    {{ category.category_name }}
+                  </option>
+                </select>
+              </li>
+            </ul>
+          </template>
+          <div class="flex flex-col mb-6 mt-6">
+            <div @click.capture="clicked" class="w-fit mx-auto">
+              <button
+                type="button"
+                id="getRoute"
+                class="cursor-pointer rounded-full bg-orange-300 p-2 mb-3 text-center max-w-lg"
+                @click="setRakuten()"
+              >
+                周辺を検索する
+              </button>
+            </div>
+            <div class="mt-6 w-fit mx-auto">
+              <router-link
+                :to="{ name: 'TopIndex' }"
+                @click.native="resetState()"
+                class="rounded-full bg-orange-300 text-center p-2"
+                >ホームに戻る</router-link
+              >
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
   </div>
 </template>
 
 <script>
 import { Loader } from "@googlemaps/js-api-loader";
 import { mapGetters, mapActions } from "vuex";
+import LoadingPackmanPage from "../LoadingPacmanPage.vue";
 
 export default {
+  components: {
+    LoadingPackmanPage,
+  },
   data() {
     return {
       apiKey: process.env.API_KEY,
@@ -146,13 +157,11 @@ export default {
       foodGenre: 100227,
       sweetGenre: 551167,
       recipeCategory: 30,
+      isLoading: false,
     };
   },
   computed: {
-    ...mapGetters("googleMealHomeStores", [
-      "currentPositionData",
-      "deliveryStoresData",
-    ]),
+    ...mapGetters("googleMealHomeStores", ["currentPositionData"]),
     ...mapGetters(["categories", "foodGenres", "sweetGenres", "authUser"]),
     isValidation() {
       return Object.keys(this.currentPositionData).length === 0;
@@ -212,7 +221,6 @@ export default {
               name: "現在地情報を取得しました",
               latLng: pos,
             });
-            storeSearch(pos);
             self.isOpenSetStartModal();
           });
         } else {
@@ -305,7 +313,6 @@ export default {
                         name: place.name,
                         latLng: place.geometry.location,
                       });
-                      storeSearch(place.geometry.location);
                     });
                 });
               }
@@ -337,15 +344,22 @@ export default {
                   name: marker.title,
                   latLng: locationMarker,
                 });
-                storeSearch(locationMarker);
               });
           });
         });
       }
+      document.getElementById("getRoute").addEventListener("click", () => {
+        self.clicked();
+        storeSearch();
+        setTimeout(() => {
+          self.isLoading = false;
+          self.$router.push({ name: "MealHomeResult" });
+        }, 700);
+      });
 
-      function storeSearch(location) {
+      function storeSearch() {
         let radiusSearchRequest = {
-          location: location,
+          location: self.currentPositionData.latLng,
           radius: 3000,
           type: ["meal_delivery"],
           maxPriceLevel: 2,
@@ -388,10 +402,9 @@ export default {
         this.isStartModalShown = false;
       }, 100);
     },
-    clicked(e) {
-      this.validateSwitch = true;
+    clicked(event) {
       if (this.isValidation) {
-        e.preventDefault();
+        event.preventDefault();
       }
     },
     resetState() {
@@ -399,10 +412,15 @@ export default {
       this.$store.commit("googleMealHomeStores/resetState");
       localStorage.removeItem("cheatDayMaster");
     },
-    setRakuten() {
+    setRakuten(event) {
+      if (this.isValidation) {
+        this.validateSwitch = true;
+        event.preventDefault();
+      }
       this.fetchItems(this.foodGenre);
       this.fetchSweets(this.sweetGenre);
       this.fetchRecipes(this.recipeCategory);
+      this.isLoading = true;
     },
   },
 };

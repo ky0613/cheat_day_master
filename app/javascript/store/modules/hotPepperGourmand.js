@@ -30,7 +30,9 @@ const actions = {
 };
 
 const mutations = {
-  setStores: (state, stores) => (state.stores = shuffle(stores)),
+  setStores: (state, stores) => {
+    Object.assign(state.stores, shuffle(stores));
+  },
 };
 
 export default {

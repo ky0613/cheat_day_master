@@ -1,7 +1,6 @@
 <template>
   <div
     class="overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 my-4 w-full"
-    v-cloak
   >
     <div class="p-3">
       <p class="text-4xl font-bold">ルート検索結果</p>
@@ -18,10 +17,14 @@
     <div class="p-3 mt-5">
       <p class="text-4xl font-bold">経由地の店舗情報</p>
       <p>
-        経由地に追加されなければ食べない可能性があったのでこちらのお店で摂取したカロリーは0kcalです。
+        経由地に追加されなければ食べない可能性があったので、こちらのお店で摂取したカロリーは<span
+          class="text-3xl font-bold"
+          >0kcal</span
+        >です。
       </p>
-      <p>安心してお立ち寄りください。</p>
-      <p v-if="this.allDescriptions">余談ですが，{{ allDescriptions[0] }}</p>
+      <p v-if="this.allDescriptions" class="text-2xl font-bold">
+        余談ですが，{{ allDescriptions[0] }}
+      </p>
     </div>
     <StoreDataCard
       :wayPoint="true"
@@ -35,10 +38,14 @@
     <div class="p-3 mt-2">
       <p class="text-4xl font-bold">経由地以外の店舗情報</p>
       <p>
-        評価によって店舗情報を並び替えたタイミングでカロリーが抜け落ちてしまったので，<br />こちらのお店で摂取したカロリーは0kcalです。
+        経由地以上に行かない可能性があったので、こちらのお店で摂取したカロリーは<span
+          class="text-3xl font-bold"
+          >0kcal</span
+        >です。むしろマイナスです。
       </p>
-      <p>安心して食事をお楽しみください。</p>
-      <p v-if="this.allDescriptions">余談ですが，{{ allDescriptions[1] }}</p>
+      <p v-if="this.allDescriptions" class="text-2xl font-bold">
+        余談ですが，{{ allDescriptions[1] }}
+      </p>
     </div>
     <StoreDataCard
       v-if="recommendStoresData.length !== 0"
@@ -51,22 +58,30 @@
     <div class="p-3 mt-2">
       <p class="text-4xl font-bold">ホットペッパーグルメの店舗情報</p>
       <p>
-        ホットもペッパーも辛そうなので，こちらのお店で摂取したカロリーは0kcalです。
+        ホットもペッパーも辛そうなので，こちらのお店で摂取したカロリーは<span
+          class="text-3xl font-bold"
+          >0kcal</span
+        >です。
       </p>
-      <p>安心して食事をお楽しみください。</p>
-      <p v-if="this.allDescriptions">余談ですが，{{ allDescriptions[2] }}</p>
+      <p v-if="this.allDescriptions" class="text-2xl font-bold">
+        余談ですが，{{ allDescriptions[2] }}
+      </p>
     </div>
     <HotPepperGourmandStores
       v-if="allStores.length !== 0"
       :stores="allStores"
     />
     <div class="p-3 mt-2">
-      <p class="text-4xl font-bold">Yelpの店舗情報</p>
+      <p class="text-3xl font-bold">Yelpの店舗情報</p>
       <p>
-        海外のサイトから取得したので「calorie」はありますが「カロリー」はないと思われます。<br />こちらのお店で摂取したカロリーは0kcalです。
+        海外のサイトから取得したため「calorie」はありますが「カロリー」はありません。摂取カロリーは<span
+          class="text-3xl font-bold"
+          >0kcal</span
+        >です。
       </p>
-      <p>安心して食事をお楽しみください。</p>
-      <p v-if="this.allDescriptions">余談ですが，{{ allDescriptions[3] }}</p>
+      <p v-if="this.allDescriptions" class="text-2xl font-bold">
+        余談ですが，{{ allDescriptions[3] }}
+      </p>
     </div>
     <YelpStoreData v-if="allYelpStores.length !== 0" :stores="allYelpStores" />
     <p class="text-6xl font-bold text-center my-24" v-else>
@@ -85,10 +100,10 @@
 
 <script>
 import { Loader } from "@googlemaps/js-api-loader";
+import { mapGetters, mapActions } from "vuex";
 import StoreDataCard from "../StoreDataCard.vue";
 import HotPepperGourmandStores from "./HotPepperGourmandStores.vue";
 import YelpStoreData from "./YelpStoreDataCard.vue";
-import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
@@ -128,7 +143,6 @@ export default {
     loader.load().then(() => {
       const google = window.google;
       map = new google.maps.Map(document.getElementById("map"), {
-        zoom: 15,
         mayTypeId: google.maps.MapTypeId.ROADMAP,
         mapTypeControl: false,
         streetViewControl: false,
@@ -149,27 +163,34 @@ export default {
       setMarker(
         self.startPositionData.name,
         self.startPositionData.latLng,
-        "S"
+        "S",
+        google.maps.Animation.BOUNCE
       );
       setMarker(
         self.destinationPositionData.name,
         self.destinationPositionData.latLng,
-        "D"
+        "D",
+        google.maps.Animation.BOUNCE
       );
 
       let index = 0;
       self.wayPointsData.forEach((waypoint) => {
         index++;
-        setMarker(waypoint.name, waypoint.geometry.location, String(index));
+        setMarker(
+          waypoint.name,
+          waypoint.geometry.location,
+          String(index),
+          google.maps.Animation.DROP
+        );
       });
 
-      function setMarker(title, location, label) {
+      function setMarker(title, position, label, animation) {
         new google.maps.Marker({
           map,
-          title: title,
-          position: location,
-          label: label,
-          animation: google.maps.Animation.DROP,
+          title,
+          position,
+          label,
+          animation,
         });
       }
 
