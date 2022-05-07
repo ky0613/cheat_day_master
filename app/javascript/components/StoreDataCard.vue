@@ -3,19 +3,19 @@
     <Carousel :perPage="this.perPage" :paginationPadding="4">
       <Slide
         v-for="(store, index) of stores"
-        :key="store.place_id"
+        :key="store.store_id"
         class="px-2 my-3"
       >
         <div
           class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
         >
           <a
-            :href="`https://maps.google.co.jp/maps?q=place_id:${store.place_id}`"
+            :href="`https://maps.google.co.jp/maps?q=place_id:${store.store_id}`"
             target="_blank"
           >
             <img
               class="object-cover object-center w-full h-56"
-              :src="store.storePhoto"
+              :src="store.img_url"
               alt="avatar"
             />
           </a>
@@ -35,7 +35,7 @@
               class="flex items-center mt-4 text-gray-700 dark:text-gray-200 h-6"
             >
               <img src="../../../public/place.svg" class="w-5 h-5" />
-              <p class="px-2 text-sm">{{ store.vicinity }}</p>
+              <p class="px-2 text-sm">{{ store.address }}</p>
             </div>
             <div
               class="flex items-center mt-4 text-gray-700 dark:text-gray-200"
@@ -45,12 +45,26 @@
                 :round-start-rating="false"
                 :read-only="true"
                 :rating="store.rating"
-                :star-size="30"
+                :star-size="25"
                 class="items-center text-base"
               ></StarRating>
-              <p class="px-2 text-base items-center">
-                ({{ store.user_ratings_total }})
+              <p class="px-2 text-base items-center jus">
+                ({{ store.total_ratings }})
               </p>
+              <!-- <div v-if="authUser" class="justify-end">
+                <img
+                  src="../../../public/bookmark_add_black_24dp.svg"
+                  alt="bookmark"
+                  v-if="existStore(store)"
+                  @click="addStore(store)"
+                />
+                <img
+                  src="../../../public/bookmark_added_black_24dp.svg"
+                  alt="bookmark"
+                  v-if="existStore(store)"
+                  @click="deleteStore(store)"
+                />
+              </div> -->
             </div>
           </div>
         </div>
@@ -62,6 +76,7 @@
 <script>
 import { Carousel, Slide } from "vue-carousel";
 import StarRating from "vue-star-rating";
+// import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
@@ -81,6 +96,17 @@ export default {
       type: Boolean,
       default: false,
     },
+  },
+  computed: {
+    // ...mapGetters(["savedStores", "authUser"]),
+    // existStore: (store) => {
+    //   return this.stores.find(
+    //     (savedStore) => savedStore.store_id === store.place_id
+    //   );
+    // },
+  },
+  methods: {
+    // ...mapActions(["addStore", "deleteStore"]),
   },
 };
 </script>

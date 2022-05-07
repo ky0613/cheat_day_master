@@ -1,14 +1,14 @@
 <template>
   <div>
     <Carousel :perPage="3" :paginationPadding="4">
-      <Slide v-for="store of stores" :key="store.id" class="px-2 my-3">
+      <Slide v-for="store of stores" :key="store.store_id" class="px-2 my-3">
         <div
           class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full flex flex-col"
         >
-          <a class="bg-blue-300 w-full" :href="store.urls.pc" target="_blank">
+          <a class="bg-blue-300 w-full" :href="store.store_url" target="_blank">
             <img
               class="object-cover object-center w-full h-56"
-              :src="store.photo.pc.l"
+              :src="store.img_url"
               alt="avatar"
             />
           </a>

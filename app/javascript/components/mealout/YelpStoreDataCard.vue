@@ -1,14 +1,14 @@
 <template>
   <div>
     <Carousel :perPage="3" :paginationPadding="4">
-      <Slide v-for="store of stores" :key="store.id" class="px-2 my-3">
+      <Slide v-for="store of stores" :key="store.store_id" class="px-2 my-3">
         <div
           class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
         >
-          <a :href="store.url" target="_blank">
+          <a :href="store.store_url" target="_blank">
             <img
               class="object-cover object-center w-full h-56"
-              :src="store.image_url"
+              :src="store.img_url"
               alt="avatar"
             />
           </a>
@@ -18,7 +18,7 @@
             >
               <img src="../../../../public/shop.svg" class="w-5 h-5" />
               <p class="px-2 text-l font-semibold text-center">
-                {{ store.alias }}
+                {{ store.name }}
               </p>
             </div>
             <div
@@ -33,7 +33,7 @@
                 class="items-center text-base"
               />
               <p class="px-2 text-base items-center">
-                ({{ store.review_count }})
+                ({{ store.total_ratings }})
               </p>
             </div>
           </div>

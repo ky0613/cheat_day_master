@@ -26,6 +26,7 @@ class YelpApiClient
       'Authorization' => "Bearer #{@token}"
     )
     response = http.request(request)
+
     JSON.parse(response.body)
   end
 

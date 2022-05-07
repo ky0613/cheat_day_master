@@ -7,6 +7,7 @@
       <p>
         1店舗では物足りないと思うので勝手に経由地を追加しておきました。(S:現在地、D:目的地、数字:経由順)
       </p>
+      <p>{{ routeWayPointsData }}</p>
       <p>
         余談ですが，このルートを歩いたら{{ burnedCalories }}kcal消費します。
       </p>
@@ -161,33 +162,25 @@ export default {
       );
 
       setMarker(
-        self.startPositionData.name,
         self.startPositionData.latLng,
         "S",
         google.maps.Animation.BOUNCE
       );
       setMarker(
-        self.destinationPositionData.name,
         self.destinationPositionData.latLng,
         "D",
         google.maps.Animation.BOUNCE
       );
 
       let index = 0;
-      self.wayPointsData.forEach((waypoint) => {
+      self.routeWayPointsData.forEach((waypoint) => {
         index++;
-        setMarker(
-          waypoint.name,
-          waypoint.geometry.location,
-          String(index),
-          google.maps.Animation.DROP
-        );
+        setMarker(waypoint.location, String(index), google.maps.Animation.DROP);
       });
 
-      function setMarker(title, position, label, animation) {
+      function setMarker(position, label, animation) {
         new google.maps.Marker({
           map,
-          title,
           position,
           label,
           animation,
