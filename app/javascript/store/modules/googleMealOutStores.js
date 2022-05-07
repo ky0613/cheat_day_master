@@ -6,6 +6,23 @@ const shuffle = ([...array]) => {
   return array;
 };
 
+const convertStoreData = (stores) => {
+  let googleStores = [];
+  stores.map((store) => {
+    let convertStore = {
+      store_id: store.place_id,
+      img_url: store.storePhoto,
+      name: store.name,
+      address: store.vicinity,
+      rating: store.rating,
+      total_ratings: store.user_ratings_total,
+      store_type: "Google",
+    };
+    googleStores.push(convertStore);
+  });
+  return googleStores;
+};
+
 export default {
   namespaced: true,
   state: {
@@ -34,7 +51,6 @@ export default {
         return position.name.match(/ホテル/) == null;
       });
       const shuffleWayPoints = shuffle(notHotelPositions.splice(0, 6));
-      commit("setWayPoints", shuffleWayPoints);
       let points = [];
       shuffleWayPoints.map((waypoint) => {
         let convertWayPoint = {};
@@ -44,10 +60,14 @@ export default {
         };
         points.push(convertWayPoint);
       });
+
       commit("setRouteWayPoints", points);
+      commit("setWayPoints", convertStoreData(shuffleWayPoints));
       commit(
         "setRecommendStores",
-        notHotelPositions.sort((a, b) => (a.rating < b.rating ? 1 : -1))
+        convertStoreData(notHotelPositions).sort((a, b) =>
+          a.rating < b.rating ? 1 : -1
+        )
       );
     },
   },

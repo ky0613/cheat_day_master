@@ -17,7 +17,20 @@ const actions = {
       },
     };
     const response = await axios.get("yelp_stores", config);
-    commit("setYelpStores", response.data.businesses);
+    let YelpStores = [];
+    response.data.businesses.map((store) => {
+      let convertStore = {
+        store_id: store.id,
+        img_url: store.image_url,
+        name: store.alias,
+        rating: store.rating,
+        total_ratings: store.review_count,
+        store_url: store.url,
+        store_type: "Yelp",
+      };
+      YelpStores.push(convertStore);
+    });
+    commit("setYelpStores", YelpStores);
   },
 };
 
