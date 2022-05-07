@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     resources :digressions, only: %i(index)
     resources :genres, only: %i(index)
     resources :categories, only: %i(index)
+    resources :stores, only: %i(index create destroy)
 
     resources :sessions
     resources :users do
