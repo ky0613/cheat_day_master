@@ -23,6 +23,7 @@ const actions = {
         store_id: store.id,
         img_url: store.image_url,
         name: store.alias,
+        address: Object.values(store.location).splice(0, 3).join(" "),
         rating: store.rating,
         total_ratings: store.review_count,
         store_url: store.url,
