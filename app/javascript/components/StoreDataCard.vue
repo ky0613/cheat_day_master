@@ -51,20 +51,7 @@
               <p class="px-2 text-base items-center jus">
                 ({{ store.total_ratings }})
               </p>
-              <div v-if="authUser" class="text-right">
-                <img
-                  src="../../../public/bookmark_added_black_24dp.svg"
-                  alt="bookmark"
-                  v-if="existStore(store)"
-                  @click="removeStore(store)"
-                />
-                <img
-                  src="../../../public/bookmark_add_black_24dp.svg"
-                  alt="bookmark"
-                  v-else
-                  @click="addStore(store)"
-                />
-              </div>
+              <StoreBookmark :store="store" />
             </div>
           </div>
         </div>
@@ -76,18 +63,14 @@
 <script>
 import { Carousel, Slide } from "vue-carousel";
 import StarRating from "vue-star-rating";
-import { mapGetters, mapActions } from "vuex";
+import StoreBookmark from "../components/StoreBookmark.vue";
 
 export default {
   components: {
     Carousel,
     Slide,
     StarRating,
-  },
-  data() {
-    return {
-      // existStore: false,
-    };
+    StoreBookmark,
   },
   props: {
     perPage: {
@@ -100,32 +83,6 @@ export default {
     wayPoint: {
       type: Boolean,
       default: false,
-    },
-  },
-  computed: {
-    ...mapGetters(["savedStores", "authUser"]),
-  },
-  created() {
-    this.fetchStores();
-  },
-  methods: {
-    ...mapActions(["fetchStores", "addStore", "deleteStore"]),
-    existStore(store) {
-      const check = (savedStore) => {
-        return (
-          savedStore.store_id === store.store_id &&
-          savedStore.store_type === store.store_type
-        );
-      };
-      return this.savedStores.some(check);
-    },
-    removeStore(store) {
-      const removeStore = this.savedStores.find(
-        (savedStore) =>
-          savedStore.store_id === store.store_id &&
-          savedStore.store_type === store.store_type
-      );
-      this.deleteStore(removeStore.id);
     },
   },
 };

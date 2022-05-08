@@ -28,20 +28,22 @@
               <p class="px-2 text-sm">{{ store.address }}</p>
             </div>
           </div>
-          <a
-            href="http://webservice.recruit.co.jp/"
-            class="h-10 p-3 flex justify-center"
-            target="_blank"
-            ><p class="text-xs items-center pr-2">Produced by</p>
-            <img
-              src="http://webservice.recruit.co.jp/banner/hotpepper-s.gif"
-              alt="ホットペッパー Webサービス"
-              width="135"
-              height="17"
-              border="0"
-              title="ホットペッパー Webサービス"
-              class="items-ceter"
-          /></a>
+          <div class="flex">
+            <a
+              href="http://webservice.recruit.co.jp/"
+              class="h-10 p-3 w-full"
+              target="_blank"
+            >
+              <img
+                src="http://webservice.recruit.co.jp/banner/hotpepper-s.gif"
+                alt="ホットペッパー Webサービス"
+                width="135"
+                height="17"
+                border="0"
+                title="ホットペッパー Webサービス"
+            /></a>
+            <StoreBookmark :store="store" />
+          </div>
         </div>
       </Slide>
     </Carousel>
@@ -50,11 +52,13 @@
 
 <script>
 import { Carousel, Slide } from "vue-carousel";
+import StoreBookmark from "../../components/StoreBookmark.vue";
 
 export default {
   components: {
     Carousel,
     Slide,
+    StoreBookmark,
   },
   props: {
     stores: {
