@@ -17,7 +17,7 @@ const actions = {
     const response = await axios.post("stores", store);
     commit("newStore", response.data);
   },
-  async deleteStore({ commit }, store_id) {
+  async deleteStore({ commit }, id) {
     await axios.delete(`stores/${id}`);
     commit("removeStore", id);
   },

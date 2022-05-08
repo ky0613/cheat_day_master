@@ -7,7 +7,7 @@ class Api::StoresController < ApplicationController
   end
 
   def create
-    @store = current_user.stores.build(store_params)
+    @store = Store.new(store_params)
     if @store.save
       render json: @store
     else
@@ -27,7 +27,7 @@ class Api::StoresController < ApplicationController
   end
 
   def store_params
-    params.require(:store).permit(:store_id, :img_url, :name, :address, :rating, :total_ratings, :store_url).merge(user)
+    params.require(:store).permit(:store_id, :img_url, :name, :address, :rating, :total_ratings, :store_url, :store_type).merge(user_id: current_user.id)
   end
 end
 
