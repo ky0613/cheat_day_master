@@ -24,7 +24,7 @@ const actions = {
 };
 
 const mutations = {
-  setStore: (state, stores) => (state.stores = stores),
+  setStores: (state, stores) => (state.stores = stores),
   newStore: (state, store) => state.stores.push(store),
   removeStore: (state, id) =>
     (state.stores = state.stores.filter((store) => store.id !== id)),

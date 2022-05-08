@@ -9,15 +9,15 @@ const shuffle = ([...array]) => {
 };
 
 const state = {
-  stores: [],
+  hotPepperStores: [],
 };
 
 const getters = {
-  allStores: (state) => state.stores,
+  allStores: (state) => state.hotPepperStores,
 };
 
 const actions = {
-  async fetchStores({ commit }, { lat, lng }) {
+  async fetchHotPepperStores({ commit }, { lat, lng }) {
     const config = {
       params: {
         lat: String(lat),
@@ -37,13 +37,13 @@ const actions = {
       };
       HotPepperStores.push(convertStore);
     });
-    commit("setStores", HotPepperStores);
+    commit("setHotPepperStores", HotPepperStores);
   },
 };
 
 const mutations = {
-  setStores: (state, stores) => {
-    Object.assign(state.stores, shuffle(stores));
+  setHotPepperStores: (state, stores) => {
+    Object.assign(state.hotPepperStores, shuffle(stores));
   },
 };
 

@@ -51,7 +51,7 @@
               <p class="px-2 text-base items-center jus">
                 ({{ store.total_ratings }})
               </p>
-              <!-- <div v-if="authUser" class="justify-end">
+              <div v-if="authUser" class="text-right">
                 <img
                   src="../../../public/bookmark_add_black_24dp.svg"
                   alt="bookmark"
@@ -61,10 +61,10 @@
                 <img
                   src="../../../public/bookmark_added_black_24dp.svg"
                   alt="bookmark"
-                  v-if="existStore(store)"
+                  v-else
                   @click="deleteStore(store)"
                 />
-              </div> -->
+              </div>
             </div>
           </div>
         </div>
@@ -76,7 +76,7 @@
 <script>
 import { Carousel, Slide } from "vue-carousel";
 import StarRating from "vue-star-rating";
-// import { mapGetters, mapActions } from "vuex";
+import { mapGetters, mapActions } from "vuex";
 
 export default {
   components: {
@@ -98,15 +98,15 @@ export default {
     },
   },
   computed: {
-    // ...mapGetters(["savedStores", "authUser"]),
-    // existStore: (store) => {
-    //   return this.stores.find(
-    //     (savedStore) => savedStore.store_id === store.place_id
-    //   );
-    // },
+    ...mapGetters(["savedStores", "authUser"]),
   },
   methods: {
-    // ...mapActions(["addStore", "deleteStore"]),
+    ...mapActions(["addStore", "deleteStore"]),
+    existStore(store) {
+      return this.savedStores.find(
+        (savedStore) => savedStore.store_id === store.place_id
+      );
+    },
   },
 };
 </script>

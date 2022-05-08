@@ -1,11 +1,11 @@
 import axios from "../../plugins/axios";
 
 const state = {
-  stores: [],
+  yelpStores: [],
 };
 
 const getters = {
-  allYelpStores: (state) => state.stores,
+  allYelpStores: (state) => state.yelpStores,
 };
 
 const actions = {
@@ -36,7 +36,7 @@ const actions = {
 
 const mutations = {
   setYelpStores: (state, stores) => {
-    state.stores = stores;
+    state.yelpStores = stores;
   },
 };
 

@@ -217,12 +217,16 @@ export default {
     });
   },
   created() {
-    this.fetchStores(this.destinationPositionData.latLng);
+    this.fetchHotPepperStores(this.destinationPositionData.latLng);
     this.fetchYelpStores(this.destinationPositionData.latLng);
     this.fetchDescriptions();
   },
   methods: {
-    ...mapActions(["fetchStores", "fetchYelpStores", "fetchDescriptions"]),
+    ...mapActions([
+      "fetchHotPepperStores",
+      "fetchYelpStores",
+      "fetchDescriptions",
+    ]),
     resetState() {
       this.$store.commit("googleMealOutStores/resetState");
       this.$store.commit("googleMealHomeStores/resetState");
