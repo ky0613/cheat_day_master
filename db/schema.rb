@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_07_023325) do
+ActiveRecord::Schema.define(version: 2022_05_09_001551) do
 
   create_table "categories", force: :cascade do |t|
     t.integer "category_id"
@@ -31,6 +31,22 @@ ActiveRecord::Schema.define(version: 2022_05_07_023325) do
     t.string "genre_type"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "items", force: :cascade do |t|
+    t.string "item_id", null: false
+    t.string "img_url", null: false
+    t.string "name", null: false
+    t.string "shop_name", null: false
+    t.integer "price"
+    t.integer "rating"
+    t.integer "total_ratings"
+    t.string "item_url"
+    t.string "item_type", null: false
+    t.integer "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["user_id"], name: "index_items_on_user_id"
   end
 
   create_table "stores", force: :cascade do |t|
@@ -58,5 +74,6 @@ ActiveRecord::Schema.define(version: 2022_05_07_023325) do
     t.index ["email"], name: "index_users_on_email", unique: true
   end
 
+  add_foreign_key "items", "users"
   add_foreign_key "stores", "users"
 end
