@@ -10,6 +10,7 @@ Rails.application.routes.draw do
     resources :genres, only: %i(index)
     resources :categories, only: %i(index)
     resources :stores, only: %i(index create destroy)
+    resources :items, only: %i(index create destroy)
 
     resources :sessions
     resources :users do

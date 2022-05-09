@@ -13,6 +13,7 @@ import users from "./modules/users";
 import categories from "./modules/categories";
 import genres from "./modules/genres";
 import stores from "./modules/stores";
+import items from "./modules/items";
 
 Vue.use(Vuex);
 
@@ -29,6 +30,7 @@ export default new Vuex.Store({
     categories,
     genres,
     stores,
+    items,
   },
   plugins: [
     createPersistedState({
