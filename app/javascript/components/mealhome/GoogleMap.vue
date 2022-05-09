@@ -392,9 +392,9 @@ export default {
     ...mapActions([
       "fetchGenres",
       "fetchCategories",
-      "fetchItems",
+      "fetchRakutenItems",
       "fetchRecipes",
-      "fetchSweets",
+      "fetchRakutenSweets",
     ]),
     isOpenSetStartModal() {
       this.isStartModalShown = true;
@@ -417,8 +417,8 @@ export default {
         this.validateSwitch = true;
         event.preventDefault();
       }
-      this.fetchItems(this.foodGenre);
-      this.fetchSweets(this.sweetGenre);
+      this.fetchRakutenItems(this.foodGenre);
+      this.fetchRakutenSweets(this.sweetGenre);
       this.fetchRecipes(this.recipeCategory);
       this.isLoading = true;
     },
