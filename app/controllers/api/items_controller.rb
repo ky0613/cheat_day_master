@@ -1,6 +1,6 @@
 class Api::ItemsController < ApplicationController
   def index
-    @items = Item.all
+    @items = current_user.items.all
     render json: @items
   end
 
@@ -14,7 +14,7 @@ class Api::ItemsController < ApplicationController
   end
 
   def destroy
-    @item = Item.find(params[:id])
+    @item = current_user.items.find(params[:id])
     @item.destroy!
     render json: @item
   end
