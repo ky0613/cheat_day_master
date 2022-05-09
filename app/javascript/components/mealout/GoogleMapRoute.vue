@@ -161,33 +161,25 @@ export default {
       );
 
       setMarker(
-        self.startPositionData.name,
         self.startPositionData.latLng,
         "S",
         google.maps.Animation.BOUNCE
       );
       setMarker(
-        self.destinationPositionData.name,
         self.destinationPositionData.latLng,
         "D",
         google.maps.Animation.BOUNCE
       );
 
       let index = 0;
-      self.wayPointsData.forEach((waypoint) => {
+      self.routeWayPointsData.forEach((waypoint) => {
         index++;
-        setMarker(
-          waypoint.name,
-          waypoint.geometry.location,
-          String(index),
-          google.maps.Animation.DROP
-        );
+        setMarker(waypoint.location, String(index), google.maps.Animation.DROP);
       });
 
-      function setMarker(title, position, label, animation) {
+      function setMarker(position, label, animation) {
         new google.maps.Marker({
           map,
-          title,
           position,
           label,
           animation,
@@ -225,12 +217,16 @@ export default {
     });
   },
   created() {
-    this.fetchStores(this.destinationPositionData.latLng);
+    this.fetchHotPepperStores(this.destinationPositionData.latLng);
     this.fetchYelpStores(this.destinationPositionData.latLng);
     this.fetchDescriptions();
   },
   methods: {
-    ...mapActions(["fetchStores", "fetchYelpStores", "fetchDescriptions"]),
+    ...mapActions([
+      "fetchHotPepperStores",
+      "fetchYelpStores",
+      "fetchDescriptions",
+    ]),
     resetState() {
       this.$store.commit("googleMealOutStores/resetState");
       this.$store.commit("googleMealHomeStores/resetState");

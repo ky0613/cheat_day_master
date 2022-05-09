@@ -9,15 +9,15 @@ const shuffle = ([...array]) => {
 };
 
 const state = {
-  stores: [],
+  hotPepperStores: [],
 };
 
 const getters = {
-  allStores: (state) => state.stores,
+  allStores: (state) => state.hotPepperStores,
 };
 
 const actions = {
-  async fetchStores({ commit }, { lat, lng }) {
+  async fetchHotPepperStores({ commit }, { lat, lng }) {
     const config = {
       params: {
         lat: String(lat),
@@ -25,13 +25,25 @@ const actions = {
       },
     };
     const response = await axios.get("hot_pepper_stores", config);
-    commit("setStores", response.data.results.shop);
+    let HotPepperStores = [];
+    response.data.results.shop.map((store) => {
+      let convertStore = {
+        store_id: store.id,
+        img_url: store.photo.pc.l,
+        name: store.name,
+        address: store.address,
+        store_url: store.urls.pc,
+        store_type: "HotPepper",
+      };
+      HotPepperStores.push(convertStore);
+    });
+    commit("setHotPepperStores", HotPepperStores);
   },
 };
 
 const mutations = {
-  setStores: (state, stores) => {
-    Object.assign(state.stores, shuffle(stores));
+  setHotPepperStores: (state, stores) => {
+    Object.assign(state.hotPepperStores, shuffle(stores));
   },
 };
 

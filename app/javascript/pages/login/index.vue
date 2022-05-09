@@ -29,7 +29,7 @@
                 }}</span>
               </div>
             </ValidationProvider>
-            <ValidationProvider rules="required" mode="lazy">
+            <ValidationProvider rules="required" mode="aggressive">
               <div slot-scope="ProviderProps">
                 <label
                   for="password"
@@ -105,9 +105,17 @@ export default {
       try {
         await this.loginUser(this.user);
         this.$router.push({ name: "TopIndex" });
+        this.resetState();
       } catch (error) {
         console.log(error);
       }
+    },
+    resetState() {
+      this.$store.commit("googleMealOutStores/resetState");
+      this.$store.commit("googleMealHomeStores/resetState");
+      this.$store.commit("resetRakutenState");
+      this.$store.commit("resetRecipesState");
+      localStorage.removeItem("cheatDayMaster");
     },
   },
 };

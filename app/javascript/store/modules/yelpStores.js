@@ -1,11 +1,11 @@
 import axios from "../../plugins/axios";
 
 const state = {
-  stores: [],
+  yelpStores: [],
 };
 
 const getters = {
-  allYelpStores: (state) => state.stores,
+  allYelpStores: (state) => state.yelpStores,
 };
 
 const actions = {
@@ -17,13 +17,27 @@ const actions = {
       },
     };
     const response = await axios.get("yelp_stores", config);
-    commit("setYelpStores", response.data.businesses);
+    let YelpStores = [];
+    response.data.businesses.map((store) => {
+      let convertStore = {
+        store_id: store.id,
+        img_url: store.image_url,
+        name: store.alias,
+        address: Object.values(store.location).splice(0, 3).join(" "),
+        rating: store.rating,
+        total_ratings: store.review_count,
+        store_url: store.url,
+        store_type: "Yelp",
+      };
+      YelpStores.push(convertStore);
+    });
+    commit("setYelpStores", YelpStores);
   },
 };
 
 const mutations = {
   setYelpStores: (state, stores) => {
-    state.stores = stores;
+    state.yelpStores = stores;
   },
 };
 

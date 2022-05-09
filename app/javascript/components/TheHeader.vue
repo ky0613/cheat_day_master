@@ -53,7 +53,7 @@ export default {
     async handleLogout() {
       try {
         await this.logoutUser();
-        this.$route.push({ name: "TopIndex" });
+        this.resetState();
       } catch (error) {
         console.log(error);
       }

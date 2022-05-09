@@ -12,6 +12,7 @@ import digressions from "./modules/descriptions";
 import users from "./modules/users";
 import categories from "./modules/categories";
 import genres from "./modules/genres";
+import stores from "./modules/stores";
 
 Vue.use(Vuex);
 
@@ -27,6 +28,7 @@ export default new Vuex.Store({
     users,
     categories,
     genres,
+    stores,
   },
   plugins: [
     createPersistedState({
