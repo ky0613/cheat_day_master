@@ -8,7 +8,7 @@ class CreateItems < ActiveRecord::Migration[6.1]
       t.integer :price
       t.integer :rating
       t.integer :total_ratings
-      t.string :item_url
+      t.string :item_url, null: false
       t.string :item_type, null: false
       t.references :user, null: false, foreign_key: true
 

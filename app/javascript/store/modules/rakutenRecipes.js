@@ -1,24 +1,40 @@
 import axios from "../../plugins/axios";
 
+const convertRecipeData = (recipes) => {
+  let rakutenRecipes = [];
+  recipes.forEach((recipe) => {
+    let convertRecipe = {
+      recipe_id: String(recipe.recipeId),
+      img_url: recipe.foodImageUrl,
+      title: recipe.recipeTitle,
+      cost: recipe.recipeCost,
+      indication: recipe.recipeIndication,
+      recipe_url: recipe.recipeUrl,
+    };
+    rakutenRecipes.push(convertRecipe);
+  });
+  return rakutenRecipes;
+};
+
 const state = {
-  recipes: [],
+  rakutenRecipes: [],
 };
 
 const getters = {
-  allRecipes: (state) => state.recipes,
+  allRecipes: (state) => state.rakutenRecipes,
 };
 
 const actions = {
-  async fetchRecipes({ commit }, recipeCategory) {
+  async fetchRakutenRecipes({ commit }, recipeCategory) {
     const response = await axios.get("/rakuten_recipes", {
       params: { category_id: String(recipeCategory) },
     });
-    commit("setRecipes", response.data.result);
+    commit("setRakutenRecipes", convertRecipeData(response.data.result));
   },
 };
 
 const mutations = {
-  setRecipes: (state, recipes) => (state.recipes = recipes),
+  setRakutenRecipes: (state, recipes) => (state.rakutenRecipes = recipes),
   resetRecipesState: (state) => {
     state.recipes = [];
   },

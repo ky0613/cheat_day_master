@@ -1,8 +1,7 @@
 class Api::StoresController < ApplicationController
-  before_action :set_store, only: %i[destroy]
 
   def index
-    @stores = Store.all
+    @stores = current_user.stores.all
     render json: @stores
   end
 
@@ -16,15 +15,12 @@ class Api::StoresController < ApplicationController
   end
 
   def destroy
+    @store = current_user.stores.find(params[:id])
     @store.destroy!
     render json: @store
   end
 
   private
-
-  def set_store
-    @store = Store.find(params[:id])
-  end
 
   def store_params
     params.require(:store).permit(:store_id, :img_url, :name, :address, :rating, :total_ratings, :store_url, :store_type).merge(user_id: current_user.id)

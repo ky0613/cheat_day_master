@@ -393,7 +393,7 @@ export default {
       "fetchGenres",
       "fetchCategories",
       "fetchRakutenItems",
-      "fetchRecipes",
+      "fetchRakutenRecipes",
       "fetchRakutenSweets",
     ]),
     isOpenSetStartModal() {
@@ -419,7 +419,7 @@ export default {
       }
       this.fetchRakutenItems(this.foodGenre);
       this.fetchRakutenSweets(this.sweetGenre);
-      this.fetchRecipes(this.recipeCategory);
+      this.fetchRakutenRecipes(this.recipeCategory);
       this.isLoading = true;
     },
   },
