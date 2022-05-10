@@ -1,5 +1,5 @@
 <template>
-  <header>
+  <header class="sticky top-0 z-50">
     <div class="pl-4 py-2 flex justify-between" id="header">
       <router-link
         :to="{ name: 'TopIndex' }"
@@ -9,16 +9,22 @@
       /></router-link>
       <template v-if="!authUser">
         <nav class="pr-4 py-2">
+          <button
+            class="text-white mr-2 text-lg hover:text-green-400"
+            id="nav-font"
+          >
+            チートデイとは？
+          </button>
           <router-link
             :to="{ name: 'LoginIndex' }"
-            class="text-white mr-2 text-lg"
+            class="text-white mr-2 text-lg hover:text-green-400"
             id="nav-font"
           >
             ログイン
           </router-link>
           <router-link
             :to="{ name: 'RegisterIndex' }"
-            class="text-white text-lg"
+            class="text-white text-lg hover:text-green-400"
             id="nav-font"
           >
             新規登録
@@ -28,8 +34,15 @@
       <template v-else>
         <nav class="pr-4 py-2">
           <router-link
+            :to="{ name: 'BookmarkIndex' }"
+            class="text-white text-lg hover:text-green-400"
+            id="nav-font"
+          >
+            ブックマーク一覧
+          </router-link>
+          <router-link
             :to="{ name: 'TopIndex' }"
-            class="text-white text-lg"
+            class="text-white text-lg hover:text-green-400"
             id="nav-font"
             @click.native="handleLogout"
           >
