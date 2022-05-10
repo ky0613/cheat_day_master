@@ -11,6 +11,7 @@ import Terms from "../pages/static/Terms.vue";
 import Policy from "../pages/static/Policy.vue";
 import LoginIndex from "../pages/login/index.vue";
 import RegisterIndex from "../pages/register/index.vue";
+import BookmarkIndex from "../pages/bookmark/index.vue";
 
 Vue.use(Router);
 
@@ -33,6 +34,11 @@ const router = new Router({
       component: RegisterIndex,
     },
     {
+      path: "/bookmarks",
+      name: "BookmarkIndex",
+      component: BookmarkIndex,
+    },
+    {
       path: "/meal-out",
       name: "MealOut",
       component: MealOut,
@@ -51,7 +57,6 @@ const router = new Router({
       path: "/meal-home/result",
       name: "MealHomeResult",
       component: MealHomeResult,
-      props: true,
     },
     {
       path: "/terms",

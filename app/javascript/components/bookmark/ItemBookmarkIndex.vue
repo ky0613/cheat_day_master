@@ -1,7 +1,7 @@
 <template>
-  <div>
-    <Carousel :perPage="3" :paginationPadding="4" class="p-1">
-      <Slide v-for="item of items" :key="item.item_id" class="px-2 my-3">
+  <div class="flex flex-col mt-5">
+    <div class="w-full grid grid-cols-3 gap-4">
+      <div v-for="item in items" :key="item.id">
         <div
           class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
         >
@@ -46,20 +46,17 @@
             <ItemBookmark :item="item" />
           </div>
         </div>
-      </Slide>
-    </Carousel>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
-import { Carousel, Slide } from "vue-carousel";
 import StarRating from "vue-star-rating";
-import ItemBookmark from "../ItemBookmark.vue";
+import ItemBookmark from "../../components/ItemBookmark.vue";
 
 export default {
   components: {
-    Carousel,
-    Slide,
     StarRating,
     ItemBookmark,
   },

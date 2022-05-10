@@ -4,8 +4,8 @@ class CreateRecipes < ActiveRecord::Migration[6.1]
       t.string :recipe_id, null: false
       t.string :img_url, null: false
       t.string :title, null: false
-      t.integer :cost
-      t.integer :indication
+      t.string :cost
+      t.string :indication
       t.string :recipe_url, null: false
       t.references :user, null: false, foreign_key: true
 
