@@ -76,7 +76,7 @@ export default {
   components: { DescriptionModal },
   data() {
     return {
-      isModalActive: true,
+      isModalActive: false,
     };
   },
   computed: {

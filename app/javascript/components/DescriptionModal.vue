@@ -79,7 +79,6 @@ export default {
       this.$emit("close-modal");
     },
   },
-  mounted: {},
 };
 </script>
 
