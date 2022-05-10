@@ -336,7 +336,7 @@ export default {
         setTimeout(() => {
           self.isLoading = false;
           self.$router.push({ name: "MealOutResult" });
-        }, 2000);
+        }, 700);
       });
 
       function storeSearch() {

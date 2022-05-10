@@ -39,7 +39,7 @@
               :rating="Number(item.rating)"
               :star-size="30"
               class="items-center text-base"
-            ></StarRating>
+            />
             <p class="px-2 text-base items-center">
               ({{ item.total_ratings }})
             </p>
