@@ -1,5 +1,5 @@
 <template>
-  <header class="sticky top-0 z-50">
+  <header>
     <div class="pl-4 py-2 flex justify-between" id="header">
       <router-link
         :to="{ name: 'TopIndex' }"
@@ -12,8 +12,9 @@
           <button
             class="text-white mr-2 text-lg hover:text-green-400"
             id="nav-font"
+            @click="changeActiveDescriptionModal"
           >
-            チートデイとは？
+            サービス概要
           </button>
           <router-link
             :to="{ name: 'LoginIndex' }"
@@ -33,6 +34,13 @@
       </template>
       <template v-else>
         <nav class="pr-4 py-2">
+          <button
+            class="text-white mr-2 text-lg hover:text-green-400"
+            id="nav-font"
+            @click="changeActiveDescriptionModal"
+          >
+            サービス概要
+          </button>
           <router-link
             :to="{ name: 'BookmarkIndex' }"
             class="text-white text-lg hover:text-green-400"
@@ -50,14 +58,27 @@
           </router-link>
         </nav>
       </template>
+      <transition>
+        <DescriptionModal
+          v-if="isModalActive"
+          @close-modal="changeActiveDescriptionModal"
+        />
+      </transition>
     </div>
   </header>
 </template>
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import DescriptionModal from "./DescriptionModal.vue";
 
 export default {
+  components: { DescriptionModal },
+  data() {
+    return {
+      isModalActive: true,
+    };
+  },
   computed: {
     ...mapGetters(["authUser"]),
   },
@@ -77,6 +98,9 @@ export default {
       this.$store.commit("resetRakutenState");
       this.$store.commit("resetRecipesState");
       localStorage.removeItem("cheatDayMaster");
+    },
+    changeActiveDescriptionModal() {
+      this.isModalActive = !this.isModalActive;
     },
   },
 };
