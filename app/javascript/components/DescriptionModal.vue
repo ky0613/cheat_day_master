@@ -1,6 +1,6 @@
 <template>
   <div
-    class="fixed w-full h-full top-0 left-0 outline-none overflow-x-hidden overflow-y-auto rounded-md flex justify-center bg-black bg-opacity-50"
+    class="fixed w-full h-full top-0 left-0 outline-none overflow-x-hidden overflow-y-auto rounded-md flex justify-center bg-black bg-opacity-50 z-1000"
     @click.self="isCloseModal"
   >
     <div class="w-3/4 h-3/4 pointer-events-none rounded-md my-16">
@@ -89,5 +89,6 @@ button,
 h5,
 h6 {
   font-family: "Yomogi", cursive;
+  font-weight: 900;
 }
 </style>
