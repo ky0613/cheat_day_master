@@ -12,6 +12,7 @@ import Policy from "../pages/static/Policy.vue";
 import LoginIndex from "../pages/login/index.vue";
 import RegisterIndex from "../pages/register/index.vue";
 import BookmarkIndex from "../pages/bookmark/index.vue";
+import oauthCallback from "../pages/login/oauthCallback.vue";
 
 Vue.use(Router);
 
@@ -67,6 +68,11 @@ const router = new Router({
       path: "/policy",
       name: "Policy",
       component: Policy,
+    },
+    {
+      path: "/oauth/callback",
+      name: "oauthCallback",
+      component: oauthCallback,
     },
   ],
   scrollBehavior(to, from, savedPosition) {
