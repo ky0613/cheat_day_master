@@ -57,6 +57,7 @@
             >
               ログインする
             </button>
+            <TwitterLoginButton />
             <div class="flex justify-center items-center bg-gray-100 p-4">
               <p class="text-gray-500 text-sm text-center">
                 まだアカウントを作成してない方は
@@ -78,6 +79,7 @@
 import { mapActions } from "vuex";
 import { extend, ValidationProvider, ValidationObserver } from "vee-validate";
 import { required, email } from "vee-validate/dist/rules";
+import TwitterLoginButton from "../../components/TwitterLoginButton.vue";
 
 required.message = "必須項目です。入力してください。";
 email.message = "メールの形式ではありません";
@@ -90,6 +92,7 @@ export default {
   components: {
     ValidationProvider,
     ValidationObserver,
+    TwitterLoginButton,
   },
   data() {
     return {
