@@ -8,5 +8,10 @@ class User < ApplicationRecord
   has_many :items, dependent: :destroy
   has_many :recipes, dependent: :destroy
 
+  validates :name, presence: true, length: { maximum: 25 }
+  validates :email, uniqueness: true, allow_nil: true
+
+  validates :reset_password_token, uniqueness: true, allow_nil: true
+
   validates :name, presence: true
 end
