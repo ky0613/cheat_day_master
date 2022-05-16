@@ -113,6 +113,9 @@ export default {
       this.isActive = value;
     },
   },
+  destroyed() {
+    console.log("destroyed!!!!!!!!");
+  },
 };
 </script>
 

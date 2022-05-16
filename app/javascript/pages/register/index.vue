@@ -97,6 +97,7 @@
             >
               新規登録する
             </button>
+            <TwitterLoginButton />
           </div>
         </ValidationObserver>
       </div>
@@ -108,6 +109,7 @@
 import axios from "../../plugins/axios";
 import { extend, ValidationProvider, ValidationObserver } from "vee-validate";
 import { required, email } from "vee-validate/dist/rules";
+import TwitterLoginButton from "../../components/TwitterLoginButton.vue";
 
 required.message = "必須項目です。入力してください。";
 email.message = "メールの形式で入力してください。";
@@ -120,6 +122,7 @@ export default {
   components: {
     ValidationProvider,
     ValidationObserver,
+    TwitterLoginButton,
   },
   data() {
     return {

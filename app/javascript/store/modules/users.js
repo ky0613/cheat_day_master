@@ -2,10 +2,12 @@ import axios from "../../plugins/axios";
 
 const state = {
   authUser: null,
+  oauthToken: null,
 };
 
 const getters = {
   authUser: (state) => state.authUser,
+  oauthToken: (state) => state.oauthToken,
 };
 
 const actions = {
@@ -42,11 +44,20 @@ const actions = {
       return null;
     }
   },
+  async fetchOauthToken({ commit }) {
+    const userResponse = await axios.get("oauth/twitter").catch((err) => {
+      return null;
+    });
+    commit("setOauthToken", userResponse.data);
+  },
 };
 
 const mutations = {
   setUser: (state, user) => {
     state.authUser = user;
+  },
+  setOauthToken: (state, oauthToken) => {
+    state.oauthToken = oauthToken;
   },
 };
 

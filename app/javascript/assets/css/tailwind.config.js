@@ -22,6 +22,7 @@ module.exports = {
           800: "#9a3412",
           900: "#7c2d12",
         },
+        twitter: "#00acee",
       },
       maxWidth: {
         "1/4": "25%",

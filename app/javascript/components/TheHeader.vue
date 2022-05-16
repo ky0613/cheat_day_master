@@ -5,8 +5,13 @@
         :to="{ name: 'TopIndex' }"
         @click.native="resetState()"
         class="inline-block"
-        ><img src="../../../public/logo.png" alt="logo" class="max-w-xs h-auto"
-      /></router-link>
+      >
+        <img
+          src="../../../public/logo.png"
+          alt="logo"
+          class="max-w-xs h-auto"
+        />
+      </router-link>
       <template v-if="!authUser">
         <nav class="pr-4 py-2">
           <button
