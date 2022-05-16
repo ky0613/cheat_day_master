@@ -17,7 +17,7 @@ class TwitterApiClient
     http.use_ssl = true
     request = Net::HTTP::Post.new(uri.request_uri)
     response = http.request(request)
-    response.body
+    user_hash = Hash[URI::decode_www_form(response.body)]
   end
 
   class << self
