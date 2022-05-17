@@ -1,4 +1,4 @@
 default_url_options:
-  host: "localhost:3000"
+  host: "127.0.0.1:3000"
 site:
-  top_url: "http://localhost:3000/"
+  top_url: "http://127.0.0.1:3000/"
