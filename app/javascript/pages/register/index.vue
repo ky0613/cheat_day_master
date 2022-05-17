@@ -135,8 +135,8 @@ export default {
     };
   },
   methods: {
-    register() {
-      axios
+    async register() {
+      await axios
         .post("users", { user: this.user })
         .then((res) => {
           this.$router.push({ name: "LoginIndex" });
