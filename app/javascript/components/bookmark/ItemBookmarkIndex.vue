@@ -1,6 +1,6 @@
 <template>
-  <div class="flex flex-col mt-5">
-    <div class="w-full grid grid-cols-3 gap-4">
+  <div class="mt-5">
+    <div class="w-full grid grid-cols-3 gap-4" v-if="items.length !== 0">
       <div v-for="item in items" :key="item.id">
         <div
           class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
@@ -48,6 +48,12 @@
         </div>
       </div>
     </div>
+    <div v-else class="mt-48">
+      <p class="text-center text-6xl yomogi">
+        まだお気に入りが <br />
+        登録されていません。
+      </p>
+    </div>
   </div>
 </template>
 
@@ -68,3 +74,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Yomogi&display=swap");
+
+.yomogi {
+  font-family: "Yomogi", cursive;
+}
+</style>

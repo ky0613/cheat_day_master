@@ -47,6 +47,12 @@
         </div>
       </div>
     </div>
+    <div v-else class="mt-48">
+      <p class="text-center text-6xl yomogi">
+        まだお気に入りが <br />
+        登録されていません。
+      </p>
+    </div>
   </div>
 </template>
 
@@ -64,3 +70,11 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+@import url("https://fonts.googleapis.com/css2?family=Yomogi&display=swap");
+
+.yomogi {
+  font-family: "Yomogi", cursive;
+}
+</style>
