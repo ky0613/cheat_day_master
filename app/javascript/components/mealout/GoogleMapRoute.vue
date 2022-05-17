@@ -90,7 +90,6 @@
     <div class="my-6 w-full text-center">
       <router-link
         :to="{ name: 'TopIndex' }"
-        @click.native="resetState()"
         class="rounded-full bg-orange-300 text-center py-2 px-9"
         >ホームに戻る</router-link
       >
@@ -227,11 +226,6 @@ export default {
       "fetchYelpStores",
       "fetchDescriptions",
     ]),
-    resetState() {
-      this.$store.commit("googleMealOutStores/resetState");
-      this.$store.commit("googleMealHomeStores/resetState");
-      localStorage.removeItem("cheatDayMaster");
-    },
   },
 };
 </script>

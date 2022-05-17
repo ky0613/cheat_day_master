@@ -116,17 +116,9 @@ export default {
       try {
         await this.loginUser(this.user);
         this.$router.push({ name: "TopIndex" });
-        this.resetState();
       } catch (error) {
         console.log(error);
       }
-    },
-    resetState() {
-      this.$store.commit("googleMealOutStores/resetState");
-      this.$store.commit("googleMealHomeStores/resetState");
-      this.$store.commit("resetRakutenState");
-      this.$store.commit("resetRecipesState");
-      localStorage.removeItem("cheatDayMaster");
     },
   },
 };

@@ -89,7 +89,6 @@
             <div class="mt-6">
               <router-link
                 :to="{ name: 'TopIndex' }"
-                @click.native="resetState()"
                 class="rounded-full bg-orange-300 text-center p-2"
                 >ホームに戻る</router-link
               >
@@ -394,11 +393,6 @@ export default {
         event.preventDefault();
       }
       this.isLoading = true;
-    },
-    resetState() {
-      this.$store.commit("googleMealOutStores/resetState");
-      this.$store.commit("googleMealHomeStores/resetState");
-      localStorage.removeItem("cheatDayMaster");
     },
   },
 };
