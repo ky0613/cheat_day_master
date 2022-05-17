@@ -24,7 +24,7 @@ import axios from "../plugins/axios";
 export default {
   data() {
     return {
-      redirectUrl: "http://127.0.0.1:3000/oauth/callback",
+      redirectUrl: "http://www.cheatday-master.com/oauth/callback",
       token: "",
     };
   },

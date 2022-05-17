@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const production = "https://www.cheat-day-master.com";
+const production = "https://www.cheatday-master.com";
 const development = "http://127.0.0.1:3000";
 const url = process.env.NODE_ENV === "production" ? production : development;
 
