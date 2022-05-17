@@ -1,4 +1,5 @@
 class Api::ItemsController < ApplicationController
+
   def index
     @items = current_user.items.all
     render json: @items

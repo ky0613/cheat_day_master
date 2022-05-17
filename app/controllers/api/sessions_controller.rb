@@ -1,5 +1,10 @@
 class Api::SessionsController < ApplicationController
 
+  def index
+    set_csrf_token
+    render json: {}, status: :ok
+  end
+
   def create
     if params[:email]
       user = User.authenticate(params[:email], params[:password])

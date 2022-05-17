@@ -57,6 +57,14 @@
             >
               ログインする
             </button>
+            <p class="text-center my-3">
+              パスワードをお忘れの方は
+              <router-link
+                :to="{ name: 'ResetPasswordCreate' }"
+                class="text-blue-800 hover:text-blue-400"
+                >こちら</router-link
+              >
+            </p>
             <TwitterLoginButton />
             <div class="flex justify-center items-center bg-gray-100 p-4">
               <p class="text-gray-500 text-sm text-center">

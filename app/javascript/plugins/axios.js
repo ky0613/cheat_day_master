@@ -6,6 +6,10 @@ const url = process.env.NODE_ENV === "production" ? production : development;
 
 const axiosConfig = axios.create({ baseURL: `${url}/api/` });
 
+axiosConfig.defaults.xsrfCookieName = "CSRF-TOKEN";
+axiosConfig.defaults.xsrfHeaderName = "X-CSRF-Token";
+axiosConfig.defaults.withCredentials = true;
+
 if (localStorage.auth_token) {
   axiosConfig.defaults.headers.common[
     "Authorization"
