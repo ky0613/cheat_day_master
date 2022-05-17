@@ -15,11 +15,15 @@
 <script>
 import TheHeader from "./components/TheHeader";
 import TheFooter from "./components/TheFooter";
+import axios from "./plugins/axios";
 
 export default {
   components: {
     TheHeader,
     TheFooter,
+  },
+  mounted() {
+    axios.get("sessions");
   },
 };
 </script>

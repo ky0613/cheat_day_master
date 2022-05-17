@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  mount LetterOpenerWeb::Engine, at: '/letter_opener' if Rails.env.development?
+
   root to: 'home#index'
   namespace :api do
     resources :rakuten_items, only: %i(index)
@@ -21,11 +23,10 @@ Rails.application.routes.draw do
 
     # 外部連携ログイン
     post "oauth/callback", to: "oauths#callback"
-    # get "oauth/callback", to: "oauths#callback"
     get "oauth/:provider", to: "oauths#oauth", as: :auth_at_provider
 
     # パスワードリセット
-    resources :password_resets, only: [:create, :update]
+    resources :password_resets, only: %i(create update), param: :token
   end
   get '*path', to: 'home#index'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html

@@ -10,6 +10,7 @@ module CheatDayMaster
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 6.1
+    config.api_only = true
 
     config.paths.add 'lib', eager_load: true
     config.middleware.use ActionDispatch::Flash
@@ -31,5 +32,9 @@ module CheatDayMaster
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
+
+    config.middleware.use ActionDispatch::Cookies
+    config.middleware.use ActionDispatch::Session::CookieStore
+    config.middleware.use ActionDispatch::ContentSecurityPolicy::Middleware
   end
 end
