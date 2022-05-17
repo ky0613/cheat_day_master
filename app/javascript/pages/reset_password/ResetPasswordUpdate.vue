@@ -4,32 +4,12 @@
       <p
         class="text-gray-800 text-2xl lg:text-3xl font-bold text-center mb-4 md:mb-8"
       >
-        ログイン
+        パスワードリセット
       </p>
       <div class="max-w-lg border rounded-lg mx-auto bg-white">
         <ValidationObserver v-slot="ObserverProps">
           <div class="flex flex-col gap-4 p-4 md:p-8">
-            <ValidationProvider rules="required|email" mode="lazy">
-              <div slot-scope="ProviderProps">
-                <label
-                  for="email"
-                  class="inline-block text-gray-800 text-sm sm:text-base mb-2"
-                  >メールアドレス</label
-                >
-                <input
-                  name="email"
-                  class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
-                  placeholder="test@example.com"
-                  autocomplete="email"
-                  type="email"
-                  v-model="user.email"
-                />
-                <span class="text-red-500 text-center">{{
-                  ProviderProps.errors[0]
-                }}</span>
-              </div>
-            </ValidationProvider>
-            <ValidationProvider rules="required" mode="aggressive">
+            <ValidationProvider rules="required" mode="lazy">
               <div slot-scope="ProviderProps">
                 <label
                   for="password"
@@ -39,10 +19,30 @@
                 <input
                   name="password"
                   class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
-                  type="password"
                   placeholder="password"
                   autocomplete="new-password"
+                  type="password"
                   v-model="user.password"
+                />
+                <span class="text-red-500 text-center">{{
+                  ProviderProps.errors[0]
+                }}</span>
+              </div>
+            </ValidationProvider>
+            <ValidationProvider rules="required" mode="aggressive">
+              <div slot-scope="ProviderProps">
+                <label
+                  for="password-confirmation"
+                  class="inline-block text-gray-800 text-sm sm:text-base mb-2"
+                  >パスワード（確認）</label
+                >
+                <input
+                  name="password-confirmation"
+                  class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
+                  placeholder="password"
+                  autocomplete="new-password"
+                  type="password"
+                  v-model="user.password_confirmation"
                 />
                 <span class="text-red-500 text-center">{{
                   ProviderProps.errors[0]
@@ -53,29 +53,10 @@
               type="button"
               class="block bg-gray-800 hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
               :disabled="ObserverProps.invalid || !ObserverProps.validated"
-              @click="login"
+              @click="changePassword"
             >
-              ログインする
+              パスワードを変更する
             </button>
-            <p class="text-center my-3">
-              パスワードをお忘れの方は
-              <router-link
-                :to="{ name: 'ResetPasswordCreate' }"
-                class="text-blue-800 hover:text-blue-400"
-                >こちら</router-link
-              >
-            </p>
-            <TwitterLoginButton />
-            <div class="flex justify-center items-center bg-gray-100 p-4">
-              <p class="text-gray-500 text-sm text-center">
-                まだアカウントを作成してない方は
-                <router-link
-                  :to="{ name: 'RegisterIndex' }"
-                  class="text-indigo-500 hover:text-indigo-600 active:text-indigo-700 transition duration-100"
-                  >新規登録へ</router-link
-                >
-              </p>
-            </div>
           </div>
         </ValidationObserver>
       </div>
@@ -84,49 +65,34 @@
 </template>
 
 <script>
-import { mapActions } from "vuex";
 import { extend, ValidationProvider, ValidationObserver } from "vee-validate";
-import { required, email } from "vee-validate/dist/rules";
-import TwitterLoginButton from "../../components/TwitterLoginButton.vue";
+import { required } from "vee-validate/dist/rules";
+import axios from "../../plugins/axios";
 
 required.message = "必須項目です。入力してください。";
-email.message = "メールの形式ではありません";
 
 extend("required", required);
-extend("email", email);
 
 export default {
-  name: "LoginIndex",
-  components: {
-    ValidationProvider,
-    ValidationObserver,
-    TwitterLoginButton,
-  },
+  name: "ResetPasswordUpdate",
   data() {
     return {
       user: {
-        email: "",
         password: "",
+        password_confirmation: "",
       },
     };
   },
+  components: {
+    ValidationProvider,
+    ValidationObserver,
+  },
   methods: {
-    ...mapActions(["loginUser", "fetchUser"]),
-    async login() {
-      try {
-        await this.loginUser(this.user);
-        this.$router.push({ name: "TopIndex" });
-        this.resetState();
-      } catch (error) {
-        console.log(error);
-      }
-    },
-    resetState() {
-      this.$store.commit("googleMealOutStores/resetState");
-      this.$store.commit("googleMealHomeStores/resetState");
-      this.$store.commit("resetRakutenState");
-      this.$store.commit("resetRecipesState");
-      localStorage.removeItem("cheatDayMaster");
+    async changePassword() {
+      await axios.patch(`password_resets/${this.$route.query.token}`, {
+        user: this.user,
+      });
+      this.$router.push({ name: "TopIndex" });
     },
   },
 };

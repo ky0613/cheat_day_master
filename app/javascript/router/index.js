@@ -13,6 +13,8 @@ import LoginIndex from "../pages/login/index.vue";
 import RegisterIndex from "../pages/register/index.vue";
 import BookmarkIndex from "../pages/bookmark/index.vue";
 import oauthCallback from "../pages/login/oauthCallback.vue";
+import ResetPasswordCreate from "../pages/reset_password/ResetPasswordCreate.vue";
+import ResetPasswordUpdate from "../pages/reset_password/ResetPasswordUpdate.vue";
 
 Vue.use(Router);
 
@@ -73,6 +75,16 @@ const router = new Router({
       path: "/oauth/callback",
       name: "oauthCallback",
       component: oauthCallback,
+    },
+    {
+      path: "/users/password_resets",
+      name: "ResetPasswordCreate",
+      component: ResetPasswordCreate,
+    },
+    {
+      path: "/users/password/edit",
+      name: "ResetPasswordUpdate",
+      component: ResetPasswordUpdate,
     },
   ],
   scrollBehavior(to, from, savedPosition) {
