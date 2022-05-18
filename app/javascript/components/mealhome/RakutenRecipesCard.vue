@@ -1,7 +1,7 @@
 <template>
   <div class="p-6 flex justify-between">
     <div
-      class="mx-2 overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
+      class="mx-2 overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full border"
       v-for="recipe of recipes"
       :key="recipe.recipe_id"
     >

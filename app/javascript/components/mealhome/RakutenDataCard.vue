@@ -1,9 +1,9 @@
 <template>
-  <div>
+  <div class="border-solid">
     <Carousel :perPage="3" :paginationPadding="4" class="p-1">
       <Slide v-for="item of items" :key="item.item_id" class="px-2 my-3">
         <div
-          class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
+          class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full border"
         >
           <div class="w-full">
             <a

@@ -3,7 +3,7 @@
     <Carousel :perPage="3" :paginationPadding="4">
       <Slide v-for="store of stores" :key="store.store_id" class="px-2 my-3">
         <div
-          class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
+          class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full border"
         >
           <a :href="store.store_url" target="_blank">
             <img
