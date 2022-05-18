@@ -215,10 +215,10 @@ export default {
         });
     });
   },
-  created() {
-    this.fetchHotPepperStores(this.destinationPositionData.latLng);
-    this.fetchYelpStores(this.destinationPositionData.latLng);
-    this.fetchDescriptions();
+  async created() {
+    await this.fetchHotPepperStores(this.destinationPositionData.latLng);
+    await this.fetchYelpStores(this.destinationPositionData.latLng);
+    await this.fetchDescriptions();
   },
   methods: {
     ...mapActions([
