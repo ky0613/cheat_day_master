@@ -1,6 +1,6 @@
 <template>
   <div class="flex flex-col mt-5">
-    <div class="w-full grid grid-cols-3 gap-4" v-if="stores">
+    <div class="w-full grid grid-cols-3 gap-4" v-if="stores.length !== 0">
       <div v-for="store in stores" :key="store.id">
         <div
           class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full flex flex-col"
@@ -47,7 +47,7 @@
         </div>
       </div>
     </div>
-    <div v-else class="mt-48">
+    <div v-else class="mt-24 mx-auto">
       <p class="text-center text-6xl yomogi">
         まだお気に入りが <br />
         登録されていません。

@@ -48,7 +48,7 @@
         </div>
       </div>
     </div>
-    <div v-else class="mt-48">
+    <div v-else class="mt-24 mx-auto">
       <p class="text-center text-6xl yomogi">
         まだお気に入りが <br />
         登録されていません。
