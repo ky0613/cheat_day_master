@@ -32,8 +32,8 @@ export default {
   computed: {
     ...mapGetters(["savedItems", "authUser"]),
   },
-  created() {
-    this.fetchItems();
+  mounted() {
+    if (this.authUser) this.fetchItems();
   },
   methods: {
     ...mapActions(["fetchItems", "addItem", "deleteItem"]),
