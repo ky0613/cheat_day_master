@@ -1,4 +1,5 @@
 class Api::StoresController < ApplicationController
+  before_action :authenticate!
 
   def index
     @stores = current_user.stores.all

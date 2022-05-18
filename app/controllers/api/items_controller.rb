@@ -1,4 +1,5 @@
 class Api::ItemsController < ApplicationController
+  before_action :authenticate!
 
   def index
     @items = current_user.items.all
