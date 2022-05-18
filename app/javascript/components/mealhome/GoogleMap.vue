@@ -353,7 +353,7 @@ export default {
         setTimeout(() => {
           self.isLoading = false;
           self.$router.push({ name: "MealHomeResult" });
-        }, 700);
+        }, 1000);
       });
 
       function storeSearch() {
