@@ -42,7 +42,7 @@ module.exports = {
     },
   },
   variants: {
-    extend: {},
+    backgroundColor: ["responsive", "hover", "focus", "disabled"],
   },
   plugins: [require("@tailwindcss/line-clamp")],
 };
