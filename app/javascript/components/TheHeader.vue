@@ -92,6 +92,10 @@ export default {
     async handleLogout() {
       try {
         await this.logoutUser();
+        this.$store.dispatch("setFlash", {
+          type: "success",
+          message: "ログアウトしました。",
+        });
         this.resetState();
       } catch (error) {
         console.log(error);
