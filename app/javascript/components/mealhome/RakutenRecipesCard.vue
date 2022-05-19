@@ -23,11 +23,11 @@
       <div class="flex">
         <div class="p-2 flex flex-col">
           <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">
-            <img src="../../../../public/money.svg" class="w-5 h-5" />
+            <img src="../../../../public/img/money.svg" class="w-5 h-5" />
             <p class="px-2 text-sm">{{ recipe.cost }}</p>
           </div>
           <div class="flex items-left mt-4 text-gray-700 dark:text-gray-200">
-            <img src="../../../../public/time.svg" class="w-5 h-5" />
+            <img src="../../../../public/img/time.svg" class="w-5 h-5" />
             <p class="px-2 text-sm">{{ recipe.indication }}</p>
           </div>
         </div>

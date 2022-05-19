@@ -14,7 +14,10 @@
           </p>
         </div>
         <div class="flex items-center mb-10">
-          <img src="Best_place.svg" class="max-w-1/2 h-auto mb-10 mr-10" />
+          <img
+            src="../../../../public/img/Best_place.svg"
+            class="max-w-1/2 h-auto mb-10 mr-10"
+          />
           <router-link
             :to="{ name: 'MealOut' }"
             class="rounded-lg bg-orange-500 p-2 text-center hover:bg-orange-300 text-white text-xl font-bold"
@@ -23,7 +26,10 @@
           >
         </div>
         <div class="flex items-center">
-          <img src="at_home.svg" class="max-w-1/2 h-auto mb-10 mr-10" />
+          <img
+            src="../../../../public/img/at_home.svg"
+            class="max-w-1/2 h-auto mb-10 mr-10"
+          />
           <router-link
             :to="{ name: 'MealHome' }"
             class="rounded-lg bg-orange-500 p-2 text-center hover:bg-orange-300 text-white text-xl font-bold"
@@ -32,7 +38,10 @@
           >
         </div>
       </div>
-      <img src="undraw_healthy_options_re_lf9l.svg" class="w-1/2" />
+      <img
+        src="../../../../public/img/undraw_healthy_options_re_lf9l.svg"
+        class="w-1/2"
+      />
     </div>
   </div>
 </template>

@@ -7,7 +7,7 @@
         class="inline-block"
       >
         <img
-          src="../../../public/logo.png"
+          src="../../../public/img/logo.png"
           alt="logo"
           class="max-w-xs h-auto"
         />
