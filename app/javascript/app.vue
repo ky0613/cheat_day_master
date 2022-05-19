@@ -2,6 +2,7 @@
   <div id="app">
     <body class="flex flex-col min-h-screen">
       <TheHeader />
+      <TheFlashMessage v-if="isFlash" />
       <main class="flex flex-1">
         <div class="mx-auto max-w-4xl w-full">
           <router-view />
@@ -15,12 +16,18 @@
 <script>
 import TheHeader from "./components/TheHeader";
 import TheFooter from "./components/TheFooter";
+import TheFlashMessage from "./components/TheFlashMessage.vue";
 import axios from "./plugins/axios";
+import { mapGetters } from "vuex";
 
 export default {
   components: {
     TheHeader,
     TheFooter,
+    TheFlashMessage,
+  },
+  computed: {
+    ...mapGetters(["isFlash"]),
   },
   mounted() {
     axios.get("sessions");
