@@ -24,13 +24,12 @@ import axios from "../plugins/axios";
 export default {
   data() {
     return {
-      redirectUrl: "http://www.cheatday-master.com/oauth/callback",
       token: "",
     };
   },
   computed: {
     twitterOauthUrl() {
-      return `https://api.twitter.com/oauth/authenticate?oauth_token=${this.token}&oauth_callback=${this.redirectUrl}`;
+      return `https://api.twitter.com/oauth/authenticate?oauth_token=${this.token}`;
     },
   },
   mounted() {
