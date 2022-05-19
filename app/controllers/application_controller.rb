@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   # herokuapp.comから独自ドメインへリダイレクトさせる
-  before_filter :ensure_domain
+  before_action :ensure_domain
   FQDN = 'www.cheatday-master.com'
 
   def ensure_domain
