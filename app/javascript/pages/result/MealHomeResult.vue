@@ -64,8 +64,7 @@
     <div class="my-6 w-full text-center">
       <router-link
         :to="{ name: 'TopIndex' }"
-        @click.native="resetState()"
-        class="rounded-full bg-orange-300 text-center py-2 px-9"
+        class="rounded-lg bg-orange-300 hover:bg-orange-400 text-center py-2 px-9"
         >ホームに戻る</router-link
       >
     </div>
@@ -94,13 +93,6 @@ export default {
   },
   methods: {
     ...mapActions(["fetchDescriptions"]),
-    resetState() {
-      this.$store.commit("googleMealOutStores/resetState");
-      this.$store.commit("googleMealHomeStores/resetState");
-      this.$store.commit("resetRakutenState");
-      this.$store.commit("resetRecipesState");
-      localStorage.removeItem("cheatDayMaster");
-    },
   },
 };
 </script>

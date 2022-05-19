@@ -3,7 +3,7 @@
     <body class="flex flex-col min-h-screen">
       <TheHeader />
       <main class="flex flex-1">
-        <div class="m-auto max-w-4xl w-full">
+        <div class="mx-auto max-w-4xl w-full">
           <router-view />
         </div>
       </main>

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="min-h-full">
     <p class="text-3xl text-center mt-5">ブックマーク一覧</p>
     <div class="flex mb-3 mt-5 justify-between">
       <div v-for="tabKind in tabKinds" :key="tabKind.tabType">
@@ -12,30 +12,36 @@
         </BookmarkTabButton>
       </div>
     </div>
-    <transition>
+    <transition name="slide" mode="out-in" class="">
       <StoreBookmarkIndex
         v-if="isActive === 'GoogleStore'"
+        key="GoogleStore"
         :stores="googleStores"
       />
       <HotPepperStoreBookmarkIndex
         v-if="isActive === 'HotpepperStore'"
         :stores="hotpepperStores"
+        key="HotpepperStore"
       />
       <StoreBookmarkIndex
         v-if="isActive === 'YelpStore'"
         :stores="yelpStores"
+        key="YelpStore"
       />
       <ItemBookmarkIndex
         v-if="isActive === 'RakutenFood'"
         :items="rakutenFoods"
+        key="RakutenFood"
       />
       <ItemBookmarkIndex
         v-if="isActive === 'RakutenSweet'"
         :items="rakutenSweets"
+        key="RakutenSweet"
       />
       <RecipeBookmarkIndex
         v-if="isActive === 'Recipe'"
         :recipes="savedRecipes"
+        key="Recipe"
       />
     </transition>
   </div>
@@ -113,9 +119,6 @@ export default {
       this.isActive = value;
     },
   },
-  destroyed() {
-    console.log("destroyed!!!!!!!!");
-  },
 };
 </script>
 
@@ -126,13 +129,27 @@ p {
   font-family: "Yomogi", cursive;
 }
 
-.v-enter {
+.slide-enter,
+.slide-leave-to {
   opacity: 0;
 }
-.v-enter-active {
-  transition: opacity 2s;
+
+.slide-enter-active {
+  animation: slide-in 0.5s;
+  transition: opacity 0.5s;
 }
-.v-enter-to {
-  opacity: 1;
+
+.slide-leave-active {
+  animation: slide-in 0.5s reverse;
+  transition: opacity 0.5s;
+}
+
+@keyframes slide-in {
+  from {
+    transform: translateX(100px);
+  }
+  to {
+    transform: translateX(0px);
+  }
 }
 </style>

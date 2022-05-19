@@ -90,8 +90,7 @@
     <div class="my-6 w-full text-center">
       <router-link
         :to="{ name: 'TopIndex' }"
-        @click.native="resetState()"
-        class="rounded-full bg-orange-300 text-center py-2 px-9"
+        class="rounded-lg bg-orange-300 hover:bg-orange-400 text-center py-2 px-9"
         >ホームに戻る</router-link
       >
     </div>
@@ -216,10 +215,10 @@ export default {
         });
     });
   },
-  created() {
-    this.fetchHotPepperStores(this.destinationPositionData.latLng);
-    this.fetchYelpStores(this.destinationPositionData.latLng);
-    this.fetchDescriptions();
+  async created() {
+    await this.fetchHotPepperStores(this.destinationPositionData.latLng);
+    await this.fetchYelpStores(this.destinationPositionData.latLng);
+    await this.fetchDescriptions();
   },
   methods: {
     ...mapActions([
@@ -227,11 +226,6 @@ export default {
       "fetchYelpStores",
       "fetchDescriptions",
     ]),
-    resetState() {
-      this.$store.commit("googleMealOutStores/resetState");
-      this.$store.commit("googleMealHomeStores/resetState");
-      localStorage.removeItem("cheatDayMaster");
-    },
   },
 };
 </script>

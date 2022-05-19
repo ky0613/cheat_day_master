@@ -57,8 +57,8 @@
             <ul>
               <li class="flex my-2 items-center justify-center">
                 <label for="genre" class="mr-3 text-gray-500 font-bold w-40"
-                  >食品ジャンル</label
-                >
+                  >食品ジャンル
+                </label>
                 <select
                   name="genre"
                   v-model="foodGenre"
@@ -76,8 +76,8 @@
               </li>
               <li class="flex my-2 items-center justify-center">
                 <label for="genre" class="mr-3 text-gray-500 font-bold w-40"
-                  >スイーツジャンル</label
-                >
+                  >スイーツジャンル
+                </label>
                 <select
                   name="genre"
                   v-model="sweetGenre"
@@ -95,8 +95,8 @@
               </li>
               <li class="flex my-2 items-center justify-center">
                 <label for="genre" class="mr-3 text-gray-500 font-bold w-40"
-                  >レシピカテゴリー</label
-                >
+                  >レシピカテゴリー
+                </label>
                 <select
                   name="genre"
                   v-model="recipeCategory"
@@ -115,21 +115,19 @@
             </ul>
           </template>
           <div class="flex flex-col mb-6 mt-6">
-            <div @click.capture="clicked" class="w-fit mx-auto">
-              <button
-                type="button"
-                id="getRoute"
-                class="cursor-pointer rounded-full bg-orange-300 p-2 mb-3 text-center max-w-lg"
-                @click="setRakuten()"
-              >
-                周辺を検索する
-              </button>
-            </div>
+            <button
+              type="button"
+              id="getDelivery"
+              :disabled="isValidation"
+              class="rounded-lg bg-orange-300 hover:bg-orange-400 disabled:bg-orange-200 p-2 mb-3 text-center max-w-lg mx-auto"
+              @click="setRakuten()"
+            >
+              周辺を検索する
+            </button>
             <div class="mt-6 w-fit mx-auto">
               <router-link
                 :to="{ name: 'TopIndex' }"
-                @click.native="resetState()"
-                class="rounded-full bg-orange-300 text-center p-2"
+                class="rounded-lg bg-orange-300 hover:bg-orange-400 text-center p-2"
                 >ホームに戻る</router-link
               >
             </div>
@@ -348,13 +346,12 @@ export default {
           });
         });
       }
-      document.getElementById("getRoute").addEventListener("click", () => {
-        self.clicked();
+      document.getElementById("getDelivery").addEventListener("click", () => {
         storeSearch();
         setTimeout(() => {
           self.isLoading = false;
           self.$router.push({ name: "MealHomeResult" });
-        }, 700);
+        }, 1000);
       });
 
       function storeSearch() {
@@ -402,21 +399,7 @@ export default {
         this.isStartModalShown = false;
       }, 100);
     },
-    clicked(event) {
-      if (this.isValidation) {
-        event.preventDefault();
-      }
-    },
-    resetState() {
-      this.$store.commit("googleMealOutStores/resetState");
-      this.$store.commit("googleMealHomeStores/resetState");
-      localStorage.removeItem("cheatDayMaster");
-    },
-    setRakuten(event) {
-      if (this.isValidation) {
-        this.validateSwitch = true;
-        event.preventDefault();
-      }
+    setRakuten() {
       this.fetchRakutenItems(this.foodGenre);
       this.fetchRakutenSweets(this.sweetGenre);
       this.fetchRakutenRecipes(this.recipeCategory);

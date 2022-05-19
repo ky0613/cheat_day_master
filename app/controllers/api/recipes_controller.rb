@@ -1,4 +1,5 @@
 class Api::RecipesController < ApplicationController
+  before_action :authenticate!
 
   def index
     @recipes = current_user.recipes.all

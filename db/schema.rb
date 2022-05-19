@@ -90,7 +90,7 @@ ActiveRecord::Schema.define(version: 2022_05_16_115721) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.string "name"
+    t.string "name", null: false
     t.string "email"
     t.string "crypted_password"
     t.string "salt"

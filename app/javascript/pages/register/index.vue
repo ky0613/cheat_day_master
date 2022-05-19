@@ -91,7 +91,7 @@
             </ValidationProvider>
             <button
               type="button"
-              class="block bg-gray-800 hover:bg-gray-700 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
+              class="block bg-orange-300 hover:bg-orange-400 disabled:bg-orange-200 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
               :disabled="ObserverProps.invalid || !ObserverProps.validated"
               @click="register"
             >
@@ -135,23 +135,15 @@ export default {
     };
   },
   methods: {
-    async register() {
-      await axios
+    register() {
+      axios
         .post("users", { user: this.user })
         .then((res) => {
           this.$router.push({ name: "LoginIndex" });
-          this.resetState();
         })
         .catch((err) => {
           console.log(err);
         });
-    },
-    resetState() {
-      this.$store.commit("googleMealOutStores/resetState");
-      this.$store.commit("googleMealHomeStores/resetState");
-      this.$store.commit("resetRakutenState");
-      this.$store.commit("resetRecipesState");
-      localStorage.removeItem("cheatDayMaster");
     },
   },
 };

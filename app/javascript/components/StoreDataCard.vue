@@ -7,7 +7,7 @@
         class="px-2 my-3"
       >
         <div
-          class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
+          class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full border"
         >
           <a
             :href="`https://maps.google.co.jp/maps?q=place_id:${store.store_id}`"

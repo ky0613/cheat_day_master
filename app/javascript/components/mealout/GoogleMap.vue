@@ -76,21 +76,19 @@
             >現在地または目的地に地点が登録されていません。</span
           >
           <div class="flex flex-col mb-6 mt-6">
-            <div @click="clicked" class="w-fit mx-auto">
-              <button
-                type="button"
-                id="getRoute"
-                @click="startLoading()"
-                class="cursor-pointer rounded-full bg-orange-300 text-center p-2 mb-3"
-              >
-                ルートを検索する
-              </button>
-            </div>
+            <button
+              type="button"
+              id="getRoute"
+              :disabled="isValidation"
+              @click="startLoading()"
+              class="rounded-lg bg-orange-300 hover:bg-orange-400 disabled:bg-orange-200 text-center p-2 mb-3 mx-auto"
+            >
+              ルートを検索する
+            </button>
             <div class="mt-6">
               <router-link
                 :to="{ name: 'TopIndex' }"
-                @click.native="resetState()"
-                class="rounded-full bg-orange-300 text-center p-2"
+                class="rounded-lg bg-orange-300 hover:bg-orange-400 text-center p-2"
                 >ホームに戻る</router-link
               >
             </div>
@@ -331,12 +329,12 @@ export default {
         });
       }
       document.getElementById("getRoute").addEventListener("click", () => {
-        self.clicked();
+        console.log("getRouteGOGOGO!!!");
         storeSearch();
         setTimeout(() => {
           self.isLoading = false;
           self.$router.push({ name: "MealOutResult" });
-        }, 700);
+        }, 1000);
       });
 
       function storeSearch() {
@@ -382,23 +380,8 @@ export default {
         this.isDestinationModalShown = false;
       }, 100);
     },
-    clicked(event) {
-      this.validateSwitch = true;
-      if (this.isValidation) {
-        event.preventDefault();
-      }
-    },
-    startLoading(event) {
-      if (this.isValidation) {
-        this.validateSwitch = true;
-        event.preventDefault();
-      }
+    startLoading() {
       this.isLoading = true;
-    },
-    resetState() {
-      this.$store.commit("googleMealOutStores/resetState");
-      this.$store.commit("googleMealHomeStores/resetState");
-      localStorage.removeItem("cheatDayMaster");
     },
   },
 };

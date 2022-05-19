@@ -32,8 +32,8 @@ export default {
   computed: {
     ...mapGetters(["savedRecipes", "authUser"]),
   },
-  created() {
-    this.fetchRecipes();
+  mounted() {
+    if (this.authUser) this.fetchRecipes();
   },
   methods: {
     ...mapActions(["fetchRecipes", "addRecipe", "deleteRecipe"]),
