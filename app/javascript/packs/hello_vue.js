@@ -9,6 +9,8 @@ import Vue from "vue";
 import App from "../app.vue";
 import router from "../router";
 import store from "../store";
+import veeValidate from "../plugins/vee-validate";
+Vue.mixin(veeValidate);
 
 document.addEventListener("DOMContentLoaded", () => {
   const app = new Vue({

@@ -9,7 +9,7 @@
       <div class="max-w-lg border rounded-lg mx-auto bg-white">
         <ValidationObserver v-slot="ObserverProps">
           <div class="flex flex-col gap-4 p-4 md:p-8">
-            <ValidationProvider rules="required" mode="lazy">
+            <ValidationProvider rules="required|max:25">
               <div slot-scope="ProviderProps">
                 <label
                   for="name"
@@ -18,7 +18,7 @@
                   >名前</label
                 >
                 <input
-                  name="name"
+                  name="名前"
                   class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
                   placeholder="name"
                   autocomplete="username"
@@ -29,15 +29,15 @@
                 }}</span>
               </div>
             </ValidationProvider>
-            <ValidationProvider rules="required|email" mode="lazy">
+            <ValidationProvider rules="required|email">
               <div slot-scope="ProviderProps">
                 <label
-                  for="email"
+                  for="メール"
                   class="inline-block text-gray-800 text-sm sm:text-base mb-2"
                   >メールアドレス</label
                 >
                 <input
-                  name="email"
+                  name="メールアドレス"
                   class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
                   placeholder="test@example.com"
                   autocomplete="email"
@@ -49,7 +49,7 @@
                 }}</span>
               </div>
             </ValidationProvider>
-            <ValidationProvider rules="required" mode="lazy">
+            <ValidationProvider rules="required|min:6">
               <div slot-scope="ProviderProps">
                 <label
                   for="password"
@@ -57,7 +57,7 @@
                   >パスワード</label
                 >
                 <input
-                  name="password"
+                  name="パスワード"
                   class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
                   placeholder="password"
                   autocomplete="new-password"
@@ -69,7 +69,7 @@
                 }}</span>
               </div>
             </ValidationProvider>
-            <ValidationProvider rules="required" mode="aggressive">
+            <ValidationProvider rules="required|min:6" mode="aggressive">
               <div slot-scope="ProviderProps">
                 <label
                   for="password-confirmation"
@@ -77,7 +77,7 @@
                   >パスワード（確認）</label
                 >
                 <input
-                  name="password-confirmation"
+                  name="パスワード"
                   class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
                   placeholder="password"
                   autocomplete="new-password"
@@ -97,6 +97,7 @@
             >
               新規登録する
             </button>
+            <span class="text-red-500 text-center">{{ errorMessage }}</span>
             <TwitterLoginButton />
           </div>
         </ValidationObserver>
@@ -107,21 +108,11 @@
 
 <script>
 import axios from "../../plugins/axios";
-import { extend, ValidationProvider, ValidationObserver } from "vee-validate";
-import { required, email } from "vee-validate/dist/rules";
 import TwitterLoginButton from "../../components/TwitterLoginButton.vue";
-
-required.message = "必須項目です。入力してください。";
-email.message = "メールの形式で入力してください。";
-
-extend("required", required);
-extend("email", email);
 
 export default {
   name: "RegisterIndex",
   components: {
-    ValidationProvider,
-    ValidationObserver,
     TwitterLoginButton,
   },
   data() {
@@ -132,6 +123,7 @@ export default {
         password: "",
         password_confirmation: "",
       },
+      errorMessage: "",
     };
   },
   methods: {
@@ -139,10 +131,19 @@ export default {
       axios
         .post("users", { user: this.user })
         .then((res) => {
+          this.$store.dispatch("setFlash", {
+            type: "success",
+            message: "登録しました。",
+          });
           this.$router.push({ name: "LoginIndex" });
         })
-        .catch((err) => {
-          console.log(err);
+        .catch((error) => {
+          console.log(error.response);
+          this.errorMessage = error.response.data.errors.detail;
+          this.$store.dispatch("setFlash", {
+            type: "error",
+            message: "登録に失敗しました。",
+          });
         });
     },
   },

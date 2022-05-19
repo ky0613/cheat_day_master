@@ -21,7 +21,6 @@ const actions = {
     commit("setUser", userResponse.data);
   },
   logoutUser({ commit }) {
-    // ログアウト
     localStorage.removeItem("auth_token");
     axios.defaults.headers.common["Authorization"] = "";
     commit("setUser", null);

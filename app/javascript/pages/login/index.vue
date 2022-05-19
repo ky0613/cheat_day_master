@@ -9,7 +9,7 @@
       <div class="max-w-lg border rounded-lg mx-auto bg-white">
         <ValidationObserver v-slot="ObserverProps">
           <div class="flex flex-col gap-4 p-4 md:p-8">
-            <ValidationProvider rules="required|email" mode="lazy">
+            <ValidationProvider rules="required|email">
               <div slot-scope="ProviderProps">
                 <label
                   for="email"
@@ -17,7 +17,7 @@
                   >メールアドレス</label
                 >
                 <input
-                  name="email"
+                  name="メールアドレス"
                   class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
                   placeholder="test@example.com"
                   autocomplete="email"
@@ -29,7 +29,7 @@
                 }}</span>
               </div>
             </ValidationProvider>
-            <ValidationProvider rules="required" mode="aggressive">
+            <ValidationProvider rules="required|min:6" mode="aggressive">
               <div slot-scope="ProviderProps">
                 <label
                   for="password"
@@ -37,7 +37,7 @@
                   >パスワード</label
                 >
                 <input
-                  name="password"
+                  name="パスワード"
                   class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
                   type="password"
                   placeholder="password"
@@ -57,6 +57,7 @@
             >
               ログインする
             </button>
+            <span class="text-red-500 text-center">{{ errorMessage }}</span>
             <p class="text-center my-3">
               パスワードをお忘れの方は
               <router-link
@@ -85,21 +86,11 @@
 
 <script>
 import { mapActions } from "vuex";
-import { extend, ValidationProvider, ValidationObserver } from "vee-validate";
-import { required, email } from "vee-validate/dist/rules";
 import TwitterLoginButton from "../../components/TwitterLoginButton.vue";
-
-required.message = "必須項目です。入力してください。";
-email.message = "メールの形式ではありません";
-
-extend("required", required);
-extend("email", email);
 
 export default {
   name: "LoginIndex",
   components: {
-    ValidationProvider,
-    ValidationObserver,
     TwitterLoginButton,
   },
   data() {
@@ -108,6 +99,7 @@ export default {
         email: "",
         password: "",
       },
+      errorMessage: "",
     };
   },
   methods: {
@@ -115,9 +107,17 @@ export default {
     async login() {
       try {
         await this.loginUser(this.user);
+        this.$store.dispatch("setFlash", {
+          type: "success",
+          message: "ログインしました。",
+        });
         this.$router.push({ name: "TopIndex" });
       } catch (error) {
-        console.log(error);
+        this.$store.dispatch("setFlash", {
+          type: "error",
+          message: "ログインに失敗しました。",
+        });
+        this.errorMessage = error.response.data.errors.detail;
       }
     },
   },
