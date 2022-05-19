@@ -13,11 +13,9 @@ class Api::SessionsController < ApplicationController
       auto_login(user)
     end
 
-    if user
-      token = user.create_tokens
-      render json: {token: token}
-    else
-      head :unauthorized
-    end
+    raise ActiveRecord::RecordNotFound unless user
+
+    token = user.create_tokens
+    render json: {token: token}
   end
 end

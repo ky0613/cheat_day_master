@@ -7,7 +7,7 @@ class Api::UsersController < ApplicationController
     if user.save
       render json: user
     else
-      render json: user.errors, status: :bad_request
+      raise ActiveRecord::RecordNotFound, user.errors.full_messages
     end
   end
 
