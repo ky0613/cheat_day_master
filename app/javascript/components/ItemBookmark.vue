@@ -2,14 +2,14 @@
   <div class="w-full">
     <div v-if="authUser">
       <img
-        src="../../../public/bookmark_added_black_24dp.svg"
+        src="../../../public/img/bookmark_added_black_24dp.svg"
         alt="bookmark"
         v-if="existItem(item)"
         @click="removeItem(item)"
         class="ml-auto mr-2 cursor-pointer"
       />
       <img
-        src="../../../public/bookmark_add_black_24dp.svg"
+        src="../../../public/img/bookmark_add_black_24dp.svg"
         alt="bookmark"
         v-else
         @click="addItem(item)"

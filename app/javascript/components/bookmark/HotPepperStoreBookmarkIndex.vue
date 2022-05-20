@@ -16,7 +16,7 @@
             <div
               class="flex items-center mt-4 text-gray-700 dark:text-gray-200 h-10"
             >
-              <img src="../../../../public/shop.svg" class="w-5 h-5" />
+              <img src="../../../../public/img/shop.svg" class="w-5 h-5" />
               <p class="px-2 text-l font-semibold text-center">
                 {{ store.name }}
               </p>
@@ -24,7 +24,7 @@
             <div
               class="flex items-center mt-4 text-gray-700 dark:text-gray-200 h-6"
             >
-              <img src="../../../../public/place.svg" class="w-5 h-5" />
+              <img src="../../../../public/img/place.svg" class="w-5 h-5" />
               <p class="px-2 text-sm">{{ store.address }}</p>
             </div>
           </div>

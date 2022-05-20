@@ -11,7 +11,7 @@
       class="block bg-twitter hover:bg-opacity-80 active:bg-gray-600 focus-visible:ring ring-gray-300 text-white text-sm md:text-base font-semibold text-center rounded-lg outline-none transition duration-100 px-8 py-3"
     >
       <div class="flex justify-center items-center">
-        <img src="../../../public/twitter.svg" class="h-6 w-6 mr-3" />
+        <img src="../../../public/img/twitter.svg" class="h-6 w-6 mr-3" />
         <p>Twitterでログインする</p>
       </div>
     </a>
@@ -24,13 +24,12 @@ import axios from "../plugins/axios";
 export default {
   data() {
     return {
-      redirectUrl: "http://www.cheatday-master.com/oauth/callback",
       token: "",
     };
   },
   computed: {
     twitterOauthUrl() {
-      return `https://api.twitter.com/oauth/authenticate?oauth_token=${this.token}&oauth_callback=${this.redirectUrl}`;
+      return `https://api.twitter.com/oauth/authenticate?oauth_token=${this.token}`;
     },
   },
   mounted() {

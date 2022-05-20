@@ -39,7 +39,7 @@
             ブックマーク機能がご利用いただけるようになります。
           </p>
           <img
-            src="../../../public/bookmarkimage.png"
+            src="../../../public/img/bookmarkimage.png"
             alt="mockup"
             class="w-3/4 h-auto mx-auto"
           />
@@ -51,7 +51,7 @@
             ジャンルも多岐に渡りますので、是非お楽しみください！
           </p>
           <img
-            src="../../../public/select.png"
+            src="../../../public/img/select.png"
             alt="mockup"
             class="w-3/4 h-auto mx-auto border border-orange-300"
           />

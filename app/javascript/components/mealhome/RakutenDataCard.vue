@@ -21,11 +21,11 @@
               class="flex flex-col mt-4 text-gray-700 dark:text-gray-200 justify-right"
             >
               <div class="flex mb-3">
-                <img src="../../../../public/money.svg" class="w-5 h-5" />
+                <img src="../../../../public/img/money.svg" class="w-5 h-5" />
                 <p class="px-2 text-base font-semibold">{{ item.price }}円</p>
               </div>
               <div class="flex">
-                <img src="../../../../public/shop.svg" class="w-5 h-5" />
+                <img src="../../../../public/img/shop.svg" class="w-5 h-5" />
                 <p class="px-2 text-sm">{{ item.shop_name }}</p>
               </div>
             </div>
