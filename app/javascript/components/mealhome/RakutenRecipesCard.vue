@@ -1,18 +1,18 @@
 <template>
-  <div class="p-6 flex justify-between">
+  <div class="md:p-6 grid grid-cols-2 md:grid-cols-4 gap-3 mx-1">
     <div
-      class="mx-2 overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full border"
+      class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full border"
       v-for="recipe of recipes"
       :key="recipe.recipe_id"
     >
       <img
-        class="object-cover object-center w-full h-56"
+        class="object-cover object-center w-full md:h-56 h-32"
         :src="recipe.img_url"
         alt="avatar"
       />
       <div class="w-full">
         <a
-          class="py-2 text-gray-700 dark:text-gray-400 text-sm hover:text-blue-400 hover:underline"
+          class="py-2 text-gray-700 dark:text-gray-400 md:text-sm hover:text-blue-400 hover:underline text-xs"
           :href="recipe.recipe_url"
           target="_blank"
         >

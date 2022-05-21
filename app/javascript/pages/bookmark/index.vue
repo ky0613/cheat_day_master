@@ -1,7 +1,7 @@
 <template>
   <div class="min-h-full">
-    <p class="text-3xl text-center mt-5">ブックマーク一覧</p>
-    <div class="flex mb-3 mt-5 justify-between">
+    <p class="md:text-3xl text-sm text-center mt-5">ブックマーク一覧</p>
+    <div class="flex mb-3 md:mt-5 mt-2 justify-between">
       <div v-for="tabKind in tabKinds" :key="tabKind.tabType">
         <BookmarkTabButton
           :bookmarkType="tabKind.tabType"

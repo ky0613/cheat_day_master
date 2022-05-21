@@ -5,7 +5,7 @@
     </div>
     <div
       v-show="!isLoading"
-      class="overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 w-full my-4"
+      class="overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 w-full md:my-4 mt-12"
     >
       <transition>
         <div
@@ -31,17 +31,17 @@
           </div>
         </div>
       </transition>
-      <div class="relative w-full pt-56.25">
+      <div class="relative w-full md:h-auto h-96 pt-56.25">
         <div id="map" class="absolute w-full h-full top-0 left-0"></div>
         <input
           id="pac-input"
-          class="text-base font-light mt-2 ml-2 w-60 h-8 truncate focus:border-blue-500 text-center rounded border-2 border-black"
-          type="text"
+          class="md:text-base text-sm font-light mt-2 ml-2 md:w-60 w-30 md:h-8 h-6 truncate focus:border-blue-500 text-center rounded border-2 border-black"
+          type="search"
           placeholder="検索"
         />
         <button
           id="locationButton"
-          class="bg-orange-500 rounded-md text-white overflow-hidden h-8 cursor-pointer mt-2 mr-2 hover:bg-orange-300 px-3 py-1 text-lg"
+          class="bg-orange-500 rounded-md text-white overflow-hidden md:h-8 h-6 cursor-pointer mt-2 mr-2 hover:bg-orange-300 px-3 py-1 md:text-lg text-sm"
         >
           現在地を取得
         </button>
@@ -159,6 +159,7 @@ export default {
         mapTypeControl: false,
         streetViewControl: false,
         fullscreenControl: false,
+        gestureHandling: "greedy",
       });
 
       let service = new google.maps.places.PlacesService(map);
@@ -329,7 +330,6 @@ export default {
         });
       }
       document.getElementById("getRoute").addEventListener("click", () => {
-        console.log("getRouteGOGOGO!!!");
         storeSearch();
         setTimeout(() => {
           self.isLoading = false;

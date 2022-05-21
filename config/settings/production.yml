@@ -1,4 +1,5 @@
 default_url_options:
   host: "www.cheatday-master.com"
+  cookie_host: "www.cheatday-master.com"
 site:
   top_url: "https://www.cheatday-master.com/"

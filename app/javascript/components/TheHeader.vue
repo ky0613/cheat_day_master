@@ -1,6 +1,6 @@
 <template>
-  <header>
-    <div class="pl-4 py-2 flex justify-between" id="header">
+  <header @click.self="closeMenu">
+    <div class="pl-4 py-2 flex justify-between items-center" id="header">
       <router-link
         :to="{ name: 'TopIndex' }"
         @click.native="resetState()"
@@ -9,59 +9,106 @@
         <img
           src="../../../public/img/logo.png"
           alt="logo"
-          class="max-w-xs h-auto"
+          class="md:w-72 w-40 h-auto"
         />
       </router-link>
+      <div class="md:hidden flex items-center">
+        <p v-if="authUser" class="text-sm text-white mr-2" id="nav-font">
+          {{ authUser.name }}さん
+        </p>
+        <button
+          class="mr-2 bg-orange-400 py-1 px-2 rounded"
+          @click="toggleNavbar"
+        >
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            class="inline-block w-5 h-5 stroke-current"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+      </div>
       <template v-if="!authUser">
-        <nav class="pr-4 py-2">
-          <button
-            class="text-white mr-2 text-lg hover:text-green-400"
-            id="nav-font"
-            @click="changeActiveDescriptionModal"
-          >
-            サービス概要
-          </button>
-          <router-link
-            :to="{ name: 'LoginIndex' }"
-            class="text-white mr-2 text-lg hover:text-green-400"
-            id="nav-font"
-          >
-            ログイン
-          </router-link>
-          <router-link
-            :to="{ name: 'RegisterIndex' }"
-            class="text-white text-lg hover:text-green-400"
-            id="nav-font"
-          >
-            新規登録
-          </router-link>
-        </nav>
+        <ul
+          class="md:pr-4 md:py-2 md:flex md:gap-4"
+          :class="{
+            hidden: !isShowMenu,
+            'absolute z-30 right-0 top-12 p-3 bg-white rounded': isShowMenu,
+          }"
+        >
+          <li>
+            <button
+              class="md:text-white md:text-lg text-sm hover:text-green-400"
+              id="nav-font"
+              @click="changeActiveDescriptionModal"
+            >
+              サービス概要
+            </button>
+          </li>
+          <li>
+            <router-link
+              :to="{ name: 'LoginIndex' }"
+              class="md:text-white md:text-lg text-sm hover:text-green-400"
+              id="nav-font"
+            >
+              ログイン
+            </router-link>
+          </li>
+          <li>
+            <router-link
+              :to="{ name: 'RegisterIndex' }"
+              class="md:text-white md:text-lg text-sm hover:text-green-400"
+              id="nav-font"
+            >
+              新規登録
+            </router-link>
+          </li>
+        </ul>
       </template>
       <template v-else>
-        <nav class="pr-4 py-2">
-          <button
-            class="text-white mr-2 text-lg hover:text-green-400"
-            id="nav-font"
-            @click="changeActiveDescriptionModal"
-          >
-            サービス概要
-          </button>
-          <router-link
-            :to="{ name: 'BookmarkIndex' }"
-            class="text-white text-lg hover:text-green-400"
-            id="nav-font"
-          >
-            ブックマーク一覧
-          </router-link>
-          <router-link
-            :to="{ name: 'TopIndex' }"
-            class="text-white text-lg hover:text-green-400"
-            id="nav-font"
-            @click.native="handleLogout"
-          >
-            ログアウト
-          </router-link>
-        </nav>
+        <ul
+          class="md:pr-4 md:py-2 md:flex md:gap-4"
+          :class="{
+            hidden: !isShowMenu,
+            'absolute z-30 right-0 top-12 p-3 bg-white rounded': isShowMenu,
+          }"
+        >
+          <li>
+            <button
+              class="md:text-white md:mr-2 md:text-lg text-sm hover:text-green-400"
+              id="nav-font"
+              @click="changeActiveDescriptionModal"
+            >
+              サービス概要
+            </button>
+          </li>
+          <li>
+            <router-link
+              :to="{ name: 'BookmarkIndex' }"
+              class="md:text-white md:text-lg text-sm hover:text-green-400"
+              id="nav-font"
+            >
+              ブックマーク一覧
+            </router-link>
+          </li>
+          <li>
+            <router-link
+              :to="{ name: 'TopIndex' }"
+              class="md:text-white md:text-lg text-sm hover:text-green-400"
+              id="nav-font"
+              @click.native="handleLogout"
+            >
+              ログアウト
+            </router-link>
+          </li>
+        </ul>
       </template>
       <transition>
         <DescriptionModal
@@ -82,13 +129,30 @@ export default {
   data() {
     return {
       isModalActive: false,
+      isShowMenu: false,
     };
   },
   computed: {
     ...mapGetters(["authUser"]),
   },
+  watch: {
+    $route(to, from) {
+      this.closeMenu();
+    },
+  },
+  mounted() {
+    window.addEventListener("resize", this.handleResize);
+  },
   methods: {
     ...mapActions(["logoutUser"]),
+    handleResize() {
+      if (window.innerWidth >= 768) {
+        this.closeMenu();
+      }
+    },
+    toggleNavbar() {
+      this.isShowMenu = !this.isShowMenu;
+    },
     async handleLogout() {
       try {
         await this.logoutUser();
@@ -110,6 +174,10 @@ export default {
     },
     changeActiveDescriptionModal() {
       this.isModalActive = !this.isModalActive;
+      this.closeMenu();
+    },
+    closeMenu() {
+      this.isShowMenu = false;
     },
   },
 };

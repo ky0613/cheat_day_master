@@ -26,10 +26,14 @@ const getters = {
 
 const actions = {
   async fetchRakutenRecipes({ commit }, recipeCategory) {
-    const response = await axios.get("/rakuten_recipes", {
-      params: { category_id: String(recipeCategory) },
-    });
-    commit("setRakutenRecipes", convertRecipeData(response.data.result));
+    try {
+      const response = await axios.get("rakuten_recipes", {
+        params: { category_id: String(recipeCategory) },
+      });
+      commit("setRakutenRecipes", convertRecipeData(response.data.result));
+    } catch (err) {
+      console.log(err);
+    }
   },
 };
 

@@ -10,31 +10,35 @@
         <div
           class="modal-header flex flex-shrink-0 items-center p-2 justify-between border-b border-gray-200 rounded-t-md bg-orange-300"
         >
-          <h5 class="text-3xl font-medium leading-normal text-gray-800">
+          <h5
+            class="md:text-3xl text-xl font-medium leading-normal text-gray-800"
+          >
             このサービスについて
           </h5>
           <button
             type="button"
-            class="btn-close box-content my-auto p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline text-4xl"
+            class="btn-close box-content my-auto p-1 text-black border-none rounded-none opacity-50 focus:shadow-none focus:outline-none focus:opacity-100 hover:text-black hover:opacity-75 hover:no-underline md:text-4xl text-lg"
             @click="isCloseModal"
           >
             ×
           </button>
         </div>
         <div class="modal-body relative p-4">
-          <h5 class="text-2xl">チートデイとは？</h5>
+          <h5 class="md:text-2xl text-lg">チートデイとは？</h5>
           <hr class="my-2" />
-          <p>
+          <p class="md:text-base text-xs">
             チートデイを日本語に訳すと「騙す日」という意味になります。<br />
             人の体はダイエットなどで減量が続くと、体重が落ちることを危険と判断して省エネな体になります。<br />
             そういった状態になった体を大量の摂取カロリーで文字通り「騙す」ことで、体の省エネ化を解除し、<br />
             以降の減量につなげるための１日のことをチートデイと言います。
           </p>
-          <h5 class="text-2xl mt-4">ログイン後の機能について</h5>
+          <h5 class="md:text-2xl md:mt-4 text-lg mt-2">
+            ログイン後の機能について
+          </h5>
           <hr class="my-2" />
-          <h6 class="text-xl">1. ブックマーク</h6>
+          <h6 class="md:text-xl text-sm">1. ブックマーク</h6>
           <hr class="my-2" />
-          <p class="text-center mb-2">
+          <p class="text-center mb-2 md:text-base text-xs">
             検索結果の各カードにブックマークボタンが追加され、<br />
             ブックマーク機能がご利用いただけるようになります。
           </p>
@@ -44,11 +48,11 @@
             class="w-3/4 h-auto mx-auto"
           />
           <hr class="my-2" />
-          <h6 class="text-xl">2. 通販ジャンル選択</h6>
+          <h6 class="md:text-xl text-sm">2. 通販ジャンル選択</h6>
           <hr class="my-2" />
-          <p class="text-center mb-2">
+          <p class="text-center mb-2 md:text-base text-xs">
             自宅でチートデイの現在地入力画面でジャンルを選択できるようになります。<br />
-            ジャンルも多岐に渡りますので、是非お楽しみください！
+            ジャンルも多岐に渡りますので、お楽しみください！
           </p>
           <img
             src="../../../public/img/select.png"
