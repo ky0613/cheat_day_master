@@ -2,12 +2,12 @@
   <div
     class="overflow-hidden bg-white rounded-lg shadow-md dark:bg-gray-800 my-4 w-full"
   >
-    <div class="p-3">
-      <p class="text-4xl font-bold">ルート検索結果</p>
-      <p>
+    <div class="p-3 md:mt-5 mt-2">
+      <p class="md:text-4xl text-xl font-bold">ルート検索結果</p>
+      <p class="md:text-base text-xs">
         1店舗では物足りないと思うので勝手に経由地を追加しておきました。(S:現在地、D:目的地、数字:経由順)
       </p>
-      <p>
+      <p class="md:text-base text-xs">
         余談ですが，このルートを歩いたら{{ burnedCalories }}kcal消費します。
       </p>
     </div>
@@ -15,14 +15,14 @@
       <div id="map" class="absolute w-full h-full top-0 left-0"></div>
     </div>
     <div class="p-3 mt-5">
-      <p class="text-4xl font-bold">経由地の店舗情報</p>
-      <p>
+      <p class="md:text-4xl text-xl font-bold">経由地の店舗情報</p>
+      <p class="md:text-base text-xs">
         経由地に追加されなければ食べない可能性があったので、こちらのお店で摂取したカロリーは<span
-          class="text-3xl font-bold"
+          class="md:text-3xl text-sm font-bold"
           >0kcal</span
         >です。
       </p>
-      <p v-if="this.allDescriptions" class="text-2xl font-bold">
+      <p v-if="this.allDescriptions" class="md:text-2xl text-sm font-bold">
         余談ですが，{{ allDescriptions[0] }}
       </p>
     </div>
@@ -32,18 +32,18 @@
       :stores="wayPointsData"
       :perPage="3"
     />
-    <p class="text-6xl font-bold text-center my-24" v-else>
+    <p class="md:text-6xl text-xl font-bold text-center my-24" v-else>
       ごめんなさい，<br />お店が見つかりません。
     </p>
     <div class="p-3 mt-2">
-      <p class="text-4xl font-bold">経由地以外の店舗情報</p>
-      <p>
-        経由地以上に行かない可能性があったので、こちらのお店で摂取したカロリーは<span
-          class="text-3xl font-bold"
+      <p class="md:text-4xl text-xl font-bold">経由地以外の店舗情報</p>
+      <p class="md:text-base text-xs">
+        経由地以上に行かない可能性があったので、摂取カロリーは<span
+          class="md:text-3xl text-sm font-bold"
           >0kcal</span
         >です。むしろマイナスです。
       </p>
-      <p v-if="this.allDescriptions" class="text-2xl font-bold">
+      <p v-if="this.allDescriptions" class="md:text-2xl text-sm font-bold">
         余談ですが，{{ allDescriptions[1] }}
       </p>
     </div>
@@ -52,18 +52,20 @@
       :stores="recommendStoresData"
       :perPage="3"
     />
-    <p class="text-6xl font-bold text-center my-24" v-else>
+    <p class="md:text-6xl text-xl font-bold text-center my-24" v-else>
       ごめんなさい，<br />お店が見つかりません。
     </p>
     <div class="p-3 mt-2">
-      <p class="text-4xl font-bold">ホットペッパーグルメの店舗情報</p>
-      <p>
-        ホットもペッパーも辛そうなので，こちらのお店で摂取したカロリーは<span
-          class="text-3xl font-bold"
+      <p class="md:text-4xl text-xl font-bold">
+        ホットペッパーグルメの店舗情報
+      </p>
+      <p class="md:text-base text-xs">
+        ホットもペッパーも辛そうなので，摂取カロリーは<span
+          class="md:text-3xl text-sm font-bold"
           >0kcal</span
         >です。
       </p>
-      <p v-if="this.allDescriptions" class="text-2xl font-bold">
+      <p v-if="allDescriptions" class="md:text-2xl text-sm font-bold">
         余談ですが，{{ allDescriptions[2] }}
       </p>
     </div>
@@ -72,19 +74,19 @@
       :stores="allStores"
     />
     <div class="p-3 mt-2">
-      <p class="text-3xl font-bold">Yelpの店舗情報</p>
-      <p>
+      <p class="md:text-3xl text-sm font-bold">Yelpの店舗情報</p>
+      <p class="md:text-base text-xs">
         海外のサイトから取得したため「calorie」はありますが「カロリー」はありません。摂取カロリーは<span
-          class="text-3xl font-bold"
+          class="md:text-3xl text-sm font-bold"
           >0kcal</span
         >です。
       </p>
-      <p v-if="this.allDescriptions" class="text-2xl font-bold">
+      <p v-if="this.allDescriptions" class="md:text-2xl text-sm font-bold">
         余談ですが，{{ allDescriptions[3] }}
       </p>
     </div>
     <YelpStoreData v-if="allYelpStores.length !== 0" :stores="allYelpStores" />
-    <p class="text-6xl font-bold text-center my-24" v-else>
+    <p class="md:text-6xl text-xl font-bold text-center my-24" v-else>
       ごめんなさい，<br />お店が見つかりません。
     </p>
     <div class="my-6 w-full text-center">
@@ -146,6 +148,7 @@ export default {
         mapTypeControl: false,
         streetViewControl: false,
         fullscreenControl: false,
+        gestureHandling: "cooperative",
       });
 
       let rendererOptions = {
