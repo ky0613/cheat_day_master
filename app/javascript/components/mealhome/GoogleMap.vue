@@ -193,7 +193,7 @@ export default {
         mapTypeControl: false,
         streetViewControl: false,
         fullscreenControl: false,
-        gestureHandling: "cooperative",
+        gestureHandling: "greedy",
       });
 
       let service = new google.maps.places.PlacesService(map);

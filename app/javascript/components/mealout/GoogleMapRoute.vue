@@ -148,7 +148,7 @@ export default {
         mapTypeControl: false,
         streetViewControl: false,
         fullscreenControl: false,
-        gestureHandling: "cooperative",
+        gestureHandling: "greedy",
       });
 
       let rendererOptions = {
