@@ -1,13 +1,16 @@
 <template>
   <div class="flex flex-col mt-5">
-    <div class="w-full grid grid-cols-3 gap-4" v-if="stores.length !== 0">
-      <div v-for="store in stores" :key="store.id">
+    <div
+      class="w-full grid md:grid-cols-3 grid-cols-2 gap-4"
+      v-if="storesData.length !== 0"
+    >
+      <div v-for="store in storesData" :key="store.id">
         <div
-          class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full flex flex-col"
+          class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full flex flex-col border h-full"
         >
           <a class="bg-blue-300 w-full" :href="store.store_url" target="_blank">
             <img
-              class="object-cover object-center w-full h-56"
+              class="object-cover object-center w-full md:h-56 h-32"
               :src="store.img_url"
               alt="avatar"
             />
@@ -17,7 +20,7 @@
               class="flex items-center mt-4 text-gray-700 dark:text-gray-200 h-10"
             >
               <img src="../../../../public/img/shop.svg" class="w-5 h-5" />
-              <p class="px-2 text-l font-semibold text-center">
+              <p class="px-2 md:text-lg text-xs font-semibold text-center">
                 {{ store.name }}
               </p>
             </div>
@@ -25,7 +28,7 @@
               class="flex items-center mt-4 text-gray-700 dark:text-gray-200 h-6"
             >
               <img src="../../../../public/img/place.svg" class="w-5 h-5" />
-              <p class="px-2 text-sm">{{ store.address }}</p>
+              <p class="px-2 md:text-sm text-xs">{{ store.address }}</p>
             </div>
           </div>
           <div class="flex">
@@ -48,7 +51,7 @@
       </div>
     </div>
     <div v-else class="mt-24 mx-auto">
-      <p class="text-center text-6xl yomogi">
+      <p class="text-center md:text-6xl text-4xl yomogi">
         まだお気に入りが <br />
         登録されていません。
       </p>
@@ -67,6 +70,12 @@ export default {
     stores: {
       type: Array,
     },
+  },
+  data() {
+    return {
+      // カードの表示を保持するためにdata内で展開する
+      storesData: [...this.stores],
+    };
   },
 };
 </script>

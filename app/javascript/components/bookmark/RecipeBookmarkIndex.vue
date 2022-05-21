@@ -1,19 +1,22 @@
 <template>
   <div class="flex flex-col mt-5">
-    <div class="w-full grid grid-cols-3 gap-4" v-if="recipes.length !== 0">
+    <div
+      class="w-full grid md:grid-cols-3 grid-cols-2 gap-4"
+      v-if="recipesData.length !== 0"
+    >
       <div
-        class="mx-2 overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
-        v-for="recipe of recipes"
+        class="mx-2 overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full border"
+        v-for="recipe of recipesData"
         :key="recipe.recipe_id"
       >
         <img
-          class="object-cover object-center w-full h-56"
+          class="object-cover object-center w-full md:h-56 h-32"
           :src="recipe.img_url"
           alt="avatar"
         />
         <div class="w-full">
           <a
-            class="py-2 text-gray-700 dark:text-gray-400 text-sm hover:text-blue-400 hover:underline"
+            class="py-2 text-gray-700 dark:text-gray-400 md:text-sm hover:text-blue-400 hover:underline text-xs"
             :href="recipe.recipe_url"
             target="_blank"
           >
@@ -22,7 +25,7 @@
           <hr />
         </div>
         <div class="flex my-auto">
-          <div class="p-2 flex">
+          <div class="p-2 flex flex-col">
             <div
               class="flex items-center mt-4 text-gray-700 dark:text-gray-200"
             >
@@ -39,7 +42,7 @@
       </div>
     </div>
     <div v-else class="mt-24 mx-auto">
-      <p class="text-center text-6xl yomogi">
+      <p class="text-center md:text-6xl text-4xl yomogi">
         まだお気に入りが <br />
         登録されていません。
       </p>
@@ -59,6 +62,11 @@ export default {
       type: Array,
       required: true,
     },
+  },
+  data() {
+    return {
+      recipesData: [...this.recipes],
+    };
   },
 };
 </script>

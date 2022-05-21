@@ -6,14 +6,14 @@
         alt="bookmark"
         v-if="existStore(store)"
         @click="removeStore(store)"
-        class="ml-auto mr-2 cursor-pointer"
+        class="ml-auto md:mr-2 mr-0 cursor-pointer"
       />
       <img
         src="../../../public/img/bookmark_add_black_24dp.svg"
         alt="bookmark"
         v-else
         @click="addStore(store)"
-        class="ml-auto mr-2 cursor-pointer"
+        class="ml-auto md:mr-2 mr-0 cursor-pointer"
       />
     </div>
   </div>

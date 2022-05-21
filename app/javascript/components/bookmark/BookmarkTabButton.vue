@@ -1,13 +1,13 @@
 <template>
   <button type="button" @click="changeTab" class="rounded-sm h-12">
     <div
-      class="flex hover:text-red-800 border-b-2 border-zinc-500 pb-5 px-10"
+      class="flex hover:text-red-800 border-b-2 border-zinc-500 md:pb-5 pb-2 md:px-10 px-4"
       :class="{
         'border-red-800': isActive === bookmarkType,
         'text-red-800': isActive === bookmarkType,
       }"
     >
-      <p class="text-xl"><slot name="tabKind"></slot></p>
+      <p class="md:text-xl text-xs"><slot name="tabKind"></slot></p>
     </div>
   </button>
 </template>

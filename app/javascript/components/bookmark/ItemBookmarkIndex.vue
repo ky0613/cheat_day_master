@@ -1,9 +1,12 @@
 <template>
   <div class="mt-5">
-    <div class="w-full grid grid-cols-3 gap-4" v-if="items.length !== 0">
-      <div v-for="item in items" :key="item.id">
+    <div
+      class="w-full grid md:grid-cols-3 grid-cols-2 gap-4"
+      v-if="itemsData.length !== 0"
+    >
+      <div v-for="item in itemsData" :key="item.id">
         <div
-          class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
+          class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full h-full border"
         >
           <div class="w-full">
             <a
@@ -15,41 +18,41 @@
             </a>
             <hr />
           </div>
-          <div class="p-2 flex">
+          <div class="p-2 flex md:flex-row flex-col">
             <img class="mx-1" :src="item.img_url" />
             <div
               class="flex flex-col mt-4 text-gray-700 dark:text-gray-200 justify-right"
             >
-              <div class="flex mb-3">
+              <div class="flex md:mb-3 mb-1 items-center">
                 <img src="../../../../public/img/money.svg" class="w-5 h-5" />
-                <p class="px-2 text-base font-semibold">{{ item.price }}円</p>
+                <p class="px-2 md:text-base text-sm font-semibold">
+                  {{ item.price }}円
+                </p>
               </div>
               <div class="flex">
                 <img src="../../../../public/img/shop.svg" class="w-5 h-5" />
-                <p class="px-2 text-sm">{{ item.shop_name }}</p>
+                <p class="px-2 md:text-sm text-xs">{{ item.shop_name }}</p>
               </div>
             </div>
           </div>
           <div
-            class="flex items-center mt-4 text-gray-700 dark:text-gray-200 pb-4"
+            class="flex items-center md:mt-4 my-2 ml-2 text-gray-700 dark:text-gray-200 md:pb-4 pb-1"
           >
             <StarRating
               :increment="0.01"
               :read-only="true"
               :rating="Number(item.rating)"
-              :star-size="30"
-              class="items-center text-base"
+              :star-size="starSize"
+              text-class="md:text-base text-xs mt-1"
             />
-            <p class="px-2 text-base items-center">
-              ({{ item.total_ratings }})
-            </p>
+            <p class="md:text-base text-xs mt-1">({{ item.total_ratings }})</p>
             <ItemBookmark :item="item" />
           </div>
         </div>
       </div>
     </div>
     <div v-else class="mt-24 mx-auto">
-      <p class="text-center text-6xl yomogi">
+      <p class="text-center md:text-6xl text-4xl yomogi">
         まだお気に入りが <br />
         登録されていません。
       </p>
@@ -70,6 +73,19 @@ export default {
     items: {
       type: Array,
       required: true,
+    },
+  },
+  data() {
+    return {
+      itemsData: [...this.items],
+    };
+  },
+  computed: {
+    carouselPage() {
+      return window.innerWidth >= 768 ? 3 : 2;
+    },
+    starSize() {
+      return window.innerWidth >= 768 ? 20 : 15;
     },
   },
 };

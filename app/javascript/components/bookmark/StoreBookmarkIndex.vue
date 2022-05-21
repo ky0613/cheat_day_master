@@ -1,13 +1,16 @@
 <template>
   <div class="flex mt-5">
-    <div class="w-full grid grid-cols-3 gap-4" v-if="stores.length !== 0">
-      <div v-for="store in stores" :key="store.id">
+    <div
+      class="w-full grid md:grid-cols-3 grid-cols-2 gap-4"
+      v-if="storesData.length !== 0"
+    >
+      <div v-for="store in storesData" :key="store.id">
         <div
-          class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full"
+          class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full border h-full"
         >
           <a :href="storeUrl(store)" target="_blank">
             <img
-              class="object-cover object-center w-full h-56"
+              class="object-cover object-center w-full md:h-56 h-32"
               :src="store.img_url"
               alt="avatar"
             />
@@ -17,7 +20,7 @@
               class="flex items-center mt-4 text-gray-700 dark:text-gray-200 h-10"
             >
               <img src="../../../../public/img/shop.svg" class="w-5 h-5" />
-              <p class="px-2 text-l font-semibold text-center">
+              <p class="px-2 md:text-lg text-xs font-semibold text-center">
                 {{ store.name }}
               </p>
             </div>
@@ -25,20 +28,20 @@
               class="flex items-center mt-4 text-gray-700 dark:text-gray-200 h-6"
             >
               <img src="../../../../public/img/place.svg" class="w-5 h-5" />
-              <p class="px-2 text-sm">{{ store.address }}</p>
+              <p class="px-2 md:text-sm text-xs">{{ store.address }}</p>
             </div>
             <div
               class="flex items-center mt-4 text-gray-700 dark:text-gray-200"
             >
               <StarRating
-                :increment="0.1"
+                :increment="0.01"
                 :round-start-rating="false"
                 :read-only="true"
                 :rating="store.rating"
-                :star-size="25"
-                class="items-center text-base"
+                :star-size="starSize"
+                text-class="md:text-base text-xs mt-1"
               ></StarRating>
-              <p class="px-2 text-base items-center jus">
+              <p class="md:text-base text-xs mt-1">
                 ({{ store.total_ratings }})
               </p>
               <StoreBookmark :store="store" />
@@ -48,7 +51,7 @@
       </div>
     </div>
     <div v-else class="mt-24 mx-auto">
-      <p class="text-center text-6xl yomogi">
+      <p class="text-center md:text-6xl text-4xl yomogi">
         まだお気に入りが <br />
         登録されていません。
       </p>
@@ -68,6 +71,17 @@ export default {
   props: {
     stores: {
       type: Array,
+    },
+  },
+  data() {
+    return {
+      // カードの表示を保持するためにdata内で展開する
+      storesData: [...this.stores],
+    };
+  },
+  computed: {
+    starSize() {
+      return window.innerWidth >= 768 ? 20 : 15;
     },
   },
   methods: {
