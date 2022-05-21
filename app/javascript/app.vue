@@ -4,7 +4,7 @@
       <TheHeader />
       <TheFlashMessage v-if="isFlash" />
       <main class="flex flex-1">
-        <div class="mx-auto max-w-4xl w-full">
+        <div class="mx-auto md:max-w-4xl max-w-sm w-full">
           <router-view />
         </div>
       </main>
