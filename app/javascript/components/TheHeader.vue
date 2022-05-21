@@ -40,7 +40,7 @@
         >
           <li>
             <button
-              class="md:text-white md:text-lg hover:text-green-400"
+              class="md:text-white md:text-lg text-sm hover:text-green-400"
               id="nav-font"
               @click="changeActiveDescriptionModal"
             >
@@ -50,7 +50,7 @@
           <li>
             <router-link
               :to="{ name: 'LoginIndex' }"
-              class="md:text-white md:text-lg hover:text-green-400"
+              class="md:text-white md:text-lg text-sm hover:text-green-400"
               id="nav-font"
             >
               ログイン
@@ -59,7 +59,7 @@
           <li>
             <router-link
               :to="{ name: 'RegisterIndex' }"
-              class="md:text-white md:text-lg hover:text-green-400"
+              class="md:text-white md:text-lg text-sm hover:text-green-400"
               id="nav-font"
             >
               新規登録
@@ -70,11 +70,14 @@
       <template v-else>
         <ul
           class="md:pr-4 md:py-2 md:flex md:gap-4"
-          :class="{ hidden: !isShowMenu }"
+          :class="{
+            hidden: !isShowMenu,
+            'absolute z-30 right-0 top-12 p-3 bg-white rounded': isShowMenu,
+          }"
         >
           <li>
             <button
-              class="md:text-white md:mr-2 md:text-lg hover:text-green-400"
+              class="md:text-white md:mr-2 md:text-lg text-sm hover:text-green-400"
               id="nav-font"
               @click="changeActiveDescriptionModal"
             >
@@ -84,7 +87,7 @@
           <li>
             <router-link
               :to="{ name: 'BookmarkIndex' }"
-              class="md:text-white md:text-lg hover:text-green-400"
+              class="md:text-white md:text-lg text-sm hover:text-green-400"
               id="nav-font"
             >
               ブックマーク一覧
@@ -93,7 +96,7 @@
           <li>
             <router-link
               :to="{ name: 'TopIndex' }"
-              class="md:text-white md:text-lg hover:text-green-400"
+              class="md:text-white md:text-lg text-sm hover:text-green-400"
               id="nav-font"
               @click.native="handleLogout"
             >
