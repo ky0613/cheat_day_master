@@ -12,24 +12,29 @@
           class="md:w-72 w-40 h-auto"
         />
       </router-link>
-      <button
-        class="md:hidden mr-2 bg-orange-400 py-1 px-2 rounded"
-        @click="toggleNavbar"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          class="inline-block w-5 h-5 stroke-current"
+      <div class="md:hidden flex items-center">
+        <p v-if="authUser" class="text-sm text-white mr-2" id="nav-font">
+          {{ authUser.name }}さん
+        </p>
+        <button
+          class="mr-2 bg-orange-400 py-1 px-2 rounded"
+          @click="toggleNavbar"
         >
-          <path
-            stroke-linecap="round"
-            stroke-linejoin="round"
-            stroke-width="2"
-            d="M4 6h16M4 12h16M4 18h16"
-          />
-        </svg>
-      </button>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            class="inline-block w-5 h-5 stroke-current"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"
+            />
+          </svg>
+        </button>
+      </div>
       <template v-if="!authUser">
         <ul
           class="md:pr-4 md:py-2 md:flex md:gap-4"
