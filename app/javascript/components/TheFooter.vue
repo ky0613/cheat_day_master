@@ -1,21 +1,22 @@
 <template>
   <footer>
     <div class="text-center p-4 mx-auto">
-      <ul class="flex justify-center gap-4">
-        <router-link :to="{ name: 'Terms' }"
-          ><li class="text-xs hover:text-orange-400">利用規約</li></router-link
-        >
-        <router-link :to="{ name: 'Policy' }"
-          ><li class="text-xs hover:text-orange-400">
+      <ul class="flex justify-center md:gap-4 gap-0 mb:flex-row flex-col">
+        <li class="text-xs hover:text-orange-400">
+          <router-link :to="{ name: 'Terms' }">利用規約</router-link>
+        </li>
+        <li class="text-xs hover:text-orange-400">
+          <router-link :to="{ name: 'Policy' }">
             プライバシーポリシー
-          </li></router-link
-        >
-        <a href="https://twitter.com/engineer_newbie" target="_blank"
-          ><li class="text-xs hover:text-orange-400">
+          </router-link>
+        </li>
+        <li class="text-xs hover:text-orange-400">
+          <a href="https://twitter.com/engineer_newbie" target="_blank">
             開発者Twitter(お問い合わせ)
-          </li></a
-        >
+          </a>
+        </li>
       </ul>
+
       <small>Copyright &copy; 2022. チートデイマスター</small>
     </div>
   </footer>
