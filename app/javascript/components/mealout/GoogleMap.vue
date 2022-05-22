@@ -153,13 +153,14 @@ export default {
 
     loader.load().then(() => {
       const google = window.google;
+      const handleType =  window.innerWidth >= 768 ? "auto" : "greedy"
       map = new google.maps.Map(document.getElementById("map"), {
         center: { lat: 35.6581, lng: 139.7017 },
         zoom: 15,
         mapTypeControl: false,
         streetViewControl: false,
         fullscreenControl: false,
-        gestureHandling: "auto",
+        gestureHandling: handleType,
       });
 
       let service = new google.maps.places.PlacesService(map);
