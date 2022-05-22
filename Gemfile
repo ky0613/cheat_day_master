@@ -14,9 +14,6 @@ gem 'webpacker', '~> 5.0'
 gem 'jbuilder', '~> 2.7'
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-# デバッグでのエラーファイル表示のために導入
-gem 'pry-rails'
-
 # ログイン
 gem 'sorcery'
 gem 'jwt'
@@ -28,7 +25,10 @@ gem 'net-imap'
 gem 'net-pop'
 
 group :development, :test do
+  # デバッグでのエラーファイル表示のために導入
+  gem 'pry-rails'
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+  gem 'rubocop', require: false
   gem 'sqlite3', '~> 1.4'
   gem 'letter_opener_web'
 end
