@@ -29,6 +29,19 @@ const getters = {
   allSweets: (state) => state.rakutenSweets,
 };
 
+const mutations = {
+  setRakutenItems: (state, items) => {
+    state.rakutenItems = items;
+  },
+  setRakutenSweets: (state, sweets) => {
+    state.rakutenSweets = sweets;
+  },
+  resetRakutenState: (state) => {
+    state.rakutenItems = [];
+    state.rakutenSweets = [];
+  },
+};
+
 const actions = {
   async fetchRakutenItems({ commit }, foodGenre) {
     const response = await axios.get("rakuten_items", {
@@ -41,19 +54,6 @@ const actions = {
       params: { sweet_genre_id: String(sweetGenre) },
     });
     commit("setRakutenSweets", convertItemData(response.data.Items, "Sweet"));
-  },
-};
-
-const mutations = {
-  setRakutenItems: (state, items) => {
-    state.rakutenItems = items;
-  },
-  setRakutenSweets: (state, sweets) => {
-    state.rakutenSweets = sweets;
-  },
-  resetRakutenState: (state) => {
-    state.rakutenItems = [];
-    state.rakutenSweets = [];
   },
 };
 

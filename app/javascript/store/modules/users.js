@@ -10,6 +10,15 @@ const getters = {
   oauthToken: (state) => state.oauthToken,
 };
 
+const mutations = {
+  setUser: (state, user) => {
+    state.authUser = user;
+  },
+  setOauthToken: (state, oauthToken) => {
+    state.oauthToken = oauthToken;
+  },
+};
+
 const actions = {
   async loginUser({ commit }, user) {
     const sessionsResponse = await axios.post("sessions", user);
@@ -48,15 +57,6 @@ const actions = {
       return null;
     });
     commit("setOauthToken", userResponse.data);
-  },
-};
-
-const mutations = {
-  setUser: (state, user) => {
-    state.authUser = user;
-  },
-  setOauthToken: (state, oauthToken) => {
-    state.oauthToken = oauthToken;
   },
 };
 

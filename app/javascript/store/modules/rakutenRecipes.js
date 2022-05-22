@@ -24,6 +24,13 @@ const getters = {
   allRecipes: (state) => state.rakutenRecipes,
 };
 
+const mutations = {
+  setRakutenRecipes: (state, recipes) => (state.rakutenRecipes = recipes),
+  resetRecipesState: (state) => {
+    state.recipes = [];
+  },
+};
+
 const actions = {
   async fetchRakutenRecipes({ commit }, recipeCategory) {
     try {
@@ -34,13 +41,6 @@ const actions = {
     } catch (err) {
       console.log(err);
     }
-  },
-};
-
-const mutations = {
-  setRakutenRecipes: (state, recipes) => (state.rakutenRecipes = recipes),
-  resetRecipesState: (state) => {
-    state.recipes = [];
   },
 };
 
