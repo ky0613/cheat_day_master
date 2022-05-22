@@ -159,7 +159,7 @@ export default {
         mapTypeControl: false,
         streetViewControl: false,
         fullscreenControl: false,
-        gestureHandling: "greedy",
+        gestureHandling: "auto",
       });
 
       let service = new google.maps.places.PlacesService(map);
@@ -278,6 +278,7 @@ export default {
                         name: place.name,
                         latLng: place.geometry.location,
                       });
+                      currentInfoWindow.close();
                     });
                   document
                     .getElementById("addDestination")
@@ -286,6 +287,7 @@ export default {
                         name: place.name,
                         latLng: place.geometry.location,
                       });
+                      currentInfoWindow.close();
                     });
                 });
               }
@@ -317,6 +319,7 @@ export default {
                   name: marker.title,
                   latLng: locationMarker,
                 });
+                currentInfoWindow.close();
               });
             document
               .getElementById("addDestination")
@@ -325,6 +328,7 @@ export default {
                   name: marker.title,
                   latLng: locationMarker,
                 });
+                currentInfoWindow.close();
               });
           });
         });
