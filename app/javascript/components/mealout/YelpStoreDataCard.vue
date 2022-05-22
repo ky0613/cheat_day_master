@@ -47,7 +47,7 @@
                 :star-size="starSize"
                 text-class="md:text-base text-xs mt-1"
               />
-              <p class="pmd:text-base text-xs mt-1">
+              <p class="md:text-base text-xs mt-1">
                 ({{ store.total_ratings }})
               </p>
               <StoreBookmark :store="store" />

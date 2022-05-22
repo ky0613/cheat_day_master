@@ -54,7 +54,7 @@
             >現在地に地点が登録されていません。</span
           >
           <template v-if="authUser">
-            <ul class="inline-block relative w-64">
+            <ul>
               <li class="flex my-2 items-center justify-center">
                 <label for="genre" class="mr-3 text-gray-500 font-bold w-40"
                   >食品ジャンル
