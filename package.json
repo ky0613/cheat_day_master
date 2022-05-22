@@ -29,9 +29,16 @@
   "version": "0.1.0",
   "devDependencies": {
     "eslint": "^8.16.0",
+    "eslint-config-prettier": "^8.5.0",
     "eslint-loader": "^4.0.2",
     "eslint-plugin-vue": "^9.0.1",
+    "prettier": "^2.6.2",
     "tailwindcss": "yarn:@tailwindcss/postcss7-compat",
     "webpack-dev-server": "^3"
+  },
+  "scripts": {
+    "fix": "eslint './app/javascript/**/*.{js,vue}' --fix && eslint './app/javascript/**/**/*.{js,vue}' --fix",
+    "format": "prettier --write './app/javascript/**/*.{js,vue}'",
+    "lint": "eslint './app/javascript/**/*.{js,vue}'"
   }
 }
