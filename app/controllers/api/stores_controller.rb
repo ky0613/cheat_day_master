@@ -24,7 +24,8 @@ class Api::StoresController < ApplicationController
   private
 
   def store_params
-    params.require(:store).permit(:store_id, :img_url, :name, :address, :rating, :total_ratings, :store_url, :store_type).merge(user_id: current_user.id)
+    params.require(:store).permit(:store_id, :img_url, :name, :address, :rating, :total_ratings, :store_url,
+                                  :store_type).merge(user_id: current_user.id)
   end
 end
 

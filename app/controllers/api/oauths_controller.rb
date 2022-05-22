@@ -7,7 +7,7 @@ class Api::OauthsController < ApplicationController
   end
 
   def callback
-    user_hash = TwitterApiClient.new(auth_params[:oauth_token], auth_params[:oauth_verifier]).get_access_token
+    user_hash = TwitterApiClient.new(auth_params[:oauth_token], auth_params[:oauth_verifier]).access_token
 
     if @user = User.find_by(twitter_id: user_hash["user_id"])
       token = @user.authentications.find_by(provider: auth_params[:provider])
