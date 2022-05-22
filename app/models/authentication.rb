@@ -14,6 +14,7 @@ class Authentication < ApplicationRecord
     key_len = ActiveSupport::MessageEncryptor.key_len
     secret = Rails.application.key_generator.generate_key('salt', key_len)
     crypt = ActiveSupport::MessageEncryptor.new(secret)
-    crypt.decrypt_and_verify(self.access_token) == user_hash["oauth_token"] && crypt.decrypt_and_verify(self.access_token_secret) == user_hash["oauth_token_secret"]
+    (crypt.decrypt_and_verify(self.access_token) == user_hash["oauth_token"] &&
+            crypt.decrypt_and_verify(self.access_token_secret) == user_hash["oauth_token_secret"])
   end
 end

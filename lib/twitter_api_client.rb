@@ -7,7 +7,7 @@ class TwitterApiClient
     @oauth_verifier = oauth_verifier
   end
 
-  def get_access_token
+  def access_token
     params = URI.encode_www_form({
       oauth_token: @oauth_token,
       oauth_verifier: @oauth_verifier
@@ -17,7 +17,7 @@ class TwitterApiClient
     http.use_ssl = true
     request = Net::HTTP::Post.new(uri.request_uri)
     response = http.request(request)
-    user_hash = Hash[URI::decode_www_form(response.body)]
+    user_hash = URI::decode_www_form(response.body).to_h
   end
 
   class << self
@@ -25,8 +25,8 @@ class TwitterApiClient
       TwitterApiClient.new
     end
 
-    def get_access_token
-      client.get_access_token
+    def access_token
+      client.access_token
     end
   end
 end

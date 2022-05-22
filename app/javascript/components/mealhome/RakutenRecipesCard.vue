@@ -1,16 +1,16 @@
 <template>
   <div class="md:p-6 grid grid-cols-2 md:grid-cols-4 gap-3 mx-1">
     <div
-      class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full border"
       v-for="recipe of recipes"
       :key="recipe.recipe_id"
+      class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full border"
     >
       <img
         class="object-cover object-center w-full md:h-56 h-32"
         :src="recipe.img_url"
         alt="avatar"
       />
-      <div class="w-full md:h-12 h-8">
+      <div class="w-full h-12">
         <a
           class="py-2 text-gray-700 dark:text-gray-400 md:text-sm hover:text-blue-400 hover:underline text-xs"
           :href="recipe.recipe_url"

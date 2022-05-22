@@ -7,8 +7,8 @@ import MealOut from "../pages/meal/MealOut.vue";
 import MealHome from "../pages/meal/MealHome.vue";
 import MealOutResult from "../pages/result/MealOutResult.vue";
 import MealHomeResult from "../pages/result/MealHomeResult.vue";
-import Terms from "../pages/static/Terms.vue";
-import Policy from "../pages/static/Policy.vue";
+import TheTerms from "../pages/static/TheTerms.vue";
+import ThePolicy from "../pages/static/ThePolicy.vue";
 import LoginIndex from "../pages/login/index.vue";
 import RegisterIndex from "../pages/register/index.vue";
 import BookmarkIndex from "../pages/bookmark/index.vue";
@@ -63,13 +63,13 @@ const router = new Router({
     },
     {
       path: "/terms",
-      name: "Terms",
-      component: Terms,
+      name: "TheTerms",
+      component: TheTerms,
     },
     {
       path: "/policy",
-      name: "Policy",
-      component: Policy,
+      name: "ThePolicy",
+      component: ThePolicy,
     },
     {
       path: "/oauth/callback",

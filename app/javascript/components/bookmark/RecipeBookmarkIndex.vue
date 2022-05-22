@@ -1,13 +1,13 @@
 <template>
   <div class="flex flex-col mt-5">
     <div
-      class="w-full grid md:grid-cols-3 grid-cols-2 gap-4"
       v-if="recipesData.length !== 0"
+      class="w-full grid md:grid-cols-3 grid-cols-2 gap-4"
     >
       <div
-        class="mx-2 overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full border"
         v-for="recipe of recipesData"
         :key="recipe.recipe_id"
+        class="mx-2 overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full border"
       >
         <img
           class="object-cover object-center w-full md:h-56 h-32"

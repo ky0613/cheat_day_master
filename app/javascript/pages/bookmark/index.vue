@@ -4,8 +4,8 @@
     <div class="flex mb-3 md:mt-5 mt-2 justify-between">
       <div v-for="tabKind in tabKinds" :key="tabKind.tabType">
         <BookmarkTabButton
-          :bookmarkType="tabKind.tabType"
-          :isActive="isActive"
+          :bookmark-type="tabKind.tabType"
+          :is-active="isActive"
           @change-tab="changeActive"
         >
           <template #tabKind>{{ tabKind.sentence }}</template>
@@ -20,28 +20,28 @@
       />
       <HotPepperStoreBookmarkIndex
         v-if="isActive === 'HotpepperStore'"
-        :stores="hotpepperStores"
         key="HotpepperStore"
+        :stores="hotpepperStores"
       />
       <StoreBookmarkIndex
         v-if="isActive === 'YelpStore'"
-        :stores="yelpStores"
         key="YelpStore"
+        :stores="yelpStores"
       />
       <ItemBookmarkIndex
         v-if="isActive === 'RakutenFood'"
-        :items="rakutenFoods"
         key="RakutenFood"
+        :items="rakutenFoods"
       />
       <ItemBookmarkIndex
         v-if="isActive === 'RakutenSweet'"
-        :items="rakutenSweets"
         key="RakutenSweet"
+        :items="rakutenSweets"
       />
       <RecipeBookmarkIndex
         v-if="isActive === 'Recipe'"
-        :recipes="savedRecipes"
         key="Recipe"
+        :recipes="savedRecipes"
       />
     </transition>
   </div>

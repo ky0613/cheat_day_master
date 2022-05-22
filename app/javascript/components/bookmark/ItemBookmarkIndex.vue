@@ -1,8 +1,8 @@
 <template>
   <div class="mt-5">
     <div
-      class="w-full grid md:grid-cols-3 grid-cols-2 gap-4"
       v-if="itemsData.length !== 0"
+      class="w-full grid md:grid-cols-3 grid-cols-2 gap-4"
     >
       <div v-for="item in itemsData" :key="item.id">
         <div
@@ -10,7 +10,7 @@
         >
           <div class="w-full">
             <a
-              class="text-sm text-gray-700 dark:text-gray-400 line-clamp-3 hover:text-blue-400 hover:underline"
+              class="md:text-sm text-xs text-gray-700 dark:text-gray-400 line-clamp-3 hover:text-blue-400 hover:underline"
               :href="item.item_url"
               target="_blank"
             >

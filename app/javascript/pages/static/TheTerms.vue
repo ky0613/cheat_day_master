@@ -1,33 +1,33 @@
 <template>
-  <div class="container mx-auto mt-24">
-    <section class="bg-white m-10 p-10 rounded-lg">
+  <div class="container mx-auto md:mt-24 mt-8">
+    <section class="bg-white md:m-5 md:p-5 m-2 p-2 rounded-lg">
       <div class="my-5">
-        <h1 class="text-3xl font-bold mb-3 text-center">利用規約</h1>
-        <p class="ml-4">
+        <h1 class="md:text-3xl text-lg font-bold mb-3 text-center">利用規約</h1>
+        <p class="mb-2 md:ml-4 ml-2 md:text-base text-xs">
           この利用規約(以下、「本規約」といいます。)は、本サービス(本サイトを含むものとし、以下、特に両者を区別しません。)の利用条件を定めるものです。本規約は、本サービスを利用するすべてのユーザーに適用されます。
         </p>
       </div>
 
       <div class="my-5">
-        <h2 class="text-xl font-bold">第1条（本規約への同意）</h2>
-        <p class="mb-2 ml-4">
+        <h2 class="md:text-xl text-sm font-bold">第1条（本規約への同意）</h2>
+        <p class="mb-2 md:ml-4 ml-2 md:text-base text-xs">
           ユーザーは、本サービスを利用することによって、本規約に有効かつ取り消し不能な同意をしたものとみなされます。<br />本規約に同意しないユーザーは、本サービスをご利用いただけません。
         </p>
       </div>
 
       <div class="my-5">
-        <h2 class="text-xl font-bold">第2条（第利用登録）</h2>
-        <p class="mb-2 ml-4">
+        <h2 class="md:text-xl text-sm font-bold">第2条（第利用登録）</h2>
+        <p class="mb-2 md:ml-4 ml-2 md:text-base text-xs">
           本サービスの利用を希望する方は、本規約に同意の上、当局の定める方法によって利用登録を申請し、当局がこれを承認することによって、本サービスの利用登録をすることができます。
         </p>
       </div>
 
       <div class="my-5">
-        <h2 class="text-xl font-bold">第3条（第登録拒否）</h2>
-        <p class="mb-2 ml-4">
+        <h2 class="md:text-xl text-sm font-bold">第3条（第登録拒否）</h2>
+        <p class="mb-2 md:ml-4 ml-2 md:text-base text-xs">
           当局は、以下のいずれかの事由があると判断した場合、利用登録の申請を承認しないことがあります。当局は登録拒否の理由について一切の開示義務を負いません。
         </p>
-        <ul class="ml-4 p-4 list-decimal">
+        <ul class="md:ml-4 ml-2 p-4 list-decimal md:text-base text-xs">
           <li>虚偽の事項を届け出た場合</li>
           <li>本規約に違反したことがある者からの申請である場合</li>
           <li>その他、当局が利用登録を相当でないと判断した場合</li>
@@ -35,23 +35,29 @@
       </div>
 
       <div class="my-5">
-        <h2 class="text-xl font-bold">第4条（第条未成年による利用）</h2>
-        <p class="mb-2 ml-4">
+        <h2 class="md:text-xl text-sm font-bold">
+          第4条（第条未成年による利用）
+        </h2>
+        <p class="mb-2 md:ml-4 ml-2 md:text-base text-xs">
           ユーザーが未成年である場合には、法定代理人の同意を得た上で、本サービスを利用してください。
           法定代理人の同意を得ずに本サービスのご利用を開始したユーザーが成年に達した場合、未成年者であった間の利用行為を追認したものとみなします。
         </p>
       </div>
 
       <div class="my-5">
-        <h2 class="text-xl font-bold">第5条（ログイン情報の管理）</h2>
-        <p class="mb-2 ml-4">
+        <h2 class="md:text-xl text-sm font-bold">
+          第5条（ログイン情報の管理）
+        </h2>
+        <p class="mb-2 md:ml-4 ml-2 md:text-base text-xs">
           ユーザーは、自己の責任において、本サービスのログイン情報を適切に管理するものとします。ユーザーは、いかなる場合にも、ログイン情報を第三者に譲渡または貸与し、もしくは第三者と共用することはできません。当局は、ログイン情報が第三者によって使用されたことによって生じた損害につき、当局に故意又は重大な過失がある場合を除き、一切の責任を負いません。
         </p>
       </div>
 
       <div class="my-5">
-        <h2 class="text-xl font-bold">第6条（コンテンツのご利用）</h2>
-        <p class="mb-2 ml-4">
+        <h2 class="md:text-xl text-sm font-bold">
+          第6条（コンテンツのご利用）
+        </h2>
+        <p class="mb-2 md:ml-4 ml-2 md:text-base text-xs">
           当局は、ユーザーに対し、本サービスが提供する文章、画像、動画、音声、音楽、ソフトウェア、プログラム、コードその他のコンテンツについて、本サービスの利用範囲内における私的な利用を許諾します。
           <br />
           理由の如何を問わず、ユーザーが本サービスを利用する権利を失った場合、本サービスの一切のコンテンツの利用ができなくなることを、ユーザーは予め承諾するものとします。
@@ -59,11 +65,11 @@
       </div>
 
       <div class="my-5">
-        <h2 class="text-xl font-bold">第7条（禁止事項）</h2>
-        <p class="mb-2 ml-4">
+        <h2 class="md:text-xl text-sm font-bold">第7条（禁止事項）</h2>
+        <p class="mb-2 md:ml-4 ml-2 md:text-base text-xs">
           ユーザーは、本サービスの利用にあたり、以下の行為をしてはなりません。
         </p>
-        <ul class="ml-4 p-4 list-decimal">
+        <ul class="md:ml-4 ml-2 p-4 list-decimal md:text-base text-xs">
           <li>
             法令、裁判所の判決、決定若しくは命令、又は法令上拘束力のある行政措置に違反する行為又はこれらを助長する行為
           </li>
@@ -117,11 +123,13 @@
       </div>
 
       <div class="my-5">
-        <h2 class="text-xl font-bold">第8条（反社会的勢力の排除）</h2>
-        <p class="mb-2 ml-4">
+        <h2 class="md:text-xl text-sm font-bold">
+          第8条（反社会的勢力の排除）
+        </h2>
+        <p class="mb-2 md:ml-4 ml-2 md:text-base text-xs">
           ユーザーは、次の各号のいずれか一にも該当しないことを表明し、かつ将来にわたっても該当しないことを表明し、保証するものとします。
         </p>
-        <ul class="ml-4 p-4 list-decimal">
+        <ul class="md:ml-4 ml-2 p-4 list-decimal md:text-base text-xs">
           <li>
             ユーザーは、次の各号のいずれか一にも該当しないことを表明し、かつ将来にわたっても該当しないことを表明し、保証するものとします。
           </li>
@@ -141,10 +149,10 @@
             ユーザーが法人その他の団体の場合にあっては、自らの役員または自らの経営に実質的に関与している者が暴力団員等と社会的に非難されるべき関係を有すること
           </li>
         </ul>
-        <p class="mb-2 ml-4">
+        <p class="mb-2 md:ml-4 ml-2 md:text-base text-xs">
           ユーザーは、自らまたは第三者を利用して次の各号のいずれか一にでも該当する行為を行わないことを保証するものとします。
         </p>
-        <ul class="ml-4 p-4 list-decimal">
+        <ul class="md:ml-4 ml-2 p-4 list-decimal md:text-base text-xs">
           <li>暴力的な要求行為</li>
           <li>法的な責任を超えた不当な要求行為</li>
           <li>取引に関して、脅迫的な言動をし、または暴力を用いる行為</li>
@@ -156,11 +164,11 @@
       </div>
 
       <div class="my-5">
-        <h2 class="text-xl font-bold">第9条（利用制限）</h2>
-        <p class="mb-2 ml-4">
+        <h2 class="md:text-xl text-sm font-bold">第9条（利用制限）</h2>
+        <p class="mb-2 md:ml-4 ml-2 md:text-base text-xs">
           当局は、ユーザーが以下のいずれかに該当する場合には、事前の通知なく、ユーザーに対して、本サービスの全部もしくは一部の利用を制限し、またはユーザーとしての登録を抹消することができるものとします。当局は、本条に基づき当局が行った行為によりユーザーに生じた損害について、一切の責任を負いません。
         </p>
-        <ul class="ml-4 p-4 list-decimal">
+        <ul class="md:ml-4 ml-2 p-4 list-decimal md:text-base text-xs">
           <li>本規約のいずれかの条項に違反した場合</li>
           <li>登録事項に虚偽の事実があることが判明した場合</li>
           <li>
@@ -170,11 +178,13 @@
       </div>
 
       <div class="my-5">
-        <h2 class="text-xl font-bold">第10条（本サービスの提供の停止）</h2>
-        <p class="mb-2 ml-4">
+        <h2 class="md:text-xl text-sm font-bold">
+          第10条（本サービスの提供の停止）
+        </h2>
+        <p class="mb-2 md:ml-4 ml-2 md:text-base text-xs">
           当局は、以下のいずれかの事由があると判断した場合、ユーザーに事前に通知することなく本サービスの全部または一部の提供を停止または中断することができるものとします。当局は、この場合にユーザーまたは第三者が被ったいかなる不利益または損害についても、一切の責任を負わないものとします。
         </p>
-        <ul class="ml-4 p-4 list-decimal">
+        <ul class="md:ml-4 ml-2 p-4 list-decimal md:text-base text-xs">
           <li>
             本サービスにかかるコンピュータシステムの保守点検または更新を行う場合
           </li>
@@ -187,78 +197,82 @@
       </div>
 
       <div class="my-5">
-        <h2 class="text-xl font-bold">第11条（保証の否認）</h2>
-        <p class="ml-4">
+        <h2 class="md:text-xl text-sm font-bold">第11条（保証の否認）</h2>
+        <p class="md:ml-4 ml-2 md:text-base text-xs">
           当局は、本サービスや本サービスが提供するコンテンツに、システムバグや第三者の権利侵害が含まれないことを保証するものではありません。また、安全性、信頼性、正確性、完全性、有効性、特定の目的への適合性を保証するものでもありません。
         </p>
       </div>
 
       <div class="my-5">
-        <h2 class="text-xl font-bold">第12条（免責）</h2>
-        <p class="ml-4">
+        <h2 class="md:text-xl text-sm font-bold">第12条（免責）</h2>
+        <p class="md:ml-4 ml-2 md:text-base text-xs">
           当局は、本サービスに関してユーザーに生じたあらゆる損害について一切の責任を負いません。ただし、本サービスに関する当局とユーザーとの間の契約（本規約を含みます。）が消費者契約法に定める消費者契約となる場合、この免責規定は適用されません。
         </p>
-        <p class="ml-4">
+        <p class="md:ml-4 ml-2 md:text-base text-xs">
           消費者契約に該当する場合であっても、当局は、当局の過失（重過失を除きます。）によってユーザーに生じた損害のうち特別の事情から生じた損害（当局またはユーザーが損害発生につき予見し、または予見し得た場合を含みます。）について、一切の責任を負いません。ユーザーと他のユーザーまたは第三者との間において生じたトラブルについても一切責任を負いません。
         </p>
       </div>
 
       <div class="my-5">
-        <h2 class="text-xl font-bold">第13条（サービス内容の変更）</h2>
-        <p class="ml-4">
+        <h2 class="md:text-xl text-sm font-bold">
+          第13条（サービス内容の変更）
+        </h2>
+        <p class="md:ml-4 ml-2 md:text-base text-xs">
           当局は、ユーザーに通知することなく、本サービスの内容を変更したり、本サービスの提供を中止、終了することができるものとします。当局は、これによってユーザーに生じた損害について一切の責任を負いません。
         </p>
       </div>
 
       <div class="my-5">
-        <h2 class="text-xl font-bold">第14条（利用規約の変更）</h2>
-        <p class="ml-4">
+        <h2 class="md:text-xl text-sm font-bold">第14条（利用規約の変更）</h2>
+        <p class="md:ml-4 ml-2 md:text-base text-xs">
           ユーザーは、管理者の書面による事前の承諾なく、利当局は、ユーザーに通知することなく、いつでも本規約を変更することができるものとします。変更後の本規約は、当局ウェブサイトに掲示された時点から効力を生じるものとします。本規約の変更後、本サービスの利用を継続したユーザーは、変更後の本規約に同意したものとみなします。用契約上の地位または本規約に基づく権利もしくは義務を第三者に譲渡し、または担保に供することはできません。
         </p>
       </div>
 
       <div class="my-5">
-        <h2 class="text-xl font-bold">第15条（個人情報の取扱い）</h2>
-        <p class="ml-4">
+        <h2 class="md:text-xl text-sm font-bold">第15条（個人情報の取扱い）</h2>
+        <p class="md:ml-4 ml-2 md:text-base text-xs">
           本サービスの利用によって取得するユーザーの個人情報については、当局のプライバシーポリシーに従い適切に取り扱うものとします。
         </p>
       </div>
 
       <div class="my-5">
-        <h2 class="text-xl font-bold">第16条（権利義務の譲渡）</h2>
-        <p class="ml-4">
+        <h2 class="md:text-xl text-sm font-bold">第16条（権利義務の譲渡）</h2>
+        <p class="md:ml-4 ml-2 md:text-base text-xs">
           ユーザーは、当局の書面による事前の承諾なく、利用契約上の地位または本規約に基づく権利もしくは義務を第三者に譲渡し、または担保に供することはできません。
         </p>
       </div>
 
       <div class="my-5">
-        <h2 class="text-xl font-bold">第17条（適用関係）</h2>
-        <p class="ml-4">
+        <h2 class="md:text-xl text-sm font-bold">第17条（適用関係）</h2>
+        <p class="md:ml-4 ml-2 md:text-base text-xs">
           本規約は、ユーザーと当局との間の本サービスの利用に関わる一切の関係に適用されるものとします。
         </p>
-        <p class="ml-4">
+        <p class="md:ml-4 ml-2 md:text-base text-xs">
           当局は本サービスに関し、本規約のほか、ご利用にあたってのルールを定めることがあります。これらのルールは、その名称のいかんに関わらず、本規約の一部を構成するものとします。本規約がこれらのルールと矛盾する場合には、これらのルールが優先して適用されるものとします。
         </p>
       </div>
 
       <div class="my-5">
-        <h2 class="text-xl font-bold">第18条（分離可能性）</h2>
-        <p class="ml-4">
+        <h2 class="md:text-xl text-sm font-bold">第18条（分離可能性）</h2>
+        <p class="md:ml-4 ml-2 md:text-base text-xs">
           本規約のいずれかの条項又はその一部が無効又は執行不能と判断された場合であっても、当該判断は他の部分に影響を及ぼさず、本規約の残りの部分は、引き続き有効かつ執行力を有するものとします。
         </p>
       </div>
 
       <div class="my-5">
-        <h2 class="text-xl font-bold">第19条（準拠法・裁判管轄）</h2>
-        <p class="ml-4">本規約の解釈にあたっては、日本法を準拠法とします。</p>
-        <p class="ml-4">
+        <h2 class="md:text-xl text-sm font-bold">第19条（準拠法・裁判管轄）</h2>
+        <p class="md:ml-4 ml-2 md:text-base text-xs">
+          本規約の解釈にあたっては、日本法を準拠法とします。
+        </p>
+        <p class="md:ml-4 ml-2 md:text-base text-xs">
           本サービスに関して紛争が生じた場合には、当局の本店所在地を管轄する地方裁判所を専属的合意管轄とします。
         </p>
       </div>
 
       <div class="my-5">
-        <p class="p-0 text-right">以上</p>
-        <p class="p-0">2022年04月25日 制定</p>
+        <p class="p-0 text-right md:text-base text-xs">以上</p>
+        <p class="p-0 md:text-base text-xs">2022年04月25日 制定</p>
       </div>
     </section>
   </div>
@@ -266,6 +280,6 @@
 
 <script>
 export default {
-  name: "Term",
+  name: "TheTerm",
 };
 </script>

@@ -38,7 +38,7 @@ const actions = {
     if (!localStorage.auth_token) return null;
     if (state.authUser) return state.authUser;
 
-    const userResponse = await axios.get("users/me").catch((err) => {
+    const userResponse = await axios.get("users/me").catch(() => {
       return null;
     });
     if (!userResponse) return null;
@@ -53,7 +53,7 @@ const actions = {
     }
   },
   async fetchOauthToken({ commit }) {
-    const userResponse = await axios.get("oauth/twitter").catch((err) => {
+    const userResponse = await axios.get("oauth/twitter").catch(() => {
       return null;
     });
     commit("setOauthToken", userResponse.data);

@@ -1,10 +1,10 @@
 <template>
   <header @click.self="closeMenu">
-    <div class="pl-4 py-2 flex justify-between items-center" id="header">
+    <div id="header" class="pl-4 py-2 flex justify-between items-center">
       <router-link
         :to="{ name: 'TopIndex' }"
-        @click.native="resetState()"
         class="inline-block"
+        @click.native="resetState()"
       >
         <img
           src="../../../public/img/logo.png"
@@ -13,7 +13,7 @@
         />
       </router-link>
       <div class="md:hidden flex items-center">
-        <p v-if="authUser" class="text-sm text-white mr-2" id="nav-font">
+        <p v-if="authUser" id="nav-font" class="text-sm text-white mr-2">
           {{ authUser.name }}さん
         </p>
         <button
@@ -45,8 +45,8 @@
         >
           <li>
             <button
-              class="md:text-white md:text-lg text-sm hover:text-green-400"
               id="nav-font"
+              class="md:text-white md:text-lg text-sm hover:text-green-400"
               @click="changeActiveDescriptionModal"
             >
               サービス概要
@@ -54,18 +54,18 @@
           </li>
           <li>
             <router-link
+              id="nav-font"
               :to="{ name: 'LoginIndex' }"
               class="md:text-white md:text-lg text-sm hover:text-green-400"
-              id="nav-font"
             >
               ログイン
             </router-link>
           </li>
           <li>
             <router-link
+              id="nav-font"
               :to="{ name: 'RegisterIndex' }"
               class="md:text-white md:text-lg text-sm hover:text-green-400"
-              id="nav-font"
             >
               新規登録
             </router-link>
@@ -82,8 +82,8 @@
         >
           <li>
             <button
-              class="md:text-white md:mr-2 md:text-lg text-sm hover:text-green-400"
               id="nav-font"
+              class="md:text-white md:mr-2 md:text-lg text-sm hover:text-green-400"
               @click="changeActiveDescriptionModal"
             >
               サービス概要
@@ -91,18 +91,18 @@
           </li>
           <li>
             <router-link
+              id="nav-font"
               :to="{ name: 'BookmarkIndex' }"
               class="md:text-white md:text-lg text-sm hover:text-green-400"
-              id="nav-font"
             >
               ブックマーク一覧
             </router-link>
           </li>
           <li>
             <router-link
+              id="nav-font"
               :to="{ name: 'TopIndex' }"
               class="md:text-white md:text-lg text-sm hover:text-green-400"
-              id="nav-font"
               @click.native="handleLogout"
             >
               ログアウト
@@ -136,7 +136,7 @@ export default {
     ...mapGetters(["authUser"]),
   },
   watch: {
-    $route(to, from) {
+    $route() {
       this.closeMenu();
     },
   },

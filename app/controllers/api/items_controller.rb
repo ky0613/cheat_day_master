@@ -24,6 +24,7 @@ class Api::ItemsController < ApplicationController
   private
 
   def item_params
-    params.require(:item).permit(:item_id, :img_url, :name, :shop_name, :price, :rating, :total_ratings, :item_url, :item_type).merge(user_id: current_user.id)
+    params.require(:item).permit(:item_id, :img_url, :name, :shop_name, :price, :rating, :total_ratings, :item_url,
+                                 :item_type).merge(user_id: current_user.id)
   end
 end

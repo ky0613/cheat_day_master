@@ -18,11 +18,11 @@
                   >名前</label
                 >
                 <input
+                  v-model="user.name"
                   name="名前"
                   class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
                   placeholder="name"
                   autocomplete="username"
-                  v-model="user.name"
                 />
                 <span class="text-red-500 text-center">{{
                   ProviderProps.errors[0]
@@ -37,12 +37,12 @@
                   >メールアドレス</label
                 >
                 <input
+                  v-model="user.email"
                   name="メールアドレス"
                   class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
                   placeholder="test@example.com"
                   autocomplete="email"
                   type="email"
-                  v-model="user.email"
                 />
                 <span class="text-red-500 text-center">{{
                   ProviderProps.errors[0]
@@ -57,12 +57,12 @@
                   >パスワード</label
                 >
                 <input
+                  v-model="user.password"
                   name="パスワード"
                   class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
                   placeholder="password"
                   autocomplete="new-password"
                   type="password"
-                  v-model="user.password"
                 />
                 <span class="text-red-500 text-center">{{
                   ProviderProps.errors[0]
@@ -77,12 +77,12 @@
                   >パスワード（確認）</label
                 >
                 <input
+                  v-model="user.password_confirmation"
                   name="パスワード"
                   class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
                   placeholder="password"
                   autocomplete="new-password"
                   type="password"
-                  v-model="user.password_confirmation"
                 />
                 <span class="text-red-500 text-center">{{
                   ProviderProps.errors[0]
@@ -130,7 +130,7 @@ export default {
     register() {
       axios
         .post("users", { user: this.user })
-        .then((res) => {
+        .then(() => {
           this.$store.dispatch("setFlash", {
             type: "success",
             message: "登録しました。",

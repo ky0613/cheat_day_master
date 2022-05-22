@@ -21,9 +21,9 @@
             class="md:max-w-1/2 h-auto md:mb-10 md:mr-10 mb-5 w-2/5"
           />
           <router-link
+            id="sans"
             :to="{ name: 'MealOut' }"
             class="rounded-lg bg-orange-500 p-2 text-center hover:bg-orange-300 text-white md:text-xl font-bold text-sm"
-            id="sans"
             >外食でチートデイ</router-link
           >
         </div>
@@ -33,9 +33,9 @@
             class="md:max-w-1/2 h-auto md:mb-10 md:mr-10 mb-5 w-2/5"
           />
           <router-link
+            id="sans"
             :to="{ name: 'MealHome' }"
             class="rounded-lg bg-orange-500 p-2 text-center hover:bg-orange-300 text-white md:text-xl font-bold text-sm"
-            id="sans"
             >自宅でチートデイ</router-link
           >
         </div>

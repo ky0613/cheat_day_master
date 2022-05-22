@@ -9,9 +9,9 @@
     >
       <transition>
         <div
-          class="fixed w-4/5 max-w-md m-auto opacity-100 rounded-sm z-1000 h-0 top-0 bottom-0 left-0 right-0"
-          id="startPoint"
           v-if="isStartModalShown"
+          id="startPoint"
+          class="fixed w-4/5 max-w-md m-auto opacity-100 rounded-sm z-1000 h-0 top-0 bottom-0 left-0 right-0"
         >
           <div
             class="p-3 text-center box-border bg-black opacity-70 text-white"
@@ -20,9 +20,9 @@
           </div>
         </div>
         <div
-          class="fixed w-4/5 max-w-md m-auto opacity-100 rounded-sm z-1000 h-0 top-0 bottom-0 left-0 right-0"
-          id="destination"
           v-if="isDestinationModalShown"
+          id="destination"
+          class="fixed w-4/5 max-w-md m-auto opacity-100 rounded-sm z-1000 h-0 top-0 bottom-0 left-0 right-0"
         >
           <div
             class="p-3 text-center box-border bg-black opacity-70 text-white"
@@ -50,8 +50,8 @@
         <div class="flex items-center mb-6 mx-auto justify-center">
           <label class="text-gray-500 font-bold pr-4"> 現在地 </label>
           <input
-            type="text"
             id="data-start-point-name"
+            type="text"
             readonly="readonly"
             placeholder="マップから選択してください"
             class="bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight min-w-250 text-center"
@@ -61,8 +61,8 @@
         <div class="flex items-center mb-6 mx-auto justify-center">
           <label class="text-gray-500 font-bold pr-4"> 目的地 </label>
           <input
-            type="text"
             id="data-destination-name"
+            type="text"
             readonly="readonly"
             placeholder="マップから選択してください"
             class="bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight min-w-250 text-center"
@@ -71,17 +71,17 @@
         </div>
         <div class="container mx-auto text-center">
           <span
-            class="text-base text-red-500 justify-center"
             v-if="isValidation && validateSwitch"
+            class="text-base text-red-500 justify-center"
             >現在地または目的地に地点が登録されていません。</span
           >
           <div class="flex flex-col mb-6 mt-6">
             <button
-              type="button"
               id="getRoute"
+              type="button"
               :disabled="isValidation"
-              @click="startLoading()"
               class="rounded-lg bg-orange-300 hover:bg-orange-400 disabled:bg-orange-200 text-center p-2 mb-3 mx-auto"
+              @click="startLoading()"
             >
               ルートを検索する
             </button>

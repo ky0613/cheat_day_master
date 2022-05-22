@@ -1,9 +1,9 @@
 <template>
   <div>
     <Carousel
-      :perPage="carouselPage"
-      :paginationPadding="3"
-      paginationPosition="bottom-overlay"
+      :per-page="carouselPage"
+      :pagination-padding="3"
+      pagination-position="bottom-overlay"
       class="pb-6"
     >
       <Slide
@@ -47,7 +47,7 @@
                 :star-size="starSize"
                 text-class="md:text-base text-xs mt-1"
               />
-              <p class="pmd:text-base text-xs mt-1">
+              <p class="md:text-base text-xs mt-1">
                 ({{ store.total_ratings }})
               </p>
               <StoreBookmark :store="store" />
@@ -74,6 +74,7 @@ export default {
   props: {
     stores: {
       type: Array,
+      required: true,
     },
   },
   computed: {

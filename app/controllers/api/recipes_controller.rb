@@ -24,6 +24,7 @@ class Api::RecipesController < ApplicationController
   private
 
   def recipe_params
-    params.require(:recipe).permit(:recipe_id, :img_url, :title, :cost, :indication, :recipe_url).merge(user_id: current_user.id)
+    params.require(:recipe).permit(:recipe_id, :img_url, :title, :cost, :indication,
+                                   :recipe_url).merge(user_id: current_user.id)
   end
 end
