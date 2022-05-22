@@ -28,6 +28,9 @@
   },
   "version": "0.1.0",
   "devDependencies": {
+    "eslint": "^8.16.0",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-vue": "^9.0.1",
     "tailwindcss": "yarn:@tailwindcss/postcss7-compat",
     "webpack-dev-server": "^3"
   }

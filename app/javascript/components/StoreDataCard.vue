@@ -81,10 +81,6 @@ export default {
     StoreBookmark,
   },
   props: {
-    perPage: {
-      type: Number,
-      required: true,
-    },
     stores: {
       type: Array,
     },
@@ -95,7 +91,7 @@ export default {
   },
   computed: {
     carouselPage() {
-      return window.innerWidth >= 768 ? this.perPage : 2;
+      return window.innerWidth >= 768 ? 3 : 2;
     },
     starSize() {
       return window.innerWidth >= 768 ? 20 : 15;

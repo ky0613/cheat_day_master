@@ -17,20 +17,19 @@
     <div class="p-3 mt-5">
       <p class="md:text-4xl text-xl font-bold">経由地の店舗情報</p>
       <p class="md:text-base text-xs">
-        経由地に追加されなければ食べない可能性があったので、こちらのお店で摂取したカロリーは<span
+        経由地に追加されなければ食べない可能性があったので、摂取カロリーは<span
           class="md:text-3xl text-sm font-bold"
           >0kcal</span
         >です。
       </p>
-      <p v-if="this.allDescriptions" class="md:text-2xl text-sm font-bold">
-        余談ですが，{{ allDescriptions[0] }}
+      <p v-if="digressions" class="md:text-2xl text-sm font-bold">
+        余談ですが，{{ digressions[0] }}
       </p>
     </div>
     <StoreDataCard
       :wayPoint="true"
       v-if="wayPointsData.length !== 0"
       :stores="wayPointsData"
-      :perPage="3"
     />
     <p class="md:text-6xl text-xl font-bold text-center my-24" v-else>
       ごめんなさい，<br />お店が見つかりません。
@@ -43,8 +42,8 @@
           >0kcal</span
         >です。むしろマイナスです。
       </p>
-      <p v-if="this.allDescriptions" class="md:text-2xl text-sm font-bold">
-        余談ですが，{{ allDescriptions[1] }}
+      <p v-if="digressions" class="md:text-2xl text-sm font-bold">
+        余談ですが，{{ digressions[1] }}
       </p>
     </div>
     <StoreDataCard
@@ -65,13 +64,13 @@
           >0kcal</span
         >です。
       </p>
-      <p v-if="allDescriptions" class="md:text-2xl text-sm font-bold">
-        余談ですが，{{ allDescriptions[2] }}
+      <p v-if="digressions" class="md:text-2xl text-sm font-bold">
+        余談ですが，{{ digressions[2] }}
       </p>
     </div>
     <HotPepperGourmandStores
-      v-if="allStores.length !== 0"
-      :stores="allStores"
+      v-if="hotPepperStores.length !== 0"
+      :stores="hotPepperStores"
     />
     <div class="p-3 mt-2">
       <p class="md:text-3xl text-sm font-bold">Yelpの店舗情報</p>
@@ -81,11 +80,11 @@
           >0kcal</span
         >です。
       </p>
-      <p v-if="this.allDescriptions" class="md:text-2xl text-sm font-bold">
-        余談ですが，{{ allDescriptions[3] }}
+      <p v-if="digressions" class="md:text-2xl text-sm font-bold">
+        余談ですが，{{ digressions[3] }}
       </p>
     </div>
-    <YelpStoreData v-if="allYelpStores.length !== 0" :stores="allYelpStores" />
+    <YelpStoreData v-if="yelpStores.length !== 0" :stores="yelpStores" />
     <p class="md:text-6xl text-xl font-bold text-center my-24" v-else>
       ごめんなさい，<br />お店が見つかりません。
     </p>
@@ -101,10 +100,11 @@
 
 <script>
 import { Loader } from "@googlemaps/js-api-loader";
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 import StoreDataCard from "../StoreDataCard.vue";
 import HotPepperGourmandStores from "./HotPepperGourmandStores.vue";
 import YelpStoreData from "./YelpStoreDataCard.vue";
+import axios from "../../plugins/axios";
 
 export default {
   components: {
@@ -115,6 +115,9 @@ export default {
   data() {
     return {
       durationTime: null,
+      digressions: [],
+      yelpStores: [],
+      hotPepperStores: [],
     };
   },
   computed: {
@@ -125,12 +128,11 @@ export default {
       "wayPointsData",
       "recommendStoresData",
     ]),
-    ...mapGetters(["allStores", "allYelpStores", "allDescriptions"]),
     burnedCalories() {
-      return Math.trunc(1.05 * 3.5 * (this.durationTime / 3600) * 60);
+      return Math.trunc(1.05 * 3.5 * (this.durationTime / 3600) * 70);
     },
   },
-  mounted() {
+  async mounted() {
     const self = this;
 
     const loader = new Loader({
@@ -148,7 +150,7 @@ export default {
         mapTypeControl: false,
         streetViewControl: false,
         fullscreenControl: false,
-        gestureHandling: "greedy",
+        gestureHandling: "auto",
       });
 
       let rendererOptions = {
@@ -217,18 +219,75 @@ export default {
           self.durationTime = sum;
         });
     });
-  },
-  async created() {
-    await this.fetchHotPepperStores(this.destinationPositionData.latLng);
-    await this.fetchYelpStores(this.destinationPositionData.latLng);
-    await this.fetchDescriptions();
+
+    await this.fetchHotPepperStores();
+    await this.fetchYelpStores();
+    await this.fetchDigressions();
   },
   methods: {
-    ...mapActions([
-      "fetchHotPepperStores",
-      "fetchYelpStores",
-      "fetchDescriptions",
-    ]),
+    async fetchDigressions() {
+      const response = await axios.get("digressions");
+      let digressions = [];
+      response.data.forEach((item) => {
+        digressions.push(item.description);
+      });
+      this.digressions = digressions;
+    },
+    shuffle([...array]) {
+      for (let i = array.length - 1; i >= 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+      }
+      return array;
+    },
+    async fetchHotPepperStores() {
+      const { lat, lng } = this.destinationPositionData.latLng;
+      const config = {
+        params: {
+          lat: String(lat),
+          lng: String(lng),
+        },
+      };
+      const response = await axios.get("hot_pepper_stores", config);
+      let HotPepperStores = [];
+      response.data.results.shop.map((store) => {
+        let convertStore = {
+          store_id: store.id,
+          img_url: store.photo.pc.l,
+          name: store.name,
+          address: store.address,
+          store_url: store.urls.pc,
+          store_type: "HotPepper",
+        };
+        HotPepperStores.push(convertStore);
+      });
+      this.hotPepperStores = this.shuffle(HotPepperStores);
+    },
+    async fetchYelpStores() {
+      const { lat, lng } = this.destinationPositionData.latLng;
+      const config = {
+        params: {
+          lat: String(lat),
+          lng: String(lng),
+        },
+      };
+      const response = await axios.get("yelp_stores", config);
+      let YelpStores = [];
+      response.data.businesses.map((store) => {
+        let convertStore = {
+          store_id: store.id,
+          img_url: store.image_url,
+          name: store.alias,
+          address: Object.values(store.location).splice(0, 3).join(" "),
+          rating: store.rating,
+          total_ratings: store.review_count,
+          store_url: store.url,
+          store_type: "Yelp",
+        };
+        YelpStores.push(convertStore);
+      });
+      this.yelpStores = YelpStores;
+    },
   },
 };
 </script>

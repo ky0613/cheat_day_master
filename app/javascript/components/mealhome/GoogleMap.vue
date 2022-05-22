@@ -98,7 +98,7 @@
                   >レシピカテゴリー
                 </label>
                 <select
-                  name="genre"
+                  name="category"
                   v-model="recipeCategory"
                   class="block md:w-80 w-36 border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
                 >
@@ -142,6 +142,7 @@
 import { Loader } from "@googlemaps/js-api-loader";
 import { mapGetters, mapActions } from "vuex";
 import LoadingPackmanPage from "../LoadingPacmanPage.vue";
+import axios from "../../plugins/axios";
 
 export default {
   components: {
@@ -156,11 +157,14 @@ export default {
       sweetGenre: 551167,
       recipeCategory: 30,
       isLoading: false,
+      categories: [],
+      foodGenres: [],
+      sweetGenres: [],
     };
   },
   computed: {
     ...mapGetters("googleMealHomeStores", ["currentPositionData"]),
-    ...mapGetters(["categories", "foodGenres", "sweetGenres", "authUser"]),
+    ...mapGetters(["foodGenres", "sweetGenres", "authUser"]),
     isValidation() {
       return Object.keys(this.currentPositionData).length === 0;
     },
@@ -193,7 +197,7 @@ export default {
         mapTypeControl: false,
         streetViewControl: false,
         fullscreenControl: false,
-        gestureHandling: "greedy",
+        gestureHandling: "auto",
       });
 
       let service = new google.maps.places.PlacesService(map);
@@ -312,6 +316,7 @@ export default {
                         name: place.name,
                         latLng: place.geometry.location,
                       });
+                      currentInfoWindow.close();
                     });
                 });
               }
@@ -343,6 +348,7 @@ export default {
                   name: marker.title,
                   latLng: locationMarker,
                 });
+                currentInfoWindow.close();
               });
           });
         });
@@ -388,12 +394,23 @@ export default {
       "setDeliveryStores",
     ]),
     ...mapActions([
-      "fetchGenres",
-      "fetchCategories",
       "fetchRakutenItems",
       "fetchRakutenRecipes",
       "fetchRakutenSweets",
     ]),
+    async fetchCategories() {
+      const response = await axios.get("categories");
+      this.categories = response.data;
+    },
+    async fetchGenres() {
+      const response = await axios.get("genres");
+      this.foodGenres = response.data.filter(
+        (foodGenre) => foodGenre.genre_type === "food"
+      );
+      this.sweetGenres = response.data.filter(
+        (sweetGenre) => sweetGenre.genre_type === "sweet"
+      );
+    },
     isOpenSetStartModal() {
       this.isStartModalShown = true;
       setTimeout(() => {

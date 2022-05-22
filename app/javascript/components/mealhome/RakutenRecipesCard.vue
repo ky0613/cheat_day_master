@@ -10,7 +10,7 @@
         :src="recipe.img_url"
         alt="avatar"
       />
-      <div class="w-full">
+      <div class="w-full md:h-12 h-8">
         <a
           class="py-2 text-gray-700 dark:text-gray-400 md:text-sm hover:text-blue-400 hover:underline text-xs"
           :href="recipe.recipe_url"
@@ -18,8 +18,8 @@
         >
           {{ recipe.title }}
         </a>
-        <hr />
       </div>
+      <hr />
       <div class="flex">
         <div class="p-2 flex flex-col">
           <div class="flex items-center mt-4 text-gray-700 dark:text-gray-200">

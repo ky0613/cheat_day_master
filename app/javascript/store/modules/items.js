@@ -8,6 +8,13 @@ const getters = {
   savedItems: (state) => state.items,
 };
 
+const mutations = {
+  setItem: (state, items) => (state.items = items),
+  newItem: (state, item) => state.items.push(item),
+  removeItem: (state, id) =>
+    (state.items = state.items.filter((item) => item.id !== id)),
+};
+
 const actions = {
   async fetchItems({ commit }) {
     const response = await axios.get("items");
@@ -21,13 +28,6 @@ const actions = {
     await axios.delete(`items/${id}`);
     commit("removeItem", id);
   },
-};
-
-const mutations = {
-  setItem: (state, items) => (state.items = items),
-  newItem: (state, item) => state.items.push(item),
-  removeItem: (state, id) =>
-    (state.items = state.items.filter((item) => item.id !== id)),
 };
 
 export default {
