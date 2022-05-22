@@ -10,14 +10,13 @@
           >0kcal</span
         >です。
       </p>
-      <p v-if="allDescriptions" class="md:text-2xl text-sm font-bold">
-        余談ですが，{{ allDescriptions[0] }}
+      <p v-if="digressions" class="md:text-2xl text-sm font-bold">
+        余談ですが，{{ digressions[0] }}
       </p>
     </div>
     <StoreDataCard
       v-if="deliveryStoresData.length !== 0"
       :stores="deliveryStoresData"
-      :perPage="3"
     />
     <p class="md:text-6xl text-xl font-bold text-center my-24" v-else>
       ごめんなさい，<br />お店が見つかりません。
@@ -30,8 +29,8 @@
           >0kcal</span
         >です。
       </p>
-      <p v-if="allDescriptions" class="md:text-2xl text-sm font-bold">
-        余談ですが，{{ allDescriptions[1] }}
+      <p v-if="digressions" class="md:text-2xl text-sm font-bold">
+        余談ですが，{{ digressions[1] }}
       </p>
     </div>
     <RakutenDataCard :items="allItems" />
@@ -45,8 +44,8 @@
           >0kcal</span
         >です。
       </p>
-      <p v-if="allDescriptions" class="md:text-2xl text-sm font-bold">
-        余談ですが，{{ allDescriptions[2] }}
+      <p v-if="digressions" class="md:text-2xl text-sm font-bold">
+        余談ですが，{{ digressions[2] }}
       </p>
     </div>
     <RakutenDataCard :items="allSweets" />
@@ -58,8 +57,8 @@
           >0kcal</span
         >です。
       </p>
-      <p v-if="allDescriptions" class="md:text-2xl text-sm font-bold">
-        余談ですが，{{ allDescriptions[3] }}
+      <p v-if="digressions" class="md:text-2xl text-sm font-bold">
+        余談ですが，{{ digressions[3] }}
       </p>
     </div>
     <RakutenRecipesCard :recipes="allRecipes" />
@@ -74,27 +73,40 @@
 </template>
 
 <script>
-import { mapGetters, mapActions } from "vuex";
+import { mapGetters } from "vuex";
 import StoreDataCard from "../../components/StoreDataCard.vue";
 import RakutenDataCard from "../../components/mealhome/RakutenDataCard.vue";
 import RakutenRecipesCard from "../../components/mealhome/RakutenRecipesCard.vue";
+import axios from "../../plugins/axios";
 
 export default {
-  name: "MealOutResult",
+  name: "MealHomeResult",
   components: {
     StoreDataCard,
     RakutenDataCard,
     RakutenRecipesCard,
   },
+  data() {
+    return {
+      digressions: [],
+    };
+  },
   computed: {
-    ...mapGetters(["allItems", "allRecipes", "allSweets", "allDescriptions"]),
+    ...mapGetters(["allItems", "allRecipes", "allSweets"]),
     ...mapGetters("googleMealHomeStores", ["deliveryStoresData"]),
   },
-  created() {
-    this.fetchDescriptions();
+  async mounted() {
+    await this.fetchDigressions();
   },
   methods: {
-    ...mapActions(["fetchDescriptions"]),
+    async fetchDigressions() {
+      const response = await axios.get("digressions");
+      let digressions = [];
+      response.data.forEach((item) => {
+        digressions.push(item.description);
+      });
+      this.digressions = digressions;
+    },
   },
 };
 </script>
