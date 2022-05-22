@@ -9,9 +9,9 @@
     >
       <transition>
         <div
-          class="fixed w-4/5 max-w-md m-auto opacity-100 rounded-sm z-1000 h-0 top-0 bottom-0 left-0 right-0"
-          id="startPoint"
           v-if="isStartModalShown"
+          id="startPoint"
+          class="fixed w-4/5 max-w-md m-auto opacity-100 rounded-sm z-1000 h-0 top-0 bottom-0 left-0 right-0"
         >
           <div
             class="modalInner p-3 text-center box-border bg-black opacity-70 text-white"
@@ -39,8 +39,8 @@
         <div class="flex items-center mb-6 mx-auto justify-center">
           <label class="text-gray-500 font-bold pr-4"> 現在地 </label>
           <input
-            type="text"
             id="data-start-point-name"
+            type="text"
             readonly="readonly"
             placeholder="マップから選択してください"
             class="bg-gray-200 appearance-none border-2 border-gray-200 rounded py-2 px-4 text-gray-700 leading-tight min-w-250"
@@ -49,19 +49,19 @@
         </div>
         <div class="container mx-auto text-center">
           <span
-            class="text-base text-red-500 justify-center"
             v-if="isValidation && validateSwitch"
+            class="text-base text-red-500 justify-center"
             >現在地に地点が登録されていません。</span
           >
-          <template v-if="authUser" class="inline-block relative w-64">
-            <ul>
+          <template v-if="authUser">
+            <ul class="inline-block relative w-64">
               <li class="flex my-2 items-center justify-center">
                 <label for="genre" class="mr-3 text-gray-500 font-bold w-40"
                   >食品ジャンル
                 </label>
                 <select
-                  name="genre"
                   v-model="foodGenre"
+                  name="genre"
                   class="block md:w-80 w-36 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
                 >
                   <option
@@ -79,8 +79,8 @@
                   >スイーツジャンル
                 </label>
                 <select
-                  name="genre"
                   v-model="sweetGenre"
+                  name="genre"
                   class="block md:w-80 w-36 bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
                 >
                   <option
@@ -98,8 +98,8 @@
                   >レシピカテゴリー
                 </label>
                 <select
-                  name="category"
                   v-model="recipeCategory"
+                  name="category"
                   class="block md:w-80 w-36 border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
                 >
                   <option
@@ -116,8 +116,8 @@
           </template>
           <div class="flex flex-col mb-6 mt-6">
             <button
-              type="button"
               id="getDelivery"
+              type="button"
               :disabled="isValidation"
               class="rounded-lg bg-orange-300 hover:bg-orange-400 disabled:bg-orange-200 p-2 mb-3 text-center max-w-lg mx-auto"
               @click="setRakuten()"

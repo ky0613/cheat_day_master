@@ -1,18 +1,18 @@
 <template>
-  <div class="container mx-auto mt-24">
-    <section class="bg-white m-10 p-10 rounded-lg">
-      <div class="h3 text-center mb-5 text-3xl font-bold">
+  <div class="container mx-auto md:mt-24 mt-12">
+    <section class="bg-white md:m-5 md:p-5 m-2 p-2 rounded-lg">
+      <div class="md:text-3xl text-lg font-bold mb-3 text-center my-5">
         プライバシーポリシー
       </div>
-      <div class="mb-4">
+      <div class="mb-4 md:text-base text-xs">
         チートデイマスター（以下，「当方」といいます。）は，本ウェブサイト上で提供するサービス（以下,「本サービス」といいます。）における，ユーザーの個人情報の取扱いについて，以下のとおりプライバシーポリシー（以下，「本ポリシー」といいます。）を定めます。
       </div>
-      <div class="mb-4">
-        <div class="h5 text-xl font-bold">第1条（個人情報）</div>
+      <div class="mb-4 md:text-base text-xs">
+        <div class="md:text-xl text-base font-bold">第1条（個人情報）</div>
         「個人情報」とは，個人情報保護法にいう「個人情報」を指すものとし，生存する個人に関する情報であって，当該情報に含まれる氏名，生年月日，住所，電話番号，連絡先その他の記述等により特定の個人を識別できる情報及び容貌，指紋，声紋にかかるデータ，及び健康保険証の保険者番号などの当該情報単体から特定の個人を識別できる情報（個人識別情報）を指します。
       </div>
-      <div class="mb-4">
-        <div class="h5 text-xl font-bold">第2条（取得する情報）</div>
+      <div class="mb-4 md:text-base text-xs">
+        <div class="md:text-xl text-base font-bold">第2条（取得する情報）</div>
         当局は、お客様から以下の情報を取得します。
         <div class="list-decimal mt-2">
           <li>氏名(ニックネームやペンネームも含む)</li>
@@ -31,8 +31,8 @@
           <li>位置情報</li>
         </div>
       </div>
-      <div class="mb-4">
-        <div class="h5 text-xl font-bold">
+      <div class="mb-4 md:text-base text-xs">
+        <div class="md:text-xl text-base font-bold">
           第3条（個人情報を収集・利用する目的）
         </div>
         当方は、お客様から取得した情報を、以下の目的のために利用します。
@@ -49,13 +49,17 @@
           <li>以上の他、当方サービスの提供、維持、保護及び改善のため</li>
         </div>
       </div>
-      <div class="mb-4">
-        <div class="h5 text-xl font-bold">第4条（利用目的の変更）</div>
+      <div class="mb-4 md:text-base text-xs">
+        <div class="md:text-xl text-base font-bold">
+          第4条（利用目的の変更）
+        </div>
         当方は，利用目的が変更前と関連性を有すると合理的に認められる場合に限り，個人情報の利用目的を変更するものとします。<br />
         利用目的の変更を行った場合には，変更後の目的について，当方所定の方法により，ユーザーに通知し，または本ウェブサイト上に公表するものとします。
       </div>
-      <div class="mb-4">
-        <div class="h5 text-xl font-bold">第5条（個人情報の第三者提供）</div>
+      <div class="mb-4 md:text-base text-xs">
+        <div class="md:text-xl text-base font-bold">
+          第5条（個人情報の第三者提供）
+        </div>
         当方は、お客様から取得する情報のうち、個人データ（個人情報保護法第２条第６項）に該当するものついては、あらかじめお客様の同意を得ずに、第三者（日本国外にある者を含みます。）に提供しません。<br />
         但し、次の場合は除きます。
         <div class="list-decimal mt-2">
@@ -72,45 +76,51 @@
           </li>
         </div>
       </div>
-      <div class="mb-4">
-        <div class="h5 text-xl font-bold">第6条（個人情報の利用停止等）</div>
+      <div class="mb-4 md:text-base text-xs">
+        <div class="md:text-xl text-base font-bold">
+          第6条（個人情報の利用停止等）
+        </div>
         当方は，本人から，個人情報が，利用目的の範囲を超えて取り扱われているという理由，または不正の手段により取得されたものであるという理由により，その利用の停止または消去（以下，「利用停止等」といいます。）を求められた場合には，遅滞なく必要な調査を行います。<br />
         前項の調査結果に基づき，その請求に応じる必要があると判断した場合には，遅滞なく，当該個人情報の利用停止等を行います。<br />
         当方は，前項の規定に基づき利用停止等を行った場合，または利用停止等を行わない旨の決定をしたときは，遅滞なく，これをユーザーに通知します。<br />
         前2項にかかわらず，利用停止等に多額の費用を有する場合その他利用停止等を行うことが困難な場合であって，ユーザーの権利利益を保護するために必要なこれに代わるべき措置をとれる場合は，この代替策を講じるものとします。
       </div>
-      <div class="mb-4">
-        <div class="h5 text-xl font-bold">第7条 アクセス解析ツール</div>
+      <div class="mb-4 md:text-base text-xs">
+        <div class="md:text-xl text-base font-bold">
+          第7条 アクセス解析ツール
+        </div>
         当方は、お客様のアクセス解析のために、「Googleアナリティクス」を利用しています。
         Googleアナリティクスは、トラフィックデータの収集のためにCookieを使用しています。<br />
         トラフィックデータは匿名で収集されており、個人を特定するものではありません。<br />
         Cookieを無効にすれば、これらの情報の収集を拒否することができます。<br />
         詳しくはお使いのブラウザの設定をご確認ください。<br />
       </div>
-      <div class="mb-4">
-        <div class="h5 text-xl font-bold">
+      <div class="mb-4 md:text-base text-xs">
+        <div class="md:text-xl text-base font-bold">
           第8条（プライバシーポリシーの変更）
         </div>
         本ポリシーの内容は，法令その他本ポリシーに別段の定めのある事項を除いて，ユーザーに通知することなく，変更することができるものとします。<br />
         当方が別途定める場合を除いて，変更後のプライバシーポリシーは，本ウェブサイトに掲載したときから効力を生じるものとします。
       </div>
-      <div class="mb-4">
-        <div class="h5 text-xl font-bold">第9条（免責事項）</div>
+      <div class="mb-4 md:text-base text-xs">
+        <div class="md:text-xl text-base font-bold">第9条（免責事項）</div>
         また、本サービスのコンテンツ・情報について、できる限り正確な情報を提供するように努めておりますが、正確性や安全性を保証するものではありません。情報が古くなっていることもございます。<br />
         本サービスに掲載された内容によって生じた損害等の一切の責任を負いかねますのでご了承ください。
       </div>
-      <div class="mb-4">
-        <div class="h5 text-xl font-bold">第10条（お問い合わせ窓口）</div>
+      <div class="mb-4 md:text-base text-xs">
+        <div class="md:text-xl text-base font-bold">
+          第10条（お問い合わせ窓口）
+        </div>
         本ポリシーに関するお問い合わせは，管理者Twitterアカウント(@engineer_newbie)までお願いいたします。
       </div>
-      <p class="text-right">以上</p>
-      <p>2022年04月25日 制定</p>
+      <p class="text-right md:text-base text-sm">以上</p>
+      <p class="md:text-base text-sm">2022年04月25日 制定</p>
     </section>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Policy",
+  name: "ThePolicy",
 };
 </script>

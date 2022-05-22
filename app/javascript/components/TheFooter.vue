@@ -3,10 +3,10 @@
     <div class="text-center p-4 mx-auto">
       <ul class="flex justify-center md:gap-4 gap-0 md:flex-row flex-col">
         <li class="text-xs hover:text-orange-400">
-          <router-link :to="{ name: 'Terms' }">利用規約</router-link>
+          <router-link :to="{ name: 'TheTerms' }">利用規約</router-link>
         </li>
         <li class="text-xs hover:text-orange-400">
-          <router-link :to="{ name: 'Policy' }">
+          <router-link :to="{ name: 'ThePolicy' }">
             プライバシーポリシー
           </router-link>
         </li>

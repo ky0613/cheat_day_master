@@ -1,9 +1,9 @@
 <template>
   <div>
     <Carousel
-      :perPage="carouselPage"
-      :paginationPadding="3"
-      paginationPosition="bottom-overlay"
+      :per-page="carouselPage"
+      :pagination-padding="3"
+      pagination-position="bottom-overlay"
       class="pb-6"
     >
       <Slide
@@ -83,6 +83,7 @@ export default {
   props: {
     stores: {
       type: Array,
+      required: true,
     },
     wayPoint: {
       type: Boolean,

@@ -1,8 +1,8 @@
 <template>
   <div class="mt-5">
     <div
-      class="w-full grid md:grid-cols-3 grid-cols-2 gap-4"
       v-if="itemsData.length !== 0"
+      class="w-full grid md:grid-cols-3 grid-cols-2 gap-4"
     >
       <div v-for="item in itemsData" :key="item.id">
         <div

@@ -27,11 +27,11 @@
       </p>
     </div>
     <StoreDataCard
-      :wayPoint="true"
       v-if="wayPointsData.length !== 0"
+      :way-point="true"
       :stores="wayPointsData"
     />
-    <p class="md:text-6xl text-xl font-bold text-center my-24" v-else>
+    <p v-else class="md:text-6xl text-xl font-bold text-center my-24">
       ごめんなさい，<br />お店が見つかりません。
     </p>
     <div class="p-3 mt-2">
@@ -49,9 +49,9 @@
     <StoreDataCard
       v-if="recommendStoresData.length !== 0"
       :stores="recommendStoresData"
-      :perPage="3"
+      :per-page="3"
     />
-    <p class="md:text-6xl text-xl font-bold text-center my-24" v-else>
+    <p v-else class="md:text-6xl text-xl font-bold text-center my-24">
       ごめんなさい，<br />お店が見つかりません。
     </p>
     <div class="p-3 mt-2">
@@ -85,7 +85,7 @@
       </p>
     </div>
     <YelpStoreData v-if="yelpStores.length !== 0" :stores="yelpStores" />
-    <p class="md:text-6xl text-xl font-bold text-center my-24" v-else>
+    <p v-else class="md:text-6xl text-xl font-bold text-center my-24">
       ごめんなさい，<br />お店が見つかりません。
     </p>
     <div class="my-6 w-full text-center">

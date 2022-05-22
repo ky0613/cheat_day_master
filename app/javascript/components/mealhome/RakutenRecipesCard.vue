@@ -1,9 +1,9 @@
 <template>
   <div class="md:p-6 grid grid-cols-2 md:grid-cols-4 gap-3 mx-1">
     <div
-      class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full border"
       v-for="recipe of recipes"
       :key="recipe.recipe_id"
+      class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full border"
     >
       <img
         class="object-cover object-center w-full md:h-56 h-32"

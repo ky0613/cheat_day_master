@@ -2,18 +2,18 @@
   <div class="w-full">
     <div v-if="authUser">
       <img
+        v-if="existStore(store)"
         src="../../../public/img/bookmark_added_black_24dp.svg"
         alt="bookmark"
-        v-if="existStore(store)"
-        @click="removeStore(store)"
         class="ml-auto md:mr-2 mr-0 cursor-pointer"
+        @click="removeStore(store)"
       />
       <img
+        v-else
         src="../../../public/img/bookmark_add_black_24dp.svg"
         alt="bookmark"
-        v-else
-        @click="addStore(store)"
         class="ml-auto md:mr-2 mr-0 cursor-pointer"
+        @click="addStore(store)"
       />
     </div>
   </div>

@@ -37,7 +37,7 @@ export default {
   },
   methods: {
     async fetchOauthToken() {
-      const userResponse = await axios.get("oauth/twitter").catch((err) => {
+      const userResponse = await axios.get("oauth/twitter").catch(() => {
         return null;
       });
       this.token = userResponse.data;

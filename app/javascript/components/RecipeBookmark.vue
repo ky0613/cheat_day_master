@@ -2,18 +2,18 @@
   <div class="ml-auto mt-auto mb-2 mr-2">
     <div v-if="authUser">
       <img
+        v-if="existRecipe(recipe)"
         src="../../../public/img/bookmark_added_black_24dp.svg"
         alt="bookmark"
-        v-if="existRecipe(recipe)"
-        @click="removeRecipe(recipe)"
         class="ml-auto mr-2 cursor-pointer"
+        @click="removeRecipe(recipe)"
       />
       <img
+        v-else
         src="../../../public/img/bookmark_add_black_24dp.svg"
         alt="bookmark"
-        v-else
-        @click="addRecipe(recipe)"
         class="ml-auto mr-2 cursor-pointer"
+        @click="addRecipe(recipe)"
       />
     </div>
   </div>

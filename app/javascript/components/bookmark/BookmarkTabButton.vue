@@ -1,5 +1,5 @@
 <template>
-  <button type="button" @click="changeTab" class="rounded-sm h-12">
+  <button type="button" class="rounded-sm h-12" @click="changeTab">
     <div
       class="flex hover:text-red-800 border-b-2 border-zinc-500 md:pb-5 pb-2 md:px-10 px-4"
       :class="{

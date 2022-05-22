@@ -18,7 +18,7 @@
       v-if="deliveryStoresData.length !== 0"
       :stores="deliveryStoresData"
     />
-    <p class="md:text-6xl text-xl font-bold text-center my-24" v-else>
+    <p v-else class="md:text-6xl text-xl font-bold text-center my-24">
       ごめんなさい，<br />お店が見つかりません。
     </p>
     <div class="p-3 mt-2">

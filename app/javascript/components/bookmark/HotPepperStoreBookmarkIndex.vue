@@ -1,8 +1,8 @@
 <template>
   <div class="flex flex-col mt-5">
     <div
-      class="w-full grid md:grid-cols-3 grid-cols-2 gap-4"
       v-if="storesData.length !== 0"
+      class="w-full grid md:grid-cols-3 grid-cols-2 gap-4"
     >
       <div v-for="store in storesData" :key="store.id">
         <div
@@ -69,6 +69,7 @@ export default {
   props: {
     stores: {
       type: Array,
+      required: true,
     },
   },
   data() {

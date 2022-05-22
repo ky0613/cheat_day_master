@@ -17,12 +17,12 @@
                   >パスワード</label
                 >
                 <input
+                  v-model="user.password"
                   name="password"
                   class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
                   placeholder="password"
                   autocomplete="new-password"
                   type="password"
-                  v-model="user.password"
                 />
                 <span class="text-red-500 text-center">{{
                   ProviderProps.errors[0]
@@ -37,12 +37,12 @@
                   >パスワード（確認）</label
                 >
                 <input
+                  v-model="user.password_confirmation"
                   name="password-confirmation"
                   class="w-full bg-gray-50 text-gray-800 border focus:ring ring-indigo-300 rounded outline-none transition duration-100 px-3 py-2"
                   placeholder="password"
                   autocomplete="new-password"
                   type="password"
-                  v-model="user.password_confirmation"
                 />
                 <span class="text-red-500 text-center">{{
                   ProviderProps.errors[0]
@@ -75,6 +75,10 @@ extend("required", required);
 
 export default {
   name: "ResetPasswordUpdate",
+  components: {
+    ValidationProvider,
+    ValidationObserver,
+  },
   data() {
     return {
       user: {
@@ -82,10 +86,6 @@ export default {
         password_confirmation: "",
       },
     };
-  },
-  components: {
-    ValidationProvider,
-    ValidationObserver,
   },
   methods: {
     async changePassword() {
