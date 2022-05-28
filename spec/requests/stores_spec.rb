@@ -10,7 +10,6 @@ RSpec.describe "Stores", type: :request do
   describe "GET /api/stores" do
     it "ログインしているユーザーのストアの一覧を取得できる" do
       get api_stores_path
-      binding.pry
       expect(response).to have_http_status(200)
     end
   end
