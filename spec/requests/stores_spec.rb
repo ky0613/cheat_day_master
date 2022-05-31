@@ -4,7 +4,7 @@ RSpec.describe "Stores", type: :request do
   let(:store) { create(:store) }
 
   context "GET /api/stores" do
-    example "ログインしているユーザーのストアの一覧を取得できる" do
+    example "ログインしているユーザーの登録したストアの一覧を取得できる" do
       token = login(store.user)
       get api_stores_path, headers: { Authorization: "Bearer #{token}" }
       expect(response).to have_http_status(200)
