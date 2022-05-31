@@ -1,8 +1,8 @@
 class Api::StoresController < ApplicationController
 
   def index
-    @stores = current_user.stores.all
-    render json: @stores
+    stores = current_user.stores.all
+    render json: stores
   end
 
   def create
