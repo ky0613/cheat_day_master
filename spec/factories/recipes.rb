@@ -11,16 +11,3 @@ FactoryBot.define do
     association :user
   end
 end
-
-# create_table "recipes", force: :cascade do |t|
-  #   t.string "recipe_id", null: false
-  #   t.string "img_url", null: false
-  #   t.string "title", null: false
-  #   t.string "cost"
-  #   t.string "indication"
-  #   t.string "recipe_url", null: false
-  #   t.integer "user_id", null: false
-  #   t.datetime "created_at", precision: 6, null: false
-  #   t.datetime "updated_at", precision: 6, null: false
-  #   t.index ["user_id"], name: "index_recipes_on_user_id"
-  # end
