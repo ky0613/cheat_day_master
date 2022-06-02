@@ -31,6 +31,9 @@ group :development, :test do
   gem 'rubocop', require: false
   gem 'sqlite3', '~> 1.4'
   gem 'letter_opener_web'
+  # RSpec
+  gem 'factory_bot_rails'
+  gem 'rspec-rails'
 end
 
 group :development do

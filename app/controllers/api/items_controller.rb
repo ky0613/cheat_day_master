@@ -1,5 +1,4 @@
 class Api::ItemsController < ApplicationController
-  before_action :authenticate!
 
   def index
     @items = current_user.items.all
@@ -25,6 +24,6 @@ class Api::ItemsController < ApplicationController
 
   def item_params
     params.require(:item).permit(:item_id, :img_url, :name, :shop_name, :price, :rating, :total_ratings, :item_url,
-                                 :item_type).merge(user_id: current_user.id)
+                                :item_type).merge(user_id: current_user.id)
   end
 end

@@ -1,9 +1,8 @@
 class Api::StoresController < ApplicationController
-  before_action :authenticate!
 
   def index
-    @stores = current_user.stores.all
-    render json: @stores
+    stores = current_user.stores.all
+    render json: stores
   end
 
   def create
@@ -41,7 +40,6 @@ end
 #       t.string :store_url
 #       t.string :store_type, null: false
 #       t.references :user, null: false, foreign_key: true
-
 #       t.timestamps
 #     end
 #   end

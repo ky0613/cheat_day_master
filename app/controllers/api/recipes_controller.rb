@@ -1,5 +1,4 @@
 class Api::RecipesController < ApplicationController
-  before_action :authenticate!
 
   def index
     @recipes = current_user.recipes.all
@@ -25,6 +24,6 @@ class Api::RecipesController < ApplicationController
 
   def recipe_params
     params.require(:recipe).permit(:recipe_id, :img_url, :title, :cost, :indication,
-                                   :recipe_url).merge(user_id: current_user.id)
+                                  :recipe_url).merge(user_id: current_user.id)
   end
 end
