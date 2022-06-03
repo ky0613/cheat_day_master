@@ -1,15 +1,16 @@
 <template>
   <div class="flex mt-5">
     <div
-      v-if="storesData.length !== 0"
+      v-if="stores.length !== 0"
       class="w-full grid md:grid-cols-3 grid-cols-2 gap-4"
     >
-      <div v-for="store in storesData" :key="store.id">
+      <div v-for="store in stores" :key="store.id">
         <div
           class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full border h-full"
         >
           <a :href="storeUrl(store)" target="_blank">
             <img
+              v-if="storeType !== 'Google'"
               class="object-cover object-center w-full md:h-56 h-32"
               :src="store.img_url"
               alt="avatar"
@@ -20,9 +21,11 @@
               class="flex items-center mt-4 text-gray-700 dark:text-gray-200 h-10"
             >
               <img src="../../../../public/img/shop.svg" class="w-5 h-5" />
-              <p class="px-2 md:text-lg text-xs font-semibold text-center">
+              <a :href="storeUrl(store)" target="_blank">
+              <p class="px-2 md:text-lg text-xs font-semibold text-center hover:text-blue-400">
                 {{ store.name }}
               </p>
+              </a>
             </div>
             <div
               class="flex items-center mt-4 text-gray-700 dark:text-gray-200 h-6"
@@ -40,11 +43,11 @@
                 :rating="store.rating"
                 :star-size="starSize"
                 text-class="md:text-base text-xs mt-1"
-              ></StarRating>
+              />
               <p class="md:text-base text-xs mt-1">
                 ({{ store.total_ratings }})
               </p>
-              <StoreBookmark :store="store" />
+              <BookmarkButton :store="store" />
             </div>
           </div>
         </div>
@@ -61,24 +64,22 @@
 
 <script>
 import StarRating from "vue-star-rating";
-import StoreBookmark from "../../components/StoreBookmark.vue";
+import BookmarkButton from "./StoreBookmarkButton.vue";
 
 export default {
   components: {
     StarRating,
-    StoreBookmark,
+    BookmarkButton,
   },
   props: {
     stores: {
       type: Array,
       required: true,
     },
-  },
-  data() {
-    return {
-      // カードの表示を保持するためにdata内で展開する
-      storesData: [...this.stores],
-    };
+    storeType: {
+      type: String,
+      required: true
+    }
   },
   computed: {
     starSize() {
