@@ -17,6 +17,7 @@
         v-if="isActive === 'GoogleStore'"
         key="GoogleStore"
         :stores="googleStores"
+        :store-type="'Google'"
       />
       <HotPepperStoreBookmarkIndex
         v-if="isActive === 'HotpepperStore'"
@@ -27,6 +28,7 @@
         v-if="isActive === 'YelpStore'"
         key="YelpStore"
         :stores="yelpStores"
+        :store-type="'Yelp'"
       />
       <ItemBookmarkIndex
         v-if="isActive === 'RakutenFood'"

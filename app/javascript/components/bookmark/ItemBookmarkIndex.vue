@@ -1,10 +1,10 @@
 <template>
   <div class="mt-5">
     <div
-      v-if="itemsData.length !== 0"
+      v-if="items.length !== 0"
       class="w-full grid md:grid-cols-3 grid-cols-2 gap-4"
     >
-      <div v-for="item in itemsData" :key="item.id">
+      <div v-for="item in items" :key="item.id">
         <div
           class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full h-full border"
         >
@@ -46,7 +46,7 @@
               text-class="md:text-base text-xs mt-1"
             />
             <p class="md:text-base text-xs mt-1">({{ item.total_ratings }})</p>
-            <ItemBookmark :item="item" />
+            <ItemBookmarkButton :item="item" />
           </div>
         </div>
       </div>
@@ -62,23 +62,18 @@
 
 <script>
 import StarRating from "vue-star-rating";
-import ItemBookmark from "../../components/ItemBookmark.vue";
+import ItemBookmarkButton from "./ItemBookmarkButton.vue";
 
 export default {
   components: {
     StarRating,
-    ItemBookmark,
+    ItemBookmarkButton,
   },
   props: {
     items: {
       type: Array,
       required: true,
     },
-  },
-  data() {
-    return {
-      itemsData: [...this.items],
-    };
   },
   computed: {
     carouselPage() {
