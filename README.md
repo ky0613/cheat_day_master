@@ -63,9 +63,11 @@ https://www.figma.com/file/inSsQE78Xi9HSZgu9045Bk/CheatDayMaster?node-id=0%3A1
 https://drive.google.com/file/d/1PRnnQv8_cSyaJ0Yy8K6q89Ojf3PUZao4/view?usp=sharing
 
 ### 環境構築手順
+
 - バージョン
   - ruby 3.1.1
 - コマンド
+
 ```
 $ git clone https://github.com/ky0613/cheat_day_master.git
 $ rbenv install 3.1.1
