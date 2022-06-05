@@ -65,7 +65,8 @@ https://drive.google.com/file/d/1PRnnQv8_cSyaJ0Yy8K6q89Ojf3PUZao4/view?usp=shari
 ### 環境構築手順
 
 - バージョン
-  - ruby 3.1.1
+  - Ruby 3.1.1
+  - Ruby on Rails 6.1.5
 - コマンド
 
 ```
