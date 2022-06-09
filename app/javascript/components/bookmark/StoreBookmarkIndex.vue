@@ -22,9 +22,11 @@
             >
               <img src="../../../../public/img/shop.svg" class="w-5 h-5" />
               <a :href="storeUrl(store)" target="_blank">
-              <p class="px-2 md:text-lg text-xs font-semibold text-center hover:text-blue-400">
-                {{ store.name }}
-              </p>
+                <p
+                  class="px-2 md:text-lg text-xs font-semibold text-center hover:text-blue-400"
+                >
+                  {{ store.name }}
+                </p>
               </a>
             </div>
             <div
@@ -78,8 +80,8 @@ export default {
     },
     storeType: {
       type: String,
-      required: true
-    }
+      required: true,
+    },
   },
   computed: {
     starSize() {

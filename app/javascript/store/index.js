@@ -11,6 +11,7 @@ import stores from "./modules/stores";
 import items from "./modules/items";
 import recipes from "./modules/recipes";
 import flash from "./modules/flash";
+import bookmark from "./modules/bookmark";
 
 Vue.use(Vuex);
 
@@ -25,6 +26,7 @@ export default new Vuex.Store({
     items,
     recipes,
     flash,
+    bookmark,
   },
   plugins: [
     createPersistedState({

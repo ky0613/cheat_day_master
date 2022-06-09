@@ -2,18 +2,18 @@
   <div class="w-full">
     <div v-if="authUser">
       <img
-        v-if="isActive"
+        v-if="!unbookmarkStore"
         src="../../../../public/img/bookmark_added_black_24dp.svg"
         alt="bookmark"
         class="ml-auto md:mr-2 mr-0 cursor-pointer"
-        @click="pushDeleteStore(store)"
+        @click="pushDeleteStores(store)"
       />
       <img
         v-else
         src="../../../../public/img/bookmark_add_black_24dp.svg"
         alt="bookmark"
         class="ml-auto md:mr-2 mr-0 cursor-pointer"
-        @click="pushAddStore"
+        @click="pushAddStores(store)"
       />
     </div>
   </div>
@@ -31,9 +31,8 @@ export default {
   },
   data() {
     return {
-      isActive: true,
       unbookmarkStore: null,
-    }
+    };
   },
   computed: {
     ...mapGetters(["savedStores", "authUser"]),
@@ -41,26 +40,15 @@ export default {
   mounted() {
     if (this.authUser) this.fetchStores();
   },
-  beforeDestroy() {
-    if (this.unbookmarkStore) this.removeStore(this.unbookmarkStore)
-  },
   methods: {
-    ...mapActions(["fetchStores", "deleteStore"]),
-    removeStore(store) {
-      const removeStore = this.savedStores.find(
-        (savedStore) =>
-          savedStore.store_id === store.store_id &&
-          savedStore.store_type === store.store_type
-      );
-      this.deleteStore(removeStore.id);
-    },
-    pushAddStore() {
+    ...mapActions(["fetchStores"]),
+    pushAddStores(store) {
       this.unbookmarkStore = null;
-      this.isActive = !this.isActive
+      this.$store.dispatch("bookmark/deleteStores", store);
     },
-    pushDeleteStore(store) {
-      this.unbookmarkStore = store
-      this.isActive = !this.isActive
+    pushDeleteStores(store) {
+      this.unbookmarkStore = store;
+      this.$store.dispatch("bookmark/setStores", store);
     },
   },
 };

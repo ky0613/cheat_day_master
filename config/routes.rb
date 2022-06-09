@@ -11,7 +11,8 @@ Rails.application.routes.draw do
     resources :digressions, only: %i(index)
     resources :genres, only: %i(index)
     resources :categories, only: %i(index)
-    resources :stores, only: %i(index create destroy)
+    resources :stores, only: %i(index create)
+    delete :stores, to: 'stores#destroy'
     resources :items, only: %i(index create destroy)
     resources :recipes, only: %i(index create destroy)
     resources :sessions

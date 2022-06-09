@@ -36,7 +36,7 @@ export default {
     if (this.authUser) this.fetchStores();
   },
   methods: {
-    ...mapActions(["fetchStores", "addStore", "deleteStore"]),
+    ...mapActions(["fetchStores", "addStore", "deleteStores"]),
     existStore(store) {
       const check = (savedStore) => {
         return (
@@ -52,7 +52,7 @@ export default {
           savedStore.store_id === store.store_id &&
           savedStore.store_type === store.store_type
       );
-      this.deleteStore(removeStore.id);
+      this.deleteStores([removeStore.id]);
     },
   },
 };
