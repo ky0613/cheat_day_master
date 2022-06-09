@@ -1,7 +1,7 @@
 class Api::OauthsController < ApplicationController
 
   def oauth
-    html = sorcery_login_url(auth_params[:provider])
+    url = sorcery_login_url(auth_params[:provider])
     oauth_token = html.slice(/oauth_token=.*/).gsub(/oauth_token=/, '')
     render json: oauth_token
   end

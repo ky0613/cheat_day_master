@@ -348,6 +348,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   config
   factory_bot_rails
+  faraday
   foreman
   jbuilder (~> 2.7)
   jwt

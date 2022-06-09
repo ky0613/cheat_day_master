@@ -1,0 +1,4 @@
+hotpepper:
+  range: "5"
+  order: "4"
+  format: "json"
