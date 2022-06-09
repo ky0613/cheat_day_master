@@ -1,11 +1,11 @@
 <template>
   <div class="flex flex-col mt-5">
     <div
-      v-if="recipesData.length !== 0"
+      v-if="recipes.length !== 0"
       class="w-full grid md:grid-cols-3 grid-cols-2 gap-4"
     >
       <div
-        v-for="recipe of recipesData"
+        v-for="recipe of recipes"
         :key="recipe.recipe_id"
         class="mx-2 overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full border"
       >
@@ -37,7 +37,7 @@
               <p class="px-2 text-sm">{{ recipe.indication }}</p>
             </div>
           </div>
-          <RecipeBookmark :recipe="recipe" class="ml-auto" />
+          <RecipeBookmarkButton :recipe="recipe" class="ml-auto" />
         </div>
       </div>
     </div>
@@ -51,22 +51,17 @@
 </template>
 
 <script>
-import RecipeBookmark from "../RecipeBookmark.vue";
+import RecipeBookmarkButton from "./RecipeBookmarkButton.vue";
 
 export default {
   components: {
-    RecipeBookmark,
+    RecipeBookmarkButton,
   },
   props: {
     recipes: {
       type: Array,
       required: true,
     },
-  },
-  data() {
-    return {
-      recipesData: [...this.recipes],
-    };
   },
 };
 </script>

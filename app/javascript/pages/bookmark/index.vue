@@ -17,6 +17,7 @@
         v-if="isActive === 'GoogleStore'"
         key="GoogleStore"
         :stores="googleStores"
+        :store-type="'Google'"
       />
       <HotPepperStoreBookmarkIndex
         v-if="isActive === 'HotpepperStore'"
@@ -27,6 +28,7 @@
         v-if="isActive === 'YelpStore'"
         key="YelpStore"
         :stores="yelpStores"
+        :store-type="'Yelp'"
       />
       <ItemBookmarkIndex
         v-if="isActive === 'RakutenFood'"
@@ -79,6 +81,7 @@ export default {
   },
   computed: {
     ...mapGetters(["savedStores", "savedItems", "savedRecipes"]),
+    ...mapGetters("bookmark", ["stores", "items", "recipes"]),
     getActive() {
       return this.isActive;
     },
@@ -114,9 +117,26 @@ export default {
     this.fetchRecipes();
   },
   methods: {
-    ...mapActions(["fetchStores", "fetchItems", "fetchRecipes"]),
+    ...mapActions([
+      "fetchStores",
+      "fetchItems",
+      "fetchRecipes",
+      "deleteStores",
+      "deleteItems",
+      "deleteRecipes",
+    ]),
     changeActive(value) {
+      this.deleteBookmarks()
       this.isActive = value;
+    },
+    deleteBookmarks() {
+      if (this.stores.length)
+        this.deleteStores(this.stores);
+      if (this.items.length)
+        this.deleteItems(this.items);
+      if (this.recipes.length)
+        this.deleteRecipes(this.recipes);
+      this.$store.dispatch("bookmark/resetState");
     },
   },
 };

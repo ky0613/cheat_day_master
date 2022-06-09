@@ -6,7 +6,7 @@ class Api::ItemsController < ApplicationController
   end
 
   def create
-    @item = Item.new(item_params)
+    @item = current_user.items.new(item_params)
     if @item.save
       render json: @item
     else
@@ -15,15 +15,17 @@ class Api::ItemsController < ApplicationController
   end
 
   def destroy
-    @item = current_user.items.find(params[:id])
-    @item.destroy!
-    render json: @item
+    params[:item_ids].each do |id|
+      @item = current_user.items.find(id)
+      @item.destroy!
+    end
+    render json: @item, status: :ok
   end
 
   private
 
   def item_params
     params.require(:item).permit(:item_id, :img_url, :name, :shop_name, :price, :rating, :total_ratings, :item_url,
-                                :item_type).merge(user_id: current_user.id)
+                                :item_type)
   end
 end

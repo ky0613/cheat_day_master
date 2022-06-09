@@ -1,10 +1,10 @@
 <template>
   <div class="flex flex-col mt-5">
     <div
-      v-if="storesData.length !== 0"
+      v-if="stores.length !== 0"
       class="w-full grid md:grid-cols-3 grid-cols-2 gap-4"
     >
-      <div v-for="store in storesData" :key="store.id">
+      <div v-for="store in stores" :key="store.id">
         <div
           class="overflow-hidden bg-white rounded-lg shadow-lg dark:bg-gray-800 w-full flex flex-col border h-full"
         >
@@ -45,7 +45,7 @@
                 border="0"
                 title="ホットペッパー Webサービス"
             /></a>
-            <StoreBookmark :store="store" />
+            <BookmarkButton :store="store" />
           </div>
         </div>
       </div>
@@ -60,23 +60,17 @@
 </template>
 
 <script>
-import StoreBookmark from "../../components/StoreBookmark.vue";
+import BookmarkButton from "./StoreBookmarkButton.vue";
 
 export default {
   components: {
-    StoreBookmark,
+    BookmarkButton,
   },
   props: {
     stores: {
       type: Array,
       required: true,
     },
-  },
-  data() {
-    return {
-      // カードの表示を保持するためにdata内で展開する
-      storesData: [...this.stores],
-    };
   },
 };
 </script>

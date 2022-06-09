@@ -6,7 +6,7 @@ class Api::StoresController < ApplicationController
   end
 
   def create
-    @store = Store.new(store_params)
+    @store = current_user.stores.new(store_params)
     if @store.save
       render json: @store
     else
@@ -15,16 +15,18 @@ class Api::StoresController < ApplicationController
   end
 
   def destroy
-    @store = current_user.stores.find(params[:id])
-    @store.destroy!
-    render json: @store
+    params[:store_ids].each do |id|
+      @store = current_user.stores.find(id)
+      @store.destroy!
+    end
+    render json: @store, status: :ok
   end
 
   private
 
   def store_params
     params.require(:store).permit(:store_id, :img_url, :name, :address, :rating, :total_ratings, :store_url,
-                                  :store_type).merge(user_id: current_user.id)
+                                  :store_type)
   end
 end
 

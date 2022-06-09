@@ -11,8 +11,9 @@ const getters = {
 const mutations = {
   setStores: (state, stores) => (state.stores = stores),
   newStore: (state, store) => state.stores.push(store),
-  removeStore: (state, id) =>
-    (state.stores = state.stores.filter((store) => store.id !== id)),
+  removeStore: (state, store_ids) => {
+    state.stores = state.stores.filter((store) => !store_ids.includes(store.id, 0))
+  }
 };
 
 const actions = {
@@ -24,9 +25,10 @@ const actions = {
     const response = await axios.post("stores", store);
     commit("newStore", response.data);
   },
-  async deleteStore({ commit }, id) {
-    await axios.delete(`stores/${id}`);
-    commit("removeStore", id);
+  async deleteStores({ commit }, stores) {
+    const store_ids = stores.map((store) => store.id)
+    await axios.delete("stores", { params: {store_ids: store_ids} });
+    commit("removeStore", store_ids);
   },
 };
 
