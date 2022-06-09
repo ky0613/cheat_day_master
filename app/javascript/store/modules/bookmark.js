@@ -21,13 +21,13 @@ const actions = {
     commit("setItems", getItem);
   },
   deleteItems({ commit }, getItem) {
-    commit("deleteItem", getItem);
+    commit("deleteItems", getItem);
   },
   setRecipes({ commit }, getRecipe) {
     commit("setRecipes", getRecipe);
   },
   deleteRecipes({ commit }, getRecipe) {
-    commit("deleteRecipe", getRecipe);
+    commit("deleteRecipes", getRecipe);
   },
   resetState({ commit }) {
     commit("resetState");

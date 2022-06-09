@@ -12,7 +12,7 @@ const mutations = {
   setStores: (state, stores) => (state.stores = stores),
   newStore: (state, store) => state.stores.push(store),
   removeStore: (state, store_ids) => {
-    state.stores = state.stores.filter((store) => !store_ids.includes(store, 0))
+    state.stores = state.stores.filter((store) => !store_ids.includes(store.id, 0))
   }
 };
 
@@ -27,7 +27,6 @@ const actions = {
   },
   async deleteStores({ commit }, stores) {
     const store_ids = stores.map((store) => store.id)
-    console.log(store_ids)
     await axios.delete("stores", { params: {store_ids: store_ids} });
     commit("removeStore", store_ids);
   },

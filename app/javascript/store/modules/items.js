@@ -11,8 +11,9 @@ const getters = {
 const mutations = {
   setItem: (state, items) => (state.items = items),
   newItem: (state, item) => state.items.push(item),
-  removeItem: (state, id) =>
-    (state.items = state.items.filter((item) => item.id !== id)),
+  removeItem: (state, item_ids) =>{
+    state.items = state.items.filter((item) => !item_ids.includes(item.id, 0))
+  }
 };
 
 const actions = {
@@ -24,9 +25,10 @@ const actions = {
     const response = await axios.post("items", item);
     commit("newItem", response.data);
   },
-  async deleteItem({ commit }, id) {
-    await axios.delete(`items/${id}`);
-    commit("removeItem", id);
+  async deleteItems({ commit }, items) {
+    const item_ids = items.map((item) => item.id)
+    await axios.delete("items", { params: {item_ids: item_ids} });
+    commit("removeItem", item_ids);
   },
 };
 
