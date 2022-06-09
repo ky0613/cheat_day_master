@@ -6,7 +6,7 @@ class Api::RecipesController < ApplicationController
   end
 
   def create
-    @recipe = Recipe.new(recipe_params)
+    @recipe = current_user.recipes.new(recipe_params)
     if @recipe.save
       render json: @recipe
     else
@@ -15,15 +15,17 @@ class Api::RecipesController < ApplicationController
   end
 
   def destroy
-    @recipe = current_user.recipes.find(params[:id])
-    @recipe.destroy!
-    render json: @recipe
+    params[:recipe_ids].each do |id|
+      @recipe = current_user.recipes.find(id)
+      @recipe.destroy!
+    end
+    render json: @recipe, status: :ok
   end
 
   private
 
   def recipe_params
     params.require(:recipe).permit(:recipe_id, :img_url, :title, :cost, :indication,
-                                  :recipe_url).merge(user_id: current_user.id)
+                                  :recipe_url)
   end
 end
