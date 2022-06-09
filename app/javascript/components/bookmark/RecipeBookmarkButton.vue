@@ -33,7 +33,7 @@ export default {
     return {
       isActive: true,
       unbookmarkRecipe: null,
-    }
+    };
   },
   computed: {
     ...mapGetters(["savedRecipes", "authUser"]),
@@ -42,7 +42,7 @@ export default {
     if (this.authUser) this.fetchRecipes();
   },
   beforeDestroy() {
-    if (this.unbookmarkRecipe) this.removeRecipe(this.unbookmarkRecipe)
+    if (this.unbookmarkRecipe) this.removeRecipe(this.unbookmarkRecipe);
   },
   methods: {
     ...mapActions(["fetchRecipes", "deleteRecipe"]),
@@ -56,12 +56,12 @@ export default {
     },
     pushAddRecipe() {
       this.unbookmarkRecipe = null;
-      this.isActive = !this.isActive
+      this.isActive = !this.isActive;
     },
     pushDeleteRecipe(recipe) {
-      this.unbookmarkRecipe = recipe
-      this.isActive = !this.isActive
-    }
+      this.unbookmarkRecipe = recipe;
+      this.isActive = !this.isActive;
+    },
   },
 };
 </script>

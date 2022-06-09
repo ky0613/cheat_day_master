@@ -81,6 +81,7 @@ export default {
   },
   computed: {
     ...mapGetters(["savedStores", "savedItems", "savedRecipes"]),
+    ...mapGetters("bookmark", ["stores", "items", "recipes"]),
     getActive() {
       return this.isActive;
     },
@@ -116,9 +117,26 @@ export default {
     this.fetchRecipes();
   },
   methods: {
-    ...mapActions(["fetchStores", "fetchItems", "fetchRecipes"]),
+    ...mapActions([
+      "fetchStores",
+      "fetchItems",
+      "fetchRecipes",
+      "deleteStores",
+      "deleteItem",
+      "deleteRecipe",
+    ]),
     changeActive(value) {
+      this.deleteBookmarks()
       this.isActive = value;
+    },
+    deleteBookmarks() {
+      if (this.stores.length)
+        this.deleteStores(this.stores);
+      if (this.items.length)
+        this.items.map(async (item) => await this.deleteItem(item.id));
+      if (this.recipes.length)
+        this.recipes.map(async (recipe) => await this.deleteRecipe(recipe.id));
+      this.$store.dispatch("bookmark/resetState");
     },
   },
 };

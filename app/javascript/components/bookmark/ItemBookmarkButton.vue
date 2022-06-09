@@ -33,7 +33,7 @@ export default {
     return {
       isActive: true,
       unbookmarkItem: null,
-    }
+    };
   },
   computed: {
     ...mapGetters(["savedItems", "authUser"]),
@@ -42,7 +42,7 @@ export default {
     if (this.authUser) this.fetchItems();
   },
   destroyed() {
-    if (this.unbookmarkItem) this.removeItem(this.unbookmarkItem)
+    if (this.unbookmarkItem) this.removeItem(this.unbookmarkItem);
   },
   methods: {
     ...mapActions(["fetchItems", "deleteItem"]),
@@ -54,11 +54,11 @@ export default {
     },
     pushAddItem() {
       this.unbookmarkItem = null;
-      this.isActive = !this.isActive
+      this.isActive = !this.isActive;
     },
     pushDeleteItem(item) {
-      this.unbookmarkItem = item
-      this.isActive = !this.isActive
+      this.unbookmarkItem = item;
+      this.isActive = !this.isActive;
     },
   },
 };
