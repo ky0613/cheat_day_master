@@ -36,7 +36,7 @@ export default {
     if (this.authUser) this.fetchItems();
   },
   methods: {
-    ...mapActions(["fetchItems", "addItem", "deleteItem"]),
+    ...mapActions(["fetchItems", "addItem", "deleteItems"]),
     existItem(item) {
       const check = (savedItem) => {
         return savedItem.item_id === item.item_id;
@@ -47,7 +47,7 @@ export default {
       const removeItem = this.savedItems.find(
         (savedItem) => savedItem.item_id === item.item_id
       );
-      this.deleteItem(removeItem.id);
+      this.deleteItems([removeItem]);
     },
   },
 };

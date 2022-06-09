@@ -52,7 +52,7 @@ export default {
           savedStore.store_id === store.store_id &&
           savedStore.store_type === store.store_type
       );
-      this.deleteStores([removeStore.id]);
+      this.deleteStores([removeStore]);
     },
   },
 };

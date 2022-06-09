@@ -122,8 +122,8 @@ export default {
       "fetchItems",
       "fetchRecipes",
       "deleteStores",
-      "deleteItem",
-      "deleteRecipe",
+      "deleteItems",
+      "deleteRecipes",
     ]),
     changeActive(value) {
       this.deleteBookmarks()
@@ -133,9 +133,9 @@ export default {
       if (this.stores.length)
         this.deleteStores(this.stores);
       if (this.items.length)
-        this.items.map(async (item) => await this.deleteItem(item.id));
+        this.deleteItems(this.items);
       if (this.recipes.length)
-        this.recipes.map(async (recipe) => await this.deleteRecipe(recipe.id));
+        this.deleteRecipes(this.recipes);
       this.$store.dispatch("bookmark/resetState");
     },
   },

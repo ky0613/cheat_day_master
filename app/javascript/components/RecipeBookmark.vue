@@ -36,7 +36,7 @@ export default {
     if (this.authUser) this.fetchRecipes();
   },
   methods: {
-    ...mapActions(["fetchRecipes", "addRecipe", "deleteRecipe"]),
+    ...mapActions(["fetchRecipes", "addRecipe", "deleteRecipes"]),
     existRecipe(recipe) {
       const check = (savedRecipe) => {
         return (
@@ -52,7 +52,7 @@ export default {
           savedRecipe.recipe_id === recipe.recipe_id &&
           savedRecipe.recipe_type === recipe.recipe_type
       );
-      this.deleteRecipe(removeRecipe.id);
+      this.deleteRecipes([removeRecipe]);
     },
   },
 };
