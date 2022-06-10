@@ -164,7 +164,7 @@ export default {
   },
   computed: {
     ...mapGetters("googleMealHomeStores", ["currentPositionData"]),
-    ...mapGetters(["foodGenres", "sweetGenres", "authUser"]),
+    ...mapGetters(["authUser"]),
     isValidation() {
       return Object.keys(this.currentPositionData).length === 0;
     },
