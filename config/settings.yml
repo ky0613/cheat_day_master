@@ -2,3 +2,8 @@ hotpepper:
   range: "5"
   order: "4"
   format: "json"
+yelp:
+  radius: "3000"
+  sort: "rating"
+  price: "2"
+  limit: "30"
