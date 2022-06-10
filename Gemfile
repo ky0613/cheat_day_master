@@ -21,6 +21,7 @@ gem 'rack-cors'
 
 # API関連
 gem 'faraday'
+gem 'rakuten_web_service'
 
 # メール
 gem 'net-smtp'
