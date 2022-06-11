@@ -20,7 +20,7 @@ gem 'jwt'
 gem 'rack-cors'
 
 # API関連
-gem 'faraday'
+gem 'faraday', '~> 2.3.0'
 gem 'rakuten_web_service'
 
 # メール

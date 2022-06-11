@@ -128,10 +128,10 @@ GEM
     factory_bot_rails (6.2.0)
       factory_bot (~> 6.2.0)
       railties (>= 5.0.0)
-    faraday (2.2.0)
+    faraday (2.3.0)
       faraday-net_http (~> 2.0)
       ruby2_keywords (>= 0.0.4)
-    faraday-net_http (2.0.2)
+    faraday-net_http (2.0.3)
     ffi (1.15.5)
     foreman (0.87.2)
     globalid (1.0.0)
@@ -351,7 +351,7 @@ DEPENDENCIES
   capybara (>= 3.26)
   config
   factory_bot_rails
-  faraday
+  faraday (~> 2.3.0)
   foreman
   jbuilder (~> 2.7)
   jwt
