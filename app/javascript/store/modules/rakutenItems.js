@@ -2,16 +2,16 @@ import axios from "../../plugins/axios";
 
 const convertItemData = (items, item_type) => {
   let rakuteItems = [];
-  items.forEach((item) => {
+  items.map((item) => {
     let convertItem = {
-      item_id: item.Item.itemCode,
-      img_url: item.Item.mediumImageUrls[0].imageUrl,
-      name: item.Item.itemName,
-      shop_name: item.Item.shopName,
-      price: Number(item.Item.itemPrice),
-      rating: Number(item.Item.reviewAverage),
-      total_ratings: item.Item.reviewCount,
-      item_url: item.Item.itemUrl,
+      item_id: item.params.itemCode,
+      img_url: item.params.mediumImageUrls[0],
+      name: item.params.itemName,
+      shop_name: item.params.shopName,
+      price: Number(item.params.itemPrice),
+      rating: Number(item.params.reviewAverage),
+      total_ratings: item.params.reviewCount,
+      item_url: item.params.itemUrl,
       item_type: item_type,
     };
     rakuteItems.push(convertItem);
@@ -47,13 +47,13 @@ const actions = {
     const response = await axios.get("rakuten_items", {
       params: { food_genre_id: String(foodGenre) },
     });
-    commit("setRakutenItems", convertItemData(response.data.Items, "Food"));
+    commit("setRakutenItems", convertItemData(response.data, "Food"));
   },
   async fetchRakutenSweets({ commit }, sweetGenre) {
     const response = await axios.get("rakuten_sweets", {
       params: { sweet_genre_id: String(sweetGenre) },
     });
-    commit("setRakutenSweets", convertItemData(response.data.Items, "Sweet"));
+    commit("setRakutenSweets", convertItemData(response.data, "Sweet"));
   },
 };
 

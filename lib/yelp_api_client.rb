@@ -1,31 +1,25 @@
+require 'faraday'
+require 'faraday/net_http'
+Faraday.default_adapter = :net_http
+
 class YelpApiClient
 
-  YELP_HOST = "https://api.yelp.com/v3/businesses/search?"
+  BASE_URL = "https://api.yelp.com/v3/businesses/search"
 
   def initialize
     @token = Rails.application.credentials.dig(:yelp, :token)
   end
 
   def get_stores(lat, lng)
-    params = URI.encode_www_form({
-      # レイアウト変更用 レイアウト変更後削除
-      # latitude: "35.6581",
-      # longitude: "139.7017",
-      radius: "3000",
-      latitude: lat,
-      longitude: lng,
-      sort_by: "rating",
-      price: "2",
-      limit: "30"
-    })
-    uri = URI.parse("#{YELP_HOST}#{params}")
-    http = Net::HTTP.new(uri.host, uri.port)
-    http.use_ssl = true
-    request = Net::HTTP::Get.new(
-      uri.request_uri,
-      'Authorization' => "Bearer #{@token}"
-    )
-    response = http.request(request)
+    response = Faraday.get(BASE_URL, ssl: { ca_path: "/opt/homebrew/etc/openssl@3" }) do |req|
+      req.params['radius'] = Settings.yelp.radius
+      req.params['sort_by'] = Settings.yelp.sort
+      req.params['price'] = Settings.yelp.price
+      req.params['kimit'] = Settings.yelp.limit
+      req.params['latitude'] = lat
+      req.params['longitude'] = lng
+      req.headers['Authorization'] =  "Bearer #{@token}"
+    end
 
     JSON.parse(response.body)
   end

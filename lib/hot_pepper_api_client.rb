@@ -1,23 +1,24 @@
+require 'faraday'
+require 'faraday/net_http'
+Faraday.default_adapter = :net_http
+
 class HotPepperApiClient
-  HOTPEPPER_HOST = "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/?"
+  BASE_URL = "http://webservice.recruit.co.jp/hotpepper/gourmet/v1/"
 
   def initialize
     @token = Rails.application.credentials.dig(:hotpepper, :token)
   end
 
   def get_stores(lat, lng)
-    params = URI.encode_www_form({
-      key: @token,
-      lat: lat,
-      lng: lng,
-      range: "5",
-      order: "4",
-      format: "json",
-    })
-    uri = URI.parse("#{HOTPEPPER_HOST}#{params}")
-    http = Net::HTTP.new(uri.host, uri.port)
-    request = Net::HTTP::Get.new(uri.request_uri)
-    response = http.request(request)
+    response = Faraday.get(BASE_URL) do |req|
+      req.params['key'] = @token
+      req.params['lat'] = lat
+      req.params['lng'] = lng
+      req.params['range'] = Settings.hotpepper.range
+      req.params['order'] = Settings.hotpepper.order
+      req.params['format'] = Settings.hotpepper.format
+    end
+
     JSON.parse(response.body)
   end
 

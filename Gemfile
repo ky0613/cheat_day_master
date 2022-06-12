@@ -19,6 +19,10 @@ gem 'sorcery'
 gem 'jwt'
 gem 'rack-cors'
 
+# API関連
+gem 'faraday', '~> 2.3.0'
+gem 'rakuten_web_service'
+
 # メール
 gem 'net-smtp'
 gem 'net-imap'

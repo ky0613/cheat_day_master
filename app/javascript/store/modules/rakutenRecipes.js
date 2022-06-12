@@ -2,14 +2,14 @@ import axios from "../../plugins/axios";
 
 const convertRecipeData = (recipes) => {
   let rakutenRecipes = [];
-  recipes.forEach((recipe) => {
+  recipes.map((recipe) => {
     let convertRecipe = {
-      recipe_id: String(recipe.recipeId),
-      img_url: recipe.foodImageUrl,
-      title: recipe.recipeTitle,
-      cost: recipe.recipeCost,
-      indication: recipe.recipeIndication,
-      recipe_url: recipe.recipeUrl,
+      recipe_id: String(recipe.params.recipeId),
+      img_url: recipe.params.foodImageUrl,
+      title: recipe.params.recipeTitle,
+      cost: recipe.params.recipeCost,
+      indication: recipe.params.recipeIndication,
+      recipe_url: recipe.params.recipeUrl,
     };
     rakutenRecipes.push(convertRecipe);
   });
@@ -37,7 +37,7 @@ const actions = {
       const response = await axios.get("rakuten_recipes", {
         params: { category_id: String(recipeCategory) },
       });
-      commit("setRakutenRecipes", convertRecipeData(response.data.result));
+      commit("setRakutenRecipes", convertRecipeData(response.data));
     } catch (err) {
       console.log(err);
     }
