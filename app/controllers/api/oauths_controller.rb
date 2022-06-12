@@ -1,9 +1,11 @@
 class Api::OauthsController < ApplicationController
 
   def oauth
-    url = sorcery_login_url(auth_params[:provider])
-    oauth_token = html.slice(/oauth_token=.*/).gsub(/oauth_token=/, '')
-    render json: oauth_token
+    uri = URI::parse(sorcery_login_url(auth_params[:provider]))
+    q_array = URI::decode_www_form(uri.query)
+    q_hash = Hash[q_array]
+    twitter_login_url = "https://api.twitter.com/oauth/authenticate?oauth_token=#{q_hash["oauth_token"]}"
+    render json: twitter_login_url
   end
 
   def callback
